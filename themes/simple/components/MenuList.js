@@ -71,7 +71,7 @@ export const MenuList = ({ customNav, customMenu }) => {
   return (
     <>
       {/* 大屏模式菜单 */}
-      <div id='nav-menu-pc' className='hidden md:flex my-auto'>
+      <div id='nav-menu-pc' className='hidden md:flex h-full items-center'>
         {links?.map((link, index) => (
           <MenuItemDrop key={index} link={link} />
         ))}
@@ -79,23 +79,23 @@ export const MenuList = ({ customNav, customMenu }) => {
       {/* 移动端小屏菜单 */}
       <div
         id='nav-menu-mobile'
-        className='flex md:hidden my-auto justify-start'>
+        className='flex md:hidden h-full items-center'>
         <div
           onClick={toggleIsOpen}
-          className='cursor-pointer hover:text-red-400 transition-all duration-200'>
+          className='cursor-pointer hover:text-red-400 transition-all duration-200 px-3'>
           <i
-            className={`${isOpen && 'rotate-90'} transition-all duration-200 fa fa-bars mr-3`}
+            className={`${isOpen && 'rotate-90'} transition-all duration-200 fa fa-bars mr-2`}
           />
-          <span>{!isOpen ? 'MENU' : 'CLOSE'}</span>
+          <span className='text-sm'>{!isOpen ? 'MENU' : 'CLOSE'}</span>
         </div>
 
         <Collapse
           collapseRef={collapseRef}
-          className='absolute w-full top-12 left-0'
+          className='absolute w-full top-10 left-0 z-50'
           isOpen={isOpen}>
           <div
             id='menu-wrap'
-            className='bg-white dark:border-hexo-black-gray border'>
+            className='bg-white dark:bg-black dark:border-gray-800 border shadow-lg'>
             {links?.map((link, index) => (
               <MenuItemCollapse
                 key={index}

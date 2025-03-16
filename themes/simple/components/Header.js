@@ -7,10 +7,10 @@ import CONFIG from '../config'
  */
 export default function Header(props) {
   return (
-    <header className='text-center bg-white py-8 dark:bg-black relative z-10'>
-      <div className='max-w-9/10 mx-auto'>
-        {/* 头部区域保留空间，但移除了头像和描述 */}
-        <div className='h-8'></div>
+    <header className='text-center bg-white dark:bg-black relative z-10 border-b border-gray-100 dark:border-gray-800'>
+      <div className='max-w-3xl mx-auto'>
+        {/* 精简的头部区域 */}
+        <div className='h-2'></div>
       </div>
     </header>
   )
