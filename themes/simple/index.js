@@ -39,7 +39,9 @@ const ShareBar = dynamic(() => import('@/components/ShareBar'), { ssr: false })
 const TopBar = dynamic(() => import('./components/TopBar'), { ssr: false })
 const Header = dynamic(() => import('./components/Header'), { ssr: false })
 const NavBar = dynamic(() => import('./components/NavBar'), { ssr: false })
-const SideBar = dynamic(() => import('./components/SideBar'), { ssr: false })
+const ProfileSidebar = dynamic(() => import('./components/ProfileSidebar'), {
+  ssr: false
+})
 const JumpToTopButton = dynamic(() => import('./components/JumpToTopButton'), {
   ssr: false
 })
@@ -91,7 +93,7 @@ const LayoutBase = props => {
           className={
             (JSON.parse(siteConfig('LAYOUT_SIDEBAR_REVERSE'))
               ? 'flex-row-reverse'
-              : '') + ' w-full flex-1 flex items-start max-w-9/10 mx-auto pt-12'
+              : '') + ' w-full flex-1 flex items-start max-w-5xl mx-auto pt-6'
           }>
           <div id='container-inner ' className='w-full flex-grow min-h-fit'>
             <Transition
@@ -114,8 +116,8 @@ const LayoutBase = props => {
           {fullWidth ? null : (
             <div
               id='right-sidebar'
-              className='hidden xl:block flex-none sticky top-8 w-96 border-l dark:border-gray-800 pl-12 border-gray-100'>
-              <SideBar {...props} />
+              className='hidden xl:block flex-none w-72 border-l dark:border-gray-800 pl-8 border-gray-100'>
+              <ProfileSidebar {...props} />
             </div>
           )}
         </div>
