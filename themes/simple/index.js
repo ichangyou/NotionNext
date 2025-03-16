@@ -39,7 +39,9 @@ const ShareBar = dynamic(() => import('@/components/ShareBar'), { ssr: false })
 const TopBar = dynamic(() => import('./components/TopBar'), { ssr: false })
 const Header = dynamic(() => import('./components/Header'), { ssr: false })
 const NavBar = dynamic(() => import('./components/NavBar'), { ssr: false })
-const SideBar = dynamic(() => import('./components/SideBar'), { ssr: false })
+const ProfileSidebar = dynamic(() => import('./components/ProfileSidebar'), {
+  ssr: false
+})
 const JumpToTopButton = dynamic(() => import('./components/JumpToTopButton'), {
   ssr: false
 })
@@ -114,8 +116,8 @@ const LayoutBase = props => {
           {fullWidth ? null : (
             <div
               id='right-sidebar'
-              className='hidden xl:block flex-none sticky top-8 w-96 border-l dark:border-gray-800 pl-12 border-gray-100'>
-              <SideBar {...props} />
+              className='hidden xl:block flex-none w-96 border-l dark:border-gray-800 pl-12 border-gray-100'>
+              <ProfileSidebar {...props} />
             </div>
           )}
         </div>
