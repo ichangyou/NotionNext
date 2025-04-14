@@ -15,79 +15,83 @@ const RealTimeViewCount = ({ post, simple = false }) => {
 
   useEffect(() => {
     // 确保在客户端执行且有有效的post
-    if (typeof window === 'undefined' || !post) return
+    if (typeof window === 'undefined' || !post) {
+      console.warn('[RealTimeViewCount] Skipping effect: No window or post object')
+      return
+    }
     
+    console.log('[RealTimeViewCount] Effect running for post:', post?.id, post?.slug)
+
     const getViewCount = async () => {
       try {
         setLoading(true)
         
-        // 使用页面路径作为唯一标识，确保获取正确的ID
-        let postPath = ''
-        
-        // 优先使用slug（如果可用）
-        if (post.slug) {
-          postPath = post.slug
-        }
-        // 或者使用文章ID
-        else if (post.id) {
-          postPath = post.id
-        }
-        // 处理Notion文章
-        else if (post.idInDBs) {
-          postPath = post.idInDBs
-        }
-        // 尝试从post对象中找到其他可能的标识符
-        else if (post.postPath || post.path) {
-          postPath = post.postPath || post.path
-        }
-        
-        // 如果仍未获取到有效ID，尝试从URL中提取
-        if (!postPath && typeof window !== 'undefined') {
+        // 1. 优先使用 slug 或 id
+        let postIdentifier = post.slug || post.id
+        console.log(`[RealTimeViewCount] Initial identifier from post: '${postIdentifier}'`) 
+
+        // 2. 如果没有，尝试从 URL 获取 (确保在客户端)
+        if (!postIdentifier && typeof window !== 'undefined') {
           const pathSegments = window.location.pathname.split('/')
-          postPath = pathSegments[pathSegments.length - 1]
+          postIdentifier = pathSegments[pathSegments.length - 1]
+          console.log(`[RealTimeViewCount] Identifier from URL fallback: '${postIdentifier}'`) 
         }
-        
-        // 确保只使用ID部分，移除可能的路径前缀
-        if (postPath && postPath.includes('/')) {
-          const segments = postPath.split('/')
-          postPath = segments[segments.length - 1]
+
+        // 3. 最终清理，移除前缀
+        let cleanIdentifier = postIdentifier
+        if (typeof cleanIdentifier === 'string' && cleanIdentifier.includes('/')) {
+           const originalIdentifier = cleanIdentifier
+           cleanIdentifier = cleanIdentifier.split('/').pop()
+           console.log(`[RealTimeViewCount] Cleaned identifier from '${originalIdentifier}' to '${cleanIdentifier}'`) 
         }
-        
-        // 如果仍然没有有效的路径，使用一个回退值
-        if (!postPath || postPath === '') {
-          console.warn('Could not determine post ID, using fallback')
-          postPath = 'unknown-post'
+
+        if (!cleanIdentifier) {
+          console.error('[RealTimeViewCount] Error: Could not determine a valid post identifier.')
+          setViewCount('ERR') // Indicate an error state
+          setLoading(false)
+          return
         }
-        
-        console.log('Fetching view count for article ID:', postPath)
+
+        console.log(`[RealTimeViewCount] Attempting to fetch views for clean identifier: '${cleanIdentifier}'`) 
         
         // 获取文章访问次数
-        const data = await fetchPageViews(postPath)
+        const data = await fetchPageViews(cleanIdentifier)
+        console.log(`[RealTimeViewCount] Received data from fetchPageViews for '${cleanIdentifier}':`, data)
         
         // 如果成功获取到数据，更新计数
         if (data && typeof data.count === 'number') {
-          console.log('Received view count:', data.count)
+          console.log(`[RealTimeViewCount] Successfully fetched count for '${cleanIdentifier}': ${data.count}`)
           setViewCount(data.count)
         } else {
-          console.warn('Failed to get view count for:', postPath)
-          setViewCount('--')
+          console.warn(`[RealTimeViewCount] Failed to get valid count for '${cleanIdentifier}'. API response:`, data)
+          setViewCount('0') // Default to 0 on failure, as per the bug report
         }
       } catch (error) {
-        console.error('Error fetching view count:', error)
-        setViewCount('--')
+        console.error('[RealTimeViewCount] Error fetching view count:', error)
+        setViewCount('ERR') // Indicate an error state
       } finally {
         setLoading(false)
+        console.log('[RealTimeViewCount] View count fetch process finished.')
       }
     }
     
     // 获取初始数据
+    console.log('[RealTimeViewCount] Calling initial getViewCount.')
     getViewCount()
     
     // 定期刷新数据 (每30秒)
-    const intervalId = setInterval(getViewCount, 30000)
+    console.log('[RealTimeViewCount] Setting up interval timer.')
+    const intervalId = setInterval(() => {
+        console.log('[RealTimeViewCount] Interval triggered getViewCount.')
+        getViewCount()
+    }, 30000)
     
-    return () => clearInterval(intervalId)
-  }, [post])
+    // 清理函数
+    return () => {
+      console.log('[RealTimeViewCount] Clearing interval timer.')
+      clearInterval(intervalId)
+    }
+  }, [post]) // Dependency array includes post
 
   if (!post) return null
 
