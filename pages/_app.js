@@ -90,14 +90,15 @@ const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {
     // 处理路由变化，增加页面访问计数
     const handleRouteChange = async (url) => {
-      // 只记录文章页面访问，可以根据路由模式判断
-      if (url.includes('/post/') || url.includes('/article/')) {
+      // 只记录文章页面访问，根据各种可能的路由模式判断
+      if (url.includes('/post/') || url.includes('/article/') || url.includes('/p/') || 
+          url.includes('/blog/') || url.includes('/posts/') || url.match(/\/\d{4}\/\d{2}\/\d{2}\//)) {
         // 从URL中提取文章标识符，只保留最后一段作为ID
         const segments = url.split('/')
         const path = segments[segments.length - 1]
         
         // 确保有有效的路径
-        if (path && path.length > 5) {
+        if (path && path.length > 0) {
           // 异步增加访问计数
           try {
             console.log('Incrementing page view for ID:', path)
