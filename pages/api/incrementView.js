@@ -55,7 +55,7 @@ function writeViewsData(data) {
 export default async function handler(req, res) {
   // 只允许POST请求
   if (req.method !== 'POST') {
-    console.error('Method not allowed:', req.method)
+    console.error('[API /api/incrementView] Error: Method not allowed:', req.method)
     return res.status(405).json({ error: 'Method not allowed. Use POST instead.' })
   }
   
@@ -65,51 +65,60 @@ export default async function handler(req, res) {
   res.setHeader('Expires', '0')
 
   // 打印完整请求体，用于调试
-  console.log('Received increment request with body:', req.body)
+  console.log('[API /api/incrementView] Received request with body:', req.body)
 
   const { path: pagePath } = req.body
   
   if (!pagePath) {
-    console.error('Missing path parameter in request body')
+    console.error('[API /api/incrementView] Error: Missing path parameter in request body')
     return res.status(400).json({ error: 'Path parameter is required in request body' })
   }
   
   // 确保使用的是干净的ID，没有路径前缀
   let cleanPath = pagePath
-  if (cleanPath.includes('/')) {
+  if (typeof cleanPath === 'string' && cleanPath.includes('/')) {
+    const originalPath = cleanPath
     cleanPath = cleanPath.split('/').pop()
-    console.log('Cleaned path from:', pagePath, 'to:', cleanPath)
+    console.log(`[API /api/incrementView] Cleaned path from '${originalPath}' to '${cleanPath}'`)
+  } else {
+    console.log(`[API /api/incrementView] Using path as is: '${cleanPath}'`)
   }
   
-  console.log('Incrementing view count for path:', cleanPath)
+  console.log(`[API /api/incrementView] Attempting to increment view count for clean path: '${cleanPath}'`)
   
   try {
     // 读取当前数据
     const viewsData = readViewsData()
+    console.log('[API /api/incrementView] Read views data file. Total keys before increment:', Object.keys(viewsData).length)
     
-    // 如果该路径不存在，初始化为0
-    if (!viewsData[cleanPath]) {
-      console.log('Initializing new entry for path:', cleanPath)
-      viewsData[cleanPath] = {
-        count: 0,
-        lastUpdated: new Date().toISOString()
-      }
+    // 获取当前数据，如果不存在则初始化
+    let currentCount = 0
+    if (viewsData[cleanPath]) {
+      currentCount = viewsData[cleanPath].count || 0
+      console.log(`[API /api/incrementView] Found existing count for '${cleanPath}': ${currentCount}`)
+    } else {
+      console.log(`[API /api/incrementView] Initializing new entry for path '${cleanPath}'`)
     }
     
     // 增加访问计数
-    viewsData[cleanPath].count += 1
-    viewsData[cleanPath].lastUpdated = new Date().toISOString()
+    const newCount = currentCount + 1
+    viewsData[cleanPath] = {
+      count: newCount,
+      lastUpdated: new Date().toISOString()
+    }
     
-    console.log('New count for path:', cleanPath, 'is', viewsData[cleanPath].count)
+    console.log(`[API /api/incrementView] Updated count for path '${cleanPath}' to ${newCount}`)
     
     // 保存数据
     const success = writeViewsData(viewsData)
     
     if (!success) {
-      console.error('Failed to write view count data')
+      console.error('[API /api/incrementView] Error: Failed to write view count data')
       return res.status(500).json({ error: 'Failed to update view count' })
     }
     
+    console.log('[API /api/incrementView] Successfully wrote updated data file.')
+
     // 返回结果
     return res.status(200).json({ 
       path: cleanPath,
@@ -118,7 +127,7 @@ export default async function handler(req, res) {
       timestamp: new Date().toISOString()
     })
   } catch (error) {
-    console.error('Error incrementing view count:', error)
-    return res.status(500).json({ error: 'Failed to increment view count' })
+    console.error('[API /api/incrementView] Critical error incrementing view count:', error)
+    return res.status(500).json({ error: 'Failed to increment view count', details: error.message })
   }
 } 

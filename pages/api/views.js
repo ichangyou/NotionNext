@@ -59,56 +59,56 @@ export default async function handler(req, res) {
   res.setHeader('Expires', '0')
   
   // 打印完整的请求URL和查询参数，用于调试
-  console.log('Received views request with query:', req.query, 'URL:', req.url)
+  console.log('[API /api/views] Received query:', req.query, 'URL:', req.url)
   
-  const { path: pagePath, increment } = req.query
+  const { path: pagePath } = req.query
   
   if (!pagePath) {
-    console.error('Missing path parameter in query')
+    console.error('[API /api/views] Error: Missing path parameter in query')
     return res.status(400).json({ error: 'Path parameter is required' })
   }
   
   // 确保使用的是干净的ID，没有路径前缀
   let cleanPath = pagePath
-  if (cleanPath.includes('/')) {
+  if (typeof cleanPath === 'string' && cleanPath.includes('/')) {
+    const originalPath = cleanPath
     cleanPath = cleanPath.split('/').pop()
-    console.log('Cleaned path from:', pagePath, 'to:', cleanPath)
+    console.log(`[API /api/views] Cleaned path from '${originalPath}' to '${cleanPath}'`)
+  } else {
+    console.log(`[API /api/views] Using path as is: '${cleanPath}'`)
   }
   
-  console.log('Fetching view count for path:', cleanPath)
+  console.log(`[API /api/views] Attempting to fetch view count for clean path: '${cleanPath}'`)
   
   try {
     // 读取当前数据
     const viewsData = readViewsData()
+    console.log('[API /api/views] Read views data file. Total keys:', Object.keys(viewsData).length)
+
+    const currentViewData = viewsData[cleanPath]
     
-    // 如果该路径不存在，初始化为0
-    if (!viewsData[cleanPath]) {
-      console.log('Path not found in data, initializing to 0:', cleanPath)
-      viewsData[cleanPath] = {
+    if (!currentViewData) {
+      console.log(`[API /api/views] Path '${cleanPath}' not found in data. Initializing count to 0.`)
+      // Return 0 count if path doesn't exist yet
+      return res.status(200).json({ 
+        path: cleanPath,
         count: 0,
-        lastUpdated: new Date().toISOString()
-      }
+        lastUpdated: new Date().toISOString(), // Use current time for non-existent entry
+        timestamp: new Date().toISOString()
+      })
     } else {
-      console.log('Found existing count for path:', cleanPath, 'Count:', viewsData[cleanPath].count)
+      console.log(`[API /api/views] Found existing count for path '${cleanPath}':`, currentViewData.count)
+      // Return existing data
+      return res.status(200).json({ 
+        path: cleanPath,
+        count: currentViewData.count,
+        lastUpdated: currentViewData.lastUpdated,
+        timestamp: new Date().toISOString()
+      })
     }
-    
-    // 如果请求包含increment=true参数，增加访问计数
-    if (increment === 'true' && req.method === 'POST') {
-      viewsData[cleanPath].count += 1
-      viewsData[cleanPath].lastUpdated = new Date().toISOString()
-      console.log('Incremented count for path:', cleanPath, 'New count:', viewsData[cleanPath].count)
-      writeViewsData(viewsData)
-    }
-    
-    // 返回结果
-    return res.status(200).json({ 
-      path: cleanPath,
-      count: viewsData[cleanPath].count,
-      lastUpdated: viewsData[cleanPath].lastUpdated,
-      timestamp: new Date().toISOString()
-    })
+
   } catch (error) {
-    console.error('Error handling views request:', error)
-    return res.status(500).json({ error: 'Failed to process view count' })
+    console.error('[API /api/views] Critical error handling views request:', error)
+    return res.status(500).json({ error: 'Failed to process view count', details: error.message })
   }
 } 
