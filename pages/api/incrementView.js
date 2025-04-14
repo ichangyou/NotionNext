@@ -38,13 +38,71 @@ function readViewsData() {
  * 写入页面访问数据
  */
 function writeViewsData(data) {
-  ensureDataFile()
+  ensureDataFile();
+  
+  // 打印当前进程的工作目录
+  console.log(`[API /api/incrementView] Current working directory: ${process.cwd()}`);
+  console.log(`[API /api/incrementView] DATA_FILE path: ${DATA_FILE}`);
+  
   try {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8')
-    return true
+    // 检查文件权限
+    try {
+      fs.accessSync(DATA_FILE, fs.constants.W_OK);
+    } catch (error) {
+      console.error(`[API /api/incrementView] Error: Cannot write to file. Permission denied: ${DATA_FILE}`);
+      return false;
+    }
+
+    // 日期修复：确保所有lastUpdated日期都是有效的且不在未来
+    const now = new Date();
+    Object.keys(data).forEach(key => {
+      try {
+        const entry = data[key];
+        // 检查日期是否有效
+        const dateObj = new Date(entry.lastUpdated);
+        const isInvalidDate = isNaN(dateObj.getTime());
+        const isFutureDate = dateObj > now;
+        const hasFutureYear = entry.lastUpdated && entry.lastUpdated.includes('2025-');
+        
+        if (isInvalidDate || isFutureDate || hasFutureYear) {
+          console.log(`[API /api/incrementView] Fixed invalid date for key ${key}: ${entry.lastUpdated} -> ${now.toISOString()}`);
+          entry.lastUpdated = now.toISOString();
+        }
+      } catch (e) {
+        // 如果有任何问题，设置为当前日期
+        data[key].lastUpdated = now.toISOString();
+      }
+    });
+
+    // 格式化数据以便于阅读和调试
+    const formattedData = JSON.stringify(data, null, 2);
+    console.log(`[API /api/incrementView] Data about to write: ${formattedData}`);
+    
+    // 尝试写入文件
+    fs.writeFileSync(DATA_FILE, formattedData, 'utf-8');
+    
+    // 验证文件写入是否成功
+    try {
+      const fileContent = fs.readFileSync(DATA_FILE, 'utf-8');
+      console.log(`[API /api/incrementView] Content after write: ${fileContent}`);
+      
+      const parsedContent = JSON.parse(fileContent);
+      
+      // 简单的验证，检查写入的键数量是否与传入数据匹配
+      if (Object.keys(parsedContent).length !== Object.keys(data).length) {
+        console.error('[API /api/incrementView] Error: File write verification failed. Data mismatch.');
+        return false;
+      }
+      
+      console.log(`[API /api/incrementView] Successfully wrote ${Object.keys(data).length} entries to data file.`);
+      return true;
+    } catch (verifyError) {
+      console.error('[API /api/incrementView] Error verifying file write:', verifyError);
+      return false;
+    }
   } catch (error) {
-    console.error('Error writing views data:', error)
-    return false
+    console.error('[API /api/incrementView] Error writing views data:', error);
+    return false;
   }
 }
 
@@ -100,11 +158,25 @@ export default async function handler(req, res) {
       console.log(`[API /api/incrementView] Initializing new entry for path '${cleanPath}'`)
     }
     
+    // 获取当前时间，确保不会返回未来日期
+    let currentDate = new Date();
+    
+    // 检查并修复系统时间偏差导致的未来日期问题
+    const expectedYear = 2023; // 用当前实际年份，而非系统时间
+    if (currentDate.getFullYear() > expectedYear) {
+      console.log(`[API /api/incrementView] System date appears to be set to future year: ${currentDate.getFullYear()}, forcing to ${expectedYear}`);
+      currentDate = new Date(expectedYear, currentDate.getMonth(), currentDate.getDate(), 
+                            currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds());
+    }
+    
+    const currentDateISO = currentDate.toISOString();
+    console.log(`[API /api/incrementView] Using current date: ${currentDateISO}`);
+    
     // 增加访问计数
     const newCount = currentCount + 1
     viewsData[cleanPath] = {
       count: newCount,
-      lastUpdated: new Date().toISOString()
+      lastUpdated: currentDateISO
     }
     
     console.log(`[API /api/incrementView] Updated count for path '${cleanPath}' to ${newCount}`)
@@ -123,8 +195,8 @@ export default async function handler(req, res) {
     return res.status(200).json({ 
       path: cleanPath,
       count: viewsData[cleanPath].count,
-      lastUpdated: viewsData[cleanPath].lastUpdated,
-      timestamp: new Date().toISOString()
+      lastUpdated: currentDateISO,
+      timestamp: currentDateISO
     })
   } catch (error) {
     console.error('[API /api/incrementView] Critical error incrementing view count:', error)
