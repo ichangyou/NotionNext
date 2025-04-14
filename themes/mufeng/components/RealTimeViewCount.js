@@ -47,28 +47,29 @@ const RealTimeViewCount = ({ post, simple = false }) => {
 
         if (!cleanIdentifier) {
           console.error('[RealTimeViewCount] Error: Could not determine a valid post identifier.')
-          setViewCount('ERR') // Indicate an error state
+          setViewCount('0') // 修改为显示 0 而不是 ERR
           setLoading(false)
           return
         }
 
         console.log(`[RealTimeViewCount] Attempting to fetch views for clean identifier: '${cleanIdentifier}'`) 
         
-        // 获取文章访问次数
-        const data = await fetchPageViews(cleanIdentifier)
-        console.log(`[RealTimeViewCount] Received data from fetchPageViews for '${cleanIdentifier}':`, data)
+        // 获取文章访问次数 - 使用卜算子API
+        const response = await fetch(`https://busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback&url=${encodeURIComponent(cleanIdentifier)}`)
+        const data = await response.json()
+        console.log(`[RealTimeViewCount] Received data from busuanzi for '${cleanIdentifier}':`, data)
         
         // 如果成功获取到数据，更新计数
-        if (data && typeof data.count === 'number') {
-          console.log(`[RealTimeViewCount] Successfully fetched count for '${cleanIdentifier}': ${data.count}`)
-          setViewCount(data.count)
+        if (data && typeof data.page_pv === 'number') {
+          console.log(`[RealTimeViewCount] Successfully fetched count for '${cleanIdentifier}': ${data.page_pv}`)
+          setViewCount(data.page_pv)
         } else {
           console.warn(`[RealTimeViewCount] Failed to get valid count for '${cleanIdentifier}'. API response:`, data)
-          setViewCount('0') // Default to 0 on failure, as per the bug report
+          setViewCount('0') // Default to 0 on failure
         }
       } catch (error) {
         console.error('[RealTimeViewCount] Error fetching view count:', error)
-        setViewCount('ERR') // Indicate an error state
+        setViewCount('0') // 修改为显示 0 而不是 ERR
       } finally {
         setLoading(false)
         console.log('[RealTimeViewCount] View count fetch process finished.')
