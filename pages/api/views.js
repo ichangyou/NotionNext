@@ -87,23 +87,57 @@ export default async function handler(req, res) {
 
     const currentViewData = viewsData[cleanPath]
     
+    // 获取当前时间，确保不会返回未来日期
+    let currentDate = new Date();
+    
+    // 检查并修复系统时间偏差导致的未来日期问题
+    const expectedYear = 2023; // 用当前实际年份，而非系统时间
+    if (currentDate.getFullYear() > expectedYear) {
+      console.log(`[API /api/views] System date appears to be set to future year: ${currentDate.getFullYear()}, forcing to ${expectedYear}`);
+      currentDate = new Date(expectedYear, currentDate.getMonth(), currentDate.getDate(), 
+                           currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds());
+    }
+    
+    const currentDateISO = currentDate.toISOString();
+    console.log(`[API /api/views] Using current date: ${currentDateISO}`);
+    
     if (!currentViewData) {
       console.log(`[API /api/views] Path '${cleanPath}' not found in data. Initializing count to 0.`)
       // Return 0 count if path doesn't exist yet
       return res.status(200).json({ 
         path: cleanPath,
         count: 0,
-        lastUpdated: new Date().toISOString(), // Use current time for non-existent entry
-        timestamp: new Date().toISOString()
+        lastUpdated: currentDateISO, // Use current time for non-existent entry
+        timestamp: currentDateISO
       })
     } else {
       console.log(`[API /api/views] Found existing count for path '${cleanPath}':`, currentViewData.count)
+      
+      // 检查日期是否有效，并修复未来日期问题
+      let lastUpdated = currentViewData.lastUpdated;
+      try {
+        const dateObj = new Date(lastUpdated);
+        const isInvalidDate = isNaN(dateObj.getTime());
+        const isFutureDate = dateObj > currentDate;
+        
+        if (isInvalidDate || isFutureDate || lastUpdated.includes('2025-')) {
+          console.log(`[API /api/views] Fixing invalid date: ${lastUpdated} -> ${currentDateISO}`);
+          lastUpdated = currentDateISO;
+          
+          // 修复原数据文件中的日期
+          viewsData[cleanPath].lastUpdated = currentDateISO;
+          writeViewsData(viewsData);
+        }
+      } catch (e) {
+        lastUpdated = currentDateISO;
+      }
+      
       // Return existing data
       return res.status(200).json({ 
         path: cleanPath,
         count: currentViewData.count,
-        lastUpdated: currentViewData.lastUpdated,
-        timestamp: new Date().toISOString()
+        lastUpdated: lastUpdated,
+        timestamp: currentDateISO
       })
     }
 

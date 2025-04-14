@@ -101,12 +101,17 @@ const MyApp = ({ Component, pageProps }) => {
         if (path && path.length > 0) {
           // 异步增加访问计数
           try {
-            console.log('Incrementing page view for ID:', path)
-            await incrementPageView(path)
+            console.log('[_app.js] 增加页面访问计数: ', path)
+            const result = await incrementPageView(path)
+            console.log('[_app.js] 访问计数增加结果: ', result)
           } catch (error) {
-            console.error('Failed to track page view:', error)
+            console.error('[_app.js] 记录页面访问失败:', error)
           }
+        } else {
+          console.warn('[_app.js] 无法从URL提取有效的文章标识符: ', url)
         }
+      } else {
+        console.log('[_app.js] 跳过非文章页面的访问记录: ', url)
       }
     }
 
@@ -116,6 +121,7 @@ const MyApp = ({ Component, pageProps }) => {
     // 处理首次加载
     if (typeof window !== 'undefined') {
       const url = window.location.pathname
+      console.log('[_app.js] 页面首次加载，检查URL: ', url)
       handleRouteChange(url)
     }
 

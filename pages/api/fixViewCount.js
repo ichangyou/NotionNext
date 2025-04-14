@@ -96,6 +96,14 @@ export default async function handler(req, res) {
       } else {
         newViewsData[newKey] = data
       }
+
+      // 检查日期是否有效，或者是未来日期
+      const isInvalidDate = isNaN(new Date(data.lastUpdated).getTime())
+      const isFutureDate = new Date(data.lastUpdated) > new Date()
+      const currentYear = new Date().getFullYear()
+      const dateYear = new Date(data.lastUpdated).getFullYear()
+      const isFutureYear = dateYear > currentYear
+
     }
     
     // 保存修复后的数据
