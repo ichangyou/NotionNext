@@ -22,23 +22,41 @@ const RealTimeViewCount = ({ post, simple = false }) => {
         setLoading(true)
         
         // 使用页面路径作为唯一标识，确保获取正确的ID
-        let postPath = post.slug || post.id
+        let postPath = ''
         
-        // 如果是Notion文章，可能需要处理特殊格式的ID
-        if (!postPath && post.idInDBs) {
+        // 优先使用slug（如果可用）
+        if (post.slug) {
+          postPath = post.slug
+        }
+        // 或者使用文章ID
+        else if (post.id) {
+          postPath = post.id
+        }
+        // 处理Notion文章
+        else if (post.idInDBs) {
           postPath = post.idInDBs
+        }
+        // 尝试从post对象中找到其他可能的标识符
+        else if (post.postPath || post.path) {
+          postPath = post.postPath || post.path
         }
         
         // 如果仍未获取到有效ID，尝试从URL中提取
-        if (!postPath) {
+        if (!postPath && typeof window !== 'undefined') {
           const pathSegments = window.location.pathname.split('/')
           postPath = pathSegments[pathSegments.length - 1]
         }
         
         // 确保只使用ID部分，移除可能的路径前缀
-        if (postPath.includes('/')) {
+        if (postPath && postPath.includes('/')) {
           const segments = postPath.split('/')
           postPath = segments[segments.length - 1]
+        }
+        
+        // 如果仍然没有有效的路径，使用一个回退值
+        if (!postPath || postPath === '') {
+          console.warn('Could not determine post ID, using fallback')
+          postPath = 'unknown-post'
         }
         
         console.log('Fetching view count for article ID:', postPath)
