@@ -81,14 +81,14 @@ export default function Footer(props) {
               
               <div className='flex space-x-4'>
                 {/* 站点总访问量 */}
-                <div className='busuanzi_container_site_pv bg-gray-800 rounded-md px-3 py-1 flex items-center'>
+                <div className='hidden busuanzi_container_site_pv bg-gray-800 rounded-md px-3 py-1 flex items-center'>
                   <i className='fas fa-eye mr-2 text-yellow-500' />
                   <span className='mr-1'>{locale.COMMON.TOTAL_VIEWS}:</span>
                   <span className='busuanzi_value_site_pv font-medium text-yellow-300'></span>
                 </div>
                 
                 {/* 站点访客数 */}
-                <div className='busuanzi_container_site_uv bg-gray-800 rounded-md px-3 py-1 flex items-center'>
+                <div className='hidden busuanzi_container_site_uv bg-gray-800 rounded-md px-3 py-1 flex items-center'>
                   <i className='fas fa-users mr-2 text-yellow-500' />
                   <span className='mr-1'>{locale.COMMON.TOTAL_VISITORS}:</span>
                   <span className='busuanzi_value_site_uv font-medium text-yellow-300'></span>
