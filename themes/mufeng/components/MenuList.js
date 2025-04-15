@@ -25,8 +25,16 @@ export const MenuList = ({ customNav, customMenu }) => {
   const collapseRef = useRef(null)
 
   useEffect(() => {
-    router.events.on('routeChangeStart', closeMenu)
-  })
+    // Only run on client-side
+    if (typeof window !== 'undefined' && router?.events) {
+      router.events.on('routeChangeStart', closeMenu)
+      
+      // Clean up
+      return () => {
+        router.events.off('routeChangeStart', closeMenu)
+      }
+    }
+  }, [router]) // Add router as dependency
 
   let links = [
     {
