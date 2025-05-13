@@ -1,0 +1,16 @@
+/* 博客文章卡片美化 - 格式优化 */
+.dark #theme-simple .h-42 { background-color: #1a1a1a; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); }
+#theme-simple .h-42:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); }
+.dark #theme-simple .h-42:hover { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); }
+/* 导航栏改进 */
+#theme-simple nav { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 100; }
+/* 按钮和交互元素美化 */
+#theme-simple .h-42 a.inline-block:hover { background-color: #1c4f64; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(39, 96, 119, 0.3); }
+.dark #theme-simple .h-42 a.inline-block { background-color: #375a7f; box-shadow: 0 2px 5px rgba(55, 90, 127, 0.4); }
+.dark #theme-simple .h-42 a.inline-block:hover { background-color: #2c4964; box-shadow: 0 4px 10px rgba(55, 90, 127, 0.5); }
+/* 标签和分类标签美化 */
+#theme-simple .h-42 a.flex.items-center.text-xs { border-radius: 30px; transition: all 0.3s ease; padding: 6px 12px; }
+#theme-simple .h-42 a.flex.items-center.text-xs:hover { transform: translateY(-2px); }
+/* 优化文章卡片内边距和布局 */
+#theme-simple .h-42 .article-info { padding: 0 10px; }
+#theme-simple .h-42 main { line-height: 1.6; margin-bottom: 16px; }
