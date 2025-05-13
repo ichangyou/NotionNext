@@ -13,7 +13,7 @@ const RealTimeViewCount = ({ post, simple = false }) => {
   return (
     <span className='flex items-center group transition-all duration-200'>
       <i className='fas fa-eye mr-1 text-gray-500 group-hover:text-red-400'></i>
-      <span className='hidden busuanzi_container_page_pv'>
+      <span className='busuanzi_container_page_pv' style={{ display: 'none' }}>
         <span className='font-medium busuanzi_value_page_pv'></span>
       </span>
       {!simple && <span className='text-xs ml-1'>{locale.COMMON.VIEWS}</span>}
