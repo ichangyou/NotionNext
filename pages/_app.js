@@ -5,7 +5,7 @@ import '@/styles/utility-patterns.css'
 // import 'animate.css'
 // import '@/styles/prism-theme.scss'
 import '@/styles/notion.css'
-import '@/themes/mufeng/enhanced_styles.css' // 添加这行导入增强样式
+// import '@/themes/mufeng/enhanced_styles.css' // 已删除的文件
 import 'katex/dist/katex.min.css'
 import dynamic from 'next/dynamic'
 import { GlobalContextProvider } from '@/lib/global'
