@@ -91,6 +91,9 @@ const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {
     // 处理路由变化，增加页面访问计数
     const handleRouteChange = async (url) => {
+      if (!window._pageVisited) {
+        window._pageVisited = true;
+      
       // 只记录文章页面访问，根据各种可能的路由模式判断
       if (url.includes('/post/') || url.includes('/article/') || url.includes('/p/') || 
           url.includes('/blog/') || url.includes('/posts/') || url.match(/\/\d{4}\/\d{2}\/\d{2}\//)) {
@@ -113,6 +116,7 @@ const MyApp = ({ Component, pageProps }) => {
         }
       } else {
         console.log('[_app.js] 跳过非文章页面的访问记录: ', url)
+      }
       }
     }
 
