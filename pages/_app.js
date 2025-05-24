@@ -14,7 +14,7 @@ import { Router } from 'next/router'
 // import NProgress from 'nprogress'
 // import loadLocale from '@/lib/locale'
 import { incrementPageView } from '@/lib/utils/pageViewTracker'
-import Script from 'next/script'
+
 
 // core styles shared by all of react-notion-x (required)
 import 'react-notion-x/src/styles.css' // 原版的react-notion-x
@@ -157,13 +157,11 @@ const MyApp = ({ Component, pageProps }) => {
       {enableClerk ? (
         <ClerkProvider localization={zhCN}>
           {/* <TopProgress /> */}
-          <Script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></Script>
           {content}
         </ClerkProvider>
       ) : (
         <>
           {/* <TopProgress /> */}
-          <Script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></Script>
           {content}
         </>
       )}

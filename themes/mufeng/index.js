@@ -13,7 +13,7 @@ import BlogPostBar from './components/BlogPostBar'
 import CONFIG from './config'
 import { Style } from './style'
 import Catalog from './components/Catalog'
-import Busuanzi from '@/components/Busuanzi'
+
 
 const AlgoliaSearchModal = dynamic(
   () => import('@/components/AlgoliaSearchModal'),
@@ -80,7 +80,6 @@ const LayoutBase = props => {
         id='theme-simple'
         className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col dark:text-gray-300  bg-white dark:bg-black scroll-smooth`}>
         <Style />
-        <Busuanzi />
 
         {siteConfig('SIMPLE_TOP_BAR', null, CONFIG) && <TopBar {...props} />}
 
