@@ -7,7 +7,8 @@ import { useGlobal } from '@/lib/global'
 import { formatDateFmt } from '@/lib/utils/formatDate'
 import Link from 'next/link'
 import CONFIG from '../config'
-import RealTimeViewCount from './RealTimeViewCount'
+// 移除阅读量组件导入
+// import RealTimeViewCount from './RealTimeViewCount'
 
 export const BlogItem = props => {
   const { post } = props
@@ -73,9 +74,7 @@ export const BlogItem = props => {
                 <TwikooCommentCount post={post} />
               </span>
               
-              <span className='w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full'></span>
-              
-              <RealTimeViewCount post={post} simple={true} />
+              {/* 移除阅读量组件 */}
             </div>
 
             <div className='flex items-center mt-2 md:mt-0 md:ml-3'>
