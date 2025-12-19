@@ -41,7 +41,7 @@ const ShareBar = dynamic(() => import('@/components/ShareBar'), { ssr: false })
 const TopBar = dynamic(() => import('./components/TopBar'), { ssr: false })
 const Header = dynamic(() => import('./components/Header'), { ssr: false })
 const NavBar = dynamic(() => import('./components/NavBar'), { ssr: false })
-const ProfileSidebar = dynamic(() => import('./components/ProfileSidebar'), {
+const LeftSidebar = dynamic(() => import('./components/LeftSidebar'), {
   ssr: false
 })
 const JumpToTopButton = dynamic(() => import('./components/JumpToTopButton'), {
@@ -58,6 +58,12 @@ const BlogListPage = dynamic(() => import('./components/BlogListPage'), {
 const RecommendPosts = dynamic(() => import('./components/RecommendPosts'), {
   ssr: false
 })
+const Breadcrumb = dynamic(() => import('./components/Breadcrumb'), {
+  ssr: false
+})
+const PageTitle = dynamic(() => import('./components/PageTitle'), {
+  ssr: false
+})
 
 // 主题全局状态
 const ThemeGlobalSimple = createContext()
@@ -65,12 +71,13 @@ export const useSimpleGlobal = () => useContext(ThemeGlobalSimple)
 
 /**
  * 基础布局
+ * 参考设计：左侧固定边栏 + 右侧内容区
  *
  * @param {*} props
  * @returns
  */
 const LayoutBase = props => {
-  const { children, slotTop } = props
+  const { children, slotTop, hideBreadcrumb, hidePageTitle, pageTitle, pageDescription } = props
   const { onLoading, fullWidth } = useGlobal()
   const searchModal = useRef(null)
 
@@ -78,60 +85,62 @@ const LayoutBase = props => {
     <ThemeGlobalSimple.Provider value={{ searchModal }}>
       <div
         id='theme-simple'
-        className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col dark:text-gray-300  bg-white dark:bg-black scroll-smooth`}>
+        className={`${siteConfig('FONT_STYLE')} min-h-screen flex dark:text-gray-300 bg-white dark:bg-[#0d0d0d] scroll-smooth`}>
         <Style />
 
-        {siteConfig('SIMPLE_TOP_BAR', null, CONFIG) && <TopBar {...props} />}
+        {/* 左侧固定边栏 */}
+        <aside className='hidden lg:flex flex-col w-[280px] min-w-[280px] h-screen sticky top-0 border-r border-gray-100 dark:border-gray-800/50'>
+          <LeftSidebar {...props} />
+        </aside>
 
-        {/* 顶部LOGO 
-        <Header {...props} />
-*/}
-        {/* 导航栏 */}
-        <NavBar {...props} />
+        {/* 右侧主内容区 */}
+        <main className='flex-1 min-h-screen flex flex-col'>
+          {/* 移动端顶部导航 */}
+          <div className='lg:hidden'>
+            <NavBar {...props} />
+          </div>
 
-        {/* 主体 */}
-        <div
-          id='container-wrapper'
-          className={
-            (JSON.parse(siteConfig('LAYOUT_SIDEBAR_REVERSE'))
-              ? 'flex-row-reverse'
-              : '') + ' w-full flex-1 flex items-start max-w-5xl mx-auto pt-2 md:pt-3 px-3 md:px-4'
-          }>
-          <div id='container-inner' className='w-full flex-grow min-h-fit'>
+          {/* 内容区域 */}
+          <div
+            id='container-wrapper'
+            className='flex-1 w-full max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-10'>
+            
             <Transition
               show={!onLoading}
               appear={true}
-              enter='transition ease-in-out duration-700 transform order-first'
-              enterFrom='opacity-0 translate-y-16'
+              enter='transition ease-in-out duration-500 transform order-first'
+              enterFrom='opacity-0 translate-y-8'
               enterTo='opacity-100'
               leave='transition ease-in-out duration-300 transform'
               leaveFrom='opacity-100 translate-y-0'
-              leaveTo='opacity-0 -translate-y-16'
+              leaveTo='opacity-0 -translate-y-8'
               unmount={false}>
+              
+              {/* 面包屑导航 */}
+              {!hideBreadcrumb && <Breadcrumb />}
+              
+              {/* 页面标题 */}
+              {!hidePageTitle && <PageTitle title={pageTitle} description={pageDescription} />}
+
               {slotTop}
 
               {children}
             </Transition>
+            
             <AdSlot type='native' />
           </div>
 
-          {fullWidth ? null : (
-            <div
-              id='right-sidebar'
-              className='hidden xl:block flex-none w-72 border-l dark:border-gray-800 pl-4 md:pl-6 border-gray-100 overflow-hidden'>
-              <ProfileSidebar {...props} />
-            </div>
-          )}
-        </div>
+          {/* 页脚（包含卜算子统计） */}
+          <Footer {...props} />
+        </main>
 
+        {/* 返回顶部按钮 */}
         <div className='fixed right-4 bottom-4 z-20'>
           <JumpToTopButton />
         </div>
 
         {/* 搜索框 */}
         <AlgoliaSearchModal cRef={searchModal} {...props} />
-
-        <Footer {...props} />
       </div>
     </ThemeGlobalSimple.Provider>
   )
@@ -201,17 +210,15 @@ const LayoutSearch = props => {
 const LayoutArchive = props => {
   const { archivePosts } = props
   return (
-    <>
-      <div className='mb-10 pb-20 md:py-12 p-3  min-h-screen w-full'>
-        {Object.keys(archivePosts).map(archiveTitle => (
-          <BlogArchiveItem
-            key={archiveTitle}
-            archiveTitle={archiveTitle}
-            archivePosts={archivePosts}
-          />
-        ))}
-      </div>
-    </>
+    <div className='w-full'>
+      {Object.keys(archivePosts).map(archiveTitle => (
+        <BlogArchiveItem
+          key={archiveTitle}
+          archiveTitle={archiveTitle}
+          archivePosts={archivePosts}
+        />
+      ))}
+    </div>
   )
 }
 
@@ -301,27 +308,27 @@ const Layout404 = props => {
 const LayoutCategoryIndex = props => {
   const { categoryOptions } = props
   return (
-    <>
-      <div id='category-list' className='duration-200 flex flex-wrap'>
-        {categoryOptions?.map(category => {
-          return (
-            <Link
-              key={category.name}
-              href={`/category/${category.name}`}
-              passHref
-              legacyBehavior>
-              <div
-                className={
-                  'hover:text-black dark:hover:text-white dark:text-gray-300 dark:hover:bg-gray-600 px-5 cursor-pointer py-2 hover:bg-gray-100'
-                }>
-                <i className='mr-4 fas fa-folder' />
-                {category.name}({category.count})
-              </div>
-            </Link>
-          )
-        })}
-      </div>
-    </>
+    <div id='category-list' className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
+      {categoryOptions?.map((category, index) => (
+        <Link
+          key={category.name}
+          href={`/category/${category.name}`}
+          className='group flex items-center justify-between p-4 rounded-xl bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200'
+        >
+          <div className='flex items-center gap-3'>
+            <span className='text-sm font-mono text-gray-400 dark:text-gray-500'>
+              {(index + 1).toString().padStart(2, '0')}
+            </span>
+            <span className='text-gray-800 dark:text-gray-200 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors'>
+              {category.name}
+            </span>
+          </div>
+          <span className='text-sm text-gray-400 dark:text-gray-500 bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded-full'>
+            {category.count}
+          </span>
+        </Link>
+      ))}
+    </div>
   )
 }
 
@@ -333,26 +340,23 @@ const LayoutCategoryIndex = props => {
 const LayoutTagIndex = props => {
   const { tagOptions } = props
   return (
-    <>
-      <div id='tags-list' className='duration-200 flex flex-wrap'>
-        {tagOptions.map(tag => {
-          return (
-            <div key={tag.name} className='p-2'>
-              <Link
-                key={tag}
-                href={`/tag/${encodeURIComponent(tag.name)}`}
-                passHref
-                className={`cursor-pointer inline-block rounded hover:bg-gray-500 hover:text-white duration-200  mr-2 py-1 px-2 text-xs whitespace-nowrap dark:hover:text-white text-gray-600 hover:shadow-xl dark:border-gray-400 notion-${tag.color}_background dark:bg-gray-800`}>
-                <div className='font-light dark:text-gray-400'>
-                  <i className='mr-1 fas fa-tag' />{' '}
-                  {tag.name + (tag.count ? `(${tag.count})` : '')}{' '}
-                </div>
-              </Link>
-            </div>
-          )
-        })}
-      </div>
-    </>
+    <div id='tags-list' className='flex flex-wrap gap-2'>
+      {tagOptions.map(tag => (
+        <Link
+          key={tag.name}
+          href={`/tag/${encodeURIComponent(tag.name)}`}
+          className='inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 transition-all duration-200'
+        >
+          <span>#</span>
+          <span>{tag.name}</span>
+          {tag.count > 0 && (
+            <span className='text-xs text-gray-400 dark:text-gray-500'>
+              ({tag.count})
+            </span>
+          )}
+        </Link>
+      ))}
+    </div>
   )
 }
 
