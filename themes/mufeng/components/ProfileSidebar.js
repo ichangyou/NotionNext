@@ -5,6 +5,7 @@ import CONFIG from '../config'
 import SocialButton from './SocialButton'
 import Header from './Header'
 import Catalog from './Catalog'
+import BLOG from '@/blog.config'
 
 /**
  * 侧边栏个人资料组件
@@ -36,6 +37,9 @@ export default function ProfileSidebar(props) {
           <div className='flex flex-col items-center mt-3'>
             <div className='text-lg font-serif dark:text-white py-1 hover:scale-105 transform duration-200 text-center'>
               {siteConfig('AUTHOR')}
+            </div>
+            <div className='text-sm text-gray-500 dark:text-gray-400 hover:scale-105 transform duration-200 text-center'>
+              {BLOG.BIO}
             </div>
             <div
               className='font-light dark:text-white py-1 hover:scale-105 transform duration-200 text-center text-xs'
