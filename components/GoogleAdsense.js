@@ -42,12 +42,14 @@ function getNodesWithAdsByGoogleClass(node) {
 
   // 检查节点及其子节点是否包含 adsbygoogle 类
   function checkNodeForAds(node) {
-    if (node.tagName === 'INS' && node.classList.contains('adsbygoogle')) {
-      adsNodes.push(node)
-    } else {
-      // 递归检查子节点
-      for (let i = 0; i < node.childNodes.length; i++) {
-        checkNodeForAds(node.childNodes[i])
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      if (node.tagName === 'INS' && node.classList.contains('adsbygoogle')) {
+        adsNodes.push(node)
+      } else {
+        // 递归检查子节点
+        for (let i = 0; i < node.childNodes.length; i++) {
+          checkNodeForAds(node.childNodes[i])
+        }
       }
     }
   }
@@ -60,7 +62,7 @@ function getNodesWithAdsByGoogleClass(node) {
  * 初始化谷歌广告
  * @returns
  */
-export const initGoogleAdsense = async ADSENSE_GOOGLE_ID => {
+export const initGoogleAdsense = ADSENSE_GOOGLE_ID => {
   console.log('Load Adsense')
   loadExternalResource(
     `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_GOOGLE_ID}`,
@@ -102,6 +104,8 @@ export const initGoogleAdsense = async ADSENSE_GOOGLE_ID => {
         observerConfig
       )
     }, 100)
+  }).catch(error => {
+    console.warn('AdSense脚本加载失败，可能被广告拦截器阻止:', error)
   })
 }
 
@@ -150,14 +154,7 @@ const AdSlot = ({ type = 'show' }) => {
     return (
       <ins
         className='adsbygoogle'
-        style={{ 
-          display: 'block', 
-          textAlign: 'center',
-          maxHeight: '200px',
-          overflow: 'hidden',
-          margin: '0 auto',
-          padding: '0.5rem'
-        }}
+        style={{ display: 'block', textAlign: 'center' }}
         data-ad-format='autorelaxed'
         data-adtest={ADSENSE_GOOGLE_TEST ? 'on' : 'off'}
         data-ad-client={ADSENSE_GOOGLE_ID}

@@ -5,7 +5,7 @@
  */
 const idRibbon = 'canvasRibbon'
 function createRibbon() {
-  !(function () {
+  ;(function () {
     const t = document.getElementById('__next')
     const e = {
       z: n(t, 'zIndex', 0),
@@ -22,7 +22,7 @@ function createRibbon() {
       a = window.innerWidth,
       l = window.innerHeight,
       d = e.s
-    i.id = id
+    i.id = idRibbon
     let r, s
     const u = Math
     let h = 0
@@ -80,7 +80,7 @@ function createRibbon() {
 
 function destroyRibbon() {
   const ribbon = document.getElementById(idRibbon)
-  if (ribbon && ribbon.parentNode && ribbon.parentNode.contains(ribbon)) {
+  if (ribbon && ribbon.parentNode) {
     ribbon.parentNode.removeChild(ribbon)
   }
 }
