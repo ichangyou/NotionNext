@@ -64,6 +64,9 @@ const Breadcrumb = dynamic(() => import('./components/Breadcrumb'), {
 const PageTitle = dynamic(() => import('./components/PageTitle'), {
   ssr: false
 })
+const DarkModeButton = dynamic(() => import('@/components/DarkModeButton'), {
+  ssr: false
+})
 
 // 主题全局状态
 const ThemeGlobalSimple = createContext()
@@ -134,8 +137,9 @@ const LayoutBase = props => {
           <Footer {...props} />
         </main>
 
-        {/* 返回顶部按钮 */}
-        <div className='fixed right-4 bottom-4 z-20'>
+        {/* 右下角固定按钮组 */}
+        <div className='fixed right-4 bottom-4 z-20 flex flex-col gap-2'>
+          <DarkModeButton className='w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full shadow-lg hover:shadow-xl text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-all duration-200' />
           <JumpToTopButton />
         </div>
 

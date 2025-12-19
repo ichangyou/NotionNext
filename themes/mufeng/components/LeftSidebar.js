@@ -1,5 +1,4 @@
 import LazyImage from '@/components/LazyImage'
-import DarkModeButton from '@/components/DarkModeButton'
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import Link from 'next/link'
@@ -62,11 +61,6 @@ export default function LeftSidebar(props) {
     }
     return currentPath.startsWith(href)
   }
-
-  const d = new Date()
-  const currentYear = d.getFullYear()
-  const since = siteConfig('SINCE')
-  const copyrightDate = parseInt(since) < currentYear ? since + '-' + currentYear : currentYear
 
   return (
     <div className='flex flex-col h-full px-6 py-8'>
@@ -132,26 +126,6 @@ export default function LeftSidebar(props) {
         </ul>
       </nav>
 
-      {/* 底部：版权和深色模式 */}
-      <div className='pt-6 border-t border-gray-100 dark:border-gray-800'>
-        <div className='flex items-center justify-between mb-3'>
-          <span className='text-xs text-gray-400 dark:text-gray-500'>
-            © {copyrightDate}
-          </span>
-          <span className='text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors'>
-            <Link href={siteConfig('LINK') || '/'}>
-              {siteConfig('TITLE')}
-            </Link>
-          </span>
-        </div>
-        
-        <div className='flex items-center justify-between'>
-          <span className='text-xs text-gray-400 dark:text-gray-500'>
-            Built with ❤️
-          </span>
-          <DarkModeButton className='text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300' />
-        </div>
-      </div>
     </div>
   )
 }
