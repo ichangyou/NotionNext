@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import CONFIG from '../config'
 import SocialButton from './SocialButton'
+import BLOG from '@/blog.config'
 
 /**
  * 左侧边栏组件
@@ -86,7 +87,7 @@ export default function LeftSidebar(props) {
 
         {/* 简介 */}
         <p className='text-sm text-gray-500 dark:text-gray-400 mb-4'>
-          {siteConfig('BIO') || siteConfig('DESCRIPTION')}
+          {BLOG.BIO}
         </p>
 
         {/* 签名引言 */}
