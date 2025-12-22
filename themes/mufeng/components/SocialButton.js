@@ -48,7 +48,7 @@ const SocialButton = () => {
           rel='noreferrer'
           title='RSS'
           href='/rss/feed.xml'
-          className='w-9 h-9 flex items-center justify-center rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-500 dark:text-orange-400 hover:bg-orange-200 dark:hover:bg-orange-800/40 transition-all duration-200 hover:scale-110'
+          className='w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-all duration-200 hover:scale-110'
         >
           <i className='fas fa-rss text-sm' />
         </a>

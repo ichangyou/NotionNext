@@ -68,7 +68,7 @@ export default function LeftSidebar(props) {
       {/* 头像和个人信息 */}
       <div className='mb-8'>
         <Link href='/'>
-          <div className='w-28 h-28 mb-5 overflow-hidden rounded-xl hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg'>
+          <div className='w-28 h-28 mb-5 ml-2 overflow-hidden rounded-xl hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg'>
             <LazyImage
               priority={true}
               src={siteInfo?.icon}
@@ -109,21 +109,38 @@ export default function LeftSidebar(props) {
       {/* 导航菜单 */}
       <nav className='flex-1'>
         <ul className='space-y-1'>
-          {menuLinks?.filter(link => link.show !== false).map((link, index) => (
-            <li key={index}>
-              <Link
-                href={link.href}
-                className={`flex items-center px-3 py-2.5 rounded-lg transition-all duration-200 group
-                  ${isActive(link.href) 
-                    ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-medium' 
-                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white'
-                  }`}
-              >
-                <i className={`${link.icon} w-5 text-center mr-3 ${isActive(link.href) ? 'text-red-500' : 'group-hover:text-red-400'}`} />
-                <span>{link.name}</span>
-              </Link>
-            </li>
-          ))}
+          {menuLinks?.filter(link => link.show !== false).map((link, index) => {
+            const isExternal = link.target === '_blank' || (link.href && (link.href.startsWith('http://') || link.href.startsWith('https://')))
+            const linkClassName = `flex items-center px-3 py-2.5 rounded-lg transition-all duration-200 group
+              ${isActive(link.href) 
+                ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-medium' 
+                : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white'
+              }`
+            
+            return (
+              <li key={index}>
+                {isExternal ? (
+                  <a
+                    href={link.href}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className={linkClassName}
+                  >
+                    <i className={`${link.icon} w-5 text-center mr-3 ${isActive(link.href) ? 'text-red-500' : 'group-hover:text-red-400'}`} />
+                    <span>{link.name}</span>
+                  </a>
+                ) : (
+                  <Link
+                    href={link.href}
+                    className={linkClassName}
+                  >
+                    <i className={`${link.icon} w-5 text-center mr-3 ${isActive(link.href) ? 'text-red-500' : 'group-hover:text-red-400'}`} />
+                    <span>{link.name}</span>
+                  </Link>
+                )}
+              </li>
+            )
+          })}
         </ul>
       </nav>
 
