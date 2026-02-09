@@ -43,7 +43,7 @@ const SocialButton = () => {
               e.preventDefault()
               window.location.href = link.href
             } : undefined}
-            className='w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-all duration-200 hover:scale-110 cursor-pointer'
+            className='w-8 h-8 flex items-center justify-center rounded-full text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 cursor-pointer'
           >
             <i className={`${link.icon} text-sm`} />
           </a>
@@ -56,7 +56,7 @@ const SocialButton = () => {
           rel='noreferrer'
           title='RSS'
           href='/rss/feed.xml'
-          className='w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-all duration-200 hover:scale-110'
+          className='w-8 h-8 flex items-center justify-center rounded-full text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200'
         >
           <i className='fas fa-rss text-sm' />
         </a>
