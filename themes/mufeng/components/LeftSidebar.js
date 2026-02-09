@@ -3,9 +3,60 @@ import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useRef, useState } from 'react'
 import CONFIG from '../config'
 import SocialButton from './SocialButton'
 import BLOG from '@/blog.config'
+
+/**
+ * 侧边栏搜索框
+ */
+function SidebarSearch() {
+  const router = useRouter()
+  const inputRef = useRef(null)
+  const [hasValue, setHasValue] = useState(false)
+
+  const handleSearch = () => {
+    const key = inputRef.current?.value?.trim()
+    if (key) {
+      location.href = '/search/' + key
+    }
+  }
+
+  const handleKeyUp = (e) => {
+    if (e.keyCode === 13) handleSearch()
+  }
+
+  const handleClear = () => {
+    inputRef.current.value = ''
+    setHasValue(false)
+    inputRef.current.focus()
+  }
+
+  return (
+    <div className='mb-5'>
+      <div className='relative group'>
+        <i className='fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 dark:text-gray-500 group-focus-within:text-red-400 transition-colors duration-200' />
+        <input
+          ref={inputRef}
+          type='text'
+          placeholder='搜索文章...'
+          className='w-full pl-8 pr-8 py-2 text-sm bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-lg outline-none text-gray-700 dark:text-gray-300 placeholder-gray-400 dark:placeholder-gray-500 focus:border-red-300 dark:focus:border-red-500/50 focus:bg-white dark:focus:bg-gray-800 transition-all duration-200'
+          onKeyUp={handleKeyUp}
+          onChange={(e) => setHasValue(!!e.target.value.trim())}
+        />
+        {hasValue && (
+          <button
+            onClick={handleClear}
+            className='absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200'
+          >
+            <i className='fas fa-times' />
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
 
 /**
  * 左侧边栏组件
@@ -105,6 +156,9 @@ export default function LeftSidebar(props) {
       <div className='mb-8'>
         <SocialButton />
       </div>
+
+      {/* 搜索框 */}
+      <SidebarSearch />
 
       {/* 导航菜单 */}
       <nav className='flex-1'>
