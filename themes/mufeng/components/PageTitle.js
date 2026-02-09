@@ -42,12 +42,16 @@ export default function PageTitle({ title, description }) {
       }
       return { title: '搜索', description: '搜索文章' }
     }
-    return { title: '博客', description: '' }
+    // 未匹配的路径为文章详情页，不显示 PageTitle
+    return { title: null, description: '' }
   }
 
   const defaultContent = getDefaultContent()
   const displayTitle = title || defaultContent.title
   const displayDescription = description || defaultContent.description
+
+  // 文章详情页不显示 PageTitle
+  if (!displayTitle) return null
 
   return (
     <div className='mb-8'>

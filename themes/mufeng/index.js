@@ -232,9 +232,6 @@ const LayoutSlug = props => {
   const { post, lock, validPassword, prev, next, recommendPosts } = props
   const { fullWidth } = useGlobal()
 
-  // 文章详情页隐藏 PageTitle（文章自带标题）
-  props = { ...props, hidePageTitle: true }
-
   return (
     <>
       {lock && <ArticleLock validPassword={validPassword} />}
