@@ -116,6 +116,10 @@ const NotionPage = ({ post, className }) => {
     return () => clearTimeout(timer)
   }, [post])
 
+  if (!post?.blockMap) {
+    return null
+  }
+
   return (
     <div
       id='notion-article'
