@@ -58,9 +58,6 @@ const BlogListPage = dynamic(() => import('./components/BlogListPage'), {
 const RecommendPosts = dynamic(() => import('./components/RecommendPosts'), {
   ssr: false
 })
-const Breadcrumb = dynamic(() => import('./components/Breadcrumb'), {
-  ssr: false
-})
 const PageTitle = dynamic(() => import('./components/PageTitle'), {
   ssr: false
 })
@@ -83,7 +80,7 @@ export const useSimpleGlobal = () => useContext(ThemeGlobalSimple)
  * @returns
  */
 const LayoutBase = props => {
-  const { children, slotTop, hideBreadcrumb, hidePageTitle, pageTitle, pageDescription } = props
+  const { children, slotTop, hidePageTitle, pageTitle, pageDescription } = props
   const { onLoading, fullWidth } = useGlobal()
   const searchModal = useRef(null)
 
@@ -121,9 +118,6 @@ const LayoutBase = props => {
               leaveFrom='opacity-100 translate-y-0'
               leaveTo='opacity-0 -translate-y-8'
               unmount={false}>
-              
-              {/* 面包屑导航 */}
-              {!hideBreadcrumb && <Breadcrumb />}
               
               {/* 页面标题 */}
               {!hidePageTitle && <PageTitle title={pageTitle} description={pageDescription} />}
@@ -237,6 +231,9 @@ const LayoutArchive = props => {
 const LayoutSlug = props => {
   const { post, lock, validPassword, prev, next, recommendPosts } = props
   const { fullWidth } = useGlobal()
+
+  // 文章详情页隐藏 PageTitle（文章自带标题）
+  props = { ...props, hidePageTitle: true }
 
   return (
     <>
