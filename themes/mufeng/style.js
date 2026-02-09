@@ -122,6 +122,34 @@ const Style = () => {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
 
+  /* ======== 目录抽屉动画 ======== */
+
+  @keyframes tocSlideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes tocBackdropFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .toc-drawer-enter {
+    animation: tocSlideUp 0.3s ease-out forwards;
+  }
+
+  .toc-backdrop-enter {
+    animation: tocBackdropFadeIn 0.2s ease-out forwards;
+  }
+
   /* ======== 页面过渡动画 ======== */
   
   @keyframes fadeInUp {
