@@ -1,5 +1,6 @@
 import { siteConfig } from '@/lib/config'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import CONFIG from '../config'
 
 /**
@@ -9,6 +10,7 @@ import CONFIG from '../config'
 export default function PageTitle({ title, description }) {
   const router = useRouter()
   const path = router.asPath
+  const isSearchResult = path.startsWith('/search/') && path.split('/')[2]
 
   // 根据路径获取默认标题和描述
   const getDefaultContent = () => {
@@ -42,18 +44,33 @@ export default function PageTitle({ title, description }) {
       }
       return { title: '搜索', description: '搜索文章' }
     }
-    return { title: '博客', description: '' }
+    // 未匹配的路径为文章详情页，不显示 PageTitle
+    return { title: null, description: '' }
   }
 
   const defaultContent = getDefaultContent()
   const displayTitle = title || defaultContent.title
   const displayDescription = description || defaultContent.description
 
+  // 文章详情页不显示 PageTitle
+  if (!displayTitle) return null
+
   return (
     <div className='mb-8'>
-      <h1 className='text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3'>
-        {displayTitle}
-      </h1>
+      <div className='flex items-center justify-between'>
+        <h1 className='text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3'>
+          {displayTitle}
+        </h1>
+        {isSearchResult && (
+          <Link
+            href='/'
+            className='flex items-center gap-1.5 text-sm text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200'
+          >
+            <i className='fas fa-times text-xs' />
+            取消
+          </Link>
+        )}
+      </div>
       {displayDescription && (
         <p className='text-gray-500 dark:text-gray-400 text-base'>
           {displayDescription}

@@ -58,13 +58,13 @@ const BlogListPage = dynamic(() => import('./components/BlogListPage'), {
 const RecommendPosts = dynamic(() => import('./components/RecommendPosts'), {
   ssr: false
 })
-const Breadcrumb = dynamic(() => import('./components/Breadcrumb'), {
-  ssr: false
-})
 const PageTitle = dynamic(() => import('./components/PageTitle'), {
   ssr: false
 })
 const DarkModeButton = dynamic(() => import('@/components/DarkModeButton'), {
+  ssr: false
+})
+const FloatTocButton = dynamic(() => import('./components/FloatTocButton'), {
   ssr: false
 })
 
@@ -80,7 +80,7 @@ export const useSimpleGlobal = () => useContext(ThemeGlobalSimple)
  * @returns
  */
 const LayoutBase = props => {
-  const { children, slotTop, hideBreadcrumb, hidePageTitle, pageTitle, pageDescription } = props
+  const { children, slotTop, hidePageTitle, pageTitle, pageDescription } = props
   const { onLoading, fullWidth } = useGlobal()
   const searchModal = useRef(null)
 
@@ -118,9 +118,6 @@ const LayoutBase = props => {
               leaveFrom='opacity-100 translate-y-0'
               leaveTo='opacity-0 -translate-y-8'
               unmount={false}>
-              
-              {/* 面包屑导航 */}
-              {!hideBreadcrumb && <Breadcrumb />}
               
               {/* 页面标题 */}
               {!hidePageTitle && <PageTitle title={pageTitle} description={pageDescription} />}
@@ -241,33 +238,52 @@ const LayoutSlug = props => {
 
       {!lock && post && (
         <div className={`px-2 ${fullWidth ? '' : 'xl:max-w-4xl 2xl:max-w-6xl'}`}>
-          {/* 文章信息 */}
-          <ArticleInfo post={post} />
+          <div className='flex gap-6'>
+            {/* 文章主内容 */}
+            <div className='flex-1 min-w-0'>
+              {/* 文章信息 */}
+              <ArticleInfo post={post} />
 
-          {/* 广告嵌入 */}
-          <AdSlot type={'in-article'} />
-          <WWAds orientation='horizontal' className='w-full' />
+              {/* 广告嵌入 */}
+              <AdSlot type={'in-article'} />
+              <WWAds orientation='horizontal' className='w-full' />
 
-          <div id='article-wrapper'>
-            {/* Notion文章主体 */}
-            {!lock && <NotionPage post={post} />}
+              <div id='article-wrapper'>
+                {/* Notion文章主体 */}
+                {!lock && <NotionPage post={post} />}
+              </div>
+
+              {/* 分享 */}
+              <ShareBar post={post} />
+
+              {/* 广告嵌入 */}
+              <AdSlot type={'in-article'} />
+
+              {post?.type === 'Post' && (
+                <>
+                  <ArticleAround prev={prev} next={next} />
+                  <RecommendPosts recommendPosts={recommendPosts} />
+                </>
+              )}
+
+              {/* 评论区 */}
+              <Comment frontMatter={post} />
+            </div>
+
+            {/* 桌面端右侧目录 */}
+            {post?.toc?.length > 0 && (
+              <div className='hidden xl:block w-52 flex-shrink-0'>
+                <div className='sticky top-20'>
+                  <Catalog post={post} />
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* 分享 */}
-          <ShareBar post={post} />
-
-          {/* 广告嵌入 */}
-          <AdSlot type={'in-article'} />
-
-          {post?.type === 'Post' && (
-            <>
-              <ArticleAround prev={prev} next={next} />
-              <RecommendPosts recommendPosts={recommendPosts} />
-            </>
+          {/* 移动端浮动目录按钮 */}
+          {post?.toc?.length > 0 && (
+            <FloatTocButton post={post} />
           )}
-
-          {/* 评论区 */}
-          <Comment frontMatter={post} />
         </div>
       )}
     </>

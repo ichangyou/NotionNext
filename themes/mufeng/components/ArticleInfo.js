@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useGlobal } from '@/lib/global'
 import CONFIG from '../config'
 import { siteConfig } from '@/lib/config'
@@ -15,9 +16,27 @@ import RealTimeViewCount from './RealTimeViewCount'
 export default function ArticleInfo (props) {
   const { post } = props
   const { locale } = useGlobal()
+  const router = useRouter()
+
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      router.back()
+    } else {
+      router.push('/')
+    }
+  }
 
   return (
     <section className="mt-2 mb-3 md:mb-5 text-gray-500 dark:text-gray-400 leading-tight">
+      {/* 返回按钮 */}
+      <button
+        onClick={handleBack}
+        className='group flex items-center text-[13px] text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300 mb-5'
+      >
+        <i className='fas fa-arrow-left text-xs mr-2 transition-transform duration-300 group-hover:-translate-x-1' />
+        返回
+      </button>
+
       <h2 className="blog-item-title mb-5 font-bold text-black text-xl md:text-2xl no-underline">
         {siteConfig('POST_TITLE_ICON') && <NotionIcon icon={post?.pageIcon} />}{post?.title}
       </h2>

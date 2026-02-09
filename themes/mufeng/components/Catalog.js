@@ -23,8 +23,8 @@ const Catalog = ({ post }) => {
   // 根据窗口高度设置目录最大高度
   useEffect(() => {
     const updateMaxHeight = () => {
-      // 窗口高度减去预估的头部区域(16rem)，再留出一些底部空间
-      const calculatedHeight = window.innerHeight - 16 * 16 - 80
+      // 窗口高度减去顶部 sticky 偏移 (5rem) 和底部余量
+      const calculatedHeight = window.innerHeight - 5 * 16 - 80
       const newMaxHeight = `${Math.max(calculatedHeight, 300)}px`
       setMaxHeight(newMaxHeight)
     }
@@ -147,7 +147,7 @@ const Catalog = ({ post }) => {
                       display: 'inline-block',
                       marginLeft: tocItem.indentLevel * 16
                     }}
-                    className={`truncate max-w-[140px] sm:max-w-[150px] block ${activeSection === id ? 'font-bold text-red-600 dark:text-red-400' : ''}`}>
+                    className={`truncate max-w-[200px] block ${activeSection === id ? 'font-bold text-red-600 dark:text-red-400' : ''}`}>
                     {tocItem.text}
                   </span>
                 </a>

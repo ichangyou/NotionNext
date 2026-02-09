@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 /**
  * 面包屑导航组件
- * 参考图片中的简洁风格
+ * 典雅简约风格，融合细腻的视觉层次
  */
 export default function Breadcrumb() {
   const router = useRouter()
@@ -14,13 +14,13 @@ export default function Breadcrumb() {
     if (path === '/' || path === '') {
       return [{ name: '博客', href: '/' }]
     }
-    
+
     const segments = path.split('/').filter(Boolean)
     const crumbs = []
-    
+
     // 首页
-    crumbs.push({ name: '首页', href: '/', icon: 'fas fa-home' })
-    
+    crumbs.push({ name: '首页', href: '/' })
+
     // 根据第一个段落判断类型
     if (segments[0] === 'archive') {
       crumbs.push({ name: '归档', href: '/archive' })
@@ -44,35 +44,35 @@ export default function Breadcrumb() {
     } else {
       crumbs.push({ name: '博客', href: '/' })
     }
-    
+
     return crumbs
   }
 
   const breadcrumbs = getBreadcrumbs()
 
   return (
-    <nav className='flex items-center text-sm text-gray-500 dark:text-gray-400 mb-6'>
-      {breadcrumbs.map((crumb, index) => (
-        <span key={index} className='flex items-center'>
-          {index > 0 && (
-            <i className='fas fa-chevron-right mx-2 text-xs text-gray-400 dark:text-gray-600' />
-          )}
-          {crumb.href && index < breadcrumbs.length - 1 ? (
-            <Link 
-              href={crumb.href}
-              className='hover:text-gray-700 dark:hover:text-gray-200 transition-colors duration-200 flex items-center'
-            >
-              {crumb.icon && <i className={`${crumb.icon} mr-1.5`} />}
-              {crumb.name}
-            </Link>
-          ) : (
-            <span className='text-gray-700 dark:text-gray-200 flex items-center'>
-              {crumb.icon && <i className={`${crumb.icon} mr-1.5`} />}
-              {crumb.name}
-            </span>
-          )}
-        </span>
-      ))}
+    <nav className='flex items-center mb-8'>
+      <div className='flex items-center gap-1.5 text-[13px] tracking-wide'>
+        {breadcrumbs.map((crumb, index) => (
+          <span key={index} className='flex items-center'>
+            {index > 0 && (
+              <span className='mx-1.5 text-gray-300 dark:text-gray-600 select-none font-light'>/</span>
+            )}
+            {crumb.href && index < breadcrumbs.length - 1 ? (
+              <Link
+                href={crumb.href}
+                className='text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300'
+              >
+                {crumb.name}
+              </Link>
+            ) : (
+              <span className='text-gray-800 dark:text-gray-200 font-medium'>
+                {crumb.name}
+              </span>
+            )}
+          </span>
+        ))}
+      </div>
     </nav>
   )
 }

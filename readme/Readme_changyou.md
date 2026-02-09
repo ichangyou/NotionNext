@@ -1,6 +1,7 @@
 
+# 二次开发备忘录
 
-## 本地系统中运行（本地安装NodeJS环境）
+## 一、本地系统中运行（本地安装NodeJS环境）
 
 除了Docker环境运行，还可以在系统中直接安装NodeJS环境运行。若要在系统中安装Nodejs，推荐使用nvm进行安装，NVM（Node version manager）是nodejs的专用版本管理器，可以快速方便地安装并切换nodejs的版本，方便以后升级NodeJS环境。
 
@@ -89,5 +90,145 @@ NOAGE_ID=29d5ia78b858e4a3bbc13e51b5400fb82
 yarn start
 ```
 
+## 二、`NOTION_PAGE_ID` 的配置位置建议：
 
+项目初始化的时候，首先需要参考 .env.example 新建 .env.local 文件，并将其中 NOTION_PAGE_ID 配置为自己的。
+如果是 github public 项目，记得 .env.local 不要提交到 git 远程！！！
+
+
+### 1)、推荐配置方式
+
+#### 1. 本地开发环境（推荐）
+使用 `.env.local`（已加入 `.gitignore`）
+
+```bash
+# 在项目根目录创建 .env.local 文件
+NOTION_PAGE_ID=your-actual-notion-page-id
+```
+
+优点：
+- 不会被 Git 追踪
+- 优先级高于 `.env`
+- 适合本地开发
+
+#### 2. 生产环境（Vercel）
+在 Vercel 项目设置中配置环境变量：
+- Settings → Environment Variables
+- 添加 `NOTION_PAGE_ID`
+
+优点：
+- 不进入代码仓库
+- 支持不同环境（Production/Preview/Development）
+- 便于团队协作
+
+#### 3. Docker 部署
+使用 Docker 构建参数或运行时环境变量：
+
+```dockerfile
+# Dockerfile 中已支持
+ARG NOTION_PAGE_ID
+ENV NOTION_PAGE_ID=${NOTION_PAGE_ID}
+```
+
+运行时：
+```bash
+docker run -e NOTION_PAGE_ID=your-id ...
+```
+
+### 注意事项
+
+1. 不要放在 `.env` 中
+   - 虽然已加入 `.gitignore`，但 `.env.local` 更安全
+   - `.env` 可能被意外提交
+
+2. 不要硬编码在代码中
+   - 当前 `blog.config.js` 的默认值是空字符串，这是正确的
+
+3. 不要提交到 Git
+   - `.env.local` 已在 `.gitignore` 中
+   - `.env.example` 只放占位符
+
+### 当前状态检查
+
+你的配置是正确的：
+- `.env.example` 使用占位符 `your-notion-page-id`
+- `.gitignore` 已排除 `.env.local`
+- `blog.config.js` 从环境变量读取，默认值为空字符串
+
+只需在本地创建 `.env.local` 并填入你的真实 `NOTION_PAGE_ID` 即可。
+
+
+## 2)、process.env.NOTION_PAGE_ID 配置说明
+
+`process.env.NOTION_PAGE_ID` 的读取来源：
+
+### Next.js 环境变量加载机制
+
+Next.js 会在启动时自动从以下文件加载环境变量（按优先级从高到低）：
+
+#### 1. 本地开发环境（`next dev`）
+```
+.env.local          ← 最高优先级（记得加入 .gitignore）
+.env.development.local
+.env.development
+.env.local
+.env
+```
+
+#### 2. 生产环境（`next build` / `next start`）
+```
+.env.local
+.env.production.local
+.env.production
+.env.local
+.env
+```
+
+#### 3. 系统环境变量
+- 操作系统环境变量
+- Vercel 环境变量（部署时）
+- Docker 环境变量（容器运行时）
+
+
+读取流程：
+1. Next.js 启动时读取 `.env.local`
+2. 将 `NOTION_PAGE_ID` 注入到 `process.env`
+3. `blog.config.js` 执行时读取 `process.env.NOTION_PAGE_ID`
+
+### 重要说明
+
+`NOTION_PAGE_ID` 没有 `NEXT_PUBLIC_` 前缀，因此：
+- 仅在服务端可用（Node.js 环境）
+- 不会暴露到浏览器端
+- 在 `getStaticProps`、`getServerSideProps`、API 路由中可用
+- 在客户端组件中不可用
+
+## 验证方式
+
+可以在代码中打印验证：
+
+```javascript
+// 在 blog.config.js 或任何服务端代码中
+console.log('NOTION_PAGE_ID:', process.env.NOTION_PAGE_ID)
+```
+
+或者在 `next.config.js` 中：
+```javascript
+console.log('Env check:', {
+  NOTION_PAGE_ID: process.env.NOTION_PAGE_ID,
+  NODE_ENV: process.env.NODE_ENV
+})
+```
+
+### 总结
+
+`process.env.NOTION_PAGE_ID` 的数据来源：
+1. 本地开发：`.env.local` 文件（当前已配置）
+2. 生产环境：Vercel 环境变量或服务器环境变量
+3. 默认值：如果都不存在，`blog.config.js` 中的 `|| ''` 会返回空字符串
+
+当前配置正确，`.env.local` 中的值会被自动读取。
+
+`changyou注`：
+.env.local 不要提交到 git，注意敏感信息保护，NOTION_PAGE_ID也是敏感信息！
 
