@@ -201,12 +201,6 @@ export default function LeftSidebar(props) {
         </ul>
       </nav>
 
-      {/* 底部版权 */}
-      <div className='pt-6 border-t border-gray-100 dark:border-gray-800/50'>
-        <p className='text-xs text-gray-400 dark:text-gray-600'>
-          &copy; {new Date().getFullYear()} {siteConfig('AUTHOR')}
-        </p>
-      </div>
     </div>
   )
 }
