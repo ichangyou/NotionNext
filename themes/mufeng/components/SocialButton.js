@@ -1,4 +1,5 @@
 import { siteConfig } from '@/lib/config'
+import { decryptEmail } from '@/lib/plugins/mailEncrypt'
 
 /**
  * 社交联系方式按钮组 - 圆形图标样式
@@ -18,7 +19,7 @@ const SocialButton = () => {
     { key: 'CONTACT_INSTAGRAM', icon: 'fab fa-instagram', title: 'Instagram', href: siteConfig('CONTACT_INSTAGRAM') },
     { key: 'CONTACT_BILIBILI', icon: 'fab fa-bilibili', title: 'Bilibili', href: siteConfig('CONTACT_BILIBILI') },
     { key: 'CONTACT_YOUTUBE', icon: 'fab fa-youtube', title: 'YouTube', href: siteConfig('CONTACT_YOUTUBE') },
-    { key: 'CONTACT_EMAIL', icon: 'fas fa-envelope', title: '邮箱', href: siteConfig('CONTACT_EMAIL') ? `mailto:${siteConfig('CONTACT_EMAIL')}` : null },
+    { key: 'CONTACT_EMAIL', icon: 'fas fa-envelope', title: '邮箱', href: siteConfig('CONTACT_EMAIL') ? `mailto:${decryptEmail(siteConfig('CONTACT_EMAIL'))}` : null },
   ]
 
   // 过滤出有效的社交链接
@@ -29,18 +30,25 @@ const SocialButton = () => {
 
   return (
     <div className='flex flex-wrap gap-2'>
-      {validLinks.map((link, index) => (
-        <a
-          key={index}
-          target='_blank'
-          rel='noreferrer'
-          title={link.title}
-          href={link.href}
-          className='w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-all duration-200 hover:scale-110'
-        >
-          <i className={`${link.icon} text-sm`} />
-        </a>
-      ))}
+      {validLinks.map((link, index) => {
+        const isMailto = link.href?.startsWith('mailto:')
+        return (
+          <a
+            key={index}
+            target={isMailto ? undefined : '_blank'}
+            rel='noreferrer'
+            title={link.title}
+            href={isMailto ? undefined : link.href}
+            onClick={isMailto ? (e) => {
+              e.preventDefault()
+              window.location.href = link.href
+            } : undefined}
+            className='w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-all duration-200 hover:scale-110 cursor-pointer'
+          >
+            <i className={`${link.icon} text-sm`} />
+          </a>
+        )
+      })}
       
       {showRss && (
         <a
