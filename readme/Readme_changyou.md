@@ -92,6 +92,10 @@ yarn start
 
 ## 二、`NOTION_PAGE_ID` 的配置位置建议：
 
+项目初始化的时候，首先需要参考 .env.example 新建 .env.local 文件，并将其中 NOTION_PAGE_ID 配置为自己的。
+如果是 github public 项目，记得 .env.local 不要提交到 git 远程！！！
+
+
 ### 1)、推荐配置方式
 
 #### 1. 本地开发环境（推荐）
