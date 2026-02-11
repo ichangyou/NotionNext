@@ -20,21 +20,19 @@ export default function Footer(props) {
   return (
     <footer className='w-full border-t border-gray-100 dark:border-gray-800/50 mt-auto'>
       <div className='max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-5 md:py-8'>
-        {/* 统计信息 */}
-        <div className='flex flex-wrap items-center justify-center gap-4 mb-4 md:mb-6 text-sm'>
-          {/* 站点总访问量 */}
-          <div className='hidden busuanzi_container_site_pv items-center gap-2 px-3 py-1.5 bg-gray-50 dark:bg-gray-800/50 rounded-full'>
-            <i className='fas fa-eye text-gray-400 dark:text-gray-500' />
-            <span className='text-gray-500 dark:text-gray-400'>{locale.COMMON.TOTAL_VIEWS}:</span>
-            <span className='busuanzi_value_site_pv font-medium text-gray-700 dark:text-gray-300'></span>
-          </div>
-          
-          {/* 站点访客数 */}
-          <div className='hidden busuanzi_container_site_uv items-center gap-2 px-3 py-1.5 bg-gray-50 dark:bg-gray-800/50 rounded-full'>
-            <i className='fas fa-users text-gray-400 dark:text-gray-500' />
-            <span className='text-gray-500 dark:text-gray-400'>{locale.COMMON.TOTAL_VISITORS}:</span>
-            <span className='busuanzi_value_site_uv font-medium text-gray-700 dark:text-gray-300'></span>
-          </div>
+        {/* 统计信息 - site_pv=浏览量(每次访问+1)，site_uv=访客数(同一浏览器只计一次) */}
+        <div className='flex flex-wrap items-center justify-center gap-3 mb-4 md:mb-6 text-xs text-gray-400 dark:text-gray-500'>
+          <span className='hidden busuanzi_container_site_uv items-center gap-1.5'>
+            <i className='fas fa-users' />
+            <span>访客</span>
+            <span className='busuanzi_value_site_uv font-medium text-gray-600 dark:text-gray-400'></span>
+          </span>
+
+          <span className='hidden busuanzi_container_site_pv items-center gap-1.5'>
+            <i className='fas fa-eye' />
+            <span>浏览</span>
+            <span className='busuanzi_value_site_pv font-medium text-gray-600 dark:text-gray-400'></span>
+          </span>
         </div>
 
         {/* 版权和备案 */}
