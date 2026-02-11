@@ -237,48 +237,46 @@ const LayoutSlug = props => {
       {lock && <ArticleLock validPassword={validPassword} />}
 
       {!lock && post && (
-        <div className={`px-2 ${fullWidth ? '' : 'xl:max-w-4xl 2xl:max-w-6xl'}`}>
-          <div className='flex gap-6'>
-            {/* 文章主内容 */}
-            <div className='flex-1 min-w-0'>
-              {/* 文章信息 */}
-              <ArticleInfo post={post} />
+        <div className='relative'>
+          {/* 文章主内容 */}
+          <div className={`px-2 ${fullWidth ? '' : 'xl:max-w-4xl 2xl:max-w-6xl'}`}>
+            {/* 文章信息 */}
+            <ArticleInfo post={post} />
 
-              {/* 广告嵌入 */}
-              <AdSlot type={'in-article'} />
-              <WWAds orientation='horizontal' className='w-full' />
+            {/* 广告嵌入 */}
+            <AdSlot type={'in-article'} />
+            <WWAds orientation='horizontal' className='w-full' />
 
-              <div id='article-wrapper'>
-                {/* Notion文章主体 */}
-                {!lock && <NotionPage post={post} />}
-              </div>
-
-              {/* 分享 */}
-              <ShareBar post={post} />
-
-              {/* 广告嵌入 */}
-              <AdSlot type={'in-article'} />
-
-              {post?.type === 'Post' && (
-                <>
-                  <ArticleAround prev={prev} next={next} />
-                  <RecommendPosts recommendPosts={recommendPosts} />
-                </>
-              )}
-
-              {/* 评论区 */}
-              <Comment frontMatter={post} />
+            <div id='article-wrapper'>
+              {/* Notion文章主体 */}
+              {!lock && <NotionPage post={post} />}
             </div>
 
-            {/* 桌面端右侧目录 */}
-            {post?.toc?.length > 0 && (
-              <div className='hidden xl:block w-52 flex-shrink-0'>
-                <div className='sticky top-20'>
-                  <Catalog post={post} />
-                </div>
-              </div>
+            {/* 分享 */}
+            <ShareBar post={post} />
+
+            {/* 广告嵌入 */}
+            <AdSlot type={'in-article'} />
+
+            {post?.type === 'Post' && (
+              <>
+                <ArticleAround prev={prev} next={next} />
+                <RecommendPosts recommendPosts={recommendPosts} />
+              </>
             )}
+
+            {/* 评论区 */}
+            <Comment frontMatter={post} />
           </div>
+
+          {/* 桌面端右侧目录 - 独立于内容流，悬浮在右侧 */}
+          {post?.toc?.length > 0 && (
+            <div className='hidden xl:block absolute top-0 bottom-0 right-0 translate-x-[calc(100%+1.5rem)] w-56 2xl:w-64'>
+              <div className='sticky top-20'>
+                <Catalog post={post} />
+              </div>
+            </div>
+          )}
 
           {/* 移动端浮动目录按钮 */}
           {post?.toc?.length > 0 && (
