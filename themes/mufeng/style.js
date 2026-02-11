@@ -479,6 +479,15 @@ const Style = () => {
     margin: 0.5em 0;
   }
 
+  #article-wrapper .notion-asset-wrapper img {
+    cursor: zoom-in;
+    transition: opacity 0.2s ease;
+  }
+
+  #article-wrapper .notion-asset-wrapper img:hover {
+    opacity: 0.92;
+  }
+
   /* ======== 链接样式 ======== */
 
   #article-wrapper .notion-link {
