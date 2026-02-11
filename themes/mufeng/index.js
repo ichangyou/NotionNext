@@ -98,6 +98,13 @@ const LayoutBase = props => {
 
         {/* 右侧主内容区 */}
         <main className='flex-1 min-h-screen flex flex-col'>
+          {/* 顶部加载进度条 */}
+          {onLoading && (
+            <div className='fixed top-0 left-0 right-0 z-50'>
+              <div className='h-[2px] bg-red-500/80 loading-progress-bar' />
+            </div>
+          )}
+
           {/* 移动端顶部导航 */}
           <div className='lg:hidden'>
             <NavBar {...props} />
@@ -106,8 +113,17 @@ const LayoutBase = props => {
           {/* 内容区域 */}
           <div
             id='container-wrapper'
-            className='flex-1 w-full max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-10'>
-            
+            className='flex-1 w-full max-w-4xl px-4 md:px-8 lg:pl-16 lg:pr-8 pt-6 pb-3 md:py-10'>
+
+            {/* 加载状态占位 */}
+            {onLoading && (
+              <div className='flex items-center justify-center py-32'>
+                <div className='flex flex-col items-center gap-3'>
+                  <i className='fas fa-circle-notch animate-spin text-xl text-gray-300 dark:text-gray-600' />
+                </div>
+              </div>
+            )}
+
             <Transition
               show={!onLoading}
               appear={true}
@@ -118,7 +134,7 @@ const LayoutBase = props => {
               leaveFrom='opacity-100 translate-y-0'
               leaveTo='opacity-0 -translate-y-8'
               unmount={false}>
-              
+
               {/* 页面标题 */}
               {!hidePageTitle && <PageTitle title={pageTitle} description={pageDescription} />}
 
@@ -126,7 +142,7 @@ const LayoutBase = props => {
 
               {children}
             </Transition>
-            
+
             <AdSlot type='native' />
           </div>
 
@@ -237,48 +253,52 @@ const LayoutSlug = props => {
       {lock && <ArticleLock validPassword={validPassword} />}
 
       {!lock && post && (
-        <div className={`px-2 ${fullWidth ? '' : 'xl:max-w-4xl 2xl:max-w-6xl'}`}>
-          <div className='flex gap-6'>
-            {/* 文章主内容 */}
-            <div className='flex-1 min-w-0'>
-              {/* 文章信息 */}
-              <ArticleInfo post={post} />
+        <div className='relative'>
+          {/* 文章主内容 */}
+          <div className={`px-2 ${fullWidth ? '' : 'xl:max-w-4xl 2xl:max-w-6xl'}`}>
+            {/* 文章信息 */}
+            <ArticleInfo post={post} />
 
-              {/* 广告嵌入 */}
-              <AdSlot type={'in-article'} />
-              <WWAds orientation='horizontal' className='w-full' />
+            {/* 广告嵌入 */}
+            <AdSlot type={'in-article'} />
+            <WWAds orientation='horizontal' className='w-full' />
 
-              <div id='article-wrapper'>
-                {/* Notion文章主体 */}
-                {!lock && <NotionPage post={post} />}
-              </div>
-
-              {/* 分享 */}
-              <ShareBar post={post} />
-
-              {/* 广告嵌入 */}
-              <AdSlot type={'in-article'} />
-
-              {post?.type === 'Post' && (
-                <>
-                  <ArticleAround prev={prev} next={next} />
-                  <RecommendPosts recommendPosts={recommendPosts} />
-                </>
-              )}
-
-              {/* 评论区 */}
-              <Comment frontMatter={post} />
+            <div id='article-wrapper'>
+              {/* Notion文章主体 */}
+              {!lock && <NotionPage post={post} />}
             </div>
 
-            {/* 桌面端右侧目录 */}
-            {post?.toc?.length > 0 && (
-              <div className='hidden xl:block w-52 flex-shrink-0'>
-                <div className='sticky top-20'>
-                  <Catalog post={post} />
-                </div>
+            {/* 分享 */}
+            <div className='focus-hide'>
+              <ShareBar post={post} />
+            </div>
+
+            {/* 广告嵌入 */}
+            <div className='focus-hide'>
+              <AdSlot type={'in-article'} />
+            </div>
+
+            {post?.type === 'Post' && (
+              <div className='focus-hide'>
+                <ArticleAround prev={prev} next={next} />
+                <RecommendPosts recommendPosts={recommendPosts} />
               </div>
             )}
+
+            {/* 评论区 */}
+            <div className='focus-hide'>
+              <Comment frontMatter={post} />
+            </div>
           </div>
+
+          {/* 桌面端右侧目录 - 独立于内容流，悬浮在右侧 */}
+          {post?.toc?.length > 0 && (
+            <div className='hidden xl:block absolute top-0 bottom-0 right-0 translate-x-[calc(100%+1.5rem)] w-56 2xl:w-64'>
+              <div className='sticky top-20'>
+                <Catalog post={post} />
+              </div>
+            </div>
+          )}
 
           {/* 移动端浮动目录按钮 */}
           {post?.toc?.length > 0 && (

@@ -112,42 +112,36 @@ const Catalog = ({ post }) => {
 
   return (
     <div className='w-full'>
-      <div className='dark:text-white mb-2 flex items-center justify-between cursor-pointer select-none border-b pb-2 dark:border-gray-700' onClick={toggleCollapse}>
-        <div className='flex items-center'>
-          <i className='mr-1 fas fa-list-ul text-red-500 dark:text-red-400' />
-          <span className='font-medium text-gray-700 dark:text-gray-300'>{locale.COMMON.TABLE_OF_CONTENTS}</span>
-        </div>
-        <div className='text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'>
-          <i className={`fas ${collapsed ? 'fa-chevron-down' : 'fa-chevron-up'}`} />
-        </div>
+      <div
+        className='mb-3 flex items-center justify-between cursor-pointer select-none'
+        onClick={toggleCollapse}>
+        <span className='text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-widest'>{locale.COMMON.TABLE_OF_CONTENTS}</span>
+        <i className={`fas ${collapsed ? 'fa-chevron-down' : 'fa-chevron-up'} text-[10px] text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors`} />
       </div>
 
       {!collapsed && (
         <div
-          className='overflow-y-auto overscroll-none scroll-smooth scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800'
+          className='overflow-y-auto overscroll-none scroll-smooth scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent'
           style={{ maxHeight }}
           ref={tRef}>
-          <nav className='h-full text-black'>
+          <nav className='border-l border-gray-200 dark:border-gray-700/50'>
             {post?.toc?.map(tocItem => {
               const id = uuidToId(tocItem.id)
+              const isActive = activeSection === id
               return (
                 <a
                   key={id}
                   href={`#${id}`}
                   title={tocItem.text}
                   onClick={(e) => handleTocItemClick(e, id)}
-                  className={`${
-                    activeSection === id 
-                      ? 'dark:border-red-500 border-red-500 text-red-700 dark:text-red-400 font-bold bg-gray-50 dark:bg-gray-800' 
-                      : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-                  } hover:font-semibold border-l pl-4 block hover:text-red-600 duration-150 dark:text-gray-400 dark:border-gray-700
-                  notion-table-of-contents-item-indent-level-${tocItem.indentLevel} catalog-item w-full overflow-hidden py-1 rounded-r-md`}>
+                  className={`block py-1.5 pr-2 -ml-px border-l-2 transition-colors duration-150
+                    ${isActive
+                      ? 'border-red-500 text-gray-900 dark:text-gray-100'
+                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                    }`}>
                   <span
-                    style={{
-                      display: 'inline-block',
-                      marginLeft: tocItem.indentLevel * 16
-                    }}
-                    className={`truncate max-w-[200px] block ${activeSection === id ? 'font-bold text-red-600 dark:text-red-400' : ''}`}>
+                    style={{ paddingLeft: 12 + tocItem.indentLevel * 12 }}
+                    className={`block text-[13px] leading-relaxed ${isActive ? 'font-medium' : ''}`}>
                     {tocItem.text}
                   </span>
                 </a>

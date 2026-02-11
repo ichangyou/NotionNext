@@ -86,7 +86,7 @@ export default function BlogListPage(props) {
 
       {/* 分页导航 */}
       {(showPrev || showNext) && (
-        <div className='flex items-center justify-between mt-10 pt-6 border-t border-gray-100 dark:border-gray-800'>
+        <div className='flex items-center justify-between mt-6 md:mt-10 pt-4 md:pt-6 border-t border-gray-100 dark:border-gray-800'>
           <Link
             href={{
               pathname:

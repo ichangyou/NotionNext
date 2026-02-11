@@ -19,7 +19,7 @@ function SidebarSearch() {
   const handleSearch = () => {
     const key = inputRef.current?.value?.trim()
     if (key) {
-      location.href = '/search/' + key
+      router.push('/search/' + key)
     }
   }
 
