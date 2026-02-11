@@ -113,7 +113,7 @@ const LayoutBase = props => {
           {/* 内容区域 */}
           <div
             id='container-wrapper'
-            className='flex-1 w-full max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-10'>
+            className='flex-1 w-full max-w-4xl px-4 md:px-8 lg:pl-16 lg:pr-8 py-6 md:py-10'>
 
             {/* 加载状态占位 */}
             {onLoading && (

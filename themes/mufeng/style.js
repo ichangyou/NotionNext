@@ -286,6 +286,10 @@ const Style = () => {
 
   #theme-simple.focus-mode #container-wrapper {
     max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   /* 专注模式下隐藏的元素 */
