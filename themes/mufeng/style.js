@@ -150,6 +150,26 @@ const Style = () => {
     animation: tocBackdropFadeIn 0.2s ease-out forwards;
   }
 
+  /* ======== 顶部加载进度条 ======== */
+
+  .loading-progress-bar {
+    animation: loadingProgress 2s ease-in-out infinite;
+    transform-origin: left;
+  }
+
+  @keyframes loadingProgress {
+    0% {
+      transform: scaleX(0);
+    }
+    50% {
+      transform: scaleX(0.7);
+    }
+    100% {
+      transform: scaleX(1);
+      opacity: 0;
+    }
+  }
+
   /* ======== 页面过渡动画 ======== */
   
   @keyframes fadeInUp {

@@ -98,6 +98,13 @@ const LayoutBase = props => {
 
         {/* 右侧主内容区 */}
         <main className='flex-1 min-h-screen flex flex-col'>
+          {/* 顶部加载进度条 */}
+          {onLoading && (
+            <div className='fixed top-0 left-0 right-0 z-50'>
+              <div className='h-[2px] bg-red-500/80 loading-progress-bar' />
+            </div>
+          )}
+
           {/* 移动端顶部导航 */}
           <div className='lg:hidden'>
             <NavBar {...props} />
@@ -107,7 +114,16 @@ const LayoutBase = props => {
           <div
             id='container-wrapper'
             className='flex-1 w-full max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-10'>
-            
+
+            {/* 加载状态占位 */}
+            {onLoading && (
+              <div className='flex items-center justify-center py-32'>
+                <div className='flex flex-col items-center gap-3'>
+                  <i className='fas fa-circle-notch animate-spin text-xl text-gray-300 dark:text-gray-600' />
+                </div>
+              </div>
+            )}
+
             <Transition
               show={!onLoading}
               appear={true}
@@ -118,7 +134,7 @@ const LayoutBase = props => {
               leaveFrom='opacity-100 translate-y-0'
               leaveTo='opacity-0 -translate-y-8'
               unmount={false}>
-              
+
               {/* 页面标题 */}
               {!hidePageTitle && <PageTitle title={pageTitle} description={pageDescription} />}
 
@@ -126,7 +142,7 @@ const LayoutBase = props => {
 
               {children}
             </Transition>
-            
+
             <AdSlot type='native' />
           </div>
 
