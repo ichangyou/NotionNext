@@ -19,9 +19,9 @@ export default function Footer(props) {
 
   return (
     <footer className='w-full border-t border-gray-100 dark:border-gray-800/50 mt-auto'>
-      <div className='max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-8'>
+      <div className='max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-5 md:py-8'>
         {/* 统计信息 */}
-        <div className='flex flex-wrap items-center justify-center gap-4 mb-6 text-sm'>
+        <div className='flex flex-wrap items-center justify-center gap-4 mb-4 md:mb-6 text-sm'>
           {/* 站点总访问量 */}
           <div className='hidden busuanzi_container_site_pv items-center gap-2 px-3 py-1.5 bg-gray-50 dark:bg-gray-800/50 rounded-full'>
             <i className='fas fa-eye text-gray-400 dark:text-gray-500' />

@@ -61,9 +61,11 @@ export default function BlogListScroll(props) {
 
       <div
         onClick={handleGetMore}
-        className='w-full my-1 py-1 md:my-2 md:py-2 text-center cursor-pointer'>
-        {' '}
-        {hasMore ? locale.COMMON.MORE : `${locale.COMMON.NO_MORE} 😰`}{' '}
+        className='w-full mt-4 md:mt-6 pt-4 md:pt-6 pb-1 text-center cursor-pointer border-t border-gray-100 dark:border-gray-800/50'>
+        <span className={`inline-flex items-center gap-2 text-sm transition-colors duration-200 ${hasMore ? 'text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400' : 'text-gray-400 dark:text-gray-500'}`}>
+          {hasMore ? locale.COMMON.MORE : `${locale.COMMON.NO_MORE}`}
+          {hasMore && <i className='fas fa-angle-down text-xs' />}
+        </span>
       </div>
     </div>
   )
