@@ -269,20 +269,26 @@ const LayoutSlug = props => {
             </div>
 
             {/* 分享 */}
-            <ShareBar post={post} />
+            <div className='focus-hide'>
+              <ShareBar post={post} />
+            </div>
 
             {/* 广告嵌入 */}
-            <AdSlot type={'in-article'} />
+            <div className='focus-hide'>
+              <AdSlot type={'in-article'} />
+            </div>
 
             {post?.type === 'Post' && (
-              <>
+              <div className='focus-hide'>
                 <ArticleAround prev={prev} next={next} />
                 <RecommendPosts recommendPosts={recommendPosts} />
-              </>
+              </div>
             )}
 
             {/* 评论区 */}
-            <Comment frontMatter={post} />
+            <div className='focus-hide'>
+              <Comment frontMatter={post} />
+            </div>
           </div>
 
           {/* 桌面端右侧目录 - 独立于内容流，悬浮在右侧 */}

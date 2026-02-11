@@ -261,6 +261,56 @@ const Style = () => {
     color: #ef4444;
   }
 
+  /* ======== 专注模式 ======== */
+
+  #theme-simple.focus-mode > aside {
+    transform: translateX(-100%);
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  #theme-simple.focus-mode > main > div.lg\\:hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  #theme-simple.focus-mode > main > footer {
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+  }
+
+  #theme-simple.focus-mode #container-wrapper {
+    max-width: 48rem;
+  }
+
+  /* 专注模式下隐藏的元素 */
+  #theme-simple.focus-mode .focus-hide {
+    display: none;
+  }
+
+  /* 专注模式过渡动画 */
+  #theme-simple > aside,
+  #theme-simple > main > div.lg\\:hidden,
+  #theme-simple > main > footer,
+  #theme-simple #container-wrapper {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* 右下角按钮组在专注模式下隐藏 */
+  #theme-simple.focus-mode > .fixed.right-4 {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #theme-simple > .fixed.right-4 {
+    transition: opacity 0.3s ease;
+  }
+
   /* ======== 边框颜色优化 ======== */
 
   .dark .border-gray-800\/50 {
