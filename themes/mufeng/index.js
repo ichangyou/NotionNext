@@ -67,6 +67,9 @@ const DarkModeButton = dynamic(() => import('@/components/DarkModeButton'), {
 const FloatTocButton = dynamic(() => import('./components/FloatTocButton'), {
   ssr: false
 })
+const RewardButton = dynamic(() => import('./components/RewardButton'), {
+  ssr: false
+})
 
 // 主题全局状态
 const ThemeGlobalSimple = createContext()
@@ -271,6 +274,11 @@ const LayoutSlug = props => {
             {/* 分享 */}
             <div className='focus-hide'>
               <ShareBar post={post} />
+            </div>
+
+            {/* 打赏 */}
+            <div className='focus-hide'>
+              <RewardButton />
             </div>
 
             {/* 广告嵌入 */}
