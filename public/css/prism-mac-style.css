@@ -11,12 +11,14 @@
   margin-bottom: 0.5rem;
 }
 
+/* 折叠模式下代码块紧贴 header，无圆角无间距 */
 .collapse-wrapper .code-toolbar {
-    margin-bottom: 0;
-    border-radius: 0 0 0.5rem 0.5rem;
+  margin-bottom: 0;
+  border-radius: 0 0 0.5rem 0.5rem;
+  box-shadow: none;
 }
 
-.toolbar-item{
+.toolbar-item {
   white-space: nowrap;
 }
 
@@ -29,43 +31,48 @@ pre[class*='language-'] {
   padding-top: 1.5rem !important;
 }
 
-/* Mac 圆点 - 在代码块内部（无折叠时） */
-.pre-mac {
-  position: absolute;
-  left: 0.9rem;
-  top: 0.5rem;
-  z-index: 10;
+/* 折叠模式下去除代码区域所有多余间距 */
+.collapse-wrapper pre[class*='language-'] {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
-/* Mac 圆点 - 移到折叠 header 中时，取消绝对定位 */
+.collapse-wrapper .notion-code {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+/* Mac 圆点 - 仅在折叠 header 中显示 */
 .pre-mac.pre-mac-header {
   position: static;
   display: flex;
   align-items: center;
 }
 
-.pre-mac > span {
+.pre-mac-header > span {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   margin-right: 5px;
-  float: left;
+  flex-shrink: 0;
 }
 
-.pre-mac-header > span {
-  float: none;
+.pre-mac-header > span:nth-child(1) {
+  background: #ff5f57;
 }
 
-.pre-mac > span:nth-child(1) {
-  background: red;
+.pre-mac-header > span:nth-child(2) {
+  background: #febc2e;
 }
 
-.pre-mac > span:nth-child(2) {
-  background: sandybrown;
-}
-
-.pre-mac > span:nth-child(3) {
-  background: limegreen;
+.pre-mac-header > span:nth-child(3) {
+  background: #28c840;
 }
 
 /* 折叠 header 样式 */
@@ -84,9 +91,4 @@ pre[class*='language-'] {
 
 .dark .collapse-copy-btn:hover {
   background: rgba(255, 255, 255, 0.1);
-}
-
-/* 折叠模式下代码块不需要顶部 padding（Mac 圆点已在 header） */
-.collapse-wrapper pre[class*='language-'] {
-  padding-top: 1rem !important;
 }

@@ -132,12 +132,11 @@ const renderCollapseCode = (codeCollapse, codeCollapseExpandDefault) => {
     const headerLeft = document.createElement('div')
     headerLeft.className = 'flex items-center gap-2 flex-1'
 
-    // 移动 Mac 圆点到 header
-    const preMac = codeBlock.querySelector('.pre-mac')
-    if (preMac) {
-      preMac.classList.add('pre-mac-header')
-      headerLeft.appendChild(preMac)
-    }
+    // 在 header 中创建 Mac 圆点
+    const preMac = document.createElement('div')
+    preMac.className = 'pre-mac pre-mac-header'
+    preMac.innerHTML = '<span></span><span></span><span></span>'
+    headerLeft.appendChild(preMac)
 
     const langLabel = document.createElement('span')
     langLabel.className = 'text-xs opacity-50 font-mono'
@@ -271,19 +270,7 @@ function renderPrismMac(codeLineNumbers) {
     console.log('代码渲染', err)
   }
 
-  const codeToolBars = container?.getElementsByClassName('code-toolbar')
-  // Add pre-mac element for Mac Style UI
-  if (codeToolBars) {
-    Array.from(codeToolBars).forEach(item => {
-      const existPreMac = item.getElementsByClassName('pre-mac')
-      if (existPreMac.length < codeToolBars.length) {
-        const preMac = document.createElement('div')
-        preMac.classList.add('pre-mac')
-        preMac.innerHTML = '<span></span><span></span><span></span>'
-        item?.appendChild(preMac, item)
-      }
-    })
-  }
+  // Mac 圆点仅在折叠 header 中创建，不在代码块内部创建
 
   // 折叠代码行号bug
   if (codeLineNumbers) {
