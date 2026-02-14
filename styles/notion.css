@@ -2035,6 +2035,16 @@ code.language-mermaid {
   @apply w-full shadow-md pb-0;
 }
 
+/* 折叠模式下消除代码块内部所有白色间隔 */
+.collapse-wrapper .notion-code {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.collapse-wrapper .code-toolbar {
+  @apply shadow-none;
+}
+
 .mermaid > svg {
   margin: auto;
 }

@@ -11,11 +11,14 @@
   margin-bottom: 0.5rem;
 }
 
+/* 折叠模式下代码块紧贴 header，无圆角无间距 */
 .collapse-wrapper .code-toolbar {
-    margin-bottom: 0;
+  margin-bottom: 0;
+  border-radius: 0 0 0.5rem 0.5rem;
+  box-shadow: none;
 }
 
-.toolbar-item{
+.toolbar-item {
   white-space: nowrap;
 }
 
@@ -25,34 +28,67 @@
 
 pre[class*='language-'] {
   margin-top: 0rem !important;
-  // margin-bottom: 0rem !important;
   padding-top: 1.5rem !important;
-
 }
 
-.pre-mac {
-  position: absolute;
-  left: 0.9rem;
-  top: 0.5rem;
-  z-index: 10;
+/* 折叠模式下去除代码区域所有多余间距 */
+.collapse-wrapper pre[class*='language-'] {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
-.pre-mac > span {
+.collapse-wrapper .notion-code {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+/* Mac 圆点 - 仅在折叠 header 中显示 */
+.pre-mac.pre-mac-header {
+  position: static;
+  display: flex;
+  align-items: center;
+}
+
+.pre-mac-header > span {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   margin-right: 5px;
-  float: left;
+  flex-shrink: 0;
 }
 
-.pre-mac > span:nth-child(1) {
-  background: red;
+.pre-mac-header > span:nth-child(1) {
+  background: #ff5f57;
 }
 
-.pre-mac > span:nth-child(2) {
-  background: sandybrown;
+.pre-mac-header > span:nth-child(2) {
+  background: #febc2e;
 }
 
-.pre-mac > span:nth-child(3) {
-  background: limegreen;
+.pre-mac-header > span:nth-child(3) {
+  background: #28c840;
+}
+
+/* 折叠 header 样式 */
+.collapse-header {
+  min-height: 32px;
+}
+
+/* 折叠 header 中的 Copy 按钮 */
+.collapse-copy-btn {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.collapse-copy-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.dark .collapse-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
