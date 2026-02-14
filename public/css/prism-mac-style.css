@@ -13,6 +13,7 @@
 
 .collapse-wrapper .code-toolbar {
     margin-bottom: 0;
+    border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .toolbar-item{
@@ -25,16 +26,22 @@
 
 pre[class*='language-'] {
   margin-top: 0rem !important;
-  // margin-bottom: 0rem !important;
   padding-top: 1.5rem !important;
-
 }
 
+/* Mac 圆点 - 在代码块内部（无折叠时） */
 .pre-mac {
   position: absolute;
   left: 0.9rem;
   top: 0.5rem;
   z-index: 10;
+}
+
+/* Mac 圆点 - 移到折叠 header 中时，取消绝对定位 */
+.pre-mac.pre-mac-header {
+  position: static;
+  display: flex;
+  align-items: center;
 }
 
 .pre-mac > span {
@@ -43,6 +50,10 @@ pre[class*='language-'] {
   border-radius: 50%;
   margin-right: 5px;
   float: left;
+}
+
+.pre-mac-header > span {
+  float: none;
 }
 
 .pre-mac > span:nth-child(1) {
@@ -55,4 +66,27 @@ pre[class*='language-'] {
 
 .pre-mac > span:nth-child(3) {
   background: limegreen;
+}
+
+/* 折叠 header 样式 */
+.collapse-header {
+  min-height: 32px;
+}
+
+/* 折叠 header 中的 Copy 按钮 */
+.collapse-copy-btn {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.collapse-copy-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.dark .collapse-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 折叠模式下代码块不需要顶部 padding（Mac 圆点已在 header） */
+.collapse-wrapper pre[class*='language-'] {
+  padding-top: 1rem !important;
 }

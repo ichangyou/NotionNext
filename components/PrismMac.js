@@ -126,12 +126,60 @@ const renderCollapseCode = (codeCollapse, codeCollapseExpandDefault) => {
 
     const header = document.createElement('div')
     header.className =
-      'flex justify-between items-center px-4 py-2 cursor-pointer select-none'
-    header.innerHTML = `<h3 class="text-lg font-medium">${language}</h3><svg class="transition-all duration-200 w-5 h-5 transform rotate-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6.293 6.293a1 1 0 0 1 1.414 0L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-3 3a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 0-1.414z" clip-rule="evenodd"/></svg>`
+      'collapse-header flex items-center px-4 py-1.5 cursor-pointer select-none'
+
+    // 左侧：Mac 圆点 + 语言标签
+    const headerLeft = document.createElement('div')
+    headerLeft.className = 'flex items-center gap-2 flex-1'
+
+    // 移动 Mac 圆点到 header
+    const preMac = codeBlock.querySelector('.pre-mac')
+    if (preMac) {
+      preMac.classList.add('pre-mac-header')
+      headerLeft.appendChild(preMac)
+    }
+
+    const langLabel = document.createElement('span')
+    langLabel.className = 'text-xs opacity-50 font-mono'
+    langLabel.textContent = language
+    headerLeft.appendChild(langLabel)
+
+    // 右侧：Copy 按钮 + 折叠箭头
+    const headerRight = document.createElement('div')
+    headerRight.className = 'flex items-center gap-2'
+
+    // 创建自定义 Copy 按钮
+    const copyBtn = document.createElement('button')
+    copyBtn.className = 'collapse-copy-btn text-xs opacity-50 hover:opacity-100 transition-opacity px-1.5 py-0.5 rounded'
+    copyBtn.textContent = 'Copy'
+    copyBtn.addEventListener('click', e => {
+      e.stopPropagation()
+      const codeText = code.textContent
+      navigator.clipboard.writeText(codeText).then(() => {
+        copyBtn.textContent = 'Copied!'
+        setTimeout(() => { copyBtn.textContent = 'Copy' }, 2000)
+      })
+    })
+    headerRight.appendChild(copyBtn)
+
+    // 折叠箭头
+    const arrow = document.createElement('div')
+    arrow.className = 'collapse-arrow'
+    arrow.innerHTML = '<svg class="transition-all duration-200 w-4 h-4 transform rotate-0 opacity-50" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6.293 6.293a1 1 0 0 1 1.414 0L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-3 3a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 0-1.414z" clip-rule="evenodd"/></svg>'
+    headerRight.appendChild(arrow)
+
+    header.appendChild(headerLeft)
+    header.appendChild(headerRight)
+
+    // 隐藏原始 Prism toolbar（语言标签 + Copy 按钮已移到 header）
+    const prismToolbar = codeBlock.querySelector('.toolbar')
+    if (prismToolbar) {
+      prismToolbar.style.display = 'none'
+    }
 
     const panel = document.createElement('div')
     panel.className =
-      'invisible h-0 transition-transform duration-200 border-t border-gray-300'
+      'invisible h-0 transition-transform duration-200 border-t border-gray-300 dark:border-gray-600'
 
     panelWrapper.appendChild(header)
     panelWrapper.appendChild(panel)
@@ -144,7 +192,7 @@ const renderCollapseCode = (codeCollapse, codeCollapseExpandDefault) => {
       panel.classList.toggle('invisible')
       panel.classList.toggle('h-0')
       panel.classList.toggle('h-auto')
-      header.querySelector('svg').classList.toggle('rotate-180')
+      arrow.querySelector('svg').classList.toggle('rotate-180')
       panelWrapper.classList.toggle('border-gray-300')
     }
 
