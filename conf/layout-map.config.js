@@ -22,6 +22,7 @@ module.exports = {
     '/[prefix]': 'LayoutSlug',
     '/[prefix]/[slug]': 'LayoutSlug',
     '/[prefix]/[slug]/[...suffix]': 'LayoutSlug',
+    '/membership': 'LayoutPaidColumns',
     '/auth/result': 'LayoutAuth',
     '/sign-in/[[...index]]': 'LayoutSignIn',
     '/sign-up/[[...index]]': 'LayoutSignUp',

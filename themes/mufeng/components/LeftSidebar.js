@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 import CONFIG from '../config'
 import SocialButton from './SocialButton'
+import PaidColumnCard from './PaidColumnCard'
 import WechatCard from './WechatCard'
 import BLOG from '@/blog.config'
 
@@ -201,6 +202,9 @@ export default function LeftSidebar(props) {
           })}
         </ul>
       </nav>
+
+      {/* 付费专栏入口 */}
+      <PaidColumnCard />
 
       {/* 微信公众号推广 */}
       <WechatCard />
