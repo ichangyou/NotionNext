@@ -17,45 +17,7 @@ const RealTimeViewCount = ({ post, simple = false }) => {
   const valueId = `busuanzi_value_page_pv_${postId}`
   
   useEffect(() => {
-    // 尝试从不蒜子获取数据后的处理
-    const handleBusuanziLoad = () => {
-      // 获取页面上所有统计元素
-      const allCountElements = document.querySelectorAll('.custom-busuanzi-value')
-      if (!allCountElements || allCountElements.length === 0) return
-      
-      // 防止因为不蒜子脚本未加载或失败而导致无法显示
-      setTimeout(() => {
-        // 如果数值还是默认值，则显示一个合理的随机数
-        allCountElements.forEach(el => {
-          if (el.innerHTML === '--' || el.innerHTML === '') {
-            // 生成一个随机但看起来合理的访问量数字，根据文章ID确保相同文章在刷新时数字一致
-            const seed = postId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
-            const randomViews = Math.floor(50 + (seed % 200))
-            el.innerHTML = randomViews.toString()
-          }
-        })
-      }, 3000)
-    }
-    
-    // 监听DOM变化，当不蒜子数据加载完成时触发处理
-    if (typeof window !== 'undefined' && typeof MutationObserver !== 'undefined') {
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach(mutation => {
-          if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-            // 检查是否有不蒜子相关的元素变化
-            if (document.querySelector(`.${valueId}`)) {
-              handleBusuanziLoad()
-            }
-          }
-        })
-      })
-      
-      // 开始观察DOM变化
-      observer.observe(document.body, { childList: true, subtree: true })
-      
-      // 清理函数
-      return () => observer.disconnect()
-    }
+    // 不再生成假数据，保持 '--' 直到不蒜子返回真实数据
   }, [postId, valueId])
   
   return (

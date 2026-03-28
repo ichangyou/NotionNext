@@ -53,23 +53,16 @@ function writeViewsData(data) {
       return false;
     }
 
-    // 日期修复：确保所有lastUpdated日期都是有效的且不在未来
+    // 日期修复：只修复无效日期
     const now = new Date();
     Object.keys(data).forEach(key => {
       try {
         const entry = data[key];
-        // 检查日期是否有效
         const dateObj = new Date(entry.lastUpdated);
-        const isInvalidDate = isNaN(dateObj.getTime());
-        const isFutureDate = dateObj > now;
-        const hasFutureYear = entry.lastUpdated && entry.lastUpdated.includes('2025-');
-        
-        if (isInvalidDate || isFutureDate || hasFutureYear) {
-          console.log(`[API /api/incrementView] Fixed invalid date for key ${key}: ${entry.lastUpdated} -> ${now.toISOString()}`);
+        if (isNaN(dateObj.getTime())) {
           entry.lastUpdated = now.toISOString();
         }
       } catch (e) {
-        // 如果有任何问题，设置为当前日期
         data[key].lastUpdated = now.toISOString();
       }
     });
@@ -158,17 +151,8 @@ export default async function handler(req, res) {
       console.log(`[API /api/incrementView] Initializing new entry for path '${cleanPath}'`)
     }
     
-    // 获取当前时间，确保不会返回未来日期
-    let currentDate = new Date();
-    
-    // 检查并修复系统时间偏差导致的未来日期问题
-    const expectedYear = 2023; // 用当前实际年份，而非系统时间
-    if (currentDate.getFullYear() > expectedYear) {
-      console.log(`[API /api/incrementView] System date appears to be set to future year: ${currentDate.getFullYear()}, forcing to ${expectedYear}`);
-      currentDate = new Date(expectedYear, currentDate.getMonth(), currentDate.getDate(), 
-                            currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds());
-    }
-    
+    // 获取当前时间
+    const currentDate = new Date();
     const currentDateISO = currentDate.toISOString();
     console.log(`[API /api/incrementView] Using current date: ${currentDateISO}`);
     
