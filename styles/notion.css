@@ -764,15 +764,13 @@ code[class*='language-'] {
 
 .notion-code {
   padding: 30px 16px 30px 20px;
-  border-bottom-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
   tab-size: 2;
   display: block;
   box-sizing: border-box;
   overflow: auto;
   font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier,
     monospace;
-  @apply w-full mb-0 dark:bg-black !important;
+  @apply w-full mb-0 !important;
 }
 
 .notion-column {
@@ -2032,17 +2030,70 @@ code.language-mermaid {
 }
 
 .code-toolbar {
-  @apply w-full shadow-md pb-0;
+  @apply w-full pb-0;
 }
 
-/* 折叠模式下消除代码块内部所有白色间隔 */
+/* 折叠模式：所有装饰交给 .collapse-panel-wrapper */
 .collapse-wrapper .notion-code {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .collapse-wrapper .code-toolbar {
   @apply shadow-none;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* 折叠面板展开/收起 */
+.collapse-code-panel {
+  display: none;
+  overflow: hidden;
+}
+
+.collapse-code-panel.is-open {
+  display: block;
+}
+
+/* 折叠箭头旋转 */
+.collapse-arrow svg {
+  width: 16px;
+  height: 16px;
+  opacity: 0.4;
+  transition: transform 0.2s ease;
+}
+
+.collapse-arrow.is-open svg {
+  transform: rotate(180deg);
+}
+
+/* 语言标签 */
+.collapse-lang-label {
+  font-size: 12px;
+  opacity: 0.5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Copy 按钮 */
+.collapse-copy-btn {
+  font-size: 12px;
+  opacity: 0.4;
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: opacity 0.15s, background 0.15s;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.collapse-copy-btn:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.dark .collapse-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .mermaid > svg {

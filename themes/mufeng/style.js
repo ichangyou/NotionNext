@@ -422,65 +422,89 @@ const Style = () => {
   }
 
   /* ======== 代码块视觉优化 ======== */
+  /* 设计原则：
+     - 非折叠模式：.code-toolbar 是唯一视觉容器
+     - 折叠模式：.collapse-wrapper > panelWrapper 是唯一视觉容器
+     - .notion-code 始终透明，不参与视觉装饰 */
 
-  /* 代码块容器 */
+  /* --- 非折叠：.code-toolbar 作为视觉容器 --- */
   #article-wrapper .code-toolbar {
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    background: #f8f9fa;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     margin: 1.2em 0;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .dark #article-wrapper .code-toolbar {
+    background: #1a1a1a;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.08);
   }
 
-  /* 代码块背景 */
+  /* --- .notion-code 始终作为纯内容容器 --- */
   #article-wrapper .notion-code {
-    background: #fafafa !important;
-    border-radius: 10px;
+    background: transparent !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
     font-size: 13px;
     line-height: 1.7;
-    padding: 2.2em 1.2em 1.2em !important;
+    padding: 1.25em 1.25em !important;
     font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, 'Liberation Mono', monospace;
   }
 
-  .dark #article-wrapper .notion-code {
-    background: #141414 !important;
+  /* --- 折叠模式：panelWrapper 是视觉容器，code-toolbar 完全透明 --- */
+  #article-wrapper .collapse-wrapper {
+    margin: 1em 0;
   }
 
-  /* Mac 圆点 - 更柔和的颜色 */
-  #article-wrapper .pre-mac {
-    top: 0.65rem;
-    left: 1rem;
+  #article-wrapper .collapse-wrapper .collapse-panel-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f8f9fa;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.2s;
   }
 
-  #article-wrapper .pre-mac > span {
-    width: 8px;
-    height: 8px;
-    margin-right: 5px;
-    opacity: 0.7;
+  .dark #article-wrapper .collapse-wrapper .collapse-panel-wrapper {
+    background: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 
-  #article-wrapper .pre-mac > span:nth-child(1) {
-    background: #ff5f57;
+  #article-wrapper .collapse-wrapper .collapse-panel-wrapper:hover {
+    border-color: rgba(99, 102, 241, 0.4);
   }
 
-  #article-wrapper .pre-mac > span:nth-child(2) {
-    background: #febc2e;
+  #article-wrapper .collapse-wrapper .code-toolbar {
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    border: none !important;
   }
 
-  #article-wrapper .pre-mac > span:nth-child(3) {
-    background: #28c840;
+  /* --- 折叠 header --- */
+  #article-wrapper .collapse-header {
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+    color: #9ca3af;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
 
-  /* 语言标签 */
+  .dark #article-wrapper .collapse-header {
+    color: #6b7280;
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+
+  /* --- Prism 原生 toolbar（非折叠模式） --- */
   #article-wrapper .code-toolbar > .toolbar {
     top: 0.35rem;
     right: 0.6rem;
-    opacity: 0.5;
+    opacity: 0.4;
     transition: opacity 0.2s;
   }
 
@@ -508,7 +532,7 @@ const Style = () => {
     color: #d1d5db !important;
   }
 
-  /* 行号 - 更安静的颜色 */
+  /* --- 行号 --- */
   #article-wrapper .line-numbers .line-numbers-rows {
     border-right: 1px solid rgba(0, 0, 0, 0.06);
   }
