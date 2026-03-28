@@ -75,6 +75,15 @@ pre[class*='language-'] {
   background: #28c840;
 }
 
+/* 折叠容器统一背景，避免 header 和代码区域背景不一致 */
+.collapse-wrapper > div {
+  background: #fafafa;
+}
+
+.dark .collapse-wrapper > div {
+  background: #141414;
+}
+
 /* 折叠 header 样式 */
 .collapse-header {
   min-height: 32px;
