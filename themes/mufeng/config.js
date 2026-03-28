@@ -67,6 +67,30 @@ const CONFIG = {
       members: '',
       qrCode: '/zsxq-money.png',
       link: 'https://t.zsxq.com/wRIHp'
+    },
+    {
+      id: 'xbt-ai-lab',
+      platform: 'xbt',
+      name: 'AI 实战：我的长期主义实验室',
+      slogan: '在 AI 浪潮最热闹的时刻，做一件慢一点的事',
+      audience: ['不想被噪音淹没的开发者', '想安静构建未来能力的人'],
+      highlights: ['AI 如何改变开发者的能力结构', '从工具使用到个人产品的真实路径', 'AI × 独立开发的探索记录', '长期主义视角下的个人进化'],
+      price: '￥49',
+      members: '',
+      qrCode: '',
+      link: 'https://xiaobot.net/p/ai-lab'
+    },
+    {
+      id: 'xbt-ios-indie',
+      platform: 'xbt',
+      name: 'iOS 独立开发实战',
+      slogan: '从注册到上架，每一步都有真实踩坑记录',
+      audience: ['想踏入 iOS 开发的开发者', '想独立上架第一个 App 的人', '想把技术变成副业收入的程序员'],
+      highlights: ['证书、描述文件一次搞懂', 'Swift 核心语法项目驱动教学', 'App Store 上架全流程实操', 'IAP 内购与 ICP 合规避坑'],
+      price: '￥49',
+      members: '',
+      qrCode: '',
+      link: 'https://xiaobot.net/p/ios-indie-dev'
     }
   ]),
 
