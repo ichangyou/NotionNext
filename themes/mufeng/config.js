@@ -22,6 +22,11 @@ const CONFIG = {
   SIMPLE_MENU_ARCHIVE: true, // 显示归档
   SIMPLE_MENU_SEARCH: false, // 显示搜索（侧边栏模式下默认关闭）
 
+  // 微信公众号推广
+  SIMPLE_WECHAT_MP_QRCODE: process.env.NEXT_PUBLIC_WECHAT_MP_QRCODE || '/mufeng.png', // 公众号二维码图片
+  SIMPLE_WECHAT_MP_NAME: process.env.NEXT_PUBLIC_WECHAT_MP_NAME || '沐风', // 公众号名称
+  SIMPLE_WECHAT_MP_DESC: process.env.NEXT_PUBLIC_WECHAT_MP_DESC || '扫码关注，获取更多内容', // 公众号描述
+
   // 文章列表配置
   POST_LIST_PREVIEW: process.env.NEXT_PUBLIC_POST_LIST_PREVIEW || false // 是否显示文章预览（简洁列表默认关闭）
 }

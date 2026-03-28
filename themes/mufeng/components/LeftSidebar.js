@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 import CONFIG from '../config'
 import SocialButton from './SocialButton'
+import WechatCard from './WechatCard'
 import BLOG from '@/blog.config'
 
 /**
@@ -164,7 +165,7 @@ export default function LeftSidebar(props) {
       <SidebarSearch />
 
       {/* 导航菜单 */}
-      <nav className='flex-1'>
+      <nav>
         <ul className='space-y-0.5'>
           {menuLinks?.filter(link => link.show !== false).map((link, index) => {
             const isExternal = link.target === '_blank' || (link.href && (link.href.startsWith('http://') || link.href.startsWith('https://')))
@@ -200,6 +201,9 @@ export default function LeftSidebar(props) {
           })}
         </ul>
       </nav>
+
+      {/* 微信公众号推广 */}
+      <WechatCard />
 
     </div>
   )
