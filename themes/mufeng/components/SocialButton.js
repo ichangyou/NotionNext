@@ -33,12 +33,12 @@ const SocialButton = () => {
   // RSS 链接
   const showRss = JSON.parse(siteConfig('ENABLE_RSS') || 'false')
 
-  const handleCopyEmail = useCallback(async () => {
+  const handleCopyEmail = useCallback(async (e) => {
     if (!email || copied) return
+    // 复制到剪贴板（不阻止 href 的 mailto: 默认行为）
     try {
       await navigator.clipboard.writeText(email)
     } catch {
-      // fallback for older browsers
       const ta = document.createElement('textarea')
       ta.value = email
       ta.style.position = 'fixed'
@@ -67,16 +67,17 @@ const SocialButton = () => {
         </a>
       ))}
 
-      {/* 邮箱按钮 - 点击复制邮箱地址 */}
+      {/* 邮箱按钮 - 点击唤起邮件客户端 + 同时复制邮箱地址 */}
       {email && (
         <div className='relative'>
-          <button
+          <a
+            href={`mailto:${email}`}
             onClick={handleCopyEmail}
             title={copied ? '已复制' : email}
             className='w-8 h-8 flex items-center justify-center rounded-full text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 cursor-pointer'
           >
             <i className={`${copied ? 'fas fa-check' : 'fas fa-envelope'} text-sm ${copied ? 'text-green-500' : ''}`} />
-          </button>
+          </a>
 
           {/* 复制成功提示 */}
           {copied && (
