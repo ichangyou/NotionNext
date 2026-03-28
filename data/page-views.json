@@ -50,5 +50,9 @@
   "32bb2da8-94ba-8058-81f1-dd3a3ed5e911": {
     "count": 1,
     "lastUpdated": "2026-03-28T08:53:45.107Z"
+  },
+  "claude-code-permissions-setting": {
+    "count": 1,
+    "lastUpdated": "2023-03-28T14:11:55.000Z"
   }
 }

@@ -1,21 +1,24 @@
 /**
  * @author https://github.com/txs
- * 当配置文件 CODE_MAC_BAR 开启时，此样式会被动态引入，将开启代码组件左上角的mac图标
+ * 代码块 Mac 风格样式
+ * 设计原则：单层视觉容器，内部元素不添加任何装饰性样式
  **/
+
+/* ============================================================
+   1. 非折叠模式 — .code-toolbar 是唯一视觉容器
+   ============================================================ */
 .code-toolbar {
   position: relative;
+  width: 100%;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  width: 100%;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-/* 折叠模式下代码块紧贴 header，无圆角无间距 */
-.collapse-wrapper .code-toolbar {
-  margin-bottom: 0;
-  border-radius: 0 0 0.5rem 0.5rem;
-  box-shadow: none;
+pre[class*='language-'] {
+  margin-top: 0 !important;
+  padding-top: 1.5rem !important;
 }
 
 .toolbar-item {
@@ -26,29 +29,35 @@
   margin-top: -0.1rem;
 }
 
-pre[class*='language-'] {
-  margin-top: 0rem !important;
-  padding-top: 1.5rem !important;
-}
-
-/* 折叠模式下去除代码区域所有多余间距 */
-.collapse-wrapper pre[class*='language-'] {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-  padding-top: 0.75rem !important;
-  padding-bottom: 0.75rem !important;
-  border-radius: 0 0 0.5rem 0.5rem;
+/* ============================================================
+   2. 折叠模式 — panelWrapper 是唯一视觉容器
+      .code-toolbar / .notion-code 完全透明
+   ============================================================ */
+.collapse-wrapper .code-toolbar {
+  margin-bottom: 0;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
 }
 
 .collapse-wrapper .notion-code {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  border-radius: 0 0 0.5rem 0.5rem;
+  margin: 0 !important;
+  padding: 0.875rem 1.25rem !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* Mac 圆点 - 仅在折叠 header 中显示 */
+.collapse-wrapper pre[class*='language-'] {
+  margin: 0 !important;
+  padding: 0.875rem 1.25rem !important;
+  border-radius: 0 !important;
+}
+
+/* ============================================================
+   3. Mac 圆点（仅折叠 header 中）
+   ============================================================ */
 .pre-mac.pre-mac-header {
   position: static;
   display: flex;
@@ -56,40 +65,24 @@ pre[class*='language-'] {
 }
 
 .pre-mac-header > span {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   margin-right: 5px;
   flex-shrink: 0;
 }
 
-.pre-mac-header > span:nth-child(1) {
-  background: #ff5f57;
-}
+.pre-mac-header > span:nth-child(1) { background: #ff5f57; }
+.pre-mac-header > span:nth-child(2) { background: #febc2e; }
+.pre-mac-header > span:nth-child(3) { background: #28c840; }
 
-.pre-mac-header > span:nth-child(2) {
-  background: #febc2e;
-}
-
-.pre-mac-header > span:nth-child(3) {
-  background: #28c840;
-}
-
-/* 折叠容器统一背景，避免 header 和代码区域背景不一致 */
-.collapse-wrapper > div {
-  background: #fafafa;
-}
-
-.dark .collapse-wrapper > div {
-  background: #141414;
-}
-
-/* 折叠 header 样式 */
+/* ============================================================
+   4. 折叠 header + 交互
+   ============================================================ */
 .collapse-header {
-  min-height: 32px;
+  min-height: 36px;
 }
 
-/* 折叠 header 中的 Copy 按钮 */
 .collapse-copy-btn {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
