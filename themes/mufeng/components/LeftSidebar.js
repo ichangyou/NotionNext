@@ -6,8 +6,6 @@ import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 import CONFIG from '../config'
 import SocialButton from './SocialButton'
-import PaidColumnCard from './PaidColumnCard'
-import WechatCard from './WechatCard'
 import BLOG from '@/blog.config'
 
 /**
@@ -95,6 +93,12 @@ export default function LeftSidebar(props) {
       name: locale.COMMON.TAGS,
       href: '/tag',
       show: siteConfig('SIMPLE_MENU_TAG', null, CONFIG)
+    },
+    {
+      icon: 'fas fa-crown',
+      name: '付费专栏',
+      href: '/membership',
+      show: siteConfig('SIMPLE_PAID_COLUMNS_ENABLE', null, CONFIG)
     }
   ]
 
@@ -106,6 +110,19 @@ export default function LeftSidebar(props) {
   // 如果开启自定义菜单，则覆盖
   if (siteConfig('CUSTOM_MENU')) {
     menuLinks = customMenu
+  }
+
+  // 无论是否自定义菜单，都追加付费专栏入口
+  if (siteConfig('SIMPLE_PAID_COLUMNS_ENABLE', null, CONFIG)) {
+    const hasMembership = menuLinks?.some(link => link.href === '/membership')
+    if (!hasMembership) {
+      menuLinks = [...(menuLinks || []), {
+        icon: 'fas fa-crown',
+        name: '付费专栏',
+        href: '/membership',
+        show: true
+      }]
+    }
   }
 
   // 判断链接是否激活
@@ -202,12 +219,6 @@ export default function LeftSidebar(props) {
           })}
         </ul>
       </nav>
-
-      {/* 付费专栏入口 */}
-      <PaidColumnCard />
-
-      {/* 微信公众号推广 */}
-      <WechatCard />
 
     </div>
   )

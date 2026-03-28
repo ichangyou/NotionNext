@@ -41,7 +41,7 @@ const CONFIG = {
       highlights: ['完整项目实战', '上架流程详解', '变现策略分享', '一对一答疑'],
       price: '￥99',
       members: '',
-      qrCode: '/zsxq-iOS.JPG',
+      qrCode: '/zsxq-iOS.png',
       link: 'https://t.zsxq.com/kTK7e'
     },
     {
@@ -53,7 +53,7 @@ const CONFIG = {
       highlights: ['AI 工具深度评测', 'Prompt 工程实战', 'AI 编程技巧', '行业趋势解读'],
       price: '￥99',
       members: '',
-      qrCode: '/zsxq-ai.JPG',
+      qrCode: '/zsxq-ai.png',
       link: 'https://t.zsxq.com/IhG0F'
     },
     {
@@ -65,7 +65,7 @@ const CONFIG = {
       highlights: ['真实买卖记录，包括亏损的单子买入理由、持仓逻辑、离场复盘全程记录。亏钱的操作不删不藏，因为那才值钱', 'AI 分析的完整过程，不只给结论用 Claude、DeepSeek 读财报、分析行情的实际 prompt 和思路，拿来就能用', '程序员视角，在意系统性和可复制性不靠消息、不靠感觉，像调试代码一样对待每一笔投资决策'],
       price: '￥99',
       members: '',
-      qrCode: '/zsxq-money.JPG',
+      qrCode: '/zsxq-money.png',
       link: 'https://t.zsxq.com/wRIHp'
     }
   ]),

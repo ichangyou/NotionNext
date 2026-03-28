@@ -112,45 +112,42 @@ function ColumnCard({ column, index }) {
           </div>
         )}
 
-        {/* 价格 */}
-        {column.price && !isComingSoon && (
-          <div className='mb-5 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50'>
-            <span className='text-2xl font-bold text-gray-900 dark:text-white'>
-              {column.price}
-            </span>
-          </div>
-        )}
-
-        {/* 二维码或链接 */}
-        {!isComingSoon && (hasQrCode || hasLink) && (
-          <div className='pt-4 border-t border-gray-100 dark:border-gray-800'>
+        {/* 底部行动区：价格 + 二维码/链接 */}
+        {!isComingSoon && (column.price || hasQrCode || hasLink) && (
+          <div className='pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center gap-4'>
+            {/* 左侧：二维码（缩小） */}
             {hasQrCode && (
-              <div className='flex flex-col items-center'>
-                <div className='w-36 h-36 rounded-xl overflow-hidden bg-white p-2 shadow-sm border border-gray-100 dark:border-gray-700'>
+              <div className='flex-shrink-0'>
+                <div className='w-20 h-20 rounded-lg overflow-hidden bg-white p-1 shadow-sm border border-gray-100 dark:border-gray-700'>
                   <LazyImage
                     src={column.qrCode}
                     className='w-full h-full object-contain'
-                    width={144}
-                    height={144}
+                    width={80}
+                    height={80}
                     alt={column.name}
                   />
                 </div>
-                <p className='text-[11px] text-gray-400 dark:text-gray-500 mt-2'>
-                  扫码加入
-                </p>
               </div>
             )}
-            {hasLink && (
-              <a
-                href={column.link}
-                target='_blank'
-                rel='noopener noreferrer'
-                className={`mt-3 w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r ${platform.color} text-white text-sm font-medium hover:opacity-90 transition-opacity duration-200`}
-              >
-                <i className='fas fa-arrow-up-right-from-square text-[11px]' />
-                立即加入
-              </a>
-            )}
+            {/* 右侧：价格 + 按钮 */}
+            <div className='flex-1 flex flex-col gap-2'>
+              {column.price && (
+                <span className='text-2xl font-bold text-gray-900 dark:text-white'>
+                  {column.price}
+                </span>
+              )}
+              {hasLink && (
+                <a
+                  href={column.link}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className={`w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r ${platform.color} text-white text-sm font-medium hover:opacity-90 transition-opacity duration-200`}
+                >
+                  <i className='fas fa-arrow-up-right-from-square text-[11px]' />
+                  立即加入
+                </a>
+              )}
+            </div>
           </div>
         )}
       </div>
