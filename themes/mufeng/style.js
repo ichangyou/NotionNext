@@ -414,7 +414,7 @@ const Style = () => {
   /* 分割线 */
   #article-wrapper .notion-hr {
     border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
-    margin: 2em 0;
+    margin: 1em 0;
   }
 
   .dark #article-wrapper .notion-hr {

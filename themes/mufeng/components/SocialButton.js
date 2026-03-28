@@ -1,6 +1,8 @@
+import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
 import { decryptEmail } from '@/lib/plugins/mailEncrypt'
 import { useState, useCallback } from 'react'
+import CONFIG from '../config'
 
 /**
  * 社交联系方式按钮组 - 圆形图标样式
@@ -10,6 +12,11 @@ import { useState, useCallback } from 'react'
  */
 const SocialButton = () => {
   const [copied, setCopied] = useState(false)
+  const [showWechatQr, setShowWechatQr] = useState(false)
+
+  // 微信公众号配置
+  const wechatMpQrCode = siteConfig('SIMPLE_WECHAT_MP_QRCODE', null, CONFIG)
+  const wechatMpName = siteConfig('SIMPLE_WECHAT_MP_NAME', null, CONFIG)
 
   // 社交链接配置
   const rawEmail = siteConfig('CONTACT_EMAIL')
@@ -33,12 +40,12 @@ const SocialButton = () => {
   // RSS 链接
   const showRss = JSON.parse(siteConfig('ENABLE_RSS') || 'false')
 
-  const handleCopyEmail = useCallback(async () => {
+  const handleCopyEmail = useCallback(async (e) => {
     if (!email || copied) return
+    // 复制到剪贴板（不阻止 href 的 mailto: 默认行为）
     try {
       await navigator.clipboard.writeText(email)
     } catch {
-      // fallback for older browsers
       const ta = document.createElement('textarea')
       ta.value = email
       ta.style.position = 'fixed'
@@ -54,6 +61,44 @@ const SocialButton = () => {
 
   return (
     <div className='flex flex-wrap gap-2'>
+      {/* 微信公众号 - 悬停显示二维码 */}
+      {wechatMpQrCode && (
+        <div
+          className='relative'
+          onMouseEnter={() => setShowWechatQr(true)}
+          onMouseLeave={() => setShowWechatQr(false)}
+        >
+          <div
+            className='w-8 h-8 flex items-center justify-center rounded-full text-gray-400 dark:text-gray-500 hover:text-green-500 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-200 cursor-pointer'
+            title={wechatMpName || '微信公众号'}
+          >
+            <i className='fab fa-weixin text-sm' />
+          </div>
+
+          {/* 悬浮二维码卡片 */}
+          {showWechatQr && (
+            <div className='absolute left-1/2 -translate-x-1/2 bottom-full mb-3 z-50 animate-fade-in-up'>
+              <div className='p-3 rounded-xl bg-white dark:bg-gray-800 shadow-xl border border-gray-200 dark:border-gray-700 w-44'>
+                <div className='w-full aspect-square rounded-lg overflow-hidden bg-white mb-2'>
+                  <LazyImage
+                    src={wechatMpQrCode}
+                    className='w-full h-full object-contain'
+                    width={160}
+                    height={160}
+                    alt={wechatMpName || '微信公众号'}
+                  />
+                </div>
+                <p className='text-xs text-center text-gray-500 dark:text-gray-400'>
+                  扫码关注「{wechatMpName || '公众号'}」
+                </p>
+              </div>
+              {/* 小三角箭头 */}
+              <div className='absolute top-full left-1/2 -translate-x-1/2 border-[6px] border-transparent border-t-white dark:border-t-gray-800' />
+            </div>
+          )}
+        </div>
+      )}
+
       {validLinks.map((link, index) => (
         <a
           key={index}
@@ -67,16 +112,17 @@ const SocialButton = () => {
         </a>
       ))}
 
-      {/* 邮箱按钮 - 点击复制邮箱地址 */}
+      {/* 邮箱按钮 - 点击唤起邮件客户端 + 同时复制邮箱地址 */}
       {email && (
         <div className='relative'>
-          <button
+          <a
+            href={`mailto:${email}`}
             onClick={handleCopyEmail}
             title={copied ? '已复制' : email}
             className='w-8 h-8 flex items-center justify-center rounded-full text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 cursor-pointer'
           >
             <i className={`${copied ? 'fas fa-check' : 'fas fa-envelope'} text-sm ${copied ? 'text-green-500' : ''}`} />
-          </button>
+          </a>
 
           {/* 复制成功提示 */}
           {copied && (

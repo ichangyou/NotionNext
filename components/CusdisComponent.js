@@ -17,9 +17,12 @@ const CusdisComponent = ({ frontMatter }) => {
   }, [isDarkMode, lang])
 
   const loadCusdis = async () => {
-    await loadExternalResource(langCDN, 'js')
+    try {
+      await loadExternalResource(langCDN, 'js')
+    } catch (e) {
+      console.warn('[Cusdis] 语言包加载失败，继续初始化', e)
+    }
     await loadExternalResource(src, 'js')
-
     window?.CUSDIS?.initial()
   }
 

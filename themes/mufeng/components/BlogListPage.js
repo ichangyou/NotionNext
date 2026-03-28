@@ -29,12 +29,28 @@ export default function BlogListPage(props) {
   )
 
   const showPrev = currentPage > 1
-  const showNext = page < totalPage
+  const showNext = currentPage < totalPage
   const pagePrefix = router.asPath
     .split('?')[0]
     .replace(/\/page\/[1-9]\d*/, '')
     .replace(/\/$/, '')
     .replace('.html', '')
+
+  // 生成页码数组，带省略号
+  const getPageNumbers = (current, total) => {
+    if (total <= 7) {
+      return Array.from({ length: total }, (_, i) => i + 1)
+    }
+    const pages = []
+    pages.push(1)
+    if (current > 3) pages.push('...')
+    const start = Math.max(2, current - 1)
+    const end = Math.min(total - 1, current + 1)
+    for (let i = start; i <= end; i++) pages.push(i)
+    if (current < total - 2) pages.push('...')
+    pages.push(total)
+    return pages
+  }
 
   // 计算文章序号（考虑分页）
   const getPostIndex = (index) => {
@@ -85,44 +101,71 @@ export default function BlogListPage(props) {
       </div>
 
       {/* 分页导航 */}
-      {(showPrev || showNext) && (
-        <div className='flex items-center justify-between mt-6 md:mt-10 pt-4 md:pt-6 border-t border-gray-100 dark:border-gray-800'>
-          <Link
-            href={{
-              pathname:
-                currentPage - 1 === 1
-                  ? `${pagePrefix}/`
-                  : `${pagePrefix}/page/${currentPage - 1}`,
-              query: router.query.s ? { s: router.query.s } : {}
-            }}
-            className={`flex items-center gap-2 px-4 py-2 text-sm rounded-lg transition-all duration-200
-              ${showPrev 
-                ? 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400' 
-                : 'invisible pointer-events-none'
-              }`}
-          >
-            <i className='fas fa-arrow-left text-xs' />
-            <span>更新的文章</span>
-          </Link>
-          
-          <span className='text-sm text-gray-400 dark:text-gray-500'>
-            {currentPage} / {totalPage}
-          </span>
-          
-          <Link
-            href={{
-              pathname: `${pagePrefix}/page/${currentPage + 1}`,
-              query: router.query.s ? { s: router.query.s } : {}
-            }}
-            className={`flex items-center gap-2 px-4 py-2 text-sm rounded-lg transition-all duration-200
-              ${showNext 
-                ? 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400' 
-                : 'invisible pointer-events-none'
-              }`}
-          >
-            <span>更早的文章</span>
-            <i className='fas fa-arrow-right text-xs' />
-          </Link>
+      {totalPage > 1 && (
+        <div className='flex items-center justify-center mt-6 md:mt-10 pt-4 md:pt-6 border-t border-gray-100 dark:border-gray-800'>
+          <nav className='flex items-center gap-1'>
+            {/* 上一页箭头 */}
+            {showPrev ? (
+              <Link
+                href={{
+                  pathname: currentPage - 1 === 1
+                    ? `${pagePrefix}/`
+                    : `${pagePrefix}/page/${currentPage - 1}`,
+                  query: router.query.s ? { s: router.query.s } : {}
+                }}
+                className='w-8 h-8 flex items-center justify-center rounded-md text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200'
+              >
+                <i className='fas fa-chevron-left text-xs' />
+              </Link>
+            ) : (
+              <span className='w-8 h-8 flex items-center justify-center rounded-md text-gray-200 dark:text-gray-700 cursor-not-allowed'>
+                <i className='fas fa-chevron-left text-xs' />
+              </span>
+            )}
+
+            {/* 页码 */}
+            {getPageNumbers(currentPage, totalPage).map((item, i) =>
+              item === '...' ? (
+                <span key={`dot-${i}`} className='w-8 h-8 flex items-center justify-center text-xs text-gray-300 dark:text-gray-600'>
+                  ...
+                </span>
+              ) : (
+                <Link
+                  key={item}
+                  href={{
+                    pathname: item === 1
+                      ? `${pagePrefix}/`
+                      : `${pagePrefix}/page/${item}`,
+                    query: router.query.s ? { s: router.query.s } : {}
+                  }}
+                  className={`w-8 h-8 flex items-center justify-center rounded-md text-sm transition-all duration-200
+                    ${item === currentPage
+                      ? 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 font-medium'
+                      : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300'
+                    }`}
+                >
+                  {item}
+                </Link>
+              )
+            )}
+
+            {/* 下一页箭头 */}
+            {showNext ? (
+              <Link
+                href={{
+                  pathname: `${pagePrefix}/page/${currentPage + 1}`,
+                  query: router.query.s ? { s: router.query.s } : {}
+                }}
+                className='w-8 h-8 flex items-center justify-center rounded-md text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200'
+              >
+                <i className='fas fa-chevron-right text-xs' />
+              </Link>
+            ) : (
+              <span className='w-8 h-8 flex items-center justify-center rounded-md text-gray-200 dark:text-gray-700 cursor-not-allowed'>
+                <i className='fas fa-chevron-right text-xs' />
+              </span>
+            )}
+          </nav>
         </div>
       )}
     </div>

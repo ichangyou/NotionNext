@@ -70,6 +70,9 @@ const FloatTocButton = dynamic(() => import('./components/FloatTocButton'), {
 const RewardButton = dynamic(() => import('./components/RewardButton'), {
   ssr: false
 })
+const PaidColumnsPage = dynamic(() => import('./components/PaidColumnsPage'), {
+  ssr: false
+})
 
 // 主题全局状态
 const ThemeGlobalSimple = createContext()
@@ -349,6 +352,15 @@ const Layout404 = props => {
 }
 
 /**
+ * 付费专栏页
+ * @param {*} props
+ * @returns
+ */
+const LayoutPaidColumns = props => {
+  return <PaidColumnsPage />
+}
+
+/**
  * 分类列表
  * @param {*} props
  * @returns
@@ -414,6 +426,7 @@ export {
   LayoutBase,
   LayoutCategoryIndex,
   LayoutIndex,
+  LayoutPaidColumns,
   LayoutPostList,
   LayoutSearch,
   LayoutSlug,

@@ -67,6 +67,9 @@ const NotionPage = ({ post, className }) => {
     if (POST_DISABLE_GALLERY_CLICK) {
       processGalleryImg()
     }
+
+    // 外部链接在新标签页中打开
+    processExternalLinks()
   }, [post])
 
   useEffect(() => {
@@ -158,6 +161,25 @@ const processGalleryImg = () => {
       }
     }
   }, 800)
+}
+
+/**
+ * 文章内的外部链接（参考链接等）在新标签页中打开
+ */
+const processExternalLinks = () => {
+  if (isBrowser) {
+    const container = document.getElementById('notion-article')
+    if (!container) return
+    const links = container.querySelectorAll('a[href]')
+    for (const link of links) {
+      const href = link.getAttribute('href')
+      // 外部链接：以 http:// 或 https:// 开头且不是站内链接
+      if (href && (href.startsWith('http://') || href.startsWith('https://')) && !href.includes(window.location.hostname)) {
+        link.setAttribute('target', '_blank')
+        link.setAttribute('rel', 'noopener noreferrer')
+      }
+    }
+  }
 }
 
 /**
