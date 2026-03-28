@@ -9,21 +9,21 @@ const PLATFORM_INFO = {
   zsxq: {
     name: '知识星球',
     icon: 'fas fa-star',
-    color: 'from-blue-500 to-indigo-600',
-    bgLight: 'bg-blue-50',
-    bgDark: 'dark:bg-blue-900/20',
-    textColor: 'text-blue-600 dark:text-blue-400',
-    borderColor: 'border-blue-200 dark:border-blue-800/50',
+    color: 'from-red-500 to-rose-600',
+    bgLight: 'bg-red-50',
+    bgDark: 'dark:bg-red-900/20',
+    textColor: 'text-red-600 dark:text-red-400',
+    borderColor: 'border-red-200 dark:border-red-800/50',
     desc: '适合深度交流与社群互动'
   },
   xbt: {
     name: '小报童',
     icon: 'fas fa-newspaper',
-    color: 'from-orange-500 to-red-500',
-    bgLight: 'bg-orange-50',
-    bgDark: 'dark:bg-orange-900/20',
-    textColor: 'text-orange-600 dark:text-orange-400',
-    borderColor: 'border-orange-200 dark:border-orange-800/50',
+    color: 'from-amber-500 to-orange-600',
+    bgLight: 'bg-amber-50',
+    bgDark: 'dark:bg-amber-900/20',
+    textColor: 'text-amber-600 dark:text-amber-400',
+    borderColor: 'border-amber-200 dark:border-amber-800/50',
     desc: '适合专栏订阅与系统阅读'
   }
 }
