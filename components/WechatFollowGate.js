@@ -209,14 +209,6 @@ export const checkUnlocked = (slug) => {
 export const shouldEnableGate = (post, config) => {
   // 1. 检查全局开关
   const globalEnabled = siteConfig('WECHAT_GATE_ENABLE', false, config)
-  
-  if (typeof window !== 'undefined') {
-    console.warn('[WechatGate] shouldEnableGate:', {
-      globalEnabled,
-      postWechatGate: post?.wechat_gate,
-      slug: post?.slug
-    })
-  }
 
   // 2. 检查文章级别属性（优先级更高）
   // 如果文章明确设置了 wechat_gate 属性，以文章为准

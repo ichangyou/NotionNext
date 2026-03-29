@@ -275,14 +275,6 @@ const LayoutSlug = props => {
     if (!isBrowser || !post?.slug) return
 
     const isUnlocked = checkUnlocked(post?.slug)
-    console.warn('[WechatGate] 状态:', {
-      slug: post?.slug,
-      needsGate,
-      isSignedIn,
-      isUnlocked,
-      gateTriggered,
-      previewPercent
-    })
 
     if (!needsGate || isSignedIn || isUnlocked) {
       setWechatGated(false)
@@ -309,7 +301,6 @@ const LayoutSlug = props => {
         setWechatGated(true)
         setGateTriggered(true)
         window.removeEventListener('scroll', handleScroll)
-        console.warn('[WechatGate] 门控已触发, 进度:', Math.round(readProgress) + '%')
       }
     }
 
