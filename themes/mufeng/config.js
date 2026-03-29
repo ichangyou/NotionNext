@@ -27,6 +27,17 @@ const CONFIG = {
   SIMPLE_WECHAT_MP_NAME: process.env.NEXT_PUBLIC_WECHAT_MP_NAME || '沐风', // 公众号名称
   SIMPLE_WECHAT_MP_DESC: process.env.NEXT_PUBLIC_WECHAT_MP_DESC || '扫码关注，获取更多内容', // 公众号描述
 
+  // 微信公众号关注门控（解锁文章）
+  WECHAT_GATE_ENABLE: process.env.NEXT_PUBLIC_WECHAT_GATE_ENABLE === 'true' || true, // 总开关，默认关闭
+  WECHAT_GATE_CODE: process.env.NEXT_PUBLIC_WECHAT_GATE_CODE || '8686', // 验证码（公众号自动回复配置的）
+  WECHAT_GATE_KEYWORD: process.env.NEXT_PUBLIC_WECHAT_GATE_KEYWORD || '验证码', // 引导用户回复的关键词
+  WECHAT_GATE_VALIDITY_HOURS: parseInt(process.env.NEXT_PUBLIC_WECHAT_GATE_VALIDITY_HOURS) || 720, // 解锁有效时长（小时）
+  WECHAT_GATE_PREVIEW_PERCENT: parseInt(process.env.NEXT_PUBLIC_WECHAT_GATE_PREVIEW_PERCENT) || 70, // 允许阅读的百分比（滚动到此位置后触发门控）
+  WECHAT_GATE_TITLE: process.env.NEXT_PUBLIC_WECHAT_GATE_TITLE || '关注公众号，解锁全文', // 解锁卡片标题
+  WECHAT_GATE_DESC: process.env.NEXT_PUBLIC_WECHAT_GATE_DESC || '', // 解锁卡片描述（留空则自动生成）
+  WECHAT_GATE_YELLOW_LIST: process.env.NEXT_PUBLIC_WECHAT_GATE_YELLOW_LIST || '', // 黄名单：只有这些 slug 需要门控（逗号分隔）
+  WECHAT_GATE_WHITE_LIST: process.env.NEXT_PUBLIC_WECHAT_GATE_WHITE_LIST || '', // 白名单：这些 slug 免门控（逗号分隔）
+
   // 付费专栏推广
   SIMPLE_PAID_COLUMNS_ENABLE: process.env.NEXT_PUBLIC_PAID_COLUMNS_ENABLE || true, // 是否启用付费专栏
   SIMPLE_PAID_COLUMNS_TITLE: process.env.NEXT_PUBLIC_PAID_COLUMNS_TITLE || '深度内容，值得付费',

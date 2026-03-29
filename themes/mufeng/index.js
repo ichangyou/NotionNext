@@ -1,6 +1,7 @@
 import { AdSlot } from '@/components/GoogleAdsense'
 import replaceSearchResult from '@/components/Mark'
 import NotionPage from '@/components/NotionPage'
+import WechatFollowGate, { checkUnlocked, shouldEnableGate } from '@/components/WechatFollowGate'
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import { isBrowser } from '@/lib/utils'
@@ -8,7 +9,7 @@ import { Transition } from '@headlessui/react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { createContext, useContext, useEffect, useRef } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import BlogPostBar from './components/BlogPostBar'
 import CONFIG from './config'
 import { Style } from './style'
@@ -252,7 +253,80 @@ const LayoutArchive = props => {
  */
 const LayoutSlug = props => {
   const { post, lock, validPassword, prev, next, recommendPosts } = props
-  const { fullWidth } = useGlobal()
+  const { fullWidth, isSignedIn } = useGlobal()
+  const articleRef = useRef(null)
+
+  // 公众号关注门控状态
+  const needsGate = shouldEnableGate(post, CONFIG)
+  const [wechatGated, setWechatGated] = useState(false)
+  const [gateTriggered, setGateTriggered] = useState(false)
+  const [cutoffHeight, setCutoffHeight] = useState(null)
+  const previewPercent = siteConfig('WECHAT_GATE_PREVIEW_PERCENT', 70, CONFIG)
+
+  // 重置门控状态（当文章变化时）— 放在滚动监听之前，避免竞态
+  useEffect(() => {
+    setGateTriggered(false)
+    setWechatGated(false)
+    setCutoffHeight(null)
+  }, [post?.slug])
+
+  // 滚动监听：到达阅读百分比后触发门控
+  useEffect(() => {
+    if (!isBrowser || !post?.slug) return
+
+    const isUnlocked = checkUnlocked(post?.slug)
+    console.warn('[WechatGate] 状态:', {
+      slug: post?.slug,
+      needsGate,
+      isSignedIn,
+      isUnlocked,
+      gateTriggered,
+      previewPercent
+    })
+
+    if (!needsGate || isSignedIn || isUnlocked) {
+      setWechatGated(false)
+      return
+    }
+
+    if (gateTriggered) return
+
+    const handleScroll = () => {
+      const el = document.getElementById('article-wrapper')
+      if (!el) return
+
+      const rect = el.getBoundingClientRect()
+      const articleHeight = el.scrollHeight
+      if (articleHeight <= 0) return
+
+      // 视口底部已深入文章的距离
+      const readDistance = window.innerHeight - rect.top
+      const readProgress = (readDistance / articleHeight) * 100
+
+      if (readProgress >= previewPercent) {
+        const cutoff = (articleHeight * previewPercent) / 100
+        setCutoffHeight(cutoff)
+        setWechatGated(true)
+        setGateTriggered(true)
+        window.removeEventListener('scroll', handleScroll)
+        console.warn('[WechatGate] 门控已触发, 进度:', Math.round(readProgress) + '%')
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    // 延迟初始检查，等待 Notion 内容渲染完成
+    const timer = setTimeout(handleScroll, 1000)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      clearTimeout(timer)
+    }
+  }, [post?.slug, needsGate, isSignedIn, gateTriggered, previewPercent])
+
+  // 解锁回调
+  const handleUnlock = () => {
+    setWechatGated(false)
+  }
 
   return (
     <>
@@ -269,37 +343,60 @@ const LayoutSlug = props => {
             <AdSlot type={'in-article'} />
             <WWAds orientation='horizontal' className='w-full' />
 
-            <div id='article-wrapper'>
+            {/* 文章正文区域（可能被门控） */}
+            <div
+              id='article-wrapper'
+              ref={articleRef}
+              className='relative'
+              style={wechatGated && cutoffHeight ? {
+                maxHeight: `${cutoffHeight}px`,
+                overflow: 'hidden'
+              } : undefined}
+            >
               {/* Notion文章主体 */}
               {!lock && <NotionPage post={post} />}
+
+              {/* 公众号关注解锁遮罩 */}
+              {wechatGated && (
+                <WechatFollowGate
+                  post={post}
+                  config={CONFIG}
+                  onUnlock={handleUnlock}
+                />
+              )}
             </div>
 
-            {/* 分享 */}
-            <div className='focus-hide'>
-              <ShareBar post={post} />
-            </div>
+            {/* 以下内容在门控时隐藏 */}
+            {!wechatGated && (
+              <>
+                {/* 分享 */}
+                <div className='focus-hide'>
+                  <ShareBar post={post} />
+                </div>
 
-            {/* 打赏 */}
-            <div className='focus-hide'>
-              <RewardButton />
-            </div>
+                {/* 打赏 */}
+                <div className='focus-hide'>
+                  <RewardButton />
+                </div>
 
-            {/* 广告嵌入 */}
-            <div className='focus-hide'>
-              <AdSlot type={'in-article'} />
-            </div>
+                {/* 广告嵌入 */}
+                <div className='focus-hide'>
+                  <AdSlot type={'in-article'} />
+                </div>
 
-            {post?.type === 'Post' && (
-              <div className='focus-hide'>
-                <ArticleAround prev={prev} next={next} />
-                <RecommendPosts recommendPosts={recommendPosts} />
-              </div>
+                {post?.type === 'Post' && (
+                  <div className='focus-hide'>
+                    <ArticleAround prev={prev} next={next} />
+                    <RecommendPosts recommendPosts={recommendPosts} />
+                  </div>
+                )}
+
+                {/* 评论区 */}
+                <div className='focus-hide'>
+                  <Comment frontMatter={post} />
+                </div>
+              </>
             )}
-
-            {/* 评论区 */}
-            <div className='focus-hide'>
-              <Comment frontMatter={post} />
-            </div>
           </div>
 
           {/* 桌面端右侧目录 - 独立于内容流，悬浮在右侧 */}
