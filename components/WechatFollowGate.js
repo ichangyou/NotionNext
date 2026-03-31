@@ -44,16 +44,20 @@ const WechatFollowGate = ({ post, onUnlock, config }) => {
     // 模拟短暂延迟，提升体验
     setTimeout(() => {
       if (codes.includes(userCode)) {
-        // 验证成功，写入 localStorage
-        const storageKey = getStorageKey(post?.slug)
+        // 验证成功，写入 localStorage（同时写入全局和文章级别）
         const expiry = Date.now() + validityHours * 60 * 60 * 1000
-        
+        const unlockData = JSON.stringify({
+          unlocked: true,
+          timestamp: Date.now(),
+          expiry
+        })
+
         if (isBrowser) {
-          localStorage.setItem(storageKey, JSON.stringify({
-            unlocked: true,
-            timestamp: Date.now(),
-            expiry
-          }))
+          // 写入全局解锁记录，一次验证解锁所有文章
+          localStorage.setItem(GLOBAL_STORAGE_KEY, unlockData)
+          // 同时写入文章级别记录（兼容）
+          const storageKey = getStorageKey(post?.slug)
+          localStorage.setItem(storageKey, unlockData)
         }
 
         // 触发解锁回调
@@ -167,30 +171,26 @@ const WechatFollowGate = ({ post, onUnlock, config }) => {
 }
 
 /**
- * 生成 localStorage 存储的 key
+ * 全局解锁的 localStorage key（一次验证，所有文章通用）
+ */
+const GLOBAL_STORAGE_KEY = 'wechat_gate_global'
+
+/**
+ * 生成文章级 localStorage 存储的 key
  */
 export const getStorageKey = (slug) => {
   return `wechat_gate_${slug || 'global'}`
 }
 
 /**
- * 检查文章是否已解锁
- * @param {string} slug 文章 slug
- * @returns {boolean} 是否已解锁
+ * 检查某个 localStorage key 是否有未过期的解锁记录
  */
-export const checkUnlocked = (slug) => {
-  if (!isBrowser) return false
-
-  const storageKey = getStorageKey(slug)
-  const stored = localStorage.getItem(storageKey)
-
-  if (!stored) return false
-
+const checkStorageKey = (storageKey) => {
   try {
+    const stored = localStorage.getItem(storageKey)
+    if (!stored) return false
     const data = JSON.parse(stored)
-    // 检查是否过期
     if (data.expiry && Date.now() > data.expiry) {
-      // 已过期，清除存储
       localStorage.removeItem(storageKey)
       return false
     }
@@ -198,6 +198,20 @@ export const checkUnlocked = (slug) => {
   } catch {
     return false
   }
+}
+
+/**
+ * 检查文章是否已解锁
+ * 优先检查全局解锁记录，再检查文章级记录
+ * @param {string} slug 文章 slug
+ * @returns {boolean} 是否已解锁
+ */
+export const checkUnlocked = (slug) => {
+  if (!isBrowser) return false
+  // 先检查全局解锁（一次验证，全站通用）
+  if (checkStorageKey(GLOBAL_STORAGE_KEY)) return true
+  // 再检查文章级解锁
+  return checkStorageKey(getStorageKey(slug))
 }
 
 /**
@@ -209,14 +223,6 @@ export const checkUnlocked = (slug) => {
 export const shouldEnableGate = (post, config) => {
   // 1. 检查全局开关
   const globalEnabled = siteConfig('WECHAT_GATE_ENABLE', false, config)
-  
-  if (typeof window !== 'undefined') {
-    console.warn('[WechatGate] shouldEnableGate:', {
-      globalEnabled,
-      postWechatGate: post?.wechat_gate,
-      slug: post?.slug
-    })
-  }
 
   // 2. 检查文章级别属性（优先级更高）
   // 如果文章明确设置了 wechat_gate 属性，以文章为准
