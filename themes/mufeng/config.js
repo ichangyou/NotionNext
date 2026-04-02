@@ -28,7 +28,7 @@ const CONFIG = {
   SIMPLE_WECHAT_MP_DESC: process.env.NEXT_PUBLIC_WECHAT_MP_DESC || '扫码关注，获取更多内容', // 公众号描述
 
   // 微信公众号关注门控（解锁文章）
-  WECHAT_GATE_ENABLE: process.env.NEXT_PUBLIC_WECHAT_GATE_ENABLE === 'true' || true, // 总开关，默认关闭
+  WECHAT_GATE_ENABLE: process.env.NEXT_PUBLIC_WECHAT_GATE_ENABLE === 'true' || false, // 总开关，默认关闭
   WECHAT_GATE_CODE: process.env.NEXT_PUBLIC_WECHAT_GATE_CODE || '8686', // 验证码（公众号自动回复配置的）
   WECHAT_GATE_KEYWORD: process.env.NEXT_PUBLIC_WECHAT_GATE_KEYWORD || '验证码', // 引导用户回复的关键词
   WECHAT_GATE_VALIDITY_HOURS: parseInt(process.env.NEXT_PUBLIC_WECHAT_GATE_VALIDITY_HOURS) || 720, // 解锁有效时长（小时）
