@@ -107,6 +107,15 @@ const NotionPage = ({ post, className }) => {
     return null
   }
 
+  if (post?.blockMap?.block) {
+    Object.keys(post.blockMap.block).forEach(key => {
+      const b = post.blockMap.block[key]
+      if (b?.value && !b.value.id) {
+        b.value.id = key || 'fallback-id'
+      }
+    })
+  }
+
   return (
     <>
       <div
