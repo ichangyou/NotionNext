@@ -66,5 +66,13 @@
   "ai-spacex": {
     "count": 2,
     "lastUpdated": "2023-03-29T14:41:23.000Z"
+  },
+  "claudeignore": {
+    "count": 1,
+    "lastUpdated": "2023-04-02T15:15:06.000Z"
+  },
+  "remove-app-from-app-store": {
+    "count": 1,
+    "lastUpdated": "2023-04-02T15:24:02.000Z"
   }
 }
