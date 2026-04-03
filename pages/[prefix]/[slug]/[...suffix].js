@@ -60,7 +60,7 @@ export async function getStaticProps({
   // 在列表内查找文章
   props.post = props?.allPages?.find(p => {
     return (
-      p.type.indexOf('Menu') < 0 &&
+      (p.type || '').indexOf('Menu') < 0 &&
       (p.slug === suffix ||
         p.slug === fullSlug.substring(fullSlug.lastIndexOf('/') + 1) ||
         p.slug === fullSlug ||
@@ -70,7 +70,7 @@ export async function getStaticProps({
 
   // 处理非列表内文章的内信息
   if (!props?.post) {
-    const pageId = fullSlug.slice(-1)[0]
+    const pageId = fullSlug
     if (pageId.length >= 32) {
       const post = await getPost(pageId)
       props.post = post
