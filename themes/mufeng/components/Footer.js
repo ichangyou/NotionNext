@@ -43,6 +43,10 @@ export default function Footer(props) {
             <Link href='/' className='hover:text-gray-600 dark:hover:text-gray-300 transition-colors'>
               {siteConfig('TITLE')}
             </Link>
+            <span className='hidden sm:inline'>·</span>
+            <Link href='/privacy-policy' className='hover:text-gray-600 dark:hover:text-gray-300 transition-colors'>
+              {locale?.COMMON?.PRIVACY_POLICY || '隐私政策'}
+            </Link>
           </div>
           
           {/* 备案信息 */}
