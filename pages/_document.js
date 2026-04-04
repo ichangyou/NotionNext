@@ -12,6 +12,14 @@ class MyDocument extends Document {
     return (
       <Html lang={BLOG.LANG}>
         <Head>
+          {/* Google AdSense 验证 - 静态加载确保被Google爬虫检测到 */}
+          {BLOG.ADSENSE_GOOGLE_ID && (
+            <script
+              async
+              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${BLOG.ADSENSE_GOOGLE_ID}`}
+              crossOrigin='anonymous'
+            />
+          )}
           {/* 预加载字体 */}
           {BLOG.FONT_AWESOME && (
             <>
