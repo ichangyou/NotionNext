@@ -210,11 +210,133 @@ const Style = () => {
   }
 
   /* ======== 响应式优化 ======== */
-  
+
   @media (max-width: 1024px) {
     #container-wrapper {
       padding-left: 1rem;
       padding-right: 1rem;
+    }
+  }
+
+  /* ======== 移动端防横向溢出 ======== */
+
+  @media (max-width: 768px) {
+
+    /* 页面整体不横向溢出 */
+    #theme-simple {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    /* Notion 文章容器 */
+    #notion-article {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    /* Notion 页面内容区去掉 react-notion-x 自带的左右 padding */
+    .notion-page {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    .notion-page-content {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    /* ---- 表格：局部横滚，不污染页面 ---- */
+    #article-wrapper .notion-collection,
+    #article-wrapper .notion-table,
+    #article-wrapper .notion-collection-view-type-table {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      display: block;
+      max-width: 100%;
+    }
+
+    #article-wrapper .notion-table-view {
+      min-width: auto !important;
+    }
+
+    /* ---- 代码块：局部横滚 ---- */
+    #article-wrapper .code-toolbar {
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    #article-wrapper .notion-code {
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch;
+      white-space: pre;
+      font-size: 12px !important;
+    }
+
+    /* ---- 数学公式：局部横滚 ---- */
+    #article-wrapper .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* ---- 图片和嵌入媒体：强制不超宽 ---- */
+    #article-wrapper img,
+    #article-wrapper video {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+
+    #article-wrapper .notion-asset-wrapper,
+    #article-wrapper .notion-asset-wrapper-image {
+      max-width: 100% !important;
+    }
+
+    #article-wrapper iframe,
+    #article-wrapper .notion-embed {
+      max-width: 100% !important;
+    }
+
+    /* ---- 标题字号：移动端缩小 ---- */
+    #article-wrapper .notion-h1 {
+      font-size: 1.35rem;
+    }
+
+    #article-wrapper .notion-h2 {
+      font-size: 1.15rem;
+    }
+
+    #article-wrapper .notion-h3 {
+      font-size: 1rem;
+    }
+
+    /* ---- 文章主标题 ---- */
+    .blog-item-title {
+      font-size: 1.25rem !important;
+      line-height: 1.4;
+    }
+
+    /* ---- 行内代码字号 ---- */
+    #article-wrapper .notion-inline-code {
+      font-size: 0.8em;
+      word-break: break-all;
+    }
+
+    /* ---- 引用块缩进收窄 ---- */
+    #article-wrapper .notion-quote {
+      padding-left: 0.8em;
+      padding-right: 0.8em;
+    }
+
+    /* ---- 文章内容行高放宽，提升可读性 ---- */
+    #article-wrapper .notion-text {
+      line-height: 1.85;
+    }
+
+    /* ---- 目录浮动按钮位置避开底部安全区 ---- */
+    .floating-toc-btn {
+      bottom: calc(1rem + env(safe-area-inset-bottom));
     }
   }
 
