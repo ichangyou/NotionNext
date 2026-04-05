@@ -162,6 +162,36 @@ const SEO = props => {
           <meta property='article:author' content={AUTHOR} />
           <meta property='article:section' content={category} />
           <meta property='article:publisher' content={FACEBOOK_PAGE} />
+          <script
+            type='application/ld+json'
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'BlogPosting',
+                headline: title,
+                description: description,
+                image: image,
+                url: url,
+                datePublished: meta.publishDay,
+                dateModified: post?.lastEditedDay || meta.publishDay,
+                author: {
+                  '@type': 'Person',
+                  name: AUTHOR
+                },
+                publisher: {
+                  '@type': 'Organization',
+                  name: AUTHOR,
+                  logo: {
+                    '@type': 'ImageObject',
+                    url: favicon
+                  }
+                },
+                keywords: keywords,
+                articleSection: category,
+                inLanguage: siteConfig('LANG')
+              })
+            }}
+          />
         </>
       )}
       {children}
