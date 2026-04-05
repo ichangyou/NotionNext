@@ -437,6 +437,15 @@ const Style = () => {
     transition: opacity 0.3s ease;
   }
 
+  /* 右侧目录面板在专注模式下隐藏 */
+  #theme-simple.focus-mode #toc-sidebar {
+    display: none;
+  }
+
+  #toc-sidebar {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   /* ======== 边框颜色优化 ======== */
 
   .dark .border-gray-800\/50 {
