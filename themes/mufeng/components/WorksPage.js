@@ -70,15 +70,17 @@ function AppHeroCard({ app }) {
           </div>
 
           {/* App 图标 */}
-          <div className='w-20 h-20 rounded-2xl overflow-hidden shadow-md border border-gray-100 dark:border-gray-700 flex-shrink-0'>
-            <LazyImage
-              src={app.icon}
-              className='w-full h-full object-cover'
-              width={80}
-              height={80}
-              alt={app.name}
-            />
-          </div>
+          {app.icon && (
+            <div className='w-20 h-20 rounded-2xl overflow-hidden shadow-md border border-gray-100 dark:border-gray-700 flex-shrink-0'>
+              <LazyImage
+                src={app.icon}
+                className='w-full h-full object-cover'
+                width={80}
+                height={80}
+                alt={app.name}
+              />
+            </div>
+          )}
 
           {/* 名称 */}
           <h2 className='text-2xl font-bold text-gray-900 dark:text-white mt-4'>
@@ -114,7 +116,7 @@ function AppHeroCard({ app }) {
                   rel='noopener noreferrer'
                   className='inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-medium hover:opacity-85 transition-opacity duration-200'
                 >
-                  <i className='fab fa-apple text-base' />
+                  <i className={`${platform.icon} text-base`} />
                   🇨🇳 中国区下载
                 </a>
               )}
@@ -125,7 +127,7 @@ function AppHeroCard({ app }) {
                   rel='noopener noreferrer'
                   className='inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200'
                 >
-                  <i className='fab fa-apple text-base' />
+                  <i className={`${platform.icon} text-base`} />
                   🇺🇸 美区下载
                 </a>
               )}
@@ -195,18 +197,20 @@ function AppNavGrid({ works }) {
         return (
           <a
             key={app.id}
-            href={`#${app.id}`}
+            href={app.id ? `#${app.id}` : undefined}
             className='flex items-center gap-3 p-3 rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200'
           >
-            <div className='w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100 dark:border-gray-700'>
-              <LazyImage
-                src={app.icon}
-                className='w-full h-full object-cover'
-                width={40}
-                height={40}
-                alt={app.name}
-              />
-            </div>
+            {app.icon && (
+              <div className='w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100 dark:border-gray-700'>
+                <LazyImage
+                  src={app.icon}
+                  className='w-full h-full object-cover'
+                  width={40}
+                  height={40}
+                  alt={app.name}
+                />
+              </div>
+            )}
             <div className='min-w-0'>
               <p className='text-sm font-medium text-gray-800 dark:text-gray-200 truncate'>{app.name}</p>
               <span className={`text-[10px] ${platform.textColor}`}>{platform.label}</span>
@@ -228,7 +232,7 @@ export default function WorksPage() {
 
   let works = []
   try {
-    works = typeof worksRaw === 'string' ? JSON.parse(worksRaw) : worksRaw
+    works = (typeof worksRaw === 'string' ? JSON.parse(worksRaw) : worksRaw) || []
   } catch {
     works = []
   }
@@ -249,11 +253,15 @@ export default function WorksPage() {
       <AppNavGrid works={works} />
 
       {/* App Hero 卡片列表 */}
-      <div className='flex flex-col gap-8'>
-        {works.map((app, i) => (
-          <AppHeroCard key={app.id || i} app={app} />
-        ))}
-      </div>
+      {works.length === 0 ? (
+        <p className='text-sm text-gray-400 dark:text-gray-500'>暂无作品</p>
+      ) : (
+        <div className='flex flex-col gap-8'>
+          {works.map((app, i) => (
+            <AppHeroCard key={app.id || i} app={app} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
