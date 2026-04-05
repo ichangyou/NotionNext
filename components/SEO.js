@@ -102,6 +102,7 @@ const SEO = props => {
     <Head>
       <link rel='icon' href={favicon} />
       <title>{title}</title>
+      {router.route !== '/404' && <link rel='canonical' href={url} />}
       <meta name='theme-color' content={BACKGROUND_DARK} />
       <meta
         name='viewport'
