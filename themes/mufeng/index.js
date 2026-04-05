@@ -82,6 +82,9 @@ const WorksPage = dynamic(() => import('./components/WorksPage'), {
 const ThemeGlobalSimple = createContext()
 export const useSimpleGlobal = () => useContext(ThemeGlobalSimple)
 
+// 右侧 TOC 插槽 context（LayoutSlug 注入，LayoutBase 渲染）
+const TocSlotContext = createContext({ slotRight: null, setSlotRight: () => {} })
+
 /**
  * 基础布局
  * 参考设计：左侧固定边栏 + 右侧内容区
@@ -93,85 +96,102 @@ const LayoutBase = props => {
   const { children, slotTop, hidePageTitle, pageTitle, pageDescription } = props
   const { onLoading, fullWidth } = useGlobal()
   const searchModal = useRef(null)
+  const [slotRight, setSlotRight] = useState(null)
 
   return (
     <ThemeGlobalSimple.Provider value={{ searchModal }}>
-      <div
-        id='theme-simple'
-        className={`${siteConfig('FONT_STYLE')} min-h-screen flex dark:text-gray-300 bg-white dark:bg-[#0d0d0d] scroll-smooth`}>
-        <Style />
+      <TocSlotContext.Provider value={{ slotRight, setSlotRight }}>
+        <div
+          id='theme-simple'
+          className={`${siteConfig('FONT_STYLE')} min-h-screen flex dark:text-gray-300 bg-white dark:bg-[#0d0d0d] scroll-smooth`}>
+          <Style />
 
-        {/* 左侧固定边栏 */}
-        <aside className='hidden lg:flex flex-col w-[280px] min-w-[280px] h-screen sticky top-0 border-r border-gray-100 dark:border-gray-800/50'>
-          <LeftSidebar {...props} />
-        </aside>
+          {/* 左侧固定边栏 */}
+          <aside className='hidden lg:flex flex-col w-[280px] min-w-[280px] h-screen sticky top-0 border-r border-gray-100 dark:border-gray-800/50'>
+            <LeftSidebar {...props} />
+          </aside>
 
-        {/* 右侧主内容区 */}
-        <main className='flex-1 min-h-screen flex flex-col'>
-          {/* 顶部加载进度条 */}
-          {onLoading && (
-            <div className='fixed top-0 left-0 right-0 z-50'>
-              <div className='h-[2px] bg-red-500/80 loading-progress-bar' />
-            </div>
-          )}
-
-          {/* 移动端顶部导航 */}
-          <div className='lg:hidden'>
-            <NavBar {...props} />
-          </div>
-
-          {/* 内容区域 */}
-          <div
-            id='container-wrapper'
-            className='flex-1 w-full max-w-4xl px-4 md:px-8 lg:pl-16 lg:pr-8 pt-6 pb-3 md:py-10 overflow-x-hidden'>
-
-            {/* 加载状态占位 */}
+          {/* 右侧主内容区 */}
+          <main className='flex-1 min-h-screen flex flex-col'>
+            {/* 顶部加载进度条 */}
             {onLoading && (
-              <div className='flex items-center justify-center py-32'>
-                <div className='flex flex-col items-center gap-3'>
-                  <i className='fas fa-circle-notch animate-spin text-xl text-gray-300 dark:text-gray-600' />
-                </div>
+              <div className='fixed top-0 left-0 right-0 z-50'>
+                <div className='h-[2px] bg-red-500/80 loading-progress-bar' />
               </div>
             )}
 
-            <Transition
-              show={!onLoading}
-              appear={true}
-              enter='transition ease-in-out duration-500 transform order-first'
-              enterFrom='opacity-0 translate-y-8'
-              enterTo='opacity-100'
-              leave='transition ease-in-out duration-300 transform'
-              leaveFrom='opacity-100 translate-y-0'
-              leaveTo='opacity-0 -translate-y-8'
-              unmount={false}>
-
-              {/* 页面标题 */}
-              {!hidePageTitle && <PageTitle title={pageTitle} description={pageDescription} />}
-
-              {slotTop}
-
-              {children}
-            </Transition>
-
-            {/* 原生广告：移动端隐藏，autorelaxed 在小屏幕上产生大量空白 */}
-            <div className='hidden md:block'>
-              <AdSlot type='native' />
+            {/* 移动端顶部导航 */}
+            <div className='lg:hidden'>
+              <NavBar {...props} />
             </div>
+
+            {/* 内容行：文章 + 右侧目录（items-stretch 让 aside 撑满高度，保证 sticky 生效） */}
+            <div className='flex flex-1'>
+              {/* 主内容区域 */}
+              <div
+                id='container-wrapper'
+                className='flex-1 min-w-0 max-w-4xl px-4 md:px-8 lg:pl-16 lg:pr-8 pt-6 pb-3 md:py-10 overflow-x-hidden'>
+
+                {/* 加载状态占位 */}
+                {onLoading && (
+                  <div className='flex items-center justify-center py-32'>
+                    <div className='flex flex-col items-center gap-3'>
+                      <i className='fas fa-circle-notch animate-spin text-xl text-gray-300 dark:text-gray-600' />
+                    </div>
+                  </div>
+                )}
+
+                <Transition
+                  show={!onLoading}
+                  appear={true}
+                  enter='transition ease-in-out duration-500 transform order-first'
+                  enterFrom='opacity-0 translate-y-8'
+                  enterTo='opacity-100'
+                  leave='transition ease-in-out duration-300 transform'
+                  leaveFrom='opacity-100 translate-y-0'
+                  leaveTo='opacity-0 -translate-y-8'
+                  unmount={false}>
+
+                  {/* 页面标题 */}
+                  {!hidePageTitle && <PageTitle title={pageTitle} description={pageDescription} />}
+
+                  {slotTop}
+
+                  {children}
+                </Transition>
+
+                {/* 原生广告：移动端隐藏，autorelaxed 在小屏幕上产生大量空白 */}
+                <div className='hidden md:block'>
+                  <AdSlot type='native' />
+                </div>
+              </div>
+
+              {/* 右侧目录面板（xl 以上显示，内容由 LayoutSlug 注入） */}
+              {slotRight && (
+                <aside
+                  id='toc-sidebar'
+                  className='hidden xl:block shrink-0 w-52 2xl:w-60 pt-10 pr-6 pl-1'>
+                  <div className='sticky top-20'>
+                    {slotRight}
+                  </div>
+                </aside>
+              )}
+            </div>
+
+            {/* 页脚（包含卜算子统计） */}
+            <Footer {...props} />
+          </main>
+
+          {/* 右下角固定按钮组 */}
+          <div className='fixed right-4 bottom-4 z-20 flex flex-col gap-2'>
+            <DarkModeButton className='w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full shadow-lg hover:shadow-xl text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-all duration-200' />
+            <JumpToTopButton />
           </div>
 
-          {/* 页脚（包含卜算子统计） */}
-          <Footer {...props} />
-        </main>
-
-        {/* 右下角固定按钮组 */}
-        <div className='fixed right-4 bottom-4 z-20 flex flex-col gap-2'>
-          <DarkModeButton className='w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full shadow-lg hover:shadow-xl text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-all duration-200' />
-          <JumpToTopButton />
+          {/* 搜索框 */}
+          <AlgoliaSearchModal cRef={searchModal} {...props} />
         </div>
-
-        {/* 搜索框 */}
-        <AlgoliaSearchModal cRef={searchModal} {...props} />
-      </div>
+      </TocSlotContext.Provider>
     </ThemeGlobalSimple.Provider>
   )
 }
@@ -260,7 +280,18 @@ const LayoutArchive = props => {
 const LayoutSlug = props => {
   const { post, lock, validPassword, prev, next, recommendPosts } = props
   const { fullWidth, isSignedIn } = useGlobal()
+  const { setSlotRight } = useContext(TocSlotContext)
   const articleRef = useRef(null)
+
+  // 将目录注入到 LayoutBase 的右侧插槽
+  useEffect(() => {
+    if (post?.toc?.length > 0) {
+      setSlotRight(<Catalog post={post} />)
+    } else {
+      setSlotRight(null)
+    }
+    return () => setSlotRight(null)
+  }, [post])
 
   // 公众号关注门控状态
   const needsGate = shouldEnableGate(post, CONFIG)
@@ -396,19 +427,8 @@ const LayoutSlug = props => {
             )}
           </div>
 
-          {/* 桌面端右侧目录 - 独立于内容流，悬浮在右侧 */}
-          {post?.toc?.length > 0 && (
-            <div className='hidden xl:block absolute top-0 bottom-0 right-0 translate-x-[calc(100%+1.5rem)] w-56 2xl:w-64'>
-              <div className='sticky top-20'>
-                <Catalog post={post} />
-              </div>
-            </div>
-          )}
-
           {/* 移动端浮动目录按钮 */}
-          {post?.toc?.length > 0 && (
-            <FloatTocButton post={post} />
-          )}
+          <FloatTocButton post={post} />
         </div>
       )}
     </>

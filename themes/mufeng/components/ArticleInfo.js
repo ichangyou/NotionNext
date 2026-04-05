@@ -54,35 +54,14 @@ export default function ArticleInfo (props) {
     <section className="mt-2 mb-3 md:mb-5 text-gray-500 dark:text-gray-400 leading-tight">
       {/* 顶部操作栏：面包屑返回 + 专注模式 */}
       <div className='flex items-center justify-between mb-5'>
-        {/* 面包屑：分类 → 当前文章 */}
-        <nav className='flex items-center gap-1.5 text-[13px] text-gray-400 dark:text-gray-500'>
-          {post?.category ? (
-            <>
-              <Link
-                href='/category'
-                className='hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300'
-              >
-                分类
-              </Link>
-              <span className='text-gray-300 dark:text-gray-600 select-none'>/</span>
-              <Link
-                href={`/category/${encodeURIComponent(post.category)}`}
-                className='group flex items-center hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300'
-              >
-                <i className='fas fa-arrow-left text-[10px] mr-1 transition-transform duration-300 group-hover:-translate-x-0.5 opacity-0 group-hover:opacity-100' />
-                {post.category}
-              </Link>
-            </>
-          ) : (
-            <button
-              onClick={handleBack}
-              className='group flex items-center hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300'
-            >
-              <i className='fas fa-arrow-left text-xs mr-2 transition-transform duration-300 group-hover:-translate-x-1' />
-              返回
-            </button>
-          )}
-        </nav>
+        {/* 返回按钮：始终使用 router.back() 回到来源页（首页/分类页等） */}
+        <button
+          onClick={handleBack}
+          className='group flex items-center text-[13px] text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300'
+        >
+          <i className='fas fa-arrow-left text-xs mr-2 transition-transform duration-300 group-hover:-translate-x-1' />
+          返回
+        </button>
 
         {post?.type !== 'Page' && (
           <button
