@@ -74,6 +74,9 @@ const RewardButton = dynamic(() => import('./components/RewardButton'), {
 const PaidColumnsPage = dynamic(() => import('./components/PaidColumnsPage'), {
   ssr: false
 })
+const WorksPage = dynamic(() => import('./components/WorksPage'), {
+  ssr: false
+})
 
 // 主题全局状态
 const ThemeGlobalSimple = createContext()
@@ -449,6 +452,13 @@ const LayoutPaidColumns = props => {
 }
 
 /**
+ * 作品展示页
+ */
+const LayoutWorks = props => {
+  return <WorksPage />
+}
+
+/**
  * 分类列表
  * @param {*} props
  * @returns
@@ -519,5 +529,6 @@ export {
   LayoutSearch,
   LayoutSlug,
   LayoutTagIndex,
+  LayoutWorks,
   CONFIG as THEME_CONFIG
 }
