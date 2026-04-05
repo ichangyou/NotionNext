@@ -74,6 +74,9 @@ const RewardButton = dynamic(() => import('./components/RewardButton'), {
 const PaidColumnsPage = dynamic(() => import('./components/PaidColumnsPage'), {
   ssr: false
 })
+const WorksPage = dynamic(() => import('./components/WorksPage'), {
+  ssr: false
+})
 
 // 主题全局状态
 const ThemeGlobalSimple = createContext()
@@ -120,7 +123,7 @@ const LayoutBase = props => {
           {/* 内容区域 */}
           <div
             id='container-wrapper'
-            className='flex-1 w-full max-w-4xl px-4 md:px-8 lg:pl-16 lg:pr-8 pt-6 pb-3 md:py-10'>
+            className='flex-1 w-full max-w-4xl px-4 md:px-8 lg:pl-16 lg:pr-8 pt-6 pb-3 md:py-10 overflow-x-hidden'>
 
             {/* 加载状态占位 */}
             {onLoading && (
@@ -150,7 +153,10 @@ const LayoutBase = props => {
               {children}
             </Transition>
 
-            <AdSlot type='native' />
+            {/* 原生广告：移动端隐藏，autorelaxed 在小屏幕上产生大量空白 */}
+            <div className='hidden md:block'>
+              <AdSlot type='native' />
+            </div>
           </div>
 
           {/* 页脚（包含卜算子统计） */}
@@ -449,6 +455,13 @@ const LayoutPaidColumns = props => {
 }
 
 /**
+ * 作品展示页
+ */
+const LayoutWorks = props => {
+  return <WorksPage />
+}
+
+/**
  * 分类列表
  * @param {*} props
  * @returns
@@ -519,5 +532,6 @@ export {
   LayoutSearch,
   LayoutSlug,
   LayoutTagIndex,
+  LayoutWorks,
   CONFIG as THEME_CONFIG
 }

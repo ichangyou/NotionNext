@@ -95,6 +95,12 @@ export default function LeftSidebar(props) {
       show: siteConfig('SIMPLE_MENU_TAG', null, CONFIG)
     },
     {
+      icon: 'fas fa-rocket',
+      name: '我的作品',
+      href: '/works',
+      show: siteConfig('SIMPLE_MENU_WORKS', null, CONFIG)
+    },
+    {
       icon: 'fas fa-crown',
       name: '付费专栏',
       href: '/membership',
@@ -110,6 +116,19 @@ export default function LeftSidebar(props) {
   // 如果开启自定义菜单，则覆盖
   if (siteConfig('CUSTOM_MENU')) {
     menuLinks = customMenu
+  }
+
+  // 无论是否自定义菜单，都追加作品展示入口
+  if (siteConfig('SIMPLE_MENU_WORKS', null, CONFIG)) {
+    const hasWorks = menuLinks?.some(link => link.href === '/works')
+    if (!hasWorks) {
+      menuLinks = [...(menuLinks || []), {
+        icon: 'fas fa-rocket',
+        name: '我的作品',
+        href: '/works',
+        show: true
+      }]
+    }
   }
 
   // 无论是否自定义菜单，都追加付费专栏入口

@@ -60,6 +60,12 @@ export const MenuList = ({ customNav, customMenu }) => {
       name: locale.COMMON.TAGS,
       href: '/tag',
       show: siteConfig('SIMPLE_MENU_TAG', null, CONFIG)
+    },
+    {
+      icon: 'fas fa-rocket',
+      name: '我的作品',
+      href: '/works',
+      show: siteConfig('SIMPLE_MENU_WORKS', null, CONFIG)
     }
   ]
 

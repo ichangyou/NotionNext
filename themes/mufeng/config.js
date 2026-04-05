@@ -106,6 +106,36 @@ const CONFIG = {
   ]),
 
   // 文章列表配置
-  POST_LIST_PREVIEW: process.env.NEXT_PUBLIC_POST_LIST_PREVIEW || false // 是否显示文章预览（简洁列表默认关闭）
+  POST_LIST_PREVIEW: process.env.NEXT_PUBLIC_POST_LIST_PREVIEW || false, // 是否显示文章预览（简洁列表默认关闭）
+
+  // 作品展示页
+  SIMPLE_MENU_WORKS: true, // 导航菜单显示「我的作品」
+  SIMPLE_WORKS_TITLE: process.env.NEXT_PUBLIC_WORKS_TITLE || '我的作品',
+  SIMPLE_WORKS_DESC: process.env.NEXT_PUBLIC_WORKS_DESC || '独立构建的 App，从想法到上架的完整旅程。',
+  SIMPLE_WORKS: process.env.NEXT_PUBLIC_WORKS || JSON.stringify([
+    {
+      id: 'jingnote',
+      name: '鲸海语记',
+      platform: 'ios',
+      status: 'live',
+      icon: '/works/jingnote/icon.png',
+      screenshots: [
+        '/works/jingnote/s1.png',
+        '/works/jingnote/s2.png',
+        '/works/jingnote/s3.png'
+      ],
+      slogan: '说出来，记下来',
+      features: [
+        '实时语音识别，边说边转',
+        '支持普通话、英语等多语言',
+        '转写结果一键复制、分享或导出',
+        '简洁界面，专注记录本身'
+      ],
+      links: {
+        cn: 'https://apps.apple.com/cn/app/%E9%B2%B8%E6%B5%B7%E8%AF%AD%E8%AE%B0/id6759850635',
+        us: 'https://apps.apple.com/us/app/jingnote/id6759850635'
+      }
+    }
+  ])
 }
 export default CONFIG

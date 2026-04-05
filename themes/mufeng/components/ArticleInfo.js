@@ -52,15 +52,37 @@ export default function ArticleInfo (props) {
 
   return (
     <section className="mt-2 mb-3 md:mb-5 text-gray-500 dark:text-gray-400 leading-tight">
-      {/* 顶部操作栏：返回 + 专注模式 */}
+      {/* 顶部操作栏：面包屑返回 + 专注模式 */}
       <div className='flex items-center justify-between mb-5'>
-        <button
-          onClick={handleBack}
-          className='group flex items-center text-[13px] text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300'
-        >
-          <i className='fas fa-arrow-left text-xs mr-2 transition-transform duration-300 group-hover:-translate-x-1' />
-          返回
-        </button>
+        {/* 面包屑：分类 → 当前文章 */}
+        <nav className='flex items-center gap-1.5 text-[13px] text-gray-400 dark:text-gray-500'>
+          {post?.category ? (
+            <>
+              <Link
+                href='/category'
+                className='hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300'
+              >
+                分类
+              </Link>
+              <span className='text-gray-300 dark:text-gray-600 select-none'>/</span>
+              <Link
+                href={`/category/${encodeURIComponent(post.category)}`}
+                className='group flex items-center hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300'
+              >
+                <i className='fas fa-arrow-left text-[10px] mr-1 transition-transform duration-300 group-hover:-translate-x-0.5 opacity-0 group-hover:opacity-100' />
+                {post.category}
+              </Link>
+            </>
+          ) : (
+            <button
+              onClick={handleBack}
+              className='group flex items-center hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300'
+            >
+              <i className='fas fa-arrow-left text-xs mr-2 transition-transform duration-300 group-hover:-translate-x-1' />
+              返回
+            </button>
+          )}
+        </nav>
 
         {post?.type !== 'Page' && (
           <button
@@ -81,38 +103,40 @@ export default function ArticleInfo (props) {
       {post?.type !== 'Page' && (
         <>
           {/* 文章信息 - 与博客列表项保持一致的样式 */}
-          <header className='mb-3 md:mb-5 flex flex-wrap items-center text-sm text-gray-500 dark:text-gray-400 leading-tight'>
-            <div className='flex items-center space-x-3'>
+          <header className='mb-3 md:mb-5 flex flex-col gap-2 text-sm text-gray-500 dark:text-gray-400 leading-tight'>
+            {/* 第一行：作者、日期、评论、阅读量 */}
+            <div className='flex flex-wrap items-center gap-x-3 gap-y-1'>
               <Link
                 href={siteConfig('SIMPLE_AUTHOR_LINK', null, CONFIG)}
                 className='flex items-center hover:text-red-400 transition-all duration-200'>
                 <i className='fas fa-user-edit mr-1'></i> {siteConfig('AUTHOR')}
               </Link>
-              
-              <span className='w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full'></span>
-              
+
+              <span className='w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full flex-shrink-0'></span>
+
               <Link
                 className='flex items-center hover:text-red-400 transition-all duration-200'
                 href={`/archive#${formatDateFmt(post?.publishDate, 'yyyy-MM')}`}>
                 <i className='fas fa-calendar-alt mr-1' />{' '}
                 {post?.publishDay}
               </Link>
-              
-              <span className='w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full'></span>
-              
+
+              <span className='w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full flex-shrink-0'></span>
+
               <span className='flex items-center'>
                 <TwikooCommentCount post={post} />
               </span>
-              
-              <span className='w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full'></span>
-              
+
+              <span className='w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full flex-shrink-0'></span>
+
               <RealTimeViewCount post={post} simple={true} />
             </div>
 
-            <div className='flex items-center mt-2 md:mt-0 md:ml-3 focus-hide'>
+            {/* 第二行：分类和标签 */}
+            <div className='flex flex-wrap items-center gap-2 focus-hide'>
               {post?.category && (
-                <Link 
-                  href={`/category/${post?.category}`} 
+                <Link
+                  href={`/category/${post?.category}`}
                   className='flex items-center text-xs bg-gray-100 dark:bg-gray-800 hover:bg-red-50 dark:hover:bg-gray-700 px-2 py-1 rounded-md hover:text-red-400 transition-all duration-200'>
                   <i className='fas fa-folder-open mr-1'></i>
                   {post?.category}
@@ -124,7 +148,7 @@ export default function ArticleInfo (props) {
                   <Link
                     key={t}
                     href={`/tag/${t}`}
-                    className='ml-2 flex items-center text-xs bg-gray-100 dark:bg-gray-800 hover:bg-red-50 dark:hover:bg-gray-700 px-2 py-1 rounded-md hover:text-red-400 transition-all duration-200'>
+                    className='flex items-center text-xs bg-gray-100 dark:bg-gray-800 hover:bg-red-50 dark:hover:bg-gray-700 px-2 py-1 rounded-md hover:text-red-400 transition-all duration-200'>
                     <i className='fas fa-tag mr-1'></i> {t}
                   </Link>
                 ))}
