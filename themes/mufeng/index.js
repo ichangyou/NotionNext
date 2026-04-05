@@ -153,7 +153,10 @@ const LayoutBase = props => {
               {children}
             </Transition>
 
-            <AdSlot type='native' />
+            {/* 原生广告：移动端隐藏，autorelaxed 在小屏幕上产生大量空白 */}
+            <div className='hidden md:block'>
+              <AdSlot type='native' />
+            </div>
           </div>
 
           {/* 页脚（包含卜算子统计） */}
