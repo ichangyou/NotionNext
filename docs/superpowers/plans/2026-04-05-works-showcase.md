@@ -95,7 +95,7 @@ Add after the last existing config key (after `POST_LIST_PREVIEW`):
         '/works/jingnote/s2.png',
         '/works/jingnote/s3.png'
       ],
-      slogan: '想说就说，鲸海语记帮你记下每一句。',
+      slogan: '说出来，记下来',
       features: [
         '实时语音识别，边说边转',
         '支持普通话、英语等多语言',

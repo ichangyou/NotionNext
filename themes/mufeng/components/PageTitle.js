@@ -2,6 +2,7 @@ import { siteConfig } from '@/lib/config'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import CONFIG from '../config'
+import Breadcrumb from './Breadcrumb'
 
 /**
  * 页面标题组件
@@ -55,8 +56,12 @@ export default function PageTitle({ title, description }) {
   // 文章详情页不显示 PageTitle
   if (!displayTitle) return null
 
+  // 归档页显示面包屑；分类/标签页由 BlogPostBar 自带面包屑，无需重复
+  const showBreadcrumb = path.startsWith('/archive')
+
   return (
     <div className='mb-8'>
+      {showBreadcrumb && <Breadcrumb />}
       <div className='flex items-center justify-between'>
         <h1 className='text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3'>
           {displayTitle}
