@@ -125,8 +125,8 @@ const LayoutBase = props => {
               <NavBar {...props} />
             </div>
 
-            {/* 内容行：文章 + 右侧目录 */}
-            <div className='flex flex-1 items-start'>
+            {/* 内容行：文章 + 右侧目录（items-stretch 让 aside 撑满高度，保证 sticky 生效） */}
+            <div className='flex flex-1'>
               {/* 主内容区域 */}
               <div
                 id='container-wrapper'
