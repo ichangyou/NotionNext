@@ -45,9 +45,6 @@ function AppHeroCard({ app }) {
       id={app.id}
       className={`rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 overflow-hidden transition-all duration-300 ${isComingSoon ? 'opacity-60' : ''}`}
     >
-      {/* 顶部平台色条 */}
-      <div className={`h-1 bg-gradient-to-r ${platform.color}`} />
-
       <div className='flex flex-col md:flex-row'>
         {/* 左栏：文字信息 */}
         <div className='flex-1 p-6 md:p-8 flex flex-col'>
