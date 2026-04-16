@@ -1,5 +1,6 @@
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
+import { isNoIndexPost } from '@/lib/utils/content-indexing'
 import { loadExternalResource } from '@/lib/utils'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -98,17 +99,27 @@ const SEO = props => {
   const FACEBOOK_PAGE = siteConfig('FACEBOOK_PAGE', null, NOTION_CONFIG)
 
   const AUTHOR = siteConfig('AUTHOR')
+  const isNoIndexRoute =
+    router.route === '/404' ||
+    router.route === '/search' ||
+    router.route === '/search/[keyword]' ||
+    router.route === '/search/[keyword]/page/[page]'
+  const isNoIndexPage = isNoIndexRoute || isNoIndexPost(post)
+  const robotsContent = isNoIndexPage ? 'noindex, nofollow' : 'follow, index'
+
   return (
     <Head>
       <link rel='icon' href={favicon} />
       <title>{title}</title>
-      {router.route !== '/404' && <link rel='canonical' href={url} />}
+      {!isNoIndexPage && router.route !== '/404' && (
+        <link rel='canonical' href={url} />
+      )}
       <meta name='theme-color' content={BACKGROUND_DARK} />
       <meta
         name='viewport'
         content='width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0'
       />
-      <meta name='robots' content='follow, index' />
+      <meta name='robots' content={robotsContent} />
       <meta charSet='UTF-8' />
       {SEO_GOOGLE_SITE_VERIFICATION && (
         <meta

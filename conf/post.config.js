@@ -31,6 +31,17 @@ module.exports = {
   POST_WAITING_TIME_FOR_404:
     process.env.NEXT_PUBLIC_POST_WAITING_TIME_FOR_404 || '8', // 文章加载超时时间，单位秒；超时后跳转到404页面
 
+  // 内容索引过滤：逗号分隔 slug 或路径片段。命中后将从 sitemap 剔除，并在页面上输出 noindex。
+  CONTENT_EXCLUDE_SLUGS:
+    process.env.NEXT_PUBLIC_CONTENT_EXCLUDE_SLUGS || 'guide,example-1,example-2',
+  // 命中内容排除列表后的默认 301 跳转目标。支持站内路径（如 / 或 /about）。
+  CONTENT_REDIRECT_DEFAULT:
+    process.env.NEXT_PUBLIC_CONTENT_REDIRECT_DEFAULT || '/',
+  // 命中内容排除列表后的精确跳转规则（JSON 字符串）。
+  // 例：{"guide":"/about","example-1":"/article/your-real-post"}
+  CONTENT_REDIRECT_RULES:
+    process.env.NEXT_PUBLIC_CONTENT_REDIRECT_RULES || '{}',
+
   // 标签相关
   TAG_SORT_BY_COUNT: true, // 标签是否按照文章数量倒序排列，文章多的标签排在前。
   IS_TAG_COLOR_DISTINGUISHED:
