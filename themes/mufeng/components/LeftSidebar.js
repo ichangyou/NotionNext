@@ -7,6 +7,10 @@ import { useRef, useState } from 'react'
 import CONFIG from '../config'
 import SocialButton from './SocialButton'
 import BLOG from '@/blog.config'
+import {
+  flattenNavigationForSidebar,
+  sanitizeNavigationLinks
+} from '@/lib/utils/navigation'
 
 /**
  * 侧边栏搜索框
@@ -144,8 +148,15 @@ export default function LeftSidebar(props) {
     }
   }
 
+  const safeMenuLinks = flattenNavigationForSidebar(
+    sanitizeNavigationLinks(menuLinks)
+  )
+
   // 判断链接是否激活
   const isActive = (href) => {
+    if (!href || href === '#') {
+      return false
+    }
     if (href === '/') {
       return currentPath === '/' || currentPath.startsWith('/page/')
     }
@@ -204,7 +215,7 @@ export default function LeftSidebar(props) {
       {/* 导航菜单 */}
       <nav>
         <ul className='space-y-0.5'>
-          {menuLinks?.filter(link => link.show !== false).map((link, index) => {
+          {safeMenuLinks?.filter(link => link.show !== false).map((link, index) => {
             const isExternal = link.target === '_blank' || (link.href && (link.href.startsWith('http://') || link.href.startsWith('https://')))
             const linkClassName = `flex items-center px-3 py-2 rounded-lg transition-all duration-200 text-[14px] group
               ${isActive(link.href)

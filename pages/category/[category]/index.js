@@ -1,6 +1,7 @@
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { getGlobalData } from '@/lib/db/getSiteData'
+import { isPublishedPostForList } from '@/lib/utils/content-indexing'
 import { DynamicLayout } from '@/themes/theme'
 
 /**
@@ -18,9 +19,7 @@ export async function getStaticProps({ params: { category }, locale }) {
   let props = await getGlobalData({ from, locale })
 
   // 过滤状态
-  props.posts = props.allPages?.filter(
-    page => page.type === 'Post' && page.status === 'Published'
-  )
+  props.posts = props.allPages?.filter(isPublishedPostForList)
   // 处理过滤
   props.posts = props.posts.filter(
     post => post && post.category && post.category.includes(category)

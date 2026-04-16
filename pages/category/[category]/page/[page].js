@@ -1,6 +1,7 @@
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { getGlobalData } from '@/lib/db/getSiteData'
+import { isPublishedPostForList } from '@/lib/utils/content-indexing'
 import { DynamicLayout } from '@/themes/theme'
 
 /**
@@ -20,7 +21,7 @@ export async function getStaticProps({ params: { category, page } }) {
 
   // 过滤状态类型
   props.posts = props.allPages
-    ?.filter(page => page.type === 'Post' && page.status === 'Published')
+    ?.filter(isPublishedPostForList)
     .filter(post => post && post.category && post.category.includes(category))
   // 处理文章页数
   props.postCount = props.posts.length
@@ -58,7 +59,7 @@ export async function getStaticPaths() {
   categoryOptions?.forEach(category => {
     // 过滤状态类型
     const categoryPosts = allPages
-      ?.filter(page => page.type === 'Post' && page.status === 'Published')
+      ?.filter(isPublishedPostForList)
       .filter(
         post => post && post.category && post.category.includes(category.name)
       )

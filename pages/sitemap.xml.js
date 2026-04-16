@@ -4,6 +4,12 @@ import { siteConfig } from '@/lib/config'
 import { getGlobalData } from '@/lib/db/getSiteData'
 import { extractLangId, extractLangPrefix } from '@/lib/utils/pageId'
 import { getServerSideSitemap } from 'next-sitemap'
+import {
+  formatSitemapDate,
+  isIndexableContentPage,
+  normalizeSiteLink,
+  normalizeSlug
+} from '@/lib/utils/content-indexing'
 
 export const getServerSideProps = async ctx => {
   let fields = []
@@ -18,11 +24,12 @@ export const getServerSideProps = async ctx => {
       pageId: id,
       from: 'sitemap.xml'
     })
-    const link = siteConfig(
+    const rawLink = siteConfig(
       'LINK',
       siteData?.siteInfo?.link,
       siteData.NOTION_CONFIG
     )
+    const link = normalizeSiteLink(rawLink)
     const localeFields = generateLocalesSitemap(link, siteData.allPages, locale)
     fields = fields.concat(localeFields)
   }
@@ -62,18 +69,6 @@ function generateLocalesSitemap(link, allPages, locale) {
       priority: '0.7'
     },
     {
-      loc: `${link}${locale}/rss/feed.xml`,
-      lastmod: dateNow,
-      changefreq: 'daily',
-      priority: '0.7'
-    },
-    {
-      loc: `${link}${locale}/search`,
-      lastmod: dateNow,
-      changefreq: 'daily',
-      priority: '0.7'
-    },
-    {
       loc: `${link}${locale}/tag`,
       lastmod: dateNow,
       changefreq: 'daily',
@@ -82,20 +77,18 @@ function generateLocalesSitemap(link, allPages, locale) {
   ]
   const postFields =
     allPages
-      ?.filter(p => p.status === BLOG.NOTION_PROPERTY_NAME.status_publish)
-      ?.map(post => {
-        const slugWithoutLeadingSlash = post?.slug.startsWith('/')
-          ? post?.slug?.slice(1)
-          : post.slug
+      ?.filter(isIndexableContentPage)
+      ?.map(page => {
+        const slugWithoutLeadingSlash = normalizeSlug(page?.slug)
         return {
           loc: `${link}${locale}/${slugWithoutLeadingSlash}`,
-          lastmod: new Date(post?.publishDay).toISOString().split('T')[0],
+          lastmod: formatSitemapDate(page?.publishDay, dateNow),
           changefreq: 'daily',
           priority: '0.7'
         }
       }) ?? []
 
-  return defaultFields.concat(postFields)
+  return defaultFields.concat(postFields.filter(Boolean))
 }
 
 function getUniqueFields(fields) {
