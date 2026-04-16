@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import CONFIG from '../config'
 import { MenuItemCollapse } from './MenuItemCollapse'
 import { MenuItemDrop } from './MenuItemDrop'
+import { sanitizeNavigationLinks } from '@/lib/utils/navigation'
 
 /**
  * 菜单导航
@@ -77,6 +78,8 @@ export const MenuList = ({ customNav, customMenu }) => {
   if (siteConfig('CUSTOM_MENU')) {
     links = customMenu
   }
+
+  links = sanitizeNavigationLinks(links)
 
   if (!links || links.length === 0) {
     return null

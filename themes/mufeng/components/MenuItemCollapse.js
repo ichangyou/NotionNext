@@ -10,7 +10,10 @@ import { useState } from 'react'
 export const MenuItemCollapse = props => {
   const { link } = props
   const [show, changeShow] = useState(false)
-  const hasSubMenu = link?.subMenus?.length > 0
+  const subMenus = Array.isArray(link?.subMenus)
+    ? link.subMenus.filter(s => Boolean(s?.href))
+    : []
+  const hasSubMenu = subMenus.length > 0
 
   const [isOpen, changeIsOpen] = useState(false)
 
@@ -67,12 +70,12 @@ export const MenuItemCollapse = props => {
       {/* 折叠子菜单 */}
       {hasSubMenu && (
         <Collapse isOpen={isOpen} onHeightChange={props.onHeightChange}>
-          {link.subMenus.map((sLink, index) => {
+          {subMenus.map((sLink, index) => {
             return (
               <div
                 key={index}
                 className='dark:bg-black text-left px-10 justify-start text-blue-600 dark:text-blue-300 bg-gray-50 hover:bg-gray-50 dark:hover:bg-gray-900 tracking-widest transition-all duration-200 border-b dark:border-gray-800 py-3 pr-6'>
-                <Link href={sLink.href} target={link?.target}>
+                <Link href={sLink.href} target={sLink?.target}>
                   <span className='ml-4 text-sm'>
                     {sLink?.icon && (
                       <span className='mr-2 w-4'>
