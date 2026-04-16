@@ -1,6 +1,7 @@
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { getGlobalData, getPostBlocks } from '@/lib/db/getSiteData'
+import { isPublishedPostForList } from '@/lib/utils/content-indexing'
 import { DynamicLayout } from '@/themes/theme'
 
 /**
@@ -38,9 +39,7 @@ export async function getStaticProps({ params: { page }, locale }) {
     props?.NOTION_CONFIG
   )
 
-  const allPosts = allPages?.filter(
-    page => page.type === 'Post' && page.status === 'Published'
-  )
+  const allPosts = allPages?.filter(isPublishedPostForList)
   const POSTS_PER_PAGE = siteConfig('POSTS_PER_PAGE', 12, props?.NOTION_CONFIG)
   // 处理分页
   props.posts = allPosts.slice(

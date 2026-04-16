@@ -1,9 +1,11 @@
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
+import { generateContentQualityReport } from '@/lib/content-quality-report'
 import { getGlobalData, getPostBlocks } from '@/lib/db/getSiteData'
 import { generateRobotsTxt } from '@/lib/robots.txt'
 import { generateRss } from '@/lib/rss'
 import { generateSitemapXml } from '@/lib/sitemap.xml'
+import { isPublishedPostForList } from '@/lib/utils/content-indexing'
 import { DynamicLayout } from '@/themes/theme'
 import { generateRedirectJson } from '@/lib/redirect'
 
@@ -30,9 +32,7 @@ export async function getStaticProps(req) {
     12,
     props?.NOTION_CONFIG
   )
-  props.posts = props.allPages?.filter(
-    page => page.type === 'Post' && page.status === 'Published'
-  )
+  props.posts = props.allPages?.filter(isPublishedPostForList)
 
   // 处理分页
   if (siteConfig('POST_LIST_STYLE') === 'scroll') {
@@ -61,6 +61,8 @@ export async function getStaticProps(req) {
   generateRss(props)
   // 生成
   generateSitemapXml(props)
+  // 生成内容质量报告（构建产物）
+  generateContentQualityReport(props)
   if (siteConfig('UUID_REDIRECT', false, props?.NOTION_CONFIG)) {
     // 生成重定向 JSON
     generateRedirectJson(props)

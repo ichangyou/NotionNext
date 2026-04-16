@@ -2,6 +2,7 @@ import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { getGlobalData } from '@/lib/db/getSiteData'
 import { isBrowser } from '@/lib/utils'
+import { isPublishedPostForList } from '@/lib/utils/content-indexing'
 import { formatDateFmt } from '@/lib/utils/formatDate'
 import { DynamicLayout } from '@/themes/theme'
 import { useEffect } from 'react'
@@ -33,9 +34,7 @@ const ArchiveIndex = props => {
 export async function getStaticProps({ locale }) {
   const props = await getGlobalData({ from: 'archive-index', locale })
   // 处理分页
-  props.posts = props.allPages?.filter(
-    page => page.type === 'Post' && page.status === 'Published'
-  )
+  props.posts = props.allPages?.filter(isPublishedPostForList)
   delete props.allPages
 
   const postsSortByDate = Object.create(props.posts)

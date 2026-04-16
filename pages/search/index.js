@@ -1,6 +1,7 @@
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { getGlobalData } from '@/lib/db/getSiteData'
+import { isPublishedPostForList } from '@/lib/utils/content-indexing'
 import { DynamicLayout } from '@/themes/theme'
 import { useRouter } from 'next/router'
 
@@ -44,9 +45,7 @@ export async function getStaticProps({ locale }) {
     locale
   })
   const { allPages } = props
-  props.posts = allPages?.filter(
-    page => page.type === 'Post' && page.status === 'Published'
-  )
+  props.posts = allPages?.filter(isPublishedPostForList)
   return {
     props,
     revalidate: process.env.EXPORT

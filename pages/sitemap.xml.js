@@ -6,8 +6,7 @@ import { extractLangId, extractLangPrefix } from '@/lib/utils/pageId'
 import { getServerSideSitemap } from 'next-sitemap'
 import {
   formatSitemapDate,
-  isIndexableSlug,
-  isPublishedContentPage,
+  isIndexableContentPage,
   normalizeSiteLink,
   normalizeSlug
 } from '@/lib/utils/content-indexing'
@@ -78,10 +77,9 @@ function generateLocalesSitemap(link, allPages, locale) {
   ]
   const postFields =
     allPages
-      ?.filter(isPublishedContentPage)
+      ?.filter(isIndexableContentPage)
       ?.map(page => {
         const slugWithoutLeadingSlash = normalizeSlug(page?.slug)
-        if (!isIndexableSlug(slugWithoutLeadingSlash)) return null
         return {
           loc: `${link}${locale}/${slugWithoutLeadingSlash}`,
           lastmod: formatSitemapDate(page?.publishDay, dateNow),
