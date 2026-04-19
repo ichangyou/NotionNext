@@ -107,7 +107,7 @@ const LayoutBase = props => {
           <Style />
 
           {/* 左侧固定边栏 */}
-          <aside className='hidden lg:flex flex-col w-[280px] min-w-[280px] h-screen sticky top-0 border-r border-gray-100 dark:border-gray-800/50'>
+          <aside className='hidden lg:flex flex-col w-[240px] min-w-[240px] h-screen sticky top-0 border-r border-gray-100 dark:border-gray-800/50'>
             <LeftSidebar {...props} />
           </aside>
 
@@ -130,7 +130,7 @@ const LayoutBase = props => {
               {/* 主内容区域 */}
               <div
                 id='container-wrapper'
-                className='flex-1 min-w-0 max-w-4xl px-4 md:px-8 lg:pl-16 lg:pr-8 pt-6 pb-3 md:py-10 overflow-x-hidden'>
+                className='w-full min-w-0 max-w-3xl mx-auto px-4 md:px-8 lg:px-12 pt-6 pb-3 md:py-10 overflow-x-hidden'>
 
                 {/* 加载状态占位 */}
                 {onLoading && (
