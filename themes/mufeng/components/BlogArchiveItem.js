@@ -26,26 +26,23 @@ export default function BlogArchiveItem({ archiveTitle, archivePosts }) {
       </div>
 
       {/* 文章列表 */}
-      <div className='space-y-1'>
-        {posts.map((post, index) => (
+      <div className='divide-y divide-gray-100 dark:divide-gray-800/60'>
+        {posts.map((post) => (
           <Link
             key={post.id}
             href={post?.href}
-            className='group flex items-center justify-between py-3 hover:bg-gray-50 dark:hover:bg-gray-800/30 -mx-3 px-3 rounded-lg transition-all duration-200'
+            className='group block py-5 hover:bg-gray-50 dark:hover:bg-gray-800/20 -mx-3 px-3 rounded-lg transition-all duration-200'
           >
-            {/* 左侧：序号 + 标题 */}
-            <div className='flex items-center gap-4 flex-1 min-w-0'>
-              <span className='text-sm font-mono text-gray-400 dark:text-gray-500 w-6 flex-shrink-0'>
-                {(index + 1).toString().padStart(2, '0')}
-              </span>
-              <h3 className='text-gray-800 dark:text-gray-200 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors truncate'>
-                {post.title}
-              </h3>
-            </div>
-
-            {/* 右侧：日期 */}
-            <time className='text-sm text-gray-400 dark:text-gray-500 flex-shrink-0 ml-4'>
-              {formatDateFmt(post?.publishDate || post.date?.start_date, 'MM/dd')}
+            <h3 className='text-base font-semibold text-gray-900 dark:text-gray-100 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors leading-snug mb-1'>
+              {post.title}
+            </h3>
+            {post.summary && (
+              <p className='text-sm text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-2 mb-2'>
+                {post.summary}
+              </p>
+            )}
+            <time className='text-xs text-gray-400 dark:text-gray-600'>
+              {formatDateFmt(post?.publishDate || post.date?.start_date, 'MM月dd日')}
             </time>
           </Link>
         ))}
