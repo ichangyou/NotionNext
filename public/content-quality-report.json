@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-16T08:49:59.687Z",
+  "generatedAt": "2026-04-19T01:30:28.751Z",
   "site": "https://mufeng.blog",
   "qualityGuard": {
     "enabled": true,
@@ -9,60 +9,40 @@
     "allowSlugs": [
       "about",
       "privacy-policy"
+    ],
+    "blockReasons": [
+      "duplicate-title",
+      "duplicate-summary",
+      "repetitive-summary",
+      "short-body"
     ]
   },
   "totals": {
-    "publishedPosts": 176,
-    "lowQualityPosts": 145
+    "publishedPosts": 180,
+    "lowQualityPosts": 128,
+    "indexBlockedPosts": 0,
+    "warningOnlyPosts": 128
+  },
+  "reasonStats": {
+    "all": {
+      "short-summary": 128
+    },
+    "blocking": {},
+    "warning": {
+      "short-summary": 128
+    }
   },
   "lowQualityPosts": [
-    {
-      "id": "343b2da8-94ba-8092-a050-e3b91e176422",
-      "slug": "article/indie-dev-not-about-coding",
-      "title": "我做了 2 个App后，终于明白：独立开发者最稀缺的不是技术",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 21,
-      "wordCount": 0,
-      "publishDay": "2026-4-15",
-      "lastEditedDay": "2026-4-15",
-      "href": "/article/indie-dev-not-about-coding",
-      "url": "https://mufeng.blog/article/indie-dev-not-about-coding"
-    },
-    {
-      "id": "340b2da8-94ba-806c-81fe-dcc34109cab8",
-      "slug": "article/indie-dev-weekly-three-mindset-shifts",
-      "title": "先卖再做，这件事让我重新看了一遍自己在做什么",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 69,
-      "wordCount": 0,
-      "publishDay": "2026-4-12",
-      "lastEditedDay": "2026-4-12",
-      "href": "/article/indie-dev-weekly-three-mindset-shifts",
-      "url": "https://mufeng.blog/article/indie-dev-weekly-three-mindset-shifts"
-    },
-    {
-      "id": "340b2da8-94ba-80c6-b218-fe18c74e88fc",
-      "slug": "article/ios-aso-seo",
-      "title": "App Store SEO（ASO）深度指南（iOS开发者实战版）",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 40,
-      "wordCount": 0,
-      "publishDay": "2026-4-12",
-      "lastEditedDay": "2026-4-12",
-      "href": "/article/ios-aso-seo",
-      "url": "https://mufeng.blog/article/ios-aso-seo"
-    },
     {
       "id": "33fb2da8-94ba-8068-bfeb-de6d9cc33b29",
       "slug": "article/stock-analysis-baba",
       "title": "阿里巴巴（BABA）深度投资分析：AI 转型期的深度价值困境反转",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 79,
@@ -73,108 +53,15 @@
       "url": "https://mufeng.blog/article/stock-analysis-baba"
     },
     {
-      "id": "33eb2da8-94ba-80d1-9586-ef24e4354c78",
-      "slug": "article/open-claw",
-      "title": "OpenClaw 深度解析：把 AI Agent 从\"顾问\"变成\"员工”",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 34,
-      "wordCount": 0,
-      "publishDay": "2026-4-10",
-      "lastEditedDay": "2026-4-10",
-      "href": "/article/open-claw",
-      "url": "https://mufeng.blog/article/open-claw"
-    },
-    {
-      "id": "33eb2da8-94ba-8080-af84-cdbcfeffff73",
-      "slug": "article/app-icon-rgba",
-      "title": "iOS 上推退出动画里，App Icon 出现白边的排查与修复",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 54,
-      "wordCount": 0,
-      "publishDay": "2026-4-10",
-      "lastEditedDay": "2026-4-10",
-      "href": "/article/app-icon-rgba",
-      "url": "https://mufeng.blog/article/app-icon-rgba"
-    },
-    {
-      "id": "33ab2da8-94ba-80e1-ab66-fdea79f9b68e",
-      "slug": "article/claude-code-source-code-leaked",
-      "title": "Claude Code 源码泄露：最强 AI Coding Agent 架构深度解构",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 32,
-      "wordCount": 0,
-      "publishDay": "2026-4-6",
-      "lastEditedDay": "2026-4-6",
-      "href": "/article/claude-code-source-code-leaked",
-      "url": "https://mufeng.blog/article/claude-code-source-code-leaked"
-    },
-    {
-      "id": "33ab2da8-94ba-8045-a31a-f70e362d49a3",
-      "slug": "article/app-store-connect-analytics",
-      "title": "App Store Connect 数据延迟与更新规则全解析",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 41,
-      "wordCount": 0,
-      "publishDay": "2026-4-6",
-      "lastEditedDay": "2026-4-6",
-      "href": "/article/app-store-connect-analytics",
-      "url": "https://mufeng.blog/article/app-store-connect-analytics"
-    },
-    {
-      "id": "337b2da8-94ba-8034-a121-daddde03eebc",
-      "slug": "article/claude-agent-teams",
-      "title": "解锁协作式 AI：Claude Agent Teams 架构与实战完全指南",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 29,
-      "wordCount": 0,
-      "publishDay": "2026-4-3",
-      "lastEditedDay": "2026-4-3",
-      "href": "/article/claude-agent-teams",
-      "url": "https://mufeng.blog/article/claude-agent-teams"
-    },
-    {
-      "id": "336b2da8-94ba-80c5-9a7a-e1fb904c077e",
-      "slug": "article/jingnote-app",
-      "title": "鲸海语记：从 0 到上线的完整过程（独立开发者实战复盘）",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 21,
-      "wordCount": 0,
-      "publishDay": "2026-4-2",
-      "lastEditedDay": "2026-4-3",
-      "href": "/article/jingnote-app",
-      "url": "https://mufeng.blog/article/jingnote-app"
-    },
-    {
-      "id": "333b2da8-94ba-80e4-91e7-dfc52fc50cc8",
-      "slug": "article/remove-app-from-app-store",
-      "title": "App Store 下架 app 的两种方法",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 21,
-      "wordCount": 0,
-      "publishDay": "2026-3-30",
-      "lastEditedDay": "2026-3-30",
-      "href": "/article/remove-app-from-app-store",
-      "url": "https://mufeng.blog/article/remove-app-from-app-store"
-    },
-    {
       "id": "332b2da8-94ba-8006-93b2-cd64d92731a9",
       "slug": "article/ai-spacex",
       "title": "2026-2030：AI驱动的最后一次大级别财富重构，普通人还剩多少时间？",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 69,
@@ -185,108 +72,15 @@
       "url": "https://mufeng.blog/article/ai-spacex"
     },
     {
-      "id": "32fb2da8-94ba-803e-8543-f5252ed3f74c",
-      "slug": "article/claude-code-permissions-setting",
-      "title": "别让 Claude Code 一直问你\"能不能执行\"：权限配置完全指南",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 39,
-      "wordCount": 0,
-      "publishDay": "2026-3-26",
-      "lastEditedDay": "2026-3-26",
-      "href": "/article/claude-code-permissions-setting",
-      "url": "https://mufeng.blog/article/claude-code-permissions-setting"
-    },
-    {
-      "id": "32fb2da8-94ba-8007-966e-f9c523998ef7",
-      "slug": "article/iOS-tag-release",
-      "title": "GitHub iOS 项目发布流程 —— Tag 与 Release 规范",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 34,
-      "wordCount": 0,
-      "publishDay": "2026-3-26",
-      "lastEditedDay": "2026-3-26",
-      "href": "/article/iOS-tag-release",
-      "url": "https://mufeng.blog/article/iOS-tag-release"
-    },
-    {
-      "id": "32eb2da8-94ba-8092-a396-f2864aeae0a1",
-      "slug": "article/32eb2da8-94ba-8092-a396-f2864aeae0a1",
-      "title": "Claude Code Skills 深度解析：让 AI 编程助手真正拥有\"肌肉记忆”",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 64,
-      "wordCount": 0,
-      "publishDay": "2026-3-25",
-      "lastEditedDay": "2026-3-28",
-      "href": "/article/32eb2da8-94ba-8092-a396-f2864aeae0a1",
-      "url": "https://mufeng.blog/article/32eb2da8-94ba-8092-a396-f2864aeae0a1"
-    },
-    {
-      "id": "32db2da8-94ba-8061-bcb5-eeb473be9c95",
-      "slug": "article/32db2da8-94ba-8061-bcb5-eeb473be9c95",
-      "title": "iOS 敏感密钥泄漏怎么防？我踩了三个坑才找到正确姿势",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 75,
-      "wordCount": 0,
-      "publishDay": "2026-3-24",
-      "lastEditedDay": "2026-3-24",
-      "href": "/article/32db2da8-94ba-8061-bcb5-eeb473be9c95",
-      "url": "https://mufeng.blog/article/32db2da8-94ba-8061-bcb5-eeb473be9c95"
-    },
-    {
-      "id": "32cb2da8-94ba-8013-8ee6-f0727cd74cd2",
-      "slug": "article/32cb2da8-94ba-8013-8ee6-f0727cd74cd2",
-      "title": "Mac Edge 浏览器一键导入链接到 Things 3",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 38,
-      "wordCount": 0,
-      "publishDay": "2026-3-23",
-      "lastEditedDay": "2026-3-23",
-      "href": "/article/32cb2da8-94ba-8013-8ee6-f0727cd74cd2",
-      "url": "https://mufeng.blog/article/32cb2da8-94ba-8013-8ee6-f0727cd74cd2"
-    },
-    {
-      "id": "32cb2da8-94ba-8020-95ad-db3665481f8e",
-      "slug": "article/32cb2da8-94ba-8020-95ad-db3665481f8e",
-      "title": "一人创业，先活下去再说完",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 67,
-      "wordCount": 0,
-      "publishDay": "2026-3-23",
-      "lastEditedDay": "2026-3-23",
-      "href": "/article/32cb2da8-94ba-8020-95ad-db3665481f8e",
-      "url": "https://mufeng.blog/article/32cb2da8-94ba-8020-95ad-db3665481f8e"
-    },
-    {
-      "id": "32bb2da8-94ba-8058-81f1-dd3a3ed5e911",
-      "slug": "article/32bb2da8-94ba-8058-81f1-dd3a3ed5e911",
-      "title": "DESIGN.md：让 AI agent 读懂你的设计语言",
-      "reasons": [
-        "short-summary"
-      ],
-      "summaryChars": 28,
-      "wordCount": 0,
-      "publishDay": "2026-3-22",
-      "lastEditedDay": "2026-3-22",
-      "href": "/article/32bb2da8-94ba-8058-81f1-dd3a3ed5e911",
-      "url": "https://mufeng.blog/article/32bb2da8-94ba-8058-81f1-dd3a3ed5e911"
-    },
-    {
       "id": "323b2da8-94ba-804e-840c-f4c54361fbba",
       "slug": "article/323b2da8-94ba-804e-840c-f4c54361fbba",
       "title": "快速生成专业 iOS App Store 截图：深入解析 app-store-screenshots",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 0,
@@ -300,7 +94,12 @@
       "id": "321b2da8-94ba-8052-94b9-e4c9b89b7870",
       "slug": "article/321b2da8-94ba-8052-94b9-e4c9b89b7870",
       "title": "录屏之前，我先把桌面「杀干净」：Mac 多桌面的正确打开方式",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 64,
@@ -314,7 +113,12 @@
       "id": "321b2da8-94ba-80ad-ac42-d552b9d22955",
       "slug": "article/321b2da8-94ba-80ad-ac42-d552b9d22955",
       "title": "使用 Cloudflare Worker 存储项目的敏感密钥配置",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 0,
@@ -328,7 +132,12 @@
       "id": "320b2da8-94ba-8059-8688-da0b1074b308",
       "slug": "article/320b2da8-94ba-8059-8688-da0b1074b308",
       "title": "将 mufeng.blog 从 Spaceship 迁移到 Cloudflare",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 21,
@@ -342,7 +151,12 @@
       "id": "31bb2da8-94ba-8083-8ee6-e9b9f6fbcbe8",
       "slug": "article/my-real-insight",
       "title": "Claude Code 使用洞察 - 第一个月 /insight 真实案例",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 30,
@@ -356,7 +170,12 @@
       "id": "31bb2da8-94ba-8082-af6e-dc87cda33938",
       "slug": "article/claude-code-insight",
       "title": "我把自己的 Claude Code 使用数据翻出来了，它说了一些实",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 73,
@@ -370,7 +189,12 @@
       "id": "319b2da8-94ba-80eb-97da-fbec226ae1ae",
       "slug": "article/319b2da8-94ba-80eb-97da-fbec226ae1ae",
       "title": "我把 ChatGPT 对我的「了解」全部搬到了 Claude",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 41,
@@ -384,7 +208,12 @@
       "id": "318b2da8-94ba-801e-b45c-db24b68ea04c",
       "slug": "article/318b2da8-94ba-801e-b45c-db24b68ea04c",
       "title": "为什么你的代理\"形同虚设\"：TUN 模式到底做了什么",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 28,
@@ -398,7 +227,12 @@
       "id": "318b2da8-94ba-80ca-841d-f67e5bd5afb4",
       "slug": "article/318b2da8-94ba-80ca-841d-f67e5bd5afb4",
       "title": "zsh（Z Shell）是什么？",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 0,
@@ -412,7 +246,12 @@
       "id": "318b2da8-94ba-806b-b8dd-f3d70106420f",
       "slug": "article/318b2da8-94ba-806b-b8dd-f3d70106420f",
       "title": "Vim 常用快捷键",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 73,
@@ -426,7 +265,12 @@
       "id": "318b2da8-94ba-8003-988b-ddff61740cc8",
       "slug": "article/318b2da8-94ba-8003-988b-ddff61740cc8",
       "title": "Claude Code 常用快捷键",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 0,
@@ -440,7 +284,12 @@
       "id": "318b2da8-94ba-8084-a5ec-d5133389e8f2",
       "slug": "article/318b2da8-94ba-8084-a5ec-d5133389e8f2",
       "title": "Claude 优化 .zshrc 配置",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 0,
@@ -454,7 +303,12 @@
       "id": "317b2da8-94ba-80c6-8228-fbf0d363d954",
       "slug": "article/317b2da8-94ba-80c6-8228-fbf0d363d954",
       "title": "责任链模式：代码世界里的击鼓传花",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 40,
@@ -468,7 +322,12 @@
       "id": "316b2da8-94ba-80b9-9df7-e0bd67a4ddb7",
       "slug": "article/316b2da8-94ba-80b9-9df7-e0bd67a4ddb7",
       "title": "iOS app 备案公钥、指纹信息生成方式",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 15,
@@ -482,7 +341,12 @@
       "id": "315b2da8-94ba-8012-8797-f67088f33031",
       "slug": "article/315b2da8-94ba-8012-8797-f67088f33031",
       "title": "iOS 开发者证书配置全攻略：我踩过的那些坑，你不必再踩",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 50,
@@ -496,7 +360,12 @@
       "id": "315b2da8-94ba-80e5-9c01-fa739821122d",
       "slug": "article/315b2da8-94ba-80e5-9c01-fa739821122d",
       "title": "让 AI 帮你做月度复盘：一个被用坏的功能",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 21,
@@ -510,7 +379,12 @@
       "id": "314b2da8-94ba-80df-b4e9-e22baaed7b5a",
       "slug": "article/314b2da8-94ba-80df-b4e9-e22baaed7b5a",
       "title": "iOS 在开发阶段测试会员购买功能",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 21,
@@ -524,7 +398,12 @@
       "id": "313b2da8-94ba-8019-b178-ed235661f99e",
       "slug": "article/313b2da8-94ba-8019-b178-ed235661f99e",
       "title": "Google 生图 API Key 获取与配置指南",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 59,
@@ -538,7 +417,12 @@
       "id": "312b2da8-94ba-804f-9e8d-e6b7e554a478",
       "slug": "article/312b2da8-94ba-804f-9e8d-e6b7e554a478",
       "title": "你的工作值得吗？",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 16,
@@ -552,7 +436,12 @@
       "id": "310b2da8-94ba-80e0-9a48-efaf23af91c9",
       "slug": "article/310b2da8-94ba-80e0-9a48-efaf23af91c9",
       "title": "给 Claude 立一部\"宪法\" : CLAUDE.md 完全指南",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 50,
@@ -566,7 +455,12 @@
       "id": "30fb2da8-94ba-805d-99fb-d3f8485a20e7",
       "slug": "article/30fb2da8-94ba-805d-99fb-d3f8485a20e7",
       "title": "我每周至少写四五篇文章，但真正花在\"写\"上的时间越来越少",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 48,
@@ -580,7 +474,12 @@
       "id": "30cb2da8-94ba-8032-be90-f121c66f7491",
       "slug": "article/30cb2da8-94ba-8032-be90-f121c66f7491",
       "title": "Mac（Apple Silicon）删除旧的 brew 重新安装",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 29,
@@ -594,7 +493,12 @@
       "id": "30cb2da8-94ba-808a-a68f-c4fe8f78c86d",
       "slug": "article/30cb2da8-94ba-808a-a68f-c4fe8f78c86d",
       "title": "Mac（Apple Silicon）安装 ARM 原生 Homebrew（ARM brew）",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 27,
@@ -608,7 +512,12 @@
       "id": "30cb2da8-94ba-80ea-b29c-d79c43f4d388",
       "slug": "article/30cb2da8-94ba-80ea-b29c-d79c43f4d388",
       "title": "书不是读完的，是拿来用的",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 23,
@@ -622,7 +531,12 @@
       "id": "30bb2da8-94ba-80e9-a467-c4ecdfee7de8",
       "slug": "article/30bb2da8-94ba-80e9-a467-c4ecdfee7de8",
       "title": "我用 60 分钟读完一本书，然后彻底改变了读书方式",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 35,
@@ -636,7 +550,12 @@
       "id": "30bb2da8-94ba-808b-acbe-f84b5c952f6e",
       "slug": "article/30bb2da8-94ba-808b-acbe-f84b5c952f6e",
       "title": "Mac 终端设置 proxy_on、proxy_off 开关",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 35,
@@ -650,7 +569,12 @@
       "id": "30ab2da8-94ba-80a4-b7fe-e6559b0a261e",
       "slug": "article/30ab2da8-94ba-80a4-b7fe-e6559b0a261e",
       "title": "Claude Code 从 O 到 1 全攻略",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 16,
@@ -664,7 +588,12 @@
       "id": "309b2da8-94ba-80f1-ad66-d91ae1acb419",
       "slug": "article/309b2da8-94ba-80f1-ad66-d91ae1acb419",
       "title": "2025，我的一年 (年终总结)",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 12,
@@ -678,7 +607,12 @@
       "id": "308b2da8-94ba-80ad-a551-d273ca3f6904",
       "slug": "article/308b2da8-94ba-80ad-a551-d273ca3f6904",
       "title": "如果你还没用 Claude Code，可能已经落后一个时代",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 12,
@@ -692,7 +626,12 @@
       "id": "307b2da8-94ba-80fc-ae48-c95e4355e9a3",
       "slug": "article/307b2da8-94ba-80fc-ae48-c95e4355e9a3",
       "title": "Draw.io 官方 MCP 实测：AI 自动生成架构图，丝滑到离谱",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 44,
@@ -706,7 +645,12 @@
       "id": "307b2da8-94ba-80b2-9649-c1c7a1420e9a",
       "slug": "article/307b2da8-94ba-80b2-9649-c1c7a1420e9a",
       "title": "DeepWiki - GitHub 仓库秒变技术文档",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 0,
@@ -720,7 +664,12 @@
       "id": "306b2da8-94ba-8008-872c-d46bf00df93c",
       "slug": "article/306b2da8-94ba-8008-872c-d46bf00df93c",
       "title": "你不是缺努力，你是缺一个\"心流开关”",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 12,
@@ -734,7 +683,12 @@
       "id": "305b2da8-94ba-804b-aced-c826b692feef",
       "slug": "article/305b2da8-94ba-804b-aced-c826b692feef",
       "title": "投资的本质：拆解《巴菲特之道》中的12个底层准则",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 29,
@@ -748,7 +702,12 @@
       "id": "304b2da8-94ba-8011-8aed-c9fe8f32704e",
       "slug": "article/304b2da8-94ba-8011-8aed-c9fe8f32704e",
       "title": "缓存雪崩、缓存击穿、缓存穿透",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 72,
@@ -762,7 +721,12 @@
       "id": "304b2da8-94ba-801a-9549-d9d9466786fb",
       "slug": "article/304b2da8-94ba-801a-9549-d9d9466786fb",
       "title": "如何优雅地老去",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 20,
@@ -776,7 +740,12 @@
       "id": "302b2da8-94ba-8056-9119-c236c0c9eb99",
       "slug": "article/302b2da8-94ba-8056-9119-c236c0c9eb99",
       "title": "穷人提桶，富人修管道｜财务自由的底层逻辑",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 22,
@@ -790,7 +759,12 @@
       "id": "302b2da8-94ba-8002-86df-c270fae25128",
       "slug": "article/302b2da8-94ba-8002-86df-c270fae25128",
       "title": "清理 Git 敏感信息提交记录",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 43,
@@ -804,7 +778,12 @@
       "id": "301b2da8-94ba-80bf-b4a7-fd2ff3a93da1",
       "slug": "article/301b2da8-94ba-80bf-b4a7-fd2ff3a93da1",
       "title": "The Art of Focus",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 52,
@@ -818,7 +797,12 @@
       "id": "2ffb2da8-94ba-80c1-9e0c-ccc8ff1fb0f6",
       "slug": "article/2ffb2da8-94ba-80c1-9e0c-ccc8ff1fb0f6",
       "title": "时间管理的陷阱：越努力越失控",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 16,
@@ -832,7 +816,12 @@
       "id": "2feb2da8-94ba-8094-9f24-e959914b123b",
       "slug": "article/2feb2da8-94ba-8094-9f24-e959914b123b",
       "title": "你不是在读书，你是在升级自己",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 18,
@@ -846,7 +835,12 @@
       "id": "2fdb2da8-94ba-8005-a824-e3e2218d062b",
       "slug": "article/2fdb2da8-94ba-8005-a824-e3e2218d062b",
       "title": "你的 AI 写作工具，可能一直都错了",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 16,
@@ -860,7 +854,12 @@
       "id": "2fcb2da8-94ba-8047-bbd8-c642527d1902",
       "slug": "article/2fcb2da8-94ba-8047-bbd8-c642527d1902",
       "title": "Cloud code、Codex、GitHub copilot 买哪个合适",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 29,
@@ -874,7 +873,12 @@
       "id": "2fbb2da8-94ba-806d-a637-ce60a80a0e47",
       "slug": "article/2fbb2da8-94ba-806d-a637-ce60a80a0e47",
       "title": "9 个高阶隐藏技巧，把 NotebookLM 调教成了“数字分身”",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 36,
@@ -888,7 +892,12 @@
       "id": "2fab2da8-94ba-808a-bbf1-cbbca2c28355",
       "slug": "article/2fab2da8-94ba-808a-bbf1-cbbca2c28355",
       "title": "mac 使用 Claude code",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 24,
@@ -902,7 +911,12 @@
       "id": "2f8b2da8-94ba-807e-a841-d979fc9f2567",
       "slug": "article/2f8b2da8-94ba-807e-a841-d979fc9f2567",
       "title": "2026-2027：在“赤马红羊”的周期里，守住内心的火候",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 59,
@@ -916,7 +930,12 @@
       "id": "2f6b2da8-94ba-80d1-b378-f8ddb3887b27",
       "slug": "article/cursor_agent_skill",
       "title": "Cursor Agent Skill：让 AI 成为你的专业搭档",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 31,
@@ -930,7 +949,12 @@
       "id": "2f4b2da8-94ba-803a-9346-fd78745ddfc2",
       "slug": "article/2f4b2da8-94ba-803a-9346-fd78745ddfc2",
       "title": "如何把 Cursor 里的 AI，驯化成一个听话的高级工程师",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 22,
@@ -944,7 +968,12 @@
       "id": "2f2b2da8-94ba-80f2-b7f0-e32e0aef7921",
       "slug": "article/2f2b2da8-94ba-80f2-b7f0-e32e0aef7921",
       "title": "沪上小酌后",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 16,
@@ -958,7 +987,12 @@
       "id": "2f1b2da8-94ba-8093-bdbb-d13c50ac6b6d",
       "slug": "article/2f1b2da8-94ba-8093-bdbb-d13c50ac6b6d",
       "title": "先让 AI 画出来，再慢慢把产品“造出来”",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 24,
@@ -972,7 +1006,12 @@
       "id": "2efb2da8-94ba-8069-b27a-c037c9908d0a",
       "slug": "article/2efb2da8-94ba-8069-b27a-c037c9908d0a",
       "title": "还没上线 app store 的开发阶段，怎样模拟购买会员功能?",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 22,
@@ -986,7 +1025,12 @@
       "id": "2efb2da8-94ba-80ad-820c-cf77c1c25054",
       "slug": "article/products-storekit-test",
       "title": "iOS 使用 StoreKit Configuration File 在开发阶段测试会员购买功能",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 38,
@@ -1000,7 +1044,12 @@
       "id": "2ecb2da8-94ba-80fa-9f67-dabd08a64fed",
       "slug": "article/ui-ux-pro-max",
       "title": "Cursor 使用 agent skill 示例 — UI UX Pro Max 技术揭秘与实战",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 33,
@@ -1014,7 +1063,12 @@
       "id": "2e8b2da8-94ba-80e7-b16c-e2b377a20444",
       "slug": "article/2e8b2da8-94ba-80e7-b16c-e2b377a20444",
       "title": "在 Cursor 中高效使用 AI Skills 指南",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 32,
@@ -1028,7 +1082,12 @@
       "id": "2e5b2da8-94ba-808a-a6f1-e767bf8e2e58",
       "slug": "article/2e5b2da8-94ba-808a-a6f1-e767bf8e2e58",
       "title": "为什么我在 2026 年选择 X：这是一个策略问题，不是情怀问题",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 22,
@@ -1042,7 +1101,12 @@
       "id": "2e4b2da8-94ba-80ff-9624-dc7258aa1177",
       "slug": "article/2e4b2da8-94ba-80ff-9624-dc7258aa1177",
       "title": "@Autowired 详解",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 17,
@@ -1056,7 +1120,12 @@
       "id": "2dcb2da8-94ba-80e1-ab2f-c6eb20dc7561",
       "slug": "article/2dcb2da8-94ba-80e1-ab2f-c6eb20dc7561",
       "title": "2026：专注、AI 与个人品牌的真正起点",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 13,
@@ -1070,7 +1139,12 @@
       "id": "2d5b2da8-94ba-8090-bf39-dd564c4b2e8c",
       "slug": "article/2d5b2da8-94ba-8090-bf39-dd564c4b2e8c",
       "title": "我低估了 NotebookLM：它正在重塑我的学习方式",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 19,
@@ -1084,7 +1158,12 @@
       "id": "2d0b2da8-94ba-8042-a279-e13140d11c0d",
       "slug": "article/2d0b2da8-94ba-8042-a279-e13140d11c0d",
       "title": "很多事不值得做，很多信息不值得看",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 30,
@@ -1098,7 +1177,12 @@
       "id": "2ceb2da8-94ba-8019-a258-f4b37d58d895",
       "slug": "article/2ceb2da8-94ba-8019-a258-f4b37d58d895",
       "title": "找到做自己喜欢的事",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 20,
@@ -1112,7 +1196,12 @@
       "id": "2bcb2da8-94ba-8079-9de1-c0619fc45c9e",
       "slug": "article/2bcb2da8-94ba-8079-9de1-c0619fc45c9e",
       "title": "以学习的方式工作",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 15,
@@ -1126,7 +1215,12 @@
       "id": "2b4b2da8-94ba-80ac-b3b4-c195c79ae46f",
       "slug": "article/2b4b2da8-94ba-80ac-b3b4-c195c79ae46f",
       "title": "机会成本、边际效用与理想生活：我们为什么总是忙？",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 16,
@@ -1140,7 +1234,12 @@
       "id": "2adb2da8-94ba-8066-be59-e503c9cc92dd",
       "slug": "article/2adb2da8-94ba-8066-be59-e503c9cc92dd",
       "title": "方三文 × 段永平访谈记录：关于投资、学习与人生的底层原则",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 62,
@@ -1154,7 +1253,12 @@
       "id": "2adb2da8-94ba-80cc-b646-d3695faef909",
       "slug": "article/2adb2da8-94ba-80cc-b646-d3695faef909",
       "title": "手动注册第三方 JAR 包中的类到 Spring 容器",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 42,
@@ -1168,7 +1272,12 @@
       "id": "2adb2da8-94ba-8039-ac30-febfb0316b66",
       "slug": "article/2adb2da8-94ba-8039-ac30-febfb0316b66",
       "title": "为什么业务实体类必须使用“业务构造器”？（含最佳实践与反例分析）",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 43,
@@ -1182,7 +1291,12 @@
       "id": "2adb2da8-94ba-807f-9212-edf37f94aa9c",
       "slug": "article/2adb2da8-94ba-807f-9212-edf37f94aa9c",
       "title": "活成自己的徐霞客",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 36,
@@ -1196,7 +1310,12 @@
       "id": "298b2da8-94ba-80c7-9962-c3c9e2f879c4",
       "slug": "article/298b2da8-94ba-80c7-9962-c3c9e2f879c4",
       "title": "一件小事，一件天大的好事",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 0,
@@ -1210,7 +1329,12 @@
       "id": "277b2da8-94ba-8091-9585-c91333d9232d",
       "slug": "article/277b2da8-94ba-8091-9585-c91333d9232d",
       "title": "让 Claude Code 子代理（Sub-agents）协助开发",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 0,
@@ -1224,7 +1348,12 @@
       "id": "26eb2da8-94ba-80f0-8c6b-d2a6636f4000",
       "slug": "article/mac-claude-code",
       "title": "Mac M1 如何使用 Claude Code",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 74,
@@ -1238,7 +1367,12 @@
       "id": "26eb2da8-94ba-802d-86d4-cd81023b1af1",
       "slug": "article/26eb2da8-94ba-802d-86d4-cd81023b1af1",
       "title": "成长的秘密：靠环境影响，靠模仿成才",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 58,
@@ -1252,7 +1386,12 @@
       "id": "266b2da8-94ba-8030-b597-e0b1ab2d92fb",
       "slug": "article/266b2da8-94ba-8030-b597-e0b1ab2d92fb",
       "title": "一场大雨，一次送行，一次久别重逢",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 12,
@@ -1266,7 +1405,12 @@
       "id": "262b2da8-94ba-80ec-992b-deb35d417e1f",
       "slug": "article/262b2da8-94ba-80ec-992b-deb35d417e1f",
       "title": "复利的奇迹：为什么越早开始，越轻松实现自由？",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 54,
@@ -1280,7 +1424,12 @@
       "id": "260b2da8-94ba-802e-8bb5-f1299d61e3d6",
       "slug": "article/260b2da8-94ba-802e-8bb5-f1299d61e3d6",
       "title": "让钱替你工作：最简单的10%储蓄法则",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 35,
@@ -1294,7 +1443,12 @@
       "id": "25eb2da8-94ba-8032-93ce-c708e0ff2ba3",
       "slug": "article/25eb2da8-94ba-8032-93ce-c708e0ff2ba3",
       "title": "读书习惯，是最划算的长期投资",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 25,
@@ -1308,7 +1462,12 @@
       "id": "25db2da8-94ba-8091-850f-ea260e103437",
       "slug": "article/25db2da8-94ba-8091-850f-ea260e103437",
       "title": "建局域网内文件服务器好软件推荐 ~ (hfs) HTTP File Server",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 0,
@@ -1322,7 +1481,12 @@
       "id": "25bb2da8-94ba-80f0-a66a-c002a25bb93d",
       "slug": "article/25bb2da8-94ba-80f0-a66a-c002a25bb93d",
       "title": "提前退休十年计划：让钱替你工作",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 25,
@@ -1336,7 +1500,12 @@
       "id": "258b2da8-94ba-809d-8422-e66954dc9838",
       "slug": "article/258b2da8-94ba-809d-8422-e66954dc9838",
       "title": "技术与管理之外，工薪族的唯一出路是什么？",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 0,
@@ -1350,7 +1519,12 @@
       "id": "251b2da8-94ba-8039-86c3-c649187977fb",
       "slug": "article/251b2da8-94ba-8039-86c3-c649187977fb",
       "title": "投资不是短跑，而是马拉松：我的年度基金+股票计划",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 29,
@@ -1364,7 +1538,12 @@
       "id": "24bb2da8-94ba-8049-b969-c6572928eacf",
       "slug": "article/24bb2da8-94ba-8049-b969-c6572928eacf",
       "title": "职场无铁饭碗，唯有高筑墙广积粮",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 27,
@@ -1378,7 +1557,12 @@
       "id": "246b2da8-94ba-802b-ba7d-d39eee7729e6",
       "slug": "article/246b2da8-94ba-802b-ba7d-d39eee7729e6",
       "title": "Helm 常用命令速查表",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 12,
@@ -1392,7 +1576,12 @@
       "id": "246b2da8-94ba-8013-a39e-cf1c50297e96",
       "slug": "article/246b2da8-94ba-8013-a39e-cf1c50297e96",
       "title": "kubectl 常用命令罗列与说明",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 12,
@@ -1406,7 +1595,12 @@
       "id": "246b2da8-94ba-8023-ae03-d5cb31869c42",
       "slug": "article/246b2da8-94ba-8023-ae03-d5cb31869c42",
       "title": "Minikube 常用命令列表",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 32,
@@ -1420,7 +1614,12 @@
       "id": "244b2da8-94ba-80a7-a9d2-d3a897b3d200",
       "slug": "article/244b2da8-94ba-80a7-a9d2-d3a897b3d200",
       "title": "Minikube 启动后的使用",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 58,
@@ -1434,7 +1633,12 @@
       "id": "244b2da8-94ba-80f3-8d6d-d9d84ef2fa80",
       "slug": "article/244b2da8-94ba-80f3-8d6d-d9d84ef2fa80",
       "title": "MiniKube Docker 系统PATH环境变量的设置",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 35,
@@ -1448,7 +1652,12 @@
       "id": "244b2da8-94ba-80e4-885c-eecf930b7d0e",
       "slug": "article/244b2da8-94ba-80e4-885c-eecf930b7d0e",
       "title": "mac 安装 minikube",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 18,
@@ -1462,7 +1671,12 @@
       "id": "23fb2da8-94ba-802e-9205-feee96572da0",
       "slug": "article/23fb2da8-94ba-802e-9205-feee96572da0",
       "title": "祭大姑母文",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 33,
@@ -1476,7 +1690,12 @@
       "id": "239b2da8-94ba-80f0-8df2-f2c0872e1b8b",
       "slug": "article/239b2da8-94ba-80f0-8df2-f2c0872e1b8b",
       "title": "Cursor无法访问Claude、ChatGPT模型问题解决",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 78,
@@ -1490,7 +1709,12 @@
       "id": "236b2da8-94ba-8008-9db0-ff2334f82404",
       "slug": "article/236b2da8-94ba-8008-9db0-ff2334f82404",
       "title": "自我观察：关于时间感、识人术与内在秩序的构建",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 74,
@@ -1504,7 +1728,12 @@
       "id": "230b2da8-94ba-80cc-a95f-ea99906850dc",
       "slug": "article/230b2da8-94ba-80cc-a95f-ea99906850dc",
       "title": "写作、投资与抗争：在多线博弈中活出一个清醒的自己",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 25,
@@ -1518,7 +1747,12 @@
       "id": "22eb2da8-94ba-80ce-93f6-fcc32be7f4c4",
       "slug": "article/22eb2da8-94ba-80ce-93f6-fcc32be7f4c4",
       "title": "让 ChatGPT 成为你的人生导师：外脑 × 镜子 × 加速器",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 46,
@@ -1532,7 +1766,12 @@
       "id": "22bb2da8-94ba-8023-97d2-dbbc37dd412f",
       "slug": "article/22bb2da8-94ba-8023-97d2-dbbc37dd412f",
       "title": "日拱一卒：如何在碎片时间里，积累出属于自己的成果？",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 17,
@@ -1546,7 +1785,12 @@
       "id": "228b2da8-94ba-801d-bf27-ea7fb74fac37",
       "slug": "article/228b2da8-94ba-801d-bf27-ea7fb74fac37",
       "title": "通过投资养老",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 26,
@@ -1560,7 +1804,12 @@
       "id": "21db2da8-94ba-80c9-af7e-c57373a59685",
       "slug": "article/21db2da8-94ba-80c9-af7e-c57373a59685",
       "title": "技术、生活、认知的螺旋式成长",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 6,
@@ -1574,7 +1823,12 @@
       "id": "20bb2da8-94ba-80bf-b4ba-fde01524a489",
       "slug": "article/20bb2da8-94ba-80bf-b4ba-fde01524a489",
       "title": "人生的复利战略：生产力不是做更多，而是做对的事",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 39,
@@ -1588,7 +1842,12 @@
       "id": "1feb2da8-94ba-8080-bdd2-de2a923b50c4",
       "slug": "article/1feb2da8-94ba-8080-bdd2-de2a923b50c4",
       "title": "这一周：技术的积累与生活的回响",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 37,
@@ -1602,7 +1861,12 @@
       "id": "1fdb2da8-94ba-80a5-b1a7-df78486058c3",
       "slug": "article/1fdb2da8-94ba-80a5-b1a7-df78486058c3",
       "title": "Vercel vs Cloudflare ",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 0,
@@ -1616,7 +1880,12 @@
       "id": "1f9b2da8-94ba-80c7-af27-fc8563e1d95b",
       "slug": "article/1f9b2da8-94ba-80c7-af27-fc8563e1d95b",
       "title": "Git 配置本地 VPN 提供的 HTTP 或 SOCKS5 代理",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 41,
@@ -1630,7 +1899,12 @@
       "id": "1f8b2da8-94ba-8082-b30a-f0e2755c213d",
       "slug": "article/1f8b2da8-94ba-8082-b30a-f0e2755c213d",
       "title": "用 ChatGPT 总结每周、反思人生，这是我的时间管理新方式",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 0,
@@ -1644,7 +1918,12 @@
       "id": "1f6b2da8-94ba-8001-9905-e0f78ed2a2a5",
       "slug": "article/1f6b2da8-94ba-8001-9905-e0f78ed2a2a5",
       "title": "读《财富的真相》：学会理财，更要学会管理自己的人生节奏",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 31,
@@ -1658,7 +1937,12 @@
       "id": "1efb2da8-94ba-805f-8770-cd1124b467fd",
       "slug": "article/1efb2da8-94ba-805f-8770-cd1124b467fd",
       "title": "做事要稳不要怕慢",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 29,
@@ -1672,7 +1956,12 @@
       "id": "1e0b2da8-94ba-8047-b857-e8531fd1ac23",
       "slug": "article/1e0b2da8-94ba-8047-b857-e8531fd1ac23",
       "title": "读《小而美：持续盈利的经营法则》有感",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 67,
@@ -1686,7 +1975,12 @@
       "id": "1dbb2da8-94ba-807d-87d8-e20e9466db7c",
       "slug": "article/1dbb2da8-94ba-807d-87d8-e20e9466db7c",
       "title": "花200美元订阅10个AI会员，我得到了什么？",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 43,
@@ -1700,7 +1994,12 @@
       "id": "1ceb2da8-94ba-803c-897b-cbabb386744c",
       "slug": "article/1ceb2da8-94ba-803c-897b-cbabb386744c",
       "title": "基于 Obsidian + Cursor + ChatGPT 的知识学习与管理实战方案",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 40,
@@ -1714,7 +2013,12 @@
       "id": "1ccb2da8-94ba-8008-91dd-f34e446bf163",
       "slug": "article/1ccb2da8-94ba-8008-91dd-f34e446bf163",
       "title": "我每天都在用的 AI 工具和学习方法，强烈推荐！",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 37,
@@ -1728,7 +2032,12 @@
       "id": "1c9b2da8-94ba-809b-9c53-d4c98dd4687b",
       "slug": "article/1c9b2da8-94ba-809b-9c53-d4c98dd4687b",
       "title": "借助AI打造个人品牌，走向技术平权时代",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 22,
@@ -1742,7 +2051,12 @@
       "id": "1bfb2da8-94ba-801d-b29b-f86ce0d9309a",
       "slug": "article/1bfb2da8-94ba-801d-b29b-f86ce0d9309a",
       "title": "为什么我要打造自己的独立博客，而不是依赖第三方平台？",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 13,
@@ -1756,7 +2070,12 @@
       "id": "1c1b2da8-94ba-8054-83fb-cd9148b8764c",
       "slug": "article/1c1b2da8-94ba-8054-83fb-cd9148b8764c",
       "title": "普通人如何通过价值投资实现财富增长？",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 23,
@@ -1770,7 +2089,12 @@
       "id": "1c1b2da8-94ba-80b2-b61f-dbd58fb84458",
       "slug": "article/1c1b2da8-94ba-80b2-b61f-dbd58fb84458",
       "title": "刀郎：用音乐普度众生，用岁月成就经典",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 18,
@@ -1784,7 +2108,12 @@
       "id": "1c1b2da8-94ba-80de-a28f-f6654e8b19b2",
       "slug": "article/1c1b2da8-94ba-80de-a28f-f6654e8b19b2",
       "title": "工作、学习、财务与成长的一些思考",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 12,
@@ -1798,7 +2127,12 @@
       "id": "1c4b2da8-94ba-8004-b4e1-de4ac7463946",
       "slug": "article/1c4b2da8-94ba-8004-b4e1-de4ac7463946",
       "title": "情绪就是你的风水",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 69,
@@ -1812,7 +2146,12 @@
       "id": "1c4b2da8-94ba-80bc-8490-d3491f4fc2bb",
       "slug": "article/1c4b2da8-94ba-80bc-8490-d3491f4fc2bb",
       "title": "《茅台传》读后感：品质是信仰，成功是坚持",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 11,
@@ -1826,7 +2165,12 @@
       "id": "1bdb2da8-94ba-8017-8a89-dae5dd7702bd",
       "slug": "article/1bdb2da8-94ba-8017-8a89-dae5dd7702bd",
       "title": "耐心是投资的关键：我的股市定投经验与心得",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 21,
@@ -1840,7 +2184,12 @@
       "id": "1c4b2da8-94ba-80be-9d52-e6bfb9f21df4",
       "slug": "article/1c4b2da8-94ba-80be-9d52-e6bfb9f21df4",
       "title": "放长线钓大鱼",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 23,
@@ -1854,7 +2203,12 @@
       "id": "1c4b2da8-94ba-80b8-b709-c8903d268236",
       "slug": "article/1c4b2da8-94ba-80b8-b709-c8903d268236",
       "title": "过年见闻录",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 12,
@@ -1868,7 +2222,12 @@
       "id": "1c5b2da8-94ba-806c-a64c-f0925bbdfff5",
       "slug": "article/1c5b2da8-94ba-806c-a64c-f0925bbdfff5",
       "title": "两个做事实用方法",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 21,
@@ -1882,7 +2241,12 @@
       "id": "1c5b2da8-94ba-80a7-baa6-e225b2060d39",
       "slug": "article/1c5b2da8-94ba-80a7-baa6-e225b2060d39",
       "title": "建议你有张美金储蓄卡",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 17,
@@ -1896,7 +2260,12 @@
       "id": "1c5b2da8-94ba-80cd-b2d8-d78bb6fde8d9",
       "slug": "article/1c5b2da8-94ba-80cd-b2d8-d78bb6fde8d9",
       "title": "每天变得更聪明一点点",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 47,
@@ -1910,7 +2279,12 @@
       "id": "1c5b2da8-94ba-809b-99b0-c7bedcb2a093",
       "slug": "article/1c5b2da8-94ba-809b-99b0-c7bedcb2a093",
       "title": "时间的艺术与财富的哲学",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 75,
@@ -1924,7 +2298,12 @@
       "id": "1c5b2da8-94ba-80e3-9ef2-df248134ae6a",
       "slug": "article/1c5b2da8-94ba-80e3-9ef2-df248134ae6a",
       "title": "向雷军学习 - 读《小米创业思考》有感",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 13,
@@ -1938,7 +2317,12 @@
       "id": "1c5b2da8-94ba-8047-b216-da3e4fd8c76b",
       "slug": "article/1c5b2da8-94ba-8047-b216-da3e4fd8c76b",
       "title": "2024年终总结",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 14,
@@ -1952,7 +2336,12 @@
       "id": "1cab2da8-94ba-801a-a10c-fa589b2835c9",
       "slug": "article/1cab2da8-94ba-801a-a10c-fa589b2835c9",
       "title": "忙碌的误区在于无效的努力",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 58,
@@ -1966,7 +2355,12 @@
       "id": "1cab2da8-94ba-80ec-a8e4-d3d87da057f7",
       "slug": "article/1cab2da8-94ba-80ec-a8e4-d3d87da057f7",
       "title": "深圳、香港二日",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 36,
@@ -1980,7 +2374,12 @@
       "id": "1cab2da8-94ba-8070-b518-e021cc52ab9b",
       "slug": "article/1cab2da8-94ba-8070-b518-e021cc52ab9b",
       "title": "选择比努力更重要",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 34,
@@ -1994,7 +2393,12 @@
       "id": "1cab2da8-94ba-80f2-a631-ca5fa87ad75c",
       "slug": "article/1cab2da8-94ba-80f2-a631-ca5fa87ad75c",
       "title": "利用工具提高效率，珍惜时间",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 33,
@@ -2008,7 +2412,12 @@
       "id": "1cdb2da8-94ba-80d2-8272-f0f02b78ea50",
       "slug": "article/1cdb2da8-94ba-80d2-8272-f0f02b78ea50",
       "title": "巴山蜀水峨眉山",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 41,
@@ -2022,7 +2431,12 @@
       "id": "1cdb2da8-94ba-800b-a501-ee9f41bedf3a",
       "slug": "article/1cdb2da8-94ba-800b-a501-ee9f41bedf3a",
       "title": "瑞·达利欧的五大交易原则",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 24,
@@ -2036,7 +2450,12 @@
       "id": "1d4b2da8-94ba-805c-b6a7-c9da2e089d3c",
       "slug": "article/1d4b2da8-94ba-805c-b6a7-c9da2e089d3c",
       "title": "万般劫难，“静”可保命",
+      "isIndexBlocked": false,
       "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
         "short-summary"
       ],
       "summaryChars": 32,
@@ -2046,5 +2465,6 @@
       "href": "/article/1d4b2da8-94ba-805c-b6a7-c9da2e089d3c",
       "url": "https://mufeng.blog/article/1d4b2da8-94ba-805c-b6a7-c9da2e089d3c"
     }
-  ]
+  ],
+  "indexBlockedPosts": []
 }
