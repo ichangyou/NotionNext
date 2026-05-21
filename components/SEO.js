@@ -48,7 +48,7 @@ const SEO = props => {
     keywords = post?.tags?.join(',')
   }
   if (meta) {
-    url = `${url}/${meta.slug}`
+    url = meta.slug ? `${url}/${meta.slug}` : url
     image = meta.image || '/bg_image.jpg'
   }
   const TITLE = siteConfig('TITLE')
