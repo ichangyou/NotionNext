@@ -12,6 +12,8 @@ class MyDocument extends Document {
     return (
       <Html lang={BLOG.LANG}>
         <Head>
+          {/* GEO: 告知 AI 爬虫存在 Markdown 格式的站点概览 */}
+          <link rel='alternate' type='text/markdown' href='/llms.txt' />
           {/* Google AdSense 验证 - 静态加载确保被Google爬虫检测到 */}
           {BLOG.ADSENSE_GOOGLE_ID && (
             <script
