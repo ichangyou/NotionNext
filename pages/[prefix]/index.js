@@ -101,6 +101,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { prefix }, locale }) {
+  if (!prefix || prefix === 'undefined') {
+    return { notFound: true }
+  }
   let fullSlug = prefix
   const from = `slug-props-${fullSlug}`
   const props = await getGlobalData({ from, locale })

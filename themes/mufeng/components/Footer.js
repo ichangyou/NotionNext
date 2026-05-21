@@ -19,7 +19,7 @@ export default function Footer(props) {
 
   return (
     <footer className='w-full border-t border-gray-100 dark:border-gray-800/50 mt-auto'>
-      <div className='max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-5 md:py-8'>
+      <div className='max-w-4xl ml-0 mr-auto px-4 md:px-8 lg:pl-[90px] lg:pr-12 py-5 md:py-8'>
         {/* 统计信息 - site_pv=浏览量(每次访问+1)，site_uv=访客数(同一浏览器只计一次) */}
         <div className='flex flex-wrap items-center justify-center gap-3 mb-4 md:mb-6 text-xs text-gray-400 dark:text-gray-500'>
           <span className='hidden busuanzi_container_site_uv items-center gap-1.5'>

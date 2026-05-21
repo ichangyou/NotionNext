@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-19T01:30:28.751Z",
+  "generatedAt": "2026-05-21T15:03:38.754Z",
   "site": "https://mufeng.blog",
   "qualityGuard": {
     "enabled": true,
@@ -18,21 +18,116 @@
     ]
   },
   "totals": {
-    "publishedPosts": 180,
-    "lowQualityPosts": 128,
+    "publishedPosts": 197,
+    "lowQualityPosts": 133,
     "indexBlockedPosts": 0,
-    "warningOnlyPosts": 128
+    "warningOnlyPosts": 133
   },
   "reasonStats": {
     "all": {
-      "short-summary": 128
+      "short-summary": 133
     },
     "blocking": {},
     "warning": {
-      "short-summary": 128
+      "short-summary": 133
     }
   },
   "lowQualityPosts": [
+    {
+      "id": "35eb2da8-94ba-80f2-a983-d9259e2f2287",
+      "slug": "article/agent-skills-ai-memory-handbook",
+      "title": "AI 每天早上都失忆了，直到我给它装了这",
+      "isIndexBlocked": false,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 74,
+      "wordCount": 0,
+      "publishDay": "2026-5-12",
+      "lastEditedDay": "2026-5-12",
+      "href": "/article/agent-skills-ai-memory-handbook",
+      "url": "https://mufeng.blog/article/agent-skills-ai-memory-handbook"
+    },
+    {
+      "id": "350b2da8-94ba-8043-a147-e1e7ac78710f",
+      "slug": "article/app-store-launch-lessons-indie-ios-developer",
+      "title": "一个 iOS 独立开发者的 App Store 上线复盘",
+      "isIndexBlocked": false,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 77,
+      "wordCount": 0,
+      "publishDay": "2026-4-28",
+      "lastEditedDay": "2026-4-28",
+      "href": "/article/app-store-launch-lessons-indie-ios-developer",
+      "url": "https://mufeng.blog/article/app-store-launch-lessons-indie-ios-developer"
+    },
+    {
+      "id": "34ab2da8-94ba-809f-aa17-d94f9b83cf2c",
+      "slug": "article/codex-npm-optional-dependencies-question",
+      "title": "Codex CLI 安装踩坑实录：npm optionalDependencies 问题 & pnpm 终极解决方案",
+      "isIndexBlocked": false,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 73,
+      "wordCount": 0,
+      "publishDay": "2026-4-22",
+      "lastEditedDay": "2026-4-25",
+      "href": "/article/codex-npm-optional-dependencies-question",
+      "url": "https://mufeng.blog/article/codex-npm-optional-dependencies-question"
+    },
+    {
+      "id": "349b2da8-94ba-802b-a42b-ded22ceb7518",
+      "slug": "article/notebooklm-learning-case-study",
+      "title": "我用 NotebookLM，完整复盘一个真实学习案例",
+      "isIndexBlocked": false,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 78,
+      "wordCount": 0,
+      "publishDay": "2026-4-21",
+      "lastEditedDay": "2026-4-21",
+      "href": "/article/notebooklm-learning-case-study",
+      "url": "https://mufeng.blog/article/notebooklm-learning-case-study"
+    },
+    {
+      "id": "349b2da8-94ba-80ee-b063-e13e79cbffbf",
+      "slug": "article/ai-for-solo-ios-developers",
+      "title": "AI 让我不再需要团队开发 App",
+      "isIndexBlocked": false,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 47,
+      "wordCount": 0,
+      "publishDay": "2026-4-21",
+      "lastEditedDay": "2026-4-21",
+      "href": "/article/ai-for-solo-ios-developers",
+      "url": "https://mufeng.blog/article/ai-for-solo-ios-developers"
+    },
     {
       "id": "33fb2da8-94ba-8068-bfeb-de6d9cc33b29",
       "slug": "article/stock-analysis-baba",
@@ -2372,7 +2467,7 @@
     },
     {
       "id": "1cab2da8-94ba-8070-b518-e021cc52ab9b",
-      "slug": "article/1cab2da8-94ba-8070-b518-e021cc52ab9b",
+      "slug": "article/thinking-in-decades",
       "title": "选择比努力更重要",
       "isIndexBlocked": false,
       "reasons": [
@@ -2385,13 +2480,13 @@
       "summaryChars": 34,
       "wordCount": 0,
       "publishDay": "2024-11-16",
-      "lastEditedDay": "2025-4-3",
-      "href": "/article/1cab2da8-94ba-8070-b518-e021cc52ab9b",
-      "url": "https://mufeng.blog/article/1cab2da8-94ba-8070-b518-e021cc52ab9b"
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/thinking-in-decades",
+      "url": "https://mufeng.blog/article/thinking-in-decades"
     },
     {
       "id": "1cab2da8-94ba-80f2-a631-ca5fa87ad75c",
-      "slug": "article/1cab2da8-94ba-80f2-a631-ca5fa87ad75c",
+      "slug": "article/upgrading-the-workflow",
       "title": "利用工具提高效率，珍惜时间",
       "isIndexBlocked": false,
       "reasons": [
@@ -2404,13 +2499,13 @@
       "summaryChars": 33,
       "wordCount": 0,
       "publishDay": "2024-11-10",
-      "lastEditedDay": "2025-4-3",
-      "href": "/article/1cab2da8-94ba-80f2-a631-ca5fa87ad75c",
-      "url": "https://mufeng.blog/article/1cab2da8-94ba-80f2-a631-ca5fa87ad75c"
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/upgrading-the-workflow",
+      "url": "https://mufeng.blog/article/upgrading-the-workflow"
     },
     {
       "id": "1cdb2da8-94ba-80d2-8272-f0f02b78ea50",
-      "slug": "article/1cdb2da8-94ba-80d2-8272-f0f02b78ea50",
+      "slug": "article/mountains-clouds-and-time",
       "title": "巴山蜀水峨眉山",
       "isIndexBlocked": false,
       "reasons": [
@@ -2423,13 +2518,13 @@
       "summaryChars": 41,
       "wordCount": 0,
       "publishDay": "2024-10-2",
-      "lastEditedDay": "2025-4-6",
-      "href": "/article/1cdb2da8-94ba-80d2-8272-f0f02b78ea50",
-      "url": "https://mufeng.blog/article/1cdb2da8-94ba-80d2-8272-f0f02b78ea50"
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/mountains-clouds-and-time",
+      "url": "https://mufeng.blog/article/mountains-clouds-and-time"
     },
     {
       "id": "1cdb2da8-94ba-800b-a501-ee9f41bedf3a",
-      "slug": "article/1cdb2da8-94ba-800b-a501-ee9f41bedf3a",
+      "slug": "article/principles-and-risk",
       "title": "瑞·达利欧的五大交易原则",
       "isIndexBlocked": false,
       "reasons": [
@@ -2442,13 +2537,13 @@
       "summaryChars": 24,
       "wordCount": 0,
       "publishDay": "2024-7-5",
-      "lastEditedDay": "2025-4-6",
-      "href": "/article/1cdb2da8-94ba-800b-a501-ee9f41bedf3a",
-      "url": "https://mufeng.blog/article/1cdb2da8-94ba-800b-a501-ee9f41bedf3a"
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/principles-and-risk",
+      "url": "https://mufeng.blog/article/principles-and-risk"
     },
     {
       "id": "1d4b2da8-94ba-805c-b6a7-c9da2e089d3c",
-      "slug": "article/1d4b2da8-94ba-805c-b6a7-c9da2e089d3c",
+      "slug": "article/learning-methods-and-quiet-growth",
       "title": "万般劫难，“静”可保命",
       "isIndexBlocked": false,
       "reasons": [
@@ -2461,9 +2556,9 @@
       "summaryChars": 32,
       "wordCount": 0,
       "publishDay": "2024-3-23",
-      "lastEditedDay": "2025-4-13",
-      "href": "/article/1d4b2da8-94ba-805c-b6a7-c9da2e089d3c",
-      "url": "https://mufeng.blog/article/1d4b2da8-94ba-805c-b6a7-c9da2e089d3c"
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/learning-methods-and-quiet-growth",
+      "url": "https://mufeng.blog/article/learning-methods-and-quiet-growth"
     }
   ],
   "indexBlockedPosts": []
