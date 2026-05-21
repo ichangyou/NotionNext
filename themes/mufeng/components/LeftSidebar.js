@@ -202,12 +202,9 @@ export default function LeftSidebar(props) {
       </div>
 
       {/* 社交图标 */}
-      <div className='mb-6'>
+      <div className='mb-3'>
         <SocialButton />
       </div>
-
-      {/* 分隔线 */}
-      <div className='border-t border-gray-100 dark:border-gray-800/50 mb-6' />
 
       {/* 搜索框 */}
       <SidebarSearch />
