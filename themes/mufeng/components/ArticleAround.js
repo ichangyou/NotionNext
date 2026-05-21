@@ -12,7 +12,7 @@ export default function ArticleAround({ prev, next }) {
   return (
     <section className='text-gray-800 dark:text-gray-400 h-12 flex items-center justify-between space-x-5 my-4'>
       {prev && <Link
-        href={`/${prev.slug}`} // 链接到[postSlug].js路由
+        href={prev.href}
         passHref
         className='text-sm cursor-pointer justify-start items-center flex hover:underline duration-300'>
 
@@ -20,7 +20,7 @@ export default function ArticleAround({ prev, next }) {
 
       </Link>}
       {next && <Link
-        href={`/${next.slug}`} // 链接到[postSlug].js路由
+        href={next.href}
         passHref
         className='text-sm cursor-pointer justify-end items-center flex hover:underline duration-300'>
         {next.title}

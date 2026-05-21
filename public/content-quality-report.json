@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T09:42:26.380Z",
+  "generatedAt": "2026-05-21T11:48:43.509Z",
   "site": "https://mufeng.blog",
   "qualityGuard": {
     "enabled": true,
@@ -2467,7 +2467,7 @@
     },
     {
       "id": "1cab2da8-94ba-8070-b518-e021cc52ab9b",
-      "slug": "article/1cab2da8-94ba-8070-b518-e021cc52ab9b",
+      "slug": "article/thinking-in-decades",
       "title": "选择比努力更重要",
       "isIndexBlocked": false,
       "reasons": [
@@ -2480,13 +2480,13 @@
       "summaryChars": 34,
       "wordCount": 0,
       "publishDay": "2024-11-16",
-      "lastEditedDay": "2025-4-3",
-      "href": "/article/1cab2da8-94ba-8070-b518-e021cc52ab9b",
-      "url": "https://mufeng.blog/article/1cab2da8-94ba-8070-b518-e021cc52ab9b"
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/thinking-in-decades",
+      "url": "https://mufeng.blog/article/thinking-in-decades"
     },
     {
       "id": "1cab2da8-94ba-80f2-a631-ca5fa87ad75c",
-      "slug": "article/1cab2da8-94ba-80f2-a631-ca5fa87ad75c",
+      "slug": "article/upgrading-the-workflow",
       "title": "利用工具提高效率，珍惜时间",
       "isIndexBlocked": false,
       "reasons": [
@@ -2499,13 +2499,13 @@
       "summaryChars": 33,
       "wordCount": 0,
       "publishDay": "2024-11-10",
-      "lastEditedDay": "2025-4-3",
-      "href": "/article/1cab2da8-94ba-80f2-a631-ca5fa87ad75c",
-      "url": "https://mufeng.blog/article/1cab2da8-94ba-80f2-a631-ca5fa87ad75c"
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/upgrading-the-workflow",
+      "url": "https://mufeng.blog/article/upgrading-the-workflow"
     },
     {
       "id": "1cdb2da8-94ba-80d2-8272-f0f02b78ea50",
-      "slug": "article/1cdb2da8-94ba-80d2-8272-f0f02b78ea50",
+      "slug": "article/mountains-clouds-and-time",
       "title": "巴山蜀水峨眉山",
       "isIndexBlocked": false,
       "reasons": [
@@ -2518,13 +2518,13 @@
       "summaryChars": 41,
       "wordCount": 0,
       "publishDay": "2024-10-2",
-      "lastEditedDay": "2025-4-6",
-      "href": "/article/1cdb2da8-94ba-80d2-8272-f0f02b78ea50",
-      "url": "https://mufeng.blog/article/1cdb2da8-94ba-80d2-8272-f0f02b78ea50"
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/mountains-clouds-and-time",
+      "url": "https://mufeng.blog/article/mountains-clouds-and-time"
     },
     {
       "id": "1cdb2da8-94ba-800b-a501-ee9f41bedf3a",
-      "slug": "article/1cdb2da8-94ba-800b-a501-ee9f41bedf3a",
+      "slug": "article/principles-and-risk",
       "title": "瑞·达利欧的五大交易原则",
       "isIndexBlocked": false,
       "reasons": [
@@ -2537,13 +2537,13 @@
       "summaryChars": 24,
       "wordCount": 0,
       "publishDay": "2024-7-5",
-      "lastEditedDay": "2025-4-6",
-      "href": "/article/1cdb2da8-94ba-800b-a501-ee9f41bedf3a",
-      "url": "https://mufeng.blog/article/1cdb2da8-94ba-800b-a501-ee9f41bedf3a"
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/principles-and-risk",
+      "url": "https://mufeng.blog/article/principles-and-risk"
     },
     {
       "id": "1d4b2da8-94ba-805c-b6a7-c9da2e089d3c",
-      "slug": "article/1d4b2da8-94ba-805c-b6a7-c9da2e089d3c",
+      "slug": "article/learning-methods-and-quiet-growth",
       "title": "万般劫难，“静”可保命",
       "isIndexBlocked": false,
       "reasons": [
@@ -2556,9 +2556,9 @@
       "summaryChars": 32,
       "wordCount": 0,
       "publishDay": "2024-3-23",
-      "lastEditedDay": "2025-4-13",
-      "href": "/article/1d4b2da8-94ba-805c-b6a7-c9da2e089d3c",
-      "url": "https://mufeng.blog/article/1d4b2da8-94ba-805c-b6a7-c9da2e089d3c"
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/learning-methods-and-quiet-growth",
+      "url": "https://mufeng.blog/article/learning-methods-and-quiet-growth"
     }
   ],
   "indexBlockedPosts": []

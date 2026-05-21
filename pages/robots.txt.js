@@ -48,6 +48,7 @@ Disallow: /
 # Default: allow all standard search engines
 User-agent: *
 Allow: /
+Disallow: /undefined
 
 `
 
