@@ -60,7 +60,7 @@ const SocialButton = () => {
   }, [email, copied])
 
   return (
-    <div className='flex flex-wrap gap-2'>
+    <div className='flex flex-nowrap gap-2'>
       {/* 微信公众号 - 悬停显示二维码 */}
       {wechatMpQrCode && (
         <div
