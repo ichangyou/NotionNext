@@ -32,14 +32,9 @@ export async function getStaticProps({ params: { category, page } }) {
     POSTS_PER_PAGE * page
   )
 
-  // 该页没有文章，重定向到分类首页
+  // 该页没有文章，返回 404（避免 Google 将重定向 URL 视为索引问题）
   if (props.posts.length === 0) {
-    return {
-      redirect: {
-        destination: `/category/${encodeURIComponent(category)}`,
-        permanent: false
-      }
-    }
+    return { notFound: true }
   }
 
   delete props.allPages
