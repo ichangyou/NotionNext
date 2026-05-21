@@ -257,17 +257,24 @@ const getSEOMeta = (props, router, locale) => {
       return {
         title: `${category} | ${locale.COMMON.CATEGORY} | ${siteInfo?.title}`,
         description: `${siteInfo?.description}`,
-        slug: 'category/' + category,
+        slug: 'category/' + category + '/page/' + page,
         image: `${siteInfo?.pageCover}`,
         type: 'website'
       }
     case '/tag/[tag]':
-    case '/tag/[tag]/page/[page]':
       return {
         title: `${tag} | ${locale.COMMON.TAGS} | ${siteInfo?.title}`,
         description: `${siteInfo?.description}`,
         image: `${siteInfo?.pageCover}`,
         slug: 'tag/' + tag,
+        type: 'website'
+      }
+    case '/tag/[tag]/page/[page]':
+      return {
+        title: `${tag} | ${locale.COMMON.TAGS} | ${siteInfo?.title}`,
+        description: `${siteInfo?.description}`,
+        image: `${siteInfo?.pageCover}`,
+        slug: 'tag/' + tag + '/page/' + page,
         type: 'website'
       }
     case '/search':
