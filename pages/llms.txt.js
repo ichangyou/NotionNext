@@ -8,13 +8,32 @@ export const getServerSideProps = async ({ res }) => {
   const id = extractLangId(siteId)
   const siteData = await getGlobalData({ pageId: id, from: 'llms.txt' })
 
-  const author = siteConfig('AUTHOR', BLOG.AUTHOR, siteData?.NOTION_CONFIG) || '沐风'
+  const author =
+    siteConfig('AUTHOR', BLOG.AUTHOR, siteData?.NOTION_CONFIG) || '沐风'
   const bio = siteConfig('BIO', BLOG.BIO, siteData?.NOTION_CONFIG) || ''
-  const link = siteConfig('LINK', BLOG.LINK, siteData?.NOTION_CONFIG) || 'https://mufeng.blog'
-  const description = siteConfig('DESCRIPTION', siteData?.siteInfo?.description, siteData?.NOTION_CONFIG) || `${author}的个人博客`
-  const keywords = siteConfig('KEYWORDS', BLOG.KEYWORDS, siteData?.NOTION_CONFIG) || ''
-  const twitter = siteConfig('CONTACT_TWITTER', BLOG.CONTACT_TWITTER, siteData?.NOTION_CONFIG) || ''
-  const github = siteConfig('CONTACT_GITHUB', BLOG.CONTACT_GITHUB, siteData?.NOTION_CONFIG) || ''
+  const link =
+    siteConfig('LINK', BLOG.LINK, siteData?.NOTION_CONFIG) ||
+    'https://mufeng.blog'
+  const description =
+    siteConfig(
+      'DESCRIPTION',
+      siteData?.siteInfo?.description,
+      siteData?.NOTION_CONFIG
+    ) || `${author}的个人博客`
+  const keywords =
+    siteConfig('KEYWORDS', BLOG.KEYWORDS, siteData?.NOTION_CONFIG) || ''
+  const twitter =
+    siteConfig(
+      'CONTACT_TWITTER',
+      BLOG.CONTACT_TWITTER,
+      siteData?.NOTION_CONFIG
+    ) || ''
+  const github =
+    siteConfig(
+      'CONTACT_GITHUB',
+      BLOG.CONTACT_GITHUB,
+      siteData?.NOTION_CONFIG
+    ) || ''
 
   const content = `# ${author}的博客
 
@@ -36,12 +55,15 @@ ${keywords ? `\n关键词：${keywords}\n` : ''}
 ## 内容说明
 
 - 所有博客文章均为原创内容，转载请注明来源
-- AI 搜索和检索爬虫被允许访问本站，训练爬虫已被屏蔽（详见 robots.txt）
+- 普通搜索索引允许访问；AI 训练用途不授权，具体策略以 robots.txt 和 Cloudflare Content Signals 为准
 - 完整文章列表见 [llms-full.txt](${link}/llms-full.txt)
 `
 
   res.setHeader('Content-Type', 'text/plain; charset=utf-8')
-  res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=600')
+  res.setHeader(
+    'Cache-Control',
+    'public, max-age=3600, stale-while-revalidate=600'
+  )
   res.write(content)
   res.end()
 

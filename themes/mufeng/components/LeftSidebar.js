@@ -164,7 +164,7 @@ export default function LeftSidebar(props) {
   }
 
   return (
-    <div className='flex flex-col h-full pl-[58px] pr-7 py-8'>
+    <div className='flex flex-col h-full px-7 py-8'>
       {/* 头像和个人信息 */}
       <div className='mb-6'>
         <Link href='/'>
