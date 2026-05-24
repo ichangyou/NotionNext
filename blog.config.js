@@ -66,8 +66,8 @@ const BLOG = {
   // uuid重定向至 slug
   UUID_REDIRECT: process.env.UUID_REDIRECT || false,
 
-  // 内容质量过滤（临时调试：只保留最严格的重复摘要过滤，观察 sitemap URL 数量）
-  CONTENT_QUALITY_BLOCK_REASONS: process.env.CONTENT_QUALITY_BLOCK_REASONS || 'repetitive-summary'
+  // 内容质量过滤：移除 duplicate-summary/short-body，避免因 Notion 未填摘要字段导致文章批量被踢出 sitemap
+  CONTENT_QUALITY_BLOCK_REASONS: process.env.CONTENT_QUALITY_BLOCK_REASONS || 'duplicate-title,repetitive-summary'
 }
 
 module.exports = BLOG
