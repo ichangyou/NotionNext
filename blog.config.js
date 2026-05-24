@@ -64,7 +64,10 @@ const BLOG = {
     'Hi，我是一个程序员, Hi，我是一个打工人,Hi，我是一个干饭人,欢迎来到我的博客🎉',
 
   // uuid重定向至 slug
-  UUID_REDIRECT: process.env.UUID_REDIRECT || false
+  UUID_REDIRECT: process.env.UUID_REDIRECT || false,
+
+  // 内容质量过滤（临时调试：只保留最严格的重复摘要过滤，观察 sitemap URL 数量）
+  CONTENT_QUALITY_BLOCK_REASONS: process.env.CONTENT_QUALITY_BLOCK_REASONS || 'repetitive-summary'
 }
 
 module.exports = BLOG
