@@ -101,6 +101,14 @@ const SEO = props => {
   const AUTHOR = siteConfig('AUTHOR')
   const isNoIndexRoute =
     router.route === '/404' ||
+    router.route === '/archive' ||
+    router.route === '/page/[page]' ||
+    router.route === '/tag' ||
+    router.route === '/tag/[tag]' ||
+    router.route === '/tag/[tag]/page/[page]' ||
+    router.route === '/category' ||
+    router.route === '/category/[category]' ||
+    router.route === '/category/[category]/page/[page]' ||
     router.route === '/search' ||
     router.route === '/search/[keyword]' ||
     router.route === '/search/[keyword]/page/[page]'
