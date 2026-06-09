@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Audit — mufeng.blog</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f7; color: #1d1d1f; font-size: 14px; line-height: 1.5; }
+  .container { max-width: 960px; margin: 32px auto; padding: 0 24px; }
+  h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .meta { color: #6e6e73; font-size: 12px; margin-bottom: 24px; }
+  .verdict { background: #fff; border: 1px solid #e5e5ea; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .verdict h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: #6e6e73; margin-bottom: 10px; }
+  .verdict-text { font-size: 15px; font-weight: 500; }
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .summary-card { background: #fff; border: 1px solid #e5e5ea; border-radius: 12px; padding: 16px 20px; }
+  .summary-card h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+  .summary-card.critical h3 { color: #d70015; }
+  .summary-card.warning h3 { color: #c77a00; }
+  .summary-card.passing h3 { color: #1d7b43; }
+  .summary-card ul { list-style: none; }
+  .summary-card ul li { font-size: 13px; padding: 2px 0; }
+  .summary-card ul li.summary-empty { color: #6e6e73; font-style: italic; }
+  .section { background: #fff; border: 1px solid #e5e5ea; border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+  .section-title { font-size: 13px; font-weight: 600; padding: 14px 20px; border-bottom: 1px solid #e5e5ea; background: #fafafa; }
+  .subsection-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: #6e6e73; padding: 10px 20px 4px; background: #fafafa; border-top: 1px solid #f0f0f0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #6e6e73; font-weight: 500; text-align: left; padding: 8px 20px; border-bottom: 1px solid #e5e5ea; }
+  td { padding: 11px 20px; vertical-align: top; border-bottom: 1px solid #f0f0f0; font-size: 13px; }
+  tr:last-child td { border-bottom: none; }
+  .check-name { font-weight: 500; white-space: nowrap; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-fail { background: #ffeef0; color: #d70015; }
+  .badge-warn { background: #fff8e6; color: #c77a00; }
+  .badge-pass { background: #edfbf0; color: #1d7b43; }
+  .badge-info { background: #f0f4ff; color: #3355cc; }
+  .badge-na   { background: #f5f5f7; color: #6e6e73; }
+  .detail-issue { color: #d70015; margin-top: 3px; font-size: 12.5px; }
+  .detail-fix { color: #1d7b43; margin-top: 3px; font-size: 12.5px; }
+  .detail-pass { color: #6e6e73; font-size: 12.5px; }
+  .priority { background: #fff; border: 1px solid #e5e5ea; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .priority h2 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: #6e6e73; margin-bottom: 14px; }
+  .priority-item { display: flex; gap: 14px; margin-bottom: 14px; }
+  .priority-num { flex-shrink: 0; width: 24px; height: 24px; background: #1d1d1f; color: #fff; border-radius: 50%; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .priority-body strong { font-size: 13px; display: block; margin-bottom: 2px; }
+  .priority-body p { font-size: 12.5px; color: #6e6e73; }
+  .upgrade { background: #f0f4ff; border: 1px solid #c3d0f7; border-radius: 12px; padding: 16px 20px; font-size: 13px; margin-bottom: 24px; }
+  .upgrade strong { display: block; margin-bottom: 4px; }
+  .js-notice { font-size: 11.5px; background: #fff8e6; border: 1px solid #ffd060; border-radius: 6px; padding: 6px 10px; margin-bottom: 6px; color: #7a5c00; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>SEO Audit — mufeng.blog</h1>
+  <p class="meta">Audited: 2026-05-29 &nbsp;·&nbsp; Type: Basic &nbsp;·&nbsp; Scope: Homepage (https://mufeng.blog)</p>
+
+  <div class="verdict">
+    <h2>Summary Verdict</h2>
+    <p class="verdict-text">18 checks run — 4 failed, 7 warned, 5 passed, 2 unverifiable (JS-rendered content). Critical issues in title, meta description, soft 404 handling, and missing JSON-LD schema require immediate attention.</p>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card critical">
+      <h3>Critical (Fail)</h3>
+      <ul>
+        <li>Title tag too short (9 chars)</li>
+        <li>Meta description too short &amp; generic</li>
+        <li>Soft 404 — returns 200 for missing pages</li>
+        <li>No JSON-LD schema on homepage</li>
+      </ul>
+    </div>
+    <div class="summary-card warning">
+      <h3>Warnings</h3>
+      <ul>
+        <li>Canonical/trailing slash mismatch</li>
+        <li>H1 unverifiable (JS-rendered)</li>
+        <li>Sitemap not in robots.txt</li>
+        <li>E-E-A-T pages exist but footer linkage unverifiable</li>
+        <li>Images/word count unverifiable</li>
+        <li>No hreflang x-default despite zh-CN html[lang]</li>
+        <li>Keyword placement unverifiable</li>
+      </ul>
+    </div>
+    <div class="summary-card passing">
+      <h3>Passing</h3>
+      <ul>
+        <li>robots.txt valid &amp; accessible</li>
+        <li>Sitemap.xml valid (28 URLs)</li>
+        <li>HTTP → HTTPS (301)</li>
+        <li>www → non-www redirect</li>
+        <li>Canonical tag present</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SITE-LEVEL CHECKS -->
+  <div class="section">
+    <div class="section-title">Site-Level Checks</div>
+    <div class="subsection-label">Crawlability</div>
+    <table>
+      <thead><tr><th>Check</th><th>Status</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="check-name">robots.txt</td>
+          <td><span class="badge badge-pass">Pass</span></td>
+          <td class="detail-pass">Accessible (200). <code>User-agent: *</code> with <code>Allow: /</code>. Includes Cloudflare Content-Signal headers (ai-train=no).</td>
+        </tr>
+        <tr>
+          <td class="check-name">Sitemap.xml</td>
+          <td><span class="badge badge-warn">Warn</span></td>
+          <td>
+            Valid XML urlset · 28 URLs found.
+            <div class="detail-issue">· Sitemap not referenced via <code>Sitemap:</code> directive in robots.txt — crawlers must discover it independently.</div>
+            <div class="detail-fix">Add <code>Sitemap: https://mufeng.blog/sitemap.xml</code> to robots.txt.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="check-name">404 Handling</td>
+          <td><span class="badge badge-fail">Fail</span></td>
+          <td>
+            <div class="detail-issue">· <code>https://mufeng.blog/this-page-definitely-does-not-exist-seo-audit-check</code> returned HTTP 200 — soft 404. · Google may index non-existent pages and waste crawl budget.</div>
+            <div class="detail-fix">Return proper HTTP 404 status for missing routes in Next.js (<code>notFound: true</code> in <code>getStaticProps</code> / app router's <code>notFound()</code>).</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="subsection-label">URL Canonicalization</div>
+    <table>
+      <tbody>
+        <tr>
+          <td class="check-name">HTTP → HTTPS</td>
+          <td><span class="badge badge-pass">Pass</span></td>
+          <td class="detail-pass"><code>http://mufeng.blog/</code> returns 301 → <code>https://mufeng.blog/</code>.</td>
+        </tr>
+        <tr>
+          <td class="check-name">www consistency</td>
+          <td><span class="badge badge-pass">Pass</span></td>
+          <td class="detail-pass"><code>https://www.mufeng.blog/</code> redirects to <code>https://mufeng.blog/</code>.</td>
+        </tr>
+        <tr>
+          <td class="check-name">Trailing slash</td>
+          <td><span class="badge badge-warn">Warn</span></td>
+          <td>
+            <div class="detail-issue">· Canonical tag is <code>https://mufeng.blog</code> (no trailing slash). · Served URL is <code>https://mufeng.blog/</code> (with slash). · Mismatch may cause duplicate content signals.</div>
+            <div class="detail-fix">Align canonical with actual served URL. Set canonical to <code>https://mufeng.blog/</code> or configure Next.js to serve without trailing slash consistently.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="check-name">Canonical match</td>
+          <td><span class="badge badge-warn">Warn</span></td>
+          <td>
+            <div class="detail-issue">· Canonical (<code>https://mufeng.blog</code>) does not exactly match final served URL (<code>https://mufeng.blog/</code>).</div>
+            <div class="detail-fix">Fix canonical tag to exactly match the URL Google indexes after all redirects.</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="subsection-label">i18n / hreflang</div>
+    <table>
+      <tbody>
+        <tr>
+          <td class="check-name">hreflang</td>
+          <td><span class="badge badge-warn">Warn</span></td>
+          <td>
+            <div class="detail-issue">· <code>&lt;html lang="zh-CN"&gt;</code> signals a language-specific page. · No hreflang tags present — no <code>x-default</code> fallback declared. · If the site has any English content or targets international readers, this is a gap.</div>
+            <div class="detail-fix">If site is Chinese-only, add at minimum <code>&lt;link rel="alternate" hreflang="zh-CN" href="https://mufeng.blog/"&gt;</code> and <code>hreflang="x-default"</code>. If bilingual content exists, add full hreflang reciprocal pairs.</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="subsection-label">E-E-A-T Trust Pages</div>
+    <table>
+      <thead><tr><th>Page</th><th>Status</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="check-name">About Us</td>
+          <td><span class="badge badge-warn">Warn</span></td>
+          <td>
+            Page exists (200 at <code>/about</code>).
+            <div class="detail-issue">· Site is JS-rendered — footer/nav links unverifiable from static HTML. Cannot confirm page is linked from homepage.</div>
+            <div class="detail-fix">Ensure About page is linked in footer or navigation with clear anchor text.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="check-name">Contact</td>
+          <td><span class="badge badge-warn">Warn</span></td>
+          <td>
+            Page exists (200 at <code>/contact</code>).
+            <div class="detail-issue">· Footer linkage unverifiable (JS-rendered).</div>
+            <div class="detail-fix">Confirm Contact is accessible from homepage footer.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="check-name">Privacy Policy</td>
+          <td><span class="badge badge-warn">Warn</span></td>
+          <td>
+            Page exists (200 at <code>/privacy</code> and <code>/privacy-policy</code>).
+            <div class="detail-issue">· Two URLs serve privacy content — potential duplicate. · Footer linkage unverifiable.</div>
+            <div class="detail-fix">Canonicalize one privacy URL and redirect the other. Add canonical tag on the privacy page.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="check-name">Terms of Service</td>
+          <td><span class="badge badge-warn">Warn</span></td>
+          <td>
+            Page exists (200 at <code>/terms</code> and <code>/terms-of-service</code>).
+            <div class="detail-issue">· Two URLs serve terms content — potential duplicate. · Footer linkage unverifiable.</div>
+            <div class="detail-fix">Same as Privacy: canonicalize one URL, redirect the other.</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAGE-LEVEL CHECKS -->
+  <div class="section">
+    <div class="section-title">Page-Level Checks — Homepage</div>
+    <div class="js-notice">Note: This site is Next.js SSG with client-side hydration. Static HTML contains minimal content — H1, images, headings, and body text are JavaScript-rendered. Checks marked "Unverified" reflect static HTML only; Google renders JS so actual indexable content may differ.</div>
+    <table>
+      <thead><tr><th>Check</th><th>Status</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="check-name">URL Slug</td>
+          <td><span class="badge badge-pass">Pass</span></td>
+          <td class="detail-pass">Homepage root — no slug judgment needed.</td>
+        </tr>
+        <tr>
+          <td class="check-name">Title Tag</td>
+          <td><span class="badge badge-fail">Fail</span></td>
+          <td>
+            <code>Joey's 博客</code> — 9 characters.
+            <div class="detail-issue">· Critically short (minimum 50 chars recommended). · No keywords — gives Google nothing to rank for. · "博客" alone does not describe content type, audience, or value.</div>
+            <div class="detail-fix">Rewrite to 50–60 chars with primary keyword first. Example: <code>Joey 的开发者笔记 | iOS、Mac 与 AI 工具链 | mufeng.blog</code></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="check-name">Meta Description</td>
+          <td><span class="badge badge-fail">Fail</span></td>
+          <td>
+            <code>一个NotionNext搭建的博客</code> — 17 characters.
+            <div class="detail-issue">· Far below 120-char minimum. · Exposes internal tooling (NotionNext) which is irrelevant to readers. · Zero value proposition — does not describe what content readers will find.</div>
+            <div class="detail-fix">Rewrite to 120–155 chars describing the blog's content and audience. Example: <code>Joey 的个人开发者博客，专注 iOS 开发、Mac 工具链与 AI 工程实践，涵盖 SwiftUI、Xcode 调试、Claude Code 使用技巧与效率工具分享。</code></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="check-name">H1 Tag</td>
+          <td><span class="badge badge-info">Unverified</span></td>
+          <td>
+            <div class="detail-issue">· No H1 found in static HTML — likely JS-rendered. · Googlebot renders JS, but H1 rendered solely client-side is harder to confirm in Search Console.</div>
+            <div class="detail-fix">Verify H1 renders correctly in Google's Rich Results Test. Consider adding H1 via Next.js server-side rendering for critical pages.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="check-name">Canonical Tag</td>
+          <td><span class="badge badge-warn">Warn</span></td>
+          <td>
+            Canonical present: <code>https://mufeng.blog</code>.
+            <div class="detail-issue">· Missing trailing slash — does not exactly match the served URL <code>https://mufeng.blog/</code>.</div>
+            <div class="detail-fix">Update canonical to <code>https://mufeng.blog/</code> to match the actual served URL.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="check-name">Image Alt Text</td>
+          <td><span class="badge badge-info">Unverified</span></td>
+          <td class="detail-pass">0 images in static HTML — all images are JS-rendered. Cannot verify alt text from static source.</td>
+        </tr>
+        <tr>
+          <td class="check-name">Word Count</td>
+          <td><span class="badge badge-warn">Warn</span></td>
+          <td>
+            <div class="detail-issue">· Only 2 words in static HTML — effectively a blank shell. · Even with JS rendering, homepage should have enough indexable text for topical relevance.</div>
+            <div class="detail-fix">Add a brief site introduction or "about this blog" blurb (80–150 words) in SSR/SSG-rendered HTML so it's available in the initial payload.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="check-name">Keyword Placement</td>
+          <td><span class="badge badge-warn">Warn</span></td>
+          <td>
+            <div class="detail-issue">· Title and meta description contain no target keywords. · Cannot assess body keyword placement due to JS rendering.</div>
+            <div class="detail-fix">Fix title and meta description first (see above). Then verify keyword appears in H1 and first visible paragraph after JS rendering.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="check-name">Heading Structure</td>
+          <td><span class="badge badge-info">Unverified</span></td>
+          <td class="detail-pass">No headings (H1–H6) in static HTML — JS-rendered. Verify with Google's Mobile-Friendly Test or a JS-capable crawler.</td>
+        </tr>
+        <tr>
+          <td class="check-name">Internal Links</td>
+          <td><span class="badge badge-warn">Warn</span></td>
+          <td>
+            5 internal links visible in static HTML (navigation only).
+            <div class="detail-issue">· Post links are JS-rendered — not guaranteed to be crawlable without JS execution. · Googlebot renders JS, but static HTML links are more reliably followed.</div>
+            <div class="detail-fix">Ensure Next.js pre-renders at least the first page of posts as static HTML links (&lt;a href&gt;) in the initial payload.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="check-name">Schema (JSON-LD)</td>
+          <td><span class="badge badge-fail">Fail</span></td>
+          <td>
+            <div class="detail-issue">· No JSON-LD schema found in page source. · Homepage should declare <code>WebSite</code> + <code>Organization</code> at minimum. · Missing <code>WebSite</code> schema means Google cannot generate sitelinks search box.</div>
+            <div class="detail-fix">Add to <code>&lt;head&gt;</code>:<br>
+            <code>{"@context":"https://schema.org","@type":"WebSite","name":"Joey's 博客","url":"https://mufeng.blog","author":{"@type":"Person","name":"Joey"}}</code><br>
+            Also add <code>Organization</code> with <code>logo</code> and <code>sameAs</code> for social profiles.</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TOP 3 PRIORITY FIXES -->
+  <div class="priority">
+    <h2>Top 3 Priority Actions</h2>
+    <div class="priority-item">
+      <div class="priority-num">1</div>
+      <div class="priority-body">
+        <strong>Rewrite Title &amp; Meta Description</strong>
+        <p>Current title (9 chars) and description (17 chars) are unusable for ranking. These are the two most direct SEO levers on any page and require only a config change in <code>blog.config.js</code> or the Notion page properties.</p>
+      </div>
+    </div>
+    <div class="priority-item">
+      <div class="priority-num">2</div>
+      <div class="priority-body">
+        <strong>Fix Soft 404 — Return Proper HTTP 404 Status</strong>
+        <p>Every non-existent URL currently returns 200. Google may crawl and index garbage URLs, wasting crawl budget and polluting the index. In Next.js, add <code>notFound: true</code> to catch-all routes or use <code>notFound()</code> in the App Router.</p>
+      </div>
+    </div>
+    <div class="priority-item">
+      <div class="priority-num">3</div>
+      <div class="priority-body">
+        <strong>Add JSON-LD Schema to Homepage</strong>
+        <p>Zero structured data means no rich results eligibility and no sitelinks search box. A <code>WebSite</code> + <code>Person</code> schema block in <code>&lt;Head&gt;</code> takes ~10 lines and is immediately crawlable since it goes into static HTML.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPGRADE PROMPT -->
+  <div class="upgrade">
+    <strong>Want a deeper analysis?</strong>
+    This was a basic SEO audit covering site-level signals and core on-page checks. For advanced technical SEO, content quality scoring, structured data analysis, and full crawl-based findings, use the <code>seo-audit-full</code> skill.
+  </div>
+</div>
+</body>
+</html>
