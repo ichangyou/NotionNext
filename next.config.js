@@ -119,6 +119,18 @@ const nextConfig = {
     ? undefined
     : () => {
         return [
+          // 将所有 vercel.app 预览域名 301 跳转到正式域名，消除重复内容
+          {
+            source: '/:path*',
+            has: [
+              {
+                type: 'host',
+                value: 'notion-next-git-main-ichangyous-projects.vercel.app'
+              }
+            ],
+            destination: 'https://mufeng.blog/:path*',
+            permanent: true
+          },
           {
             source: '/feed',
             destination: '/rss/feed.xml',
