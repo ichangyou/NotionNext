@@ -1,7 +1,5 @@
 import { siteConfig } from '@/lib/config'
-import Link from 'next/link'
 import CONFIG from '../config'
-import SocialButton from './SocialButton'
 
 /**
  * 技术标签
@@ -128,40 +126,6 @@ export default function AboutPage() {
         </section>
       )}
 
-      {/* 联系方式 */}
-      <section className='space-y-5'>
-        <div className='flex items-center gap-3'>
-          <div className='w-1 h-5 bg-red-500 rounded-full' />
-          <h2 className='text-lg font-bold text-gray-900 dark:text-white'>联系我</h2>
-        </div>
-
-        <div className='flex flex-col sm:flex-row gap-3'>
-          {/* 找我的入口 */}
-          <div className='flex-1 p-4 rounded-xl border border-gray-100 dark:border-gray-800 space-y-3'>
-            <p className='text-[13px] text-gray-500 dark:text-gray-400 leading-relaxed'>
-              欢迎通过以下方式联系我，无论是技术交流、合作咨询还是读者反馈。
-            </p>
-            <div className='pt-1'>
-              <SocialButton />
-            </div>
-          </div>
-
-          {/* 我的作品入口 */}
-          <Link
-            href='/works'
-            className='flex items-center gap-4 px-5 py-4 rounded-xl border border-gray-100 dark:border-gray-800 hover:border-red-200 dark:hover:border-red-900/40 hover:bg-red-50/30 dark:hover:bg-red-900/10 transition-all duration-200 group sm:min-w-[180px]'
-          >
-            <div className='w-9 h-9 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 group-hover:bg-red-100 dark:group-hover:bg-red-900/30 transition-colors duration-200'>
-              <i className='fas fa-rocket text-sm text-gray-500 dark:text-gray-400 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-200' />
-            </div>
-            <div>
-              <p className='text-[13px] font-semibold text-gray-800 dark:text-gray-200'>我的作品</p>
-              <p className='text-[11px] text-gray-400 dark:text-gray-500 mt-0.5'>独立开发的 App</p>
-            </div>
-            <i className='fas fa-arrow-right text-[11px] text-gray-300 dark:text-gray-600 group-hover:text-red-400 ml-auto transition-colors duration-200' />
-          </Link>
-        </div>
-      </section>
 
     </div>
   )

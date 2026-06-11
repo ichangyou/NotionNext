@@ -115,7 +115,7 @@ const CONFIG = {
   SIMPLE_ABOUT_BIO_1: process.env.NEXT_PUBLIC_ABOUT_BIO_1 || '我是沐风，独立开发者，主要使用 Swift、Java、Python 构建产品。目前专注于 iOS App 开发和 AI 工具的应用与探索。',
   SIMPLE_ABOUT_BIO_2: process.env.NEXT_PUBLIC_ABOUT_BIO_2 || '这个博客记录我在 AI、软件开发、独立开发和个人成长方面的实践与思考。所有文章均来自真实项目经验、实验记录或长期观察，不写没有积累的内容。',
   SIMPLE_ABOUT_BIO_3: process.env.NEXT_PUBLIC_ABOUT_BIO_3 || '我相信好的内容应该经得起时间检验。与其追热点，不如把一件事做扎实。',
-  SIMPLE_ABOUT_UPDATE_FREQ: process.env.NEXT_PUBLIC_ABOUT_UPDATE_FREQ || '不定期更新，通常每月 2–4 篇。可以关注公众号「沐风」获取新文章推送。',
+  SIMPLE_ABOUT_UPDATE_FREQ: process.env.NEXT_PUBLIC_ABOUT_UPDATE_FREQ || '不定期更新。可以关注公众号「沐风」获取新文章推送。',
   SIMPLE_ABOUT_TECH_STACK: process.env.NEXT_PUBLIC_ABOUT_TECH_STACK || JSON.stringify([
     { label: 'Swift', icon: 'fab fa-swift' },
     { label: 'Java', icon: 'fab fa-java' },
@@ -130,7 +130,9 @@ const CONFIG = {
     { icon: 'fas fa-robot', title: 'AI 实战', desc: 'AI 工具使用、Prompt 工程、AI 辅助编程的真实经验' },
     { icon: 'fab fa-apple', title: 'iOS 独立开发', desc: 'Swift 开发、App 上架、变现路径的踩坑与总结' },
     { icon: 'fas fa-code', title: '软件开发', desc: '架构设计、工程实践、代码质量的思考与沉淀' },
-    { icon: 'fas fa-user', title: '个人成长', desc: '独立开发者的长期主义：学习方法、认知迭代、效率工具' }
+    { icon: 'fas fa-user', title: '个人成长', desc: '独立开发者的长期主义：学习方法、认知迭代、效率工具' },
+    { icon: 'fas fa-book-open', title: '读书笔记', desc: '读过的书、提炼的观点，以及与现实碰撞后的二次思考' },
+    { icon: 'fas fa-chart-line', title: '投资理财', desc: '用 AI 辅助投资决策，记录真实买卖逻辑与持仓复盘' }
   ]),
   SIMPLE_ABOUT_STATS: process.env.NEXT_PUBLIC_ABOUT_STATS || JSON.stringify([
     { value: '3+', label: '年开发经验' },
