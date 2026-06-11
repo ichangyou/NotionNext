@@ -3,7 +3,6 @@ import { siteConfig } from '@/lib/config'
 import { generateContentQualityReport } from '@/lib/content-quality-report'
 import { getGlobalData, getPostBlocks } from '@/lib/db/getSiteData'
 import { generateRss } from '@/lib/rss'
-import { generateSitemapXml } from '@/lib/sitemap.xml'
 import { isPublishedPostForList } from '@/lib/utils/content-indexing'
 import { DynamicLayout } from '@/themes/theme'
 import { generateRedirectJson } from '@/lib/redirect'
@@ -56,8 +55,6 @@ export async function getStaticProps(req) {
 
   // 生成Feed订阅
   generateRss(props)
-  // 生成
-  generateSitemapXml(props)
   // 生成内容质量报告（构建产物）
   generateContentQualityReport(props)
   if (siteConfig('UUID_REDIRECT', false, props?.NOTION_CONFIG)) {
