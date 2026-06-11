@@ -81,6 +81,12 @@ const Slug = props => {
   )
 }
 
+// Explicit page routes that must not be pre-rendered by this dynamic route
+const RESERVED_SLUGS = new Set([
+  'about', 'works', 'archive', 'category', 'search',
+  'tag', 'membership', 'auth', 'dashboard'
+])
+
 export async function getStaticPaths() {
   if (!BLOG.isProd) {
     return {
@@ -92,7 +98,7 @@ export async function getStaticPaths() {
   const from = 'slug-paths'
   const { allPages } = await getGlobalData({ from })
   const paths = allPages
-    ?.filter(row => checkSlugHasNoSlash(row))
+    ?.filter(row => checkSlugHasNoSlash(row) && !RESERVED_SLUGS.has(row.slug))
     .map(row => ({ params: { prefix: row.slug } }))
   return {
     paths: paths,
