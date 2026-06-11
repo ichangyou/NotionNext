@@ -108,6 +108,35 @@ const CONFIG = {
   // 文章列表配置
   POST_LIST_PREVIEW: process.env.NEXT_PUBLIC_POST_LIST_PREVIEW || false, // 是否显示文章预览（简洁列表默认关闭）
 
+  // 关于我页面
+  SIMPLE_MENU_ABOUT: true, // 导航菜单显示「关于我」
+  SIMPLE_ABOUT_TITLE: process.env.NEXT_PUBLIC_ABOUT_TITLE || '关于我',
+  SIMPLE_ABOUT_SUBTITLE: process.env.NEXT_PUBLIC_ABOUT_SUBTITLE || '独立开发者 · 内容创作者',
+  SIMPLE_ABOUT_BIO_1: process.env.NEXT_PUBLIC_ABOUT_BIO_1 || '我是沐风，独立开发者，主要使用 Swift、Java、Python 构建产品。目前专注于 iOS App 开发和 AI 工具的应用与探索。',
+  SIMPLE_ABOUT_BIO_2: process.env.NEXT_PUBLIC_ABOUT_BIO_2 || '这个博客记录我在 AI、软件开发、独立开发和个人成长方面的实践与思考。所有文章均来自真实项目经验、实验记录或长期观察，不写没有积累的内容。',
+  SIMPLE_ABOUT_BIO_3: process.env.NEXT_PUBLIC_ABOUT_BIO_3 || '我相信好的内容应该经得起时间检验。与其追热点，不如把一件事做扎实。',
+  SIMPLE_ABOUT_UPDATE_FREQ: process.env.NEXT_PUBLIC_ABOUT_UPDATE_FREQ || '不定期更新，通常每月 2–4 篇。可以关注公众号「沐风」获取新文章推送。',
+  SIMPLE_ABOUT_TECH_STACK: process.env.NEXT_PUBLIC_ABOUT_TECH_STACK || JSON.stringify([
+    { label: 'Swift', icon: 'fab fa-swift' },
+    { label: 'Java', icon: 'fab fa-java' },
+    { label: 'Python', icon: 'fab fa-python' },
+    { label: 'Next.js', icon: 'fab fa-react' },
+    { label: 'iOS / SwiftUI', icon: 'fab fa-apple' },
+    { label: 'AI / LLM', icon: 'fas fa-robot' },
+    { label: 'Git', icon: 'fab fa-git-alt' },
+    { label: 'Node.js', icon: 'fab fa-node-js' }
+  ]),
+  SIMPLE_ABOUT_TOPICS: process.env.NEXT_PUBLIC_ABOUT_TOPICS || JSON.stringify([
+    { icon: 'fas fa-robot', title: 'AI 实战', desc: 'AI 工具使用、Prompt 工程、AI 辅助编程的真实经验' },
+    { icon: 'fab fa-apple', title: 'iOS 独立开发', desc: 'Swift 开发、App 上架、变现路径的踩坑与总结' },
+    { icon: 'fas fa-code', title: '软件开发', desc: '架构设计、工程实践、代码质量的思考与沉淀' },
+    { icon: 'fas fa-user', title: '个人成长', desc: '独立开发者的长期主义：学习方法、认知迭代、效率工具' }
+  ]),
+  SIMPLE_ABOUT_STATS: process.env.NEXT_PUBLIC_ABOUT_STATS || JSON.stringify([
+    { value: '3+', label: '年开发经验' },
+    { value: '1', label: '已上架 App' }
+  ]),
+
   // 作品展示页
   SIMPLE_MENU_WORKS: true, // 导航菜单显示「我的作品」
   SIMPLE_WORKS_TITLE: process.env.NEXT_PUBLIC_WORKS_TITLE || '我的作品',

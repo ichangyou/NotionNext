@@ -109,6 +109,12 @@ export default function LeftSidebar(props) {
       name: '付费专栏',
       href: '/membership',
       show: siteConfig('SIMPLE_PAID_COLUMNS_ENABLE', null, CONFIG)
+    },
+    {
+      icon: 'fas fa-user',
+      name: '关于我',
+      href: '/about',
+      show: siteConfig('SIMPLE_MENU_ABOUT', null, CONFIG)
     }
   ]
 

@@ -77,6 +77,9 @@ const PaidColumnsPage = dynamic(() => import('./components/PaidColumnsPage'), {
 const WorksPage = dynamic(() => import('./components/WorksPage'), {
   ssr: false
 })
+const AboutPage = dynamic(() => import('./components/AboutPage'), {
+  ssr: false
+})
 
 // 主题全局状态
 const ThemeGlobalSimple = createContext()
@@ -482,6 +485,13 @@ const LayoutWorks = props => {
 }
 
 /**
+ * 关于我页面
+ */
+const LayoutAbout = props => {
+  return <AboutPage {...props} />
+}
+
+/**
  * 分类列表
  * @param {*} props
  * @returns
@@ -543,6 +553,7 @@ const LayoutTagIndex = props => {
 
 export {
   Layout404,
+  LayoutAbout,
   LayoutArchive,
   LayoutBase,
   LayoutCategoryIndex,
