@@ -3,7 +3,6 @@ import { siteConfig } from '@/lib/config'
 import { generateContentQualityReport } from '@/lib/content-quality-report'
 import { getGlobalData, getPostBlocks } from '@/lib/db/getSiteData'
 import { generateRss } from '@/lib/rss'
-import { generateSitemapXml } from '@/lib/sitemap.xml'
 import { isPublishedPostForList } from '@/lib/utils/content-indexing'
 import { DynamicLayout } from '@/themes/theme'
 import { generateRedirectJson } from '@/lib/redirect'
@@ -56,8 +55,6 @@ export async function getStaticProps(req) {
 
   // 生成Feed订阅
   generateRss(props)
-  // 生成
-  generateSitemapXml(props)
   // 生成内容质量报告（构建产物）
   generateContentQualityReport(props)
   if (siteConfig('UUID_REDIRECT', false, props?.NOTION_CONFIG)) {
@@ -69,6 +66,18 @@ export async function getStaticProps(req) {
 
   delete props.allPages
 
+  // 裁剪 posts：列表页只需要展示字段，移除文章详情、封面图等大字段
+  props.posts = trimPostsForList(props.posts)
+
+  // allNavPages 只需 slug + short_id（用于站内链接转换和随机跳转），其余字段占用大量 props 体积
+  props.allNavPages = props.allNavPages?.map(({ slug, short_id }) => ({
+    slug,
+    short_id
+  }))
+
+  // latestPosts 与 posts 格式相同，同样裁剪
+  props.latestPosts = trimPostsForList(props.latestPosts)
+
   const revalidate = process.env.EXPORT
     ? undefined
     : siteConfig(
@@ -78,6 +87,26 @@ export async function getStaticProps(req) {
       )
   console.log('[ISR] index revalidate =', revalidate, '| NOTION_CONFIG override =', props.NOTION_CONFIG?.NEXT_REVALIDATE_SECOND ?? 'none')
   return { props, revalidate }
+}
+
+// 列表页所需的 post 字段白名单
+// 详情页独有字段（blockMap/toc/slug/tags/tagItems/pageCover 等）在 [prefix] 路由里按需传入
+const LIST_POST_FIELDS = [
+  'id', 'title', 'summary', 'href', 'slug',
+  'date', 'publishDay', 'createdTime',
+  'category', 'pageIcon', 'type',
+  'blockMap' // 仅 POST_LIST_PREVIEW 启用时才有值
+]
+
+function trimPostsForList(posts) {
+  if (!Array.isArray(posts)) return posts
+  return posts.map(post => {
+    const trimmed = {}
+    for (const field of LIST_POST_FIELDS) {
+      if (post[field] !== undefined) trimmed[field] = post[field]
+    }
+    return trimmed
+  })
 }
 
 export default Index
