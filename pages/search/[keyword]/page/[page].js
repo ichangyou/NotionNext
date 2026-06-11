@@ -18,7 +18,7 @@ const Index = props => {
  * @param {*} param0
  * @returns
  */
-export async function getStaticProps({ params: { keyword, page }, locale }) {
+export async function getServerSideProps({ params: { keyword, page }, locale }) {
   const props = await getGlobalData({
     from: 'search-props',
     pageType: ['Post'],
@@ -37,23 +37,7 @@ export async function getStaticProps({ params: { keyword, page }, locale }) {
   props.keyword = keyword
   props.page = page
   delete props.allPages
-  return {
-    props,
-    revalidate: process.env.EXPORT
-      ? undefined
-      : siteConfig(
-          'NEXT_REVALIDATE_SECOND',
-          BLOG.NEXT_REVALIDATE_SECOND,
-          props.NOTION_CONFIG
-        )
-  }
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: [{ params: { keyword: 'NotionNext', page: '1' } }],
-    fallback: true
-  }
+  return { props }
 }
 
 /**
