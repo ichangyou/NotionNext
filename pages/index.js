@@ -69,16 +69,15 @@ export async function getStaticProps(req) {
 
   delete props.allPages
 
-  return {
-    props,
-    revalidate: process.env.EXPORT
-      ? undefined
-      : siteConfig(
-          'NEXT_REVALIDATE_SECOND',
-          BLOG.NEXT_REVALIDATE_SECOND,
-          props.NOTION_CONFIG
-        )
-  }
+  const revalidate = process.env.EXPORT
+    ? undefined
+    : siteConfig(
+        'NEXT_REVALIDATE_SECOND',
+        BLOG.NEXT_REVALIDATE_SECOND,
+        props.NOTION_CONFIG
+      )
+  console.log('[ISR] index revalidate =', revalidate, '| NOTION_CONFIG override =', props.NOTION_CONFIG?.NEXT_REVALIDATE_SECOND ?? 'none')
+  return { props, revalidate }
 }
 
 export default Index
