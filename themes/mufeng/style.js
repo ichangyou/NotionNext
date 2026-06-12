@@ -209,12 +209,102 @@ const Style = () => {
     transition: color 0.2s ease;
   }
 
+  /* ======== 文章内容防横向溢出（全尺寸） ======== */
+
+  #article-wrapper {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
   /* ======== 响应式优化 ======== */
 
   @media (max-width: 1024px) {
     #container-wrapper {
       padding-left: 1rem;
       padding-right: 1rem;
+    }
+  }
+
+  /* ======== 平板端防横向溢出（769px – 1023px，侧栏已隐藏） ======== */
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    #notion-article {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .notion-page {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    .notion-page-content {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    #article-wrapper .notion-collection,
+    #article-wrapper .notion-table,
+    #article-wrapper .notion-collection-view-type-table {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      display: block;
+      max-width: 100%;
+    }
+
+    #article-wrapper .notion-table-view {
+      min-width: auto !important;
+    }
+
+    #article-wrapper .code-toolbar {
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    #article-wrapper .notion-code {
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch;
+      font-size: 13px !important;
+    }
+
+    #article-wrapper .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #article-wrapper img,
+    #article-wrapper video {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+
+    #article-wrapper .notion-asset-wrapper,
+    #article-wrapper .notion-asset-wrapper-image {
+      max-width: 100% !important;
+    }
+
+    #article-wrapper iframe,
+    #article-wrapper .notion-embed {
+      max-width: 100% !important;
+    }
+  }
+
+  /* ======== 小于 1024px 时 Notion 多列转单列 ======== */
+
+  @media (max-width: 1023px) {
+    .notion-row {
+      flex-direction: column;
+    }
+
+    .notion-row .notion-column {
+      width: 100% !important;
+    }
+
+    .notion-row .notion-spacer {
+      display: none;
     }
   }
 
@@ -337,6 +427,25 @@ const Style = () => {
     /* ---- 目录浮动按钮位置避开底部安全区 ---- */
     .floating-toc-btn {
       bottom: calc(1rem + env(safe-area-inset-bottom));
+    }
+
+    /* ---- 无封面文章去掉 react-notion-x 的顶部占位间距 ---- */
+    .notion-page-no-cover {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+
+    .notion-page-no-cover.notion-page-no-icon {
+      padding-top: 0 !important;
+    }
+
+    .notion-page-no-cover.notion-page-has-image-icon {
+      padding-top: 48px !important;
+    }
+
+    /* ---- 全页 Notion 底部 padding 收窄 ---- */
+    .notion-full-page {
+      padding-bottom: 2rem !important;
     }
   }
 
