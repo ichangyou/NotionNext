@@ -120,7 +120,7 @@ const NotionPage = ({ post, className }) => {
     <>
       <div
         id='notion-article'
-        className={`mx-auto overflow-hidden ${className || ''}`}>
+        className={`w-full overflow-x-hidden ${className || ''}`}>
         <NotionRenderer
           recordMap={post?.blockMap}
           mapPageUrl={mapPageUrl}

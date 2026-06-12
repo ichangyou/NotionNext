@@ -366,7 +366,7 @@ const LayoutSlug = props => {
       {!lock && post && (
         <div className='relative'>
           {/* 文章主内容 */}
-          <div className={`px-2 ${fullWidth ? '' : 'xl:max-w-4xl 2xl:max-w-6xl'}`}>
+          <div className={`${fullWidth ? '' : 'xl:max-w-4xl 2xl:max-w-6xl'}`}>
             {/* 文章信息 */}
             <ArticleInfo post={post} />
 
@@ -378,7 +378,7 @@ const LayoutSlug = props => {
             <div
               id='article-wrapper'
               ref={articleRef}
-              className='relative'
+              className='relative overflow-x-hidden'
               style={wechatGated && cutoffHeight ? {
                 maxHeight: `${cutoffHeight}px`,
                 overflow: 'hidden'
