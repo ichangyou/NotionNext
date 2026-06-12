@@ -19,7 +19,7 @@ export async function getStaticPaths() {
   if (!BLOG.isProd) {
     return {
       paths: [],
-      fallback: true
+      fallback: 'blocking'
     }
   }
 
@@ -40,7 +40,7 @@ export async function getStaticPaths() {
 
   return {
     paths: paths,
-    fallback: true
+    fallback: 'blocking'
   }
 }
 
