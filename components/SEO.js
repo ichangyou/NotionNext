@@ -118,6 +118,7 @@ const SEO = props => {
   return (
     <Head>
       <link rel='icon' href={favicon} />
+      <link rel='alternate' type='application/rss+xml' title={title} href={`${LINK}/rss/feed.xml`} />
       <title>{title}</title>
       {!isNoIndexPage && router.route !== '/404' && (
         <link rel='canonical' href={url} />
