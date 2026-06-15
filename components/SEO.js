@@ -115,6 +115,12 @@ const SEO = props => {
   const isNoIndexPage = isNoIndexRoute || isNoIndexPost(post)
   const robotsContent = isNoIndexPage ? 'noindex, nofollow' : 'follow, index'
 
+  // 将相对路径转为绝对 URL，便于搜索引擎与 AI 爬虫正确解析结构化数据中的图片
+  const toAbsoluteUrl = u =>
+    !u || u.startsWith('http') ? u : `${LINK}${u.startsWith('/') ? '' : '/'}${u}`
+  const absoluteImage = toAbsoluteUrl(image)
+  const absoluteLogo = toAbsoluteUrl(favicon)
+
   return (
     <Head>
       <link rel='icon' href={favicon} />
@@ -190,7 +196,7 @@ const SEO = props => {
                 '@type': 'BlogPosting',
                 headline: title,
                 description: description,
-                image: image,
+                image: absoluteImage,
                 url: url,
                 datePublished: meta.publishDay,
                 dateModified: post?.lastEditedDay || meta.publishDay,
@@ -203,7 +209,7 @@ const SEO = props => {
                   name: AUTHOR,
                   logo: {
                     '@type': 'ImageObject',
-                    url: favicon
+                    url: absoluteLogo
                   }
                 },
                 keywords: keywords,
@@ -213,6 +219,41 @@ const SEO = props => {
             }}
           />
         </>
+      )}
+      {router.route === '/' && (
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'WebSite',
+                  name: title,
+                  url: LINK,
+                  description: description,
+                  inLanguage: siteConfig('LANG'),
+                  publisher: { '@id': `${LINK}/#author` },
+                  potentialAction: {
+                    '@type': 'SearchAction',
+                    target: {
+                      '@type': 'EntryPoint',
+                      urlTemplate: `${LINK}/search/{search_term_string}`
+                    },
+                    'query-input': 'required name=search_term_string'
+                  }
+                },
+                {
+                  '@type': 'Person',
+                  '@id': `${LINK}/#author`,
+                  name: AUTHOR,
+                  url: LINK,
+                  image: absoluteLogo
+                }
+              ]
+            })
+          }}
+        />
       )}
       {children}
     </Head>

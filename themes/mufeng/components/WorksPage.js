@@ -1,6 +1,48 @@
 import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
+import Head from 'next/head'
 import CONFIG from '../config'
+
+/**
+ * platform → schema.org operatingSystem 映射
+ */
+const OS_MAP = { ios: 'iOS', android: 'Android', web: 'Web' }
+
+/**
+ * 为已上架应用构建 SoftwareApplication 结构化数据
+ * 帮助搜索引擎与 AI 爬虫理解“这是一个软件产品”
+ */
+function buildSoftwareAppJsonLd(works) {
+  const LINK = siteConfig('LINK')
+  const AUTHOR = siteConfig('AUTHOR')
+  const toAbs = u =>
+    !u || u.startsWith('http') ? u : `${LINK}${u.startsWith('/') ? '' : '/'}${u}`
+
+  const apps = works
+    .filter(app => app.status === 'live')
+    .map(app => {
+      const data = {
+        '@type': 'SoftwareApplication',
+        name: app.name,
+        operatingSystem: OS_MAP[app.platform] || app.platform,
+        description: app.slogan || undefined,
+        image: toAbs(app.icon) || undefined,
+        screenshot: (app.screenshots || []).map(toAbs),
+        url: app.links?.us || app.links?.cn || undefined,
+        author: { '@type': 'Person', name: AUTHOR }
+      }
+      if (app.category) data.applicationCategory = app.category
+      // 去除空值字段
+      Object.keys(data).forEach(k => {
+        const v = data[k]
+        if (v === undefined || (Array.isArray(v) && v.length === 0)) delete data[k]
+      })
+      return data
+    })
+
+  if (apps.length === 0) return null
+  return { '@context': 'https://schema.org', '@graph': apps }
+}
 
 /**
  * 平台信息映射
@@ -234,8 +276,18 @@ export default function WorksPage() {
     works = []
   }
 
+  const softwareJsonLd = buildSoftwareAppJsonLd(works)
+
   return (
     <div className='max-w-3xl'>
+      {softwareJsonLd && (
+        <Head>
+          <script
+            type='application/ld+json'
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
+          />
+        </Head>
+      )}
       {/* Hero 区域 */}
       <div className='mb-10'>
         <h1 className='text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight'>
