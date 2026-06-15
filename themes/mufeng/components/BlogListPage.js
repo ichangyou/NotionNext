@@ -5,6 +5,7 @@ import { useGlobal } from '@/lib/global'
 import { formatDateFmt } from '@/lib/utils/formatDate'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import CONFIG from '../config'
 
 /**
@@ -16,6 +17,7 @@ import CONFIG from '../config'
 export default function BlogListPage(props) {
   const { page = 1, posts, postCount } = props
   const router = useRouter()
+  const [jumpValue, setJumpValue] = useState('')
   const { NOTION_CONFIG } = useGlobal()
   const POSTS_PER_PAGE = siteConfig('POSTS_PER_PAGE', null, NOTION_CONFIG)
   const totalPage = Math.ceil(postCount / POSTS_PER_PAGE)
@@ -36,20 +38,35 @@ export default function BlogListPage(props) {
     .replace(/\/$/, '')
     .replace('.html', '')
 
-  // 生成页码数组，带省略号
+  // 生成页码数组，带省略号（当前页 ±2 窗口）
   const getPageNumbers = (current, total) => {
     if (total <= 7) {
       return Array.from({ length: total }, (_, i) => i + 1)
     }
-    const pages = []
-    pages.push(1)
-    if (current > 3) pages.push('...')
-    const start = Math.max(2, current - 1)
-    const end = Math.min(total - 1, current + 1)
+    const pages = [1]
+    const start = Math.max(2, current - 2)
+    const end = Math.min(total - 1, current + 2)
+    if (start > 2) pages.push('left-dots')
     for (let i = start; i <= end; i++) pages.push(i)
-    if (current < total - 2) pages.push('...')
+    if (end < total - 1) pages.push('right-dots')
     pages.push(total)
     return pages
+  }
+
+  // 跳转到指定页（带边界钳制）
+  const goToPage = (target) => {
+    const p = Math.min(Math.max(1, parseInt(target, 10)), totalPage)
+    if (!p || Number.isNaN(p) || p === currentPage) return
+    router.push({
+      pathname: p === 1 ? `${pagePrefix}/` : `${pagePrefix}/page/${p}`,
+      query: router.query.s ? { s: router.query.s } : {}
+    })
+  }
+
+  const handleJump = (e) => {
+    e.preventDefault()
+    goToPage(jumpValue)
+    setJumpValue('')
   }
 
   // 计算文章序号（考虑分页）
@@ -102,7 +119,7 @@ export default function BlogListPage(props) {
 
       {/* 分页导航 */}
       {totalPage > 1 && (
-        <div className='flex items-center justify-center mt-6 md:mt-10 pt-4 md:pt-6 border-t border-gray-100 dark:border-gray-800'>
+        <div className='flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-3 mt-6 md:mt-10 pt-4 md:pt-6 border-t border-gray-100 dark:border-gray-800'>
           <nav className='flex items-center gap-1'>
             {/* 上一页箭头 */}
             {showPrev ? (
@@ -114,6 +131,7 @@ export default function BlogListPage(props) {
                   query: router.query.s ? { s: router.query.s } : {}
                 }}
                 className='w-8 h-8 flex items-center justify-center rounded-md text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200'
+                aria-label='上一页'
               >
                 <i className='fas fa-chevron-left text-xs' />
               </Link>
@@ -125,10 +143,23 @@ export default function BlogListPage(props) {
 
             {/* 页码 */}
             {getPageNumbers(currentPage, totalPage).map((item, i) =>
-              item === '...' ? (
-                <span key={`dot-${i}`} className='w-8 h-8 flex items-center justify-center text-xs text-gray-300 dark:text-gray-600'>
-                  ...
-                </span>
+              item === 'left-dots' || item === 'right-dots' ? (
+                <button
+                  key={item}
+                  type='button'
+                  onClick={() =>
+                    goToPage(
+                      item === 'left-dots' ? currentPage - 5 : currentPage + 5
+                    )
+                  }
+                  className='group/dots w-8 h-8 flex items-center justify-center rounded-md text-xs text-gray-300 dark:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-300 transition-all duration-200'
+                  aria-label={item === 'left-dots' ? '向前跳 5 页' : '向后跳 5 页'}
+                >
+                  <span className='group-hover/dots:hidden'>···</span>
+                  <i
+                    className={`fas ${item === 'left-dots' ? 'fa-angles-left' : 'fa-angles-right'} hidden group-hover/dots:inline`}
+                  />
+                </button>
               ) : (
                 <Link
                   key={item}
@@ -157,6 +188,7 @@ export default function BlogListPage(props) {
                   query: router.query.s ? { s: router.query.s } : {}
                 }}
                 className='w-8 h-8 flex items-center justify-center rounded-md text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200'
+                aria-label='下一页'
               >
                 <i className='fas fa-chevron-right text-xs' />
               </Link>
@@ -166,6 +198,34 @@ export default function BlogListPage(props) {
               </span>
             )}
           </nav>
+
+          {/* 快速跳页：仅在页码折叠时出现 */}
+          {totalPage > 7 && (
+            <form
+              onSubmit={handleJump}
+              className='flex items-center gap-1.5 text-sm text-gray-400 dark:text-gray-500'
+            >
+              <span className='whitespace-nowrap'>跳至</span>
+              <input
+                type='number'
+                min={1}
+                max={totalPage}
+                value={jumpValue}
+                onChange={(e) => setJumpValue(e.target.value)}
+                placeholder={String(currentPage)}
+                aria-label='输入页码'
+                className='w-12 h-8 text-center rounded-md border border-gray-200 dark:border-gray-700 bg-transparent text-gray-700 dark:text-gray-200 text-sm placeholder:text-gray-300 dark:placeholder:text-gray-600 focus:outline-none focus:border-gray-400 dark:focus:border-gray-500 transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+              />
+              <span className='whitespace-nowrap'>页 / 共 {totalPage} 页</span>
+              <button
+                type='submit'
+                aria-label='跳转'
+                className='w-8 h-8 flex items-center justify-center rounded-md text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400 transition-all duration-200'
+              >
+                <i className='fas fa-arrow-right text-xs' />
+              </button>
+            </form>
+          )}
         </div>
       )}
     </div>
