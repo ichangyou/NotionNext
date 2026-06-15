@@ -198,25 +198,31 @@ function AppHeroCard({ app }) {
         {/* 右栏：截图展示 */}
         {screenshots.length > 0 && (
           <>
-            {/* 桌面端：倾斜景深排列 */}
-            <div className='hidden md:flex items-end justify-center gap-4 px-6 pb-8 pt-6 bg-gray-50 dark:bg-gray-800/30 min-w-[320px] max-w-[420px]'>
+            {/* 桌面端：满幅裁切贴边 —— 截图放大撑满面板，底部溢出裁切 */}
+            <div className='hidden md:flex items-end justify-center pt-8 bg-gradient-to-b from-gray-50 to-gray-100/60 dark:from-gray-800/20 dark:to-gray-800/50 min-w-[340px] max-w-[440px] relative overflow-hidden'>
               {screenshots.slice(0, 3).map((src, i) => {
-                const transforms = [
-                  '-rotate-[3deg] translate-y-3 scale-95',
-                  'rotate-0 scale-100 z-10',
-                  'rotate-[3deg] translate-y-3 scale-95'
+                // 中间图作主视觉，略大且压在两侧之上；三张整体下移，底部溢出被裁切
+                const styles = [
+                  '-rotate-[5deg] translate-y-10 z-0',
+                  'rotate-0 translate-y-6 z-10',
+                  'rotate-[5deg] translate-y-10 z-0'
                 ]
+                const isCenter = i === 1
                 return (
                   <div
                     key={i}
-                    className={`transform ${transforms[i]} transition-transform duration-300 flex-shrink-0`}
-                    style={{ width: '28%' }}
+                    className={`transform ${styles[i]} transition-transform duration-300 flex-shrink-0 ${isCenter ? '' : 'opacity-95'}`}
+                    style={{
+                      width: isCenter ? '46%' : '40%',
+                      marginLeft: isCenter ? '-7%' : 0,
+                      marginRight: isCenter ? '-7%' : 0
+                    }}
                   >
                     <LazyImage
                       src={src}
-                      className='w-full rounded-xl shadow-lg object-cover'
-                      width={120}
-                      height={260}
+                      className='w-full rounded-2xl shadow-xl object-cover'
+                      width={200}
+                      height={433}
                       alt={`${app.name} 截图 ${i + 1}`}
                     />
                   </div>
