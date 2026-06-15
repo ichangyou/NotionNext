@@ -2,6 +2,19 @@ import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { getGlobalData } from '@/lib/db/getSiteData'
 import { extractLangId } from '@/lib/utils/pageId'
+import MUFENG_CONFIG from '@/themes/mufeng/config'
+
+/** 安全解析配置里的 JSON 数组字段，失败时返回空数组 */
+const parseJsonArray = raw => {
+  if (Array.isArray(raw)) return raw
+  if (typeof raw !== 'string') return []
+  try {
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}
 
 export const getServerSideProps = async ({ res }) => {
   const siteId = BLOG.NOTION_PAGE_ID.split(',')[0]
@@ -35,6 +48,20 @@ export const getServerSideProps = async ({ res }) => {
       siteData?.NOTION_CONFIG
     ) || ''
 
+  // 关于页素材（来自 mufeng 主题配置），用于生成「关于」段落
+  const subtitle = siteConfig('SIMPLE_ABOUT_SUBTITLE', null, MUFENG_CONFIG) || ''
+  const bio1 = siteConfig('SIMPLE_ABOUT_BIO_1', null, MUFENG_CONFIG) || ''
+  const topicTitles = parseJsonArray(
+    siteConfig('SIMPLE_ABOUT_TOPICS', null, MUFENG_CONFIG)
+  )
+    .map(t => t?.title)
+    .filter(Boolean)
+
+  const aboutLead = bio1 || `${author}，${bio ? bio + '，' : ''}个人博客记录技术探索、写作思考与生活感悟。`
+  const topicsSentence = topicTitles.length
+    ? `内容方向覆盖 ${topicTitles.join('、')}。`
+    : '内容以中文为主，技术文章覆盖 Web 开发、AI 应用、效率工具等方向。'
+
   const content = `# ${author}的博客
 
 > ${description}${bio ? `——${bio}` : ''}
@@ -50,7 +77,7 @@ export const getServerSideProps = async ({ res }) => {
 ${twitter ? `- [X / Twitter](${twitter})\n` : ''}${github ? `- [GitHub](${github})\n` : ''}
 ## 关于
 
-${author}，${bio ? bio + '，' : ''}个人博客记录技术探索、写作思考与生活感悟。内容以中文为主，技术文章覆盖 Web 开发、AI 应用、效率工具等方向。博客基于 Notion 构建，使用开源的 NotionNext 框架驱动。
+${author}${subtitle ? `，${subtitle}` : ''}。${aboutLead}${topicsSentence}博客基于 Notion 构建，使用开源的 NotionNext 框架驱动。
 ${keywords ? `\n关键词：${keywords}\n` : ''}
 ## 内容说明
 
