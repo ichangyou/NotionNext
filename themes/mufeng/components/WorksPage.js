@@ -146,32 +146,53 @@ function AppHeroCard({ app }) {
           )}
 
           {/* 下载按钮 */}
-          {!isComingSoon && (app.links?.cn || app.links?.us) && (
-            <div className='mt-8 flex flex-wrap gap-3'>
-              {app.links.cn && (
+          {!isComingSoon && (app.links?.cn || app.links?.us) && (() => {
+            const hasCn = !!app.links.cn
+            const hasUs = !!app.links.us
+            const isSingle = hasCn !== hasUs // 仅一个商店链接
+            const primaryBtn =
+              'inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-medium hover:opacity-85 transition-opacity duration-200'
+            const secondaryBtn =
+              'inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200'
+            if (isSingle) {
+              const href = app.links.cn || app.links.us
+              return (
+                <div className='mt-8 flex flex-wrap gap-3'>
+                  <a
+                    href={href}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className={primaryBtn}
+                  >
+                    <i className={`${platform.icon} text-base`} />
+                    App Store 下载
+                  </a>
+                </div>
+              )
+            }
+            return (
+              <div className='mt-8 flex flex-wrap gap-3'>
                 <a
                   href={app.links.cn}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-medium hover:opacity-85 transition-opacity duration-200'
+                  className={primaryBtn}
                 >
                   <i className={`${platform.icon} text-base`} />
                   🇨🇳 中国区下载
                 </a>
-              )}
-              {app.links.us && (
                 <a
                   href={app.links.us}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200'
+                  className={secondaryBtn}
                 >
                   <i className={`${platform.icon} text-base`} />
                   🇺🇸 美区下载
                 </a>
-              )}
-            </div>
-          )}
+              </div>
+            )
+          })()}
         </div>
 
         {/* 右栏：截图展示 */}

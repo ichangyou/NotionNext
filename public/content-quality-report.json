@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-12T08:29:41.032Z",
+  "generatedAt": "2026-06-15T13:32:41.486Z",
   "site": "https://mufeng.blog",
   "qualityGuard": {
     "enabled": true,
@@ -16,7 +16,7 @@
     ]
   },
   "totals": {
-    "publishedPosts": 196,
+    "publishedPosts": 197,
     "lowQualityPosts": 29,
     "indexBlockedPosts": 0,
     "warningOnlyPosts": 29
