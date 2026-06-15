@@ -365,6 +365,30 @@ const getSEOMeta = (props, router, locale) => {
         slug: 'category',
         type: 'website'
       }
+    case '/about':
+      return {
+        title: `${siteConfig('SIMPLE_ABOUT_TITLE', '关于我')} | ${siteInfo?.title}`,
+        description: `${siteInfo?.description}`,
+        image: `${siteInfo?.pageCover}`,
+        slug: 'about',
+        type: 'website'
+      }
+    case '/works':
+      return {
+        title: `${siteConfig('SIMPLE_WORKS_TITLE', '我的作品')} | ${siteInfo?.title}`,
+        description: `${siteInfo?.description}`,
+        image: `${siteInfo?.pageCover}`,
+        slug: 'works',
+        type: 'website'
+      }
+    case '/membership':
+      return {
+        title: `付费专栏 | ${siteInfo?.title}`,
+        description: `${siteInfo?.description}`,
+        image: `${siteInfo?.pageCover}`,
+        slug: 'membership',
+        type: 'website'
+      }
     default:
       return {
         title: post
