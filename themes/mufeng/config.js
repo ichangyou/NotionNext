@@ -160,9 +160,9 @@ const CONFIG = {
       slogan: '说出来，记下来',
       features: [
         '实时语音识别，边说边转',
-        '支持普通话、英语等多语言',
-        '转写结果一键复制、分享或导出',
-        '简洁界面，专注记录本身'
+        'AI 一键润色，粗稿变精华',
+        'AI 智能回顾，看见你的这一周',
+        '离线转录、多语言、iCloud 同步'
       ],
       links: {
         cn: 'https://apps.apple.com/cn/app/%E9%B2%B8%E6%B5%B7%E8%AF%AD%E8%AE%B0/id6759850635',
