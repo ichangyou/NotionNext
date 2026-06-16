@@ -87,9 +87,12 @@ function AppHeroCard({ app }) {
       id={app.id}
       className={`rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 overflow-hidden transition-all duration-300 ${isComingSoon ? 'opacity-60' : ''}`}
     >
-      <div className='flex flex-col md:flex-row'>
+      {/* 断点说明：sidebar 在 lg(960px) 出现并占用 290px，会把内容区压窄，
+          故在 lg 区间让卡片回退为单列堆叠，避免文字列被 340px 截图面板挤成逐字换行；
+          仅在有足够宽度的 md(无 sidebar) 与 xl+(sidebar+空间充足) 才用双列。 */}
+      <div className='flex flex-col md:flex-row lg:flex-col xl:flex-row'>
         {/* 左栏：文字信息 */}
-        <div className='flex-1 p-6 md:p-8 flex flex-col'>
+        <div className='flex-1 p-6 xl:p-8 flex flex-col'>
           {/* 平台 + 状态徽章 */}
           <div className='flex items-center gap-2 mb-5'>
             <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium ${platform.bgLight} ${platform.bgDark} ${platform.textColor}`}>
@@ -198,8 +201,9 @@ function AppHeroCard({ app }) {
         {/* 右栏：截图展示 */}
         {screenshots.length > 0 && (
           <>
-            {/* 桌面端：满幅裁切贴边 —— 仅底部溢出裁切；两侧图收进面板内，标题不被左右边缘切断 */}
-            <div className='hidden md:flex items-end justify-center gap-2 px-8 pt-8 bg-gradient-to-b from-gray-50 to-gray-100/60 dark:from-gray-800/20 dark:to-gray-800/50 min-w-[340px] max-w-[480px] relative overflow-hidden'>
+            {/* 桌面端：满幅裁切贴边 —— 仅底部溢出裁切；两侧图收进面板内，标题不被左右边缘切断。
+                仅在双列模式（md 区间 + xl 及以上）显示，lg 区间因被 sidebar 压窄而隐藏。 */}
+            <div className='hidden md:flex lg:hidden xl:flex items-end justify-center gap-2 px-8 pt-8 bg-gradient-to-b from-gray-50 to-gray-100/60 dark:from-gray-800/20 dark:to-gray-800/50 min-w-[340px] max-w-[480px] relative overflow-hidden'>
               {screenshots.slice(0, 3).map((src, i) => {
                 // 中间图作主视觉略大；三张彼此留间距、互不遮挡，整体下移，仅底部溢出被裁切
                 const styles = [
@@ -226,8 +230,8 @@ function AppHeroCard({ app }) {
               })}
             </div>
 
-            {/* 移动端：横向可滑动 */}
-            <div className='md:hidden flex gap-3 px-6 pb-6 overflow-x-auto snap-x snap-mandatory'>
+            {/* 堆叠模式：横向可滑动（base、以及被 sidebar 压窄的 lg 区间） */}
+            <div className='flex md:hidden lg:flex xl:hidden gap-3 px-6 pb-6 overflow-x-auto snap-x snap-mandatory'>
               {screenshots.slice(0, 3).map((src, i) => (
                 <div key={i} className='snap-start flex-shrink-0 w-32'>
                   <LazyImage
