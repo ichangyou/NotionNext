@@ -160,13 +160,57 @@ const CONFIG = {
       slogan: '说出来，记下来',
       features: [
         '实时语音识别，边说边转',
-        '支持普通话、英语等多语言',
-        '转写结果一键复制、分享或导出',
-        '简洁界面，专注记录本身'
+        'AI 一键润色，粗稿变精华',
+        'AI 智能回顾，看见你的这一周',
+        '离线转录、多语言、iCloud 同步'
       ],
       links: {
         cn: 'https://apps.apple.com/cn/app/%E9%B2%B8%E6%B5%B7%E8%AF%AD%E8%AE%B0/id6759850635',
         us: 'https://apps.apple.com/us/app/jingnote/id6759850635'
+      }
+    },
+    {
+      id: 'duesight',
+      name: 'DueSight',
+      platform: 'ios',
+      status: 'live',
+      icon: '/works/duesight/icon.png',
+      screenshots: [
+        '/works/duesight/s1.png',
+        '/works/duesight/s2.png',
+        '/works/duesight/s3.png'
+      ],
+      slogan: '订阅，心里有数',
+      features: [
+        '集中管理所有订阅，续费日期一目了然',
+        '到期前智能提醒，告别意外扣费',
+        '自动统计每月、每年支出',
+        '数据本地存储，隐私优先'
+      ],
+      links: {
+        us: 'https://apps.apple.com/us/app/duesight-subscription-tracker/id6761469689'
+      }
+    },
+    {
+      id: 'shotzen',
+      name: 'ShotZen',
+      platform: 'ios',
+      status: 'live',
+      icon: '/works/shotzen/icon.png',
+      screenshots: [
+        '/works/shotzen/s1.png',
+        '/works/shotzen/s2.png',
+        '/works/shotzen/s3.png'
+      ],
+      slogan: '截图，该清理了',
+      features: [
+        '智能识别截图与重复图片',
+        '按类别快速清理，释放空间',
+        '全程本地处理，隐私安全',
+        '清理前逐张确认，不误删'
+      ],
+      links: {
+        us: 'https://apps.apple.com/us/app/shotzen-screenshot-cleaner/id6764285456'
       }
     }
   ])

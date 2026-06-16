@@ -115,7 +115,7 @@ const LayoutBase = props => {
           </aside>
 
           {/* 右侧主内容区 */}
-          <main className='flex-1 min-h-screen flex flex-col'>
+          <main className='flex-1 min-w-0 min-h-screen flex flex-col'>
             {/* 顶部加载进度条 */}
             {onLoading && (
               <div className='fixed top-0 left-0 right-0 z-50'>
@@ -129,7 +129,7 @@ const LayoutBase = props => {
             </div>
 
             {/* 内容行：文章 + 右侧目录（items-stretch 让 aside 撑满高度，保证 sticky 生效） */}
-            <div className='flex flex-1'>
+            <div className='flex flex-1 min-w-0'>
               {/* 主内容区域 */}
               <div
                 id='container-wrapper'
@@ -162,11 +162,6 @@ const LayoutBase = props => {
 
                   {children}
                 </Transition>
-
-                {/* 原生广告：移动端隐藏，autorelaxed 在小屏幕上产生大量空白 */}
-                <div className='hidden md:block'>
-                  <AdSlot type='native' />
-                </div>
               </div>
 
               {/* 右侧目录面板（xl 以上显示，内容由 LayoutSlug 注入） */}
@@ -425,6 +420,11 @@ const LayoutSlug = props => {
                 {/* 评论区 */}
                 <div className='focus-hide'>
                   <Comment frontMatter={post} />
+                </div>
+
+                {/* 原生广告：仅文章页展示，移动端隐藏（autorelaxed 在小屏幕上产生大量空白） */}
+                <div className='hidden md:block focus-hide'>
+                  <AdSlot type='native' />
                 </div>
               </>
             )}

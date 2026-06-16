@@ -1,6 +1,48 @@
 import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
+import Head from 'next/head'
 import CONFIG from '../config'
+
+/**
+ * platform → schema.org operatingSystem 映射
+ */
+const OS_MAP = { ios: 'iOS', android: 'Android', web: 'Web' }
+
+/**
+ * 为已上架应用构建 SoftwareApplication 结构化数据
+ * 帮助搜索引擎与 AI 爬虫理解“这是一个软件产品”
+ */
+function buildSoftwareAppJsonLd(works) {
+  const LINK = siteConfig('LINK')
+  const AUTHOR = siteConfig('AUTHOR')
+  const toAbs = u =>
+    !u || u.startsWith('http') ? u : `${LINK}${u.startsWith('/') ? '' : '/'}${u}`
+
+  const apps = works
+    .filter(app => app.status === 'live')
+    .map(app => {
+      const data = {
+        '@type': 'SoftwareApplication',
+        name: app.name,
+        operatingSystem: OS_MAP[app.platform] || app.platform,
+        description: app.slogan || undefined,
+        image: toAbs(app.icon) || undefined,
+        screenshot: (app.screenshots || []).map(toAbs),
+        url: app.links?.us || app.links?.cn || undefined,
+        author: { '@type': 'Person', name: AUTHOR }
+      }
+      if (app.category) data.applicationCategory = app.category
+      // 去除空值字段
+      Object.keys(data).forEach(k => {
+        const v = data[k]
+        if (v === undefined || (Array.isArray(v) && v.length === 0)) delete data[k]
+      })
+      return data
+    })
+
+  if (apps.length === 0) return null
+  return { '@context': 'https://schema.org', '@graph': apps }
+}
 
 /**
  * 平台信息映射
@@ -45,9 +87,12 @@ function AppHeroCard({ app }) {
       id={app.id}
       className={`rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 overflow-hidden transition-all duration-300 ${isComingSoon ? 'opacity-60' : ''}`}
     >
-      <div className='flex flex-col md:flex-row'>
+      {/* 断点说明：sidebar 在 lg(960px) 出现并占用 290px，会把内容区压窄，
+          故在 lg 区间让卡片回退为单列堆叠，避免文字列被 340px 截图面板挤成逐字换行；
+          仅在有足够宽度的 md(无 sidebar) 与 xl+(sidebar+空间充足) 才用双列。 */}
+      <div className='flex flex-col md:flex-row lg:flex-col xl:flex-row'>
         {/* 左栏：文字信息 */}
-        <div className='flex-1 p-6 md:p-8 flex flex-col'>
+        <div className='flex-1 p-6 xl:p-8 flex flex-col'>
           {/* 平台 + 状态徽章 */}
           <div className='flex items-center gap-2 mb-5'>
             <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium ${platform.bgLight} ${platform.bgDark} ${platform.textColor}`}>
@@ -104,56 +149,80 @@ function AppHeroCard({ app }) {
           )}
 
           {/* 下载按钮 */}
-          {!isComingSoon && (app.links?.cn || app.links?.us) && (
-            <div className='mt-8 flex flex-wrap gap-3'>
-              {app.links.cn && (
+          {!isComingSoon && (app.links?.cn || app.links?.us) && (() => {
+            const hasCn = !!app.links.cn
+            const hasUs = !!app.links.us
+            const isSingle = hasCn !== hasUs // 仅一个商店链接
+            const primaryBtn =
+              'inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-medium hover:opacity-85 transition-opacity duration-200'
+            const secondaryBtn =
+              'inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200'
+            if (isSingle) {
+              const href = app.links.cn || app.links.us
+              return (
+                <div className='mt-8 flex flex-wrap gap-3'>
+                  <a
+                    href={href}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className={primaryBtn}
+                  >
+                    <i className={`${platform.icon} text-base`} />
+                    App Store 下载
+                  </a>
+                </div>
+              )
+            }
+            return (
+              <div className='mt-8 flex flex-wrap gap-3'>
                 <a
                   href={app.links.cn}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-medium hover:opacity-85 transition-opacity duration-200'
+                  className={primaryBtn}
                 >
                   <i className={`${platform.icon} text-base`} />
                   🇨🇳 中国区下载
                 </a>
-              )}
-              {app.links.us && (
                 <a
                   href={app.links.us}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200'
+                  className={secondaryBtn}
                 >
                   <i className={`${platform.icon} text-base`} />
                   🇺🇸 美区下载
                 </a>
-              )}
-            </div>
-          )}
+              </div>
+            )
+          })()}
         </div>
 
         {/* 右栏：截图展示 */}
         {screenshots.length > 0 && (
           <>
-            {/* 桌面端：倾斜景深排列 */}
-            <div className='hidden md:flex items-end justify-center gap-4 px-6 pb-8 pt-6 bg-gray-50 dark:bg-gray-800/30 min-w-[320px] max-w-[420px]'>
+            {/* 桌面端：满幅裁切贴边 —— 仅底部溢出裁切；两侧图收进面板内，标题不被左右边缘切断。
+                仅在双列模式（md 区间 + xl 及以上）显示，lg 区间因被 sidebar 压窄而隐藏。 */}
+            <div className='hidden md:flex lg:hidden xl:flex items-end justify-center gap-2 px-8 pt-8 bg-gradient-to-b from-gray-50 to-gray-100/60 dark:from-gray-800/20 dark:to-gray-800/50 min-w-[340px] max-w-[480px] relative overflow-hidden'>
               {screenshots.slice(0, 3).map((src, i) => {
-                const transforms = [
-                  '-rotate-[3deg] translate-y-3 scale-95',
-                  'rotate-0 scale-100 z-10',
-                  'rotate-[3deg] translate-y-3 scale-95'
+                // 中间图作主视觉略大；三张彼此留间距、互不遮挡，整体下移，仅底部溢出被裁切
+                const styles = [
+                  '-rotate-[3deg] translate-y-10 z-0',
+                  'rotate-0 translate-y-6 z-10',
+                  'rotate-[3deg] translate-y-10 z-0'
                 ]
+                const isCenter = i === 1
                 return (
                   <div
                     key={i}
-                    className={`transform ${transforms[i]} transition-transform duration-300 flex-shrink-0`}
-                    style={{ width: '28%' }}
+                    className={`transform ${styles[i]} transition-transform duration-300 flex-shrink-0 ${isCenter ? '' : 'opacity-95'}`}
+                    style={{ width: isCenter ? '40%' : '28%' }}
                   >
                     <LazyImage
                       src={src}
-                      className='w-full rounded-xl shadow-lg object-cover'
-                      width={120}
-                      height={260}
+                      className='w-full rounded-2xl shadow-xl object-cover'
+                      width={180}
+                      height={390}
                       alt={`${app.name} 截图 ${i + 1}`}
                     />
                   </div>
@@ -161,8 +230,8 @@ function AppHeroCard({ app }) {
               })}
             </div>
 
-            {/* 移动端：横向可滑动 */}
-            <div className='md:hidden flex gap-3 px-6 pb-6 overflow-x-auto snap-x snap-mandatory'>
+            {/* 堆叠模式：横向可滑动（base、以及被 sidebar 压窄的 lg 区间） */}
+            <div className='flex md:hidden lg:flex xl:hidden gap-3 px-6 pb-6 overflow-x-auto snap-x snap-mandatory'>
               {screenshots.slice(0, 3).map((src, i) => (
                 <div key={i} className='snap-start flex-shrink-0 w-32'>
                   <LazyImage
@@ -234,8 +303,18 @@ export default function WorksPage() {
     works = []
   }
 
+  const softwareJsonLd = buildSoftwareAppJsonLd(works)
+
   return (
     <div className='max-w-3xl'>
+      {softwareJsonLd && (
+        <Head>
+          <script
+            type='application/ld+json'
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
+          />
+        </Head>
+      )}
       {/* Hero 区域 */}
       <div className='mb-10'>
         <h1 className='text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 leading-tight'>
