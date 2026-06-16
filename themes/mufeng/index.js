@@ -162,11 +162,6 @@ const LayoutBase = props => {
 
                   {children}
                 </Transition>
-
-                {/* 原生广告：移动端隐藏，autorelaxed 在小屏幕上产生大量空白 */}
-                <div className='hidden md:block'>
-                  <AdSlot type='native' />
-                </div>
               </div>
 
               {/* 右侧目录面板（xl 以上显示，内容由 LayoutSlug 注入） */}
@@ -425,6 +420,11 @@ const LayoutSlug = props => {
                 {/* 评论区 */}
                 <div className='focus-hide'>
                   <Comment frontMatter={post} />
+                </div>
+
+                {/* 原生广告：仅文章页展示，移动端隐藏（autorelaxed 在小屏幕上产生大量空白） */}
+                <div className='hidden md:block focus-hide'>
+                  <AdSlot type='native' />
                 </div>
               </>
             )}
