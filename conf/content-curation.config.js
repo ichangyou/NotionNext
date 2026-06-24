@@ -78,12 +78,29 @@ const VERY_THIN_PERSONAL = [
   'after-a-small-drink-in-shanghai' // 69 字
 ]
 
+// ── F. 单薄随笔：建议 noindex，可按需扩写后恢复收录 ─────────────────────────
+// 个人随笔类薄文，AdSense「低价值」风险中等；若日后扩写成完整长文，删掉对应 slug 即恢复收录。
+const THIN_PERSONAL = [
+  'personal-finance-hk-bank-index-fund-retirement-planning',
+  'shanghai-hustle-life-reflection-mortality-xuxiake-mindset',
+  'ai-empowers-everyone-build-habits-blog-journey',
+  'ai-blog-redesign-indie-app-passion-work-freedom',
+  'reading-habits-thin-to-thick-feynman-method-book-review',
+  'principles-and-risk',
+  'book-review-truth-about-wealth-money-time-management',
+  'build-your-own-thinking-system',
+  'financial-freedom-early-retirement-big-goals-life-purpose',
+  'english-learning-method-voice-diary-deliberate-practice',
+  'learn-location'
+]
+
 module.exports = {
   CONTENT_EXCLUDE_SLUGS: [
     ...BROKEN_PAGES,
     ...REDIRECTED_DUPLICATES,
     ...VERY_THIN_TECH,
     ...THIN_TECH,
-    ...VERY_THIN_PERSONAL
+    ...VERY_THIN_PERSONAL,
+    ...THIN_PERSONAL
   ]
 }
