@@ -135,7 +135,28 @@ const nextConfig = {
             source: '/feed',
             destination: '/rss/feed.xml',
             permanent: true
+          },
+          // ── 低价值/重复内容 301 重定向（2026-06-23 内容治理）────────────
+          // 重复主题合并到更完整的文章。这些 slug 同时在
+          // conf/content-curation.config.js 的 CONTENT_EXCLUDE_SLUGS 中，确保退出 sitemap。
+          {
+            source: '/article/ios-aso-seo',
+            destination: '/article/app-store-aso-practical-guide',
+            statusCode: 301
+          },
+          {
+            source: '/article/prevent-macos-from-sleeping-with-caffeinate',
+            destination: '/article/mac-caffeinate-shutdown-poweroff-ai-agent',
+            statusCode: 301
           }
+          // ── 合并集群（待新长文上线后再启用，目标文章尚未创建）──────────
+          // 集群A 代理配置 → 新建《Mac 开发者代理配置完全指南》后启用：
+          // { source: '/article/zsh-proxy-setup-and-terminal-proxy-switching', destination: '/article/<新指南slug>', statusCode: 301 },
+          // { source: '/article/claude-code-proxy-setup-mac-zshrc-wrapper-script', destination: '/article/<新指南slug>', statusCode: 301 },
+          // { source: '/article/git-proxy-config-socks5-http-cursor-github', destination: '/article/<新指南slug>', statusCode: 301 },
+          // { source: '/article/proxifier-guide-force-proxy-for-developers', destination: '/article/<新指南slug>', statusCode: 301 },
+          // 集群B Homebrew → 保留 install-arm，另一篇 301 过去：
+          // { source: '/article/migrate-from-intel-homebrew-to-arm-homebrew-on-mac', destination: '/article/install-arm-homebrew-on-apple-silicon-mac', statusCode: 301 }
         ]
       },
   // 重写url
