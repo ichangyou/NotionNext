@@ -123,7 +123,9 @@ ${postLines || '（暂无文章）'}
 `
 
   res.setHeader('Content-Type', 'text/plain; charset=utf-8')
-  res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=600')
+  // s-maxage 让 Vercel 边缘网络缓存（机器人无浏览器缓存，max-age 对其无效），
+  // 命中边缘即不回源，避免重复的 Fast Origin Transfer
+  res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400')
   res.write(content)
   res.end()
 
