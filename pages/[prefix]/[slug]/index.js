@@ -69,21 +69,23 @@ export async function getStaticProps({ params: { prefix, slug }, locale }) {
     }
   }
 
+  const revalidate = process.env.EXPORT
+    ? undefined
+    : siteConfig(
+        'NEXT_REVALIDATE_SECOND',
+        BLOG.NEXT_REVALIDATE_SECOND,
+        props.NOTION_CONFIG
+      )
+
   if (!props?.post) {
-    // 无法获取文章
-    props.post = null
-  } else {
-    await processPostData(props, from)
+    // A：找不到文章 → 返回 404，避免「200 空壳 + 可收录」的软 404
+    return { notFound: true, revalidate }
   }
+
+  await processPostData(props, from)
   return {
     props,
-    revalidate: process.env.EXPORT
-      ? undefined
-      : siteConfig(
-          'NEXT_REVALIDATE_SECOND',
-          BLOG.NEXT_REVALIDATE_SECOND,
-          props.NOTION_CONFIG
-        )
+    revalidate
   }
 }
 
