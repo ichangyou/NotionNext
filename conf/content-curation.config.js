@@ -18,10 +18,10 @@
  */
 
 // ── A. 渲染失败 / 空壳页（待在 Notion 修复或删除）──────────────────────────
-// 该页正文为空、标题显示「loading」，等于软 404。先 noindex 让 Google 停止收录空壳。
-const BROKEN_PAGES = [
-  'claude-code-token-rtk-89-percent'
-]
+// 此前空白的 claude-code-token-rtk-89-percent 并非空壳，而是 Notion slug 含前导空格
+// （article/␣␣...）导致干净 URL 匹配不到文章；已在 getPageProperties.js 的 slug.trim()
+// 修复，恢复正常访问并保留收录，故从此处移除。
+const BROKEN_PAGES = []
 
 // ── B. 已做 301 重定向的重复页（同时从 sitemap 移除）──────────────────────
 // 这些 slug 的 301 目标在 next.config.js 里配置；此处加入是为了让它们退出 sitemap。
