@@ -135,28 +135,46 @@ export async function getStaticProps({ params: { prefix }, locale }) {
       props.post = post
     }
   }
-  if (!props?.post) {
-    // 无法获取文章
-    props.post = null
-  } else {
-    await processPostData(props, from)
-    // 在服务器端生成目录
-    if (props.post?.blockMap?.block) {
-      props.post.content = Object.keys(props.post.blockMap.block).filter(
-        key => props.post.blockMap.block[key]?.value?.parent_id === props.post.id
+
+  const revalidate = process.env.EXPORT
+    ? undefined
+    : siteConfig(
+        'NEXT_REVALIDATE_SECOND',
+        BLOG.NEXT_REVALIDATE_SECOND,
+        props.NOTION_CONFIG
       )
-      props.post.toc = getPageTableOfContents(props.post, props.post.blockMap)
+
+  if (!props?.post) {
+    // B：无前缀路径若能对应到带前缀的文章（如 /foo → /article/foo），永久重定向到真实地址
+    const canonical = props?.allPages?.find(p => {
+      if (!p?.slug || (p.type || '').indexOf('Menu') >= 0) return false
+      const segments = p.slug.split('/').filter(Boolean)
+      return segments.length === 2 && segments[1] === prefix
+    })
+    if (canonical?.slug) {
+      return {
+        redirect: {
+          destination: `/${canonical.slug}`,
+          permanent: true
+        }
+      }
     }
+    // A：既非有效文章、也无对应前缀文章 → 返回 404，避免「200 空壳 + 可收录」的软 404
+    return { notFound: true, revalidate }
   }
+
+  await processPostData(props, from)
+  // 在服务器端生成目录
+  if (props.post?.blockMap?.block) {
+    props.post.content = Object.keys(props.post.blockMap.block).filter(
+      key => props.post.blockMap.block[key]?.value?.parent_id === props.post.id
+    )
+    props.post.toc = getPageTableOfContents(props.post, props.post.blockMap)
+  }
+
   return {
     props,
-    revalidate: process.env.EXPORT
-      ? undefined
-      : siteConfig(
-          'NEXT_REVALIDATE_SECOND',
-          BLOG.NEXT_REVALIDATE_SECOND,
-          props.NOTION_CONFIG
-        )
+    revalidate
   }
 }
 
