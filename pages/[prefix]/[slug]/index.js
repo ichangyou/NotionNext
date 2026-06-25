@@ -1,6 +1,7 @@
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { getGlobalData, getPost } from '@/lib/db/getSiteData'
+import { isLikelyScannerPath } from '@/lib/utils/is-scanner-path'
 import { checkSlugHasOneSlash, processPostData } from '@/lib/utils/post'
 import { idToUuid } from 'notion-utils'
 import Slug from '..'
@@ -48,6 +49,10 @@ export async function getStaticProps({ params: { prefix, slug }, locale }) {
   if (!prefix || prefix === 'undefined' || !slug || slug === 'undefined') {
     return { notFound: true }
   }
+  // 明显的扫描器 / 漏洞探测路径：不查询 Notion、不写入 ISR，直接 404
+  if (isLikelyScannerPath(prefix) || isLikelyScannerPath(slug)) {
+    return { notFound: true }
+  }
   const fullSlug = prefix + '/' + slug
   const from = `slug-props-${fullSlug}`
   const props = await getGlobalData({ from, locale })
@@ -79,7 +84,8 @@ export async function getStaticProps({ params: { prefix, slug }, locale }) {
 
   if (!props?.post) {
     // A：找不到文章 → 返回 404，避免「200 空壳 + 可收录」的软 404
-    return { notFound: true, revalidate }
+    // 注意：404 不带 revalidate，避免把每个被探测的无效 URL 当作 ISR 数据缓存写入
+    return { notFound: true }
   }
 
   await processPostData(props, from)
