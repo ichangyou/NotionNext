@@ -39,7 +39,9 @@ export const getServerSideProps = async ctx => {
   // 缓存
   ctx.res.setHeader(
     'Cache-Control',
-    'public, max-age=3600, stale-while-revalidate=59'
+    // s-maxage 让 Vercel 边缘网络缓存（爬虫无浏览器缓存，max-age 对其无效），
+    // 命中边缘即不回源，避免重复的 Fast Origin Transfer
+    'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400'
   )
   return getServerSideSitemap(ctx, fields)
 }
