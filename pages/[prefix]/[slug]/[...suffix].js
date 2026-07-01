@@ -1,6 +1,7 @@
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { getGlobalData, getPost } from '@/lib/db/getSiteData'
+import { isLikelyScannerPath } from '@/lib/utils/is-scanner-path'
 import { checkSlugHasMorThanTwoSlash, processPostData } from '@/lib/utils/post'
 import { idToUuid } from 'notion-utils'
 import Slug from '..'
@@ -23,7 +24,7 @@ export async function getStaticPaths() {
   if (!BLOG.isProd) {
     return {
       paths: [],
-      fallback: true
+      fallback: 'blocking'
     }
   }
 
@@ -40,7 +41,7 @@ export async function getStaticPaths() {
     }))
   return {
     paths: paths,
-    fallback: true
+    fallback: 'blocking'
   }
 }
 
@@ -53,7 +54,22 @@ export async function getStaticProps({
   params: { prefix, slug, suffix },
   locale
 }) {
-  const fullSlug = prefix + '/' + slug + '/' + suffix.join('/')
+  const suffixSegments = Array.isArray(suffix) ? suffix : [suffix]
+  const pathSegments = [prefix, slug, ...suffixSegments]
+
+  if (
+    pathSegments.some(
+      segment =>
+        !segment || segment === 'undefined' || isLikelyScannerPath(segment)
+    )
+  ) {
+    return { notFound: true }
+  }
+
+  const suffixPath = suffixSegments.join('/')
+  const tailSlug = slug + '/' + suffixPath
+  const lastSlugSegment = suffixSegments[suffixSegments.length - 1]
+  const fullSlug = prefix + '/' + tailSlug
   const from = `slug-props-${fullSlug}`
   const props = await getGlobalData({ from, locale })
 
@@ -61,8 +77,9 @@ export async function getStaticProps({
   props.post = props?.allPages?.find(p => {
     return (
       (p.type || '').indexOf('Menu') < 0 &&
-      (p.slug === suffix ||
-        p.slug === fullSlug.substring(fullSlug.lastIndexOf('/') + 1) ||
+      (p.slug === tailSlug ||
+        p.slug === suffixPath ||
+        p.slug === lastSlugSegment ||
         p.slug === fullSlug ||
         p.id === idToUuid(fullSlug))
     )
@@ -78,11 +95,11 @@ export async function getStaticProps({
   }
 
   if (!props?.post) {
-    // 无法获取文章
-    props.post = null
-  } else {
-    await processPostData(props, from)
+    // 找不到文章时返回真正的 404，避免 fallback 空壳页面被当作正常文章。
+    return { notFound: true }
   }
+
+  await processPostData(props, from)
   return {
     props,
     revalidate: process.env.EXPORT
