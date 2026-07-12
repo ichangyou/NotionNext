@@ -50,8 +50,10 @@ module.exports = {
     process.env.NEXT_PUBLIC_CONTENT_QUALITY_GUARD ?? 'true',
   CONTENT_MIN_SUMMARY_CHARS:
     process.env.NEXT_PUBLIC_CONTENT_MIN_SUMMARY_CHARS || 80,
+  // 正文字数下限（约等于中文字数）。低于此值的正文在详情页渲染时判定为 short-body，
+  // 触发 noindex。400 对齐人工审计的「极薄」线，自动兜住明显过薄的正文，误伤好文概率低。
   CONTENT_MIN_WORD_COUNT:
-    process.env.NEXT_PUBLIC_CONTENT_MIN_WORD_COUNT || 260,
+    process.env.NEXT_PUBLIC_CONTENT_MIN_WORD_COUNT || 400,
   CONTENT_MIN_SENTENCE_UNIQUE_RATIO:
     process.env.NEXT_PUBLIC_CONTENT_MIN_SENTENCE_UNIQUE_RATIO || 0.6,
   // 质量规则豁免：逗号分隔 slug，仅用于少数必须保留且内容较短的正式页面。
