@@ -30,7 +30,17 @@ export async function getStaticProps(req) {
     12,
     props?.NOTION_CONFIG
   )
-  props.posts = props.allPages?.filter(isPublishedPostForList)
+  const publishedPosts = props.allPages?.filter(isPublishedPostForList) || []
+  props.posts = publishedPosts
+
+  // 往期精选：从完整已发布列表挑选长尾文章（跳过首页已展示的最近若干篇），
+  // 为可索引的首页导入指向长尾的内链，提升其抓取优先级（缓解「已发现-尚未编入索引」）。
+  props.pastPosts = trimPostsForList(
+    pickPastPosts(
+      publishedPosts,
+      siteConfig('POSTS_PER_PAGE', null, props?.NOTION_CONFIG)
+    )
+  )
 
   // 处理分页
   if (siteConfig('POST_LIST_STYLE') === 'scroll') {
@@ -107,6 +117,31 @@ function trimPostsForList(posts) {
     }
     return trimmed
   })
+}
+
+/**
+ * 往期精选选取：跳过首页已展示的最近 skipRecent 篇，在长尾中按「一年中的第几天」
+ * 轮换偏移、均匀取 count 篇。每日构建换一批 → 长尾文章轮流登上可索引首页，为其持续
+ * 导入内链；对同一天的构建保持稳定、内链不抖动。
+ * @param {Array} publishedPosts 完整已发布文章（按发布序）
+ * @param {number} skipRecent 跳过的最近篇数（通常 = 首页每页条数）
+ * @param {number} count 精选篇数
+ */
+function pickPastPosts(publishedPosts, skipRecent, count = 12) {
+  const tail = (publishedPosts || []).slice(skipRecent)
+  if (tail.length <= count) return tail
+  const dayOfYear = Math.floor(
+    (Date.now() - Date.UTC(new Date().getUTCFullYear(), 0, 0)) / 86400000
+  )
+  // 滑动窗口：每天取长尾里连续的 count 篇、逐日滑动一个窗口，
+  // 约 ceil(tail/count) 天走完一轮，覆盖全部长尾。
+  const windows = Math.ceil(tail.length / count)
+  const start = (dayOfYear % windows) * count
+  const picked = []
+  for (let i = 0; i < count; i++) {
+    picked.push(tail[(start + i) % tail.length])
+  }
+  return picked
 }
 
 export default Index
