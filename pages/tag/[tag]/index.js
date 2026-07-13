@@ -15,6 +15,11 @@ const Tag = props => {
 }
 
 export async function getStaticProps({ params: { tag }, locale }) {
+  // 未替换的动态路由模板（如 /tag/[tag]）不是真实标签：返回 404，
+  // 避免软 404（200 空页）被 Google 当作可收录内容抓取。
+  if (typeof tag !== 'string' || /[[\]]/.test(tag)) {
+    return { notFound: true }
+  }
   const from = 'tag-props'
   const props = await getGlobalData({ from, locale })
 

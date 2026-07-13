@@ -15,6 +15,11 @@ export default function Category(props) {
 }
 
 export async function getStaticProps({ params: { category }, locale }) {
+  // 未替换的动态路由模板（如 /category/[category]）不是真实分类：返回 404，
+  // 避免软 404（200 空页）被 Google 当作可收录内容抓取。
+  if (typeof category !== 'string' || /[[\]]/.test(category)) {
+    return { notFound: true }
+  }
   const from = 'category-props'
   let props = await getGlobalData({ from, locale })
 

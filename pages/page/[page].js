@@ -30,6 +30,11 @@ export async function getStaticPaths({ locale }) {
 }
 
 export async function getStaticProps({ params: { page }, locale }) {
+  // 页码必须为纯数字；未替换模板 /page/[page] 或非法页码返回 404，
+  // 避免软 404（200 空页）/ 历史上的 5xx。
+  if (!/^\d+$/.test(String(page))) {
+    return { notFound: true }
+  }
   const from = `page-${page}`
   const props = await getGlobalData({ from, locale })
   const { allPages } = props

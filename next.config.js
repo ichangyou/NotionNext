@@ -136,6 +136,12 @@ const nextConfig = {
             destination: '/rss/feed.xml',
             permanent: true
           },
+          // 残留的旧隐私政策 URL（GSC 已发现但现为 404）→ 301 到规范隐私页
+          {
+            source: '/mufeng-blog-privacy-policy-google-adsense-vercel',
+            destination: '/privacy-policy',
+            permanent: true
+          },
           // ── 低价值/重复内容 301 重定向（2026-06-23 内容治理）────────────
           // 重复主题合并到更完整的文章。这些 slug 同时在
           // conf/content-curation.config.js 的 CONTENT_EXCLUDE_SLUGS 中，确保退出 sitemap。
@@ -149,19 +155,14 @@ const nextConfig = {
             destination: '/article/mac-caffeinate-shutdown-poweroff-ai-agent',
             statusCode: 301
           },
-          // ── slug 漂移修正（2026-07-13）：旧 slug 与正文不符，正文为实在的原创
-          //    技术内容，已改为描述正文的新 slug 并恢复收录；旧 slug 301 到新 slug
-          //    以保留链接权重、避免旧 URL 404。
-          //    ⚠️ 部署前务必先在 Notion 把两篇的 slug 改成下面 destination 的值，
-          //    否则旧 URL 会 301 到尚不存在的新 URL 而 404。
+          // ── 重复内容合并（2026-07-13）：两篇 StoreKit 测试文章正文 99.35% 相同，
+          //    属同一篇换 slug 重发。保留 subscriptions-and-sandbox 版（slug 更描述性），
+          //    membership 版 301 过去；同时已加入 content-curation 的 REDIRECTED_DUPLICATES
+          //    以退出 sitemap / 列表。
           {
-            source: '/article/ui-ux-pro-max-ai-design-skill-for-cursor',
-            destination: '/article/xcode-storekit-configuration-local-iap-testing',
-            statusCode: 301
-          },
-          {
-            source: '/article/cloudflare-pages-and-privacy-policy-for-ios-apps',
-            destination: '/article/cloudflare-worker-store-api-keys-secrets-ios',
+            source: '/article/ios-storekit-membership-testing-guide',
+            destination:
+              '/article/ios-storekit-testing-guide-for-subscriptions-and-sandbox',
             statusCode: 301
           }
           // ── 合并集群（待新长文上线后再启用，目标文章尚未创建）──────────
