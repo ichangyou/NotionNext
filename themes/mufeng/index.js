@@ -14,6 +14,8 @@ import BlogPostBar from './components/BlogPostBar'
 import CONFIG from './config'
 import { Style } from './style'
 import Catalog from './components/Catalog'
+// 静态导入（SSR）：首页「往期精选」链接必须进入初始 HTML 才能提升长尾抓取优先级
+import PastPosts from './components/PastPosts'
 
 
 const AlgoliaSearchModal = dynamic(
@@ -201,7 +203,13 @@ const LayoutBase = props => {
  * @returns
  */
 const LayoutIndex = props => {
-  return <LayoutPostList {...props} />
+  return (
+    <>
+      <LayoutPostList {...props} />
+      {/* 往期精选：仅首页设置 props.pastPosts，其余用 LayoutPostList 的路由不会渲染 */}
+      <PastPosts pastPosts={props.pastPosts} />
+    </>
+  )
 }
 /**
  * 博客列表
