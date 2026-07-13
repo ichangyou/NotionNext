@@ -93,7 +93,8 @@ const THIN_PERSONAL = [
   'build-your-own-thinking-system',
   'financial-freedom-early-retirement-big-goals-life-purpose',
   'english-learning-method-voice-diary-deliberate-practice',
-  'learn-location'
+  'learn-location',
+  'build-yourself-into-someone-strong' // 851字励志短文；GSC「已抓取-尚未编入索引」，主动 noindex + 出 sitemap
 ]
 
 module.exports = {
