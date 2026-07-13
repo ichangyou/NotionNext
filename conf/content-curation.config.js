@@ -49,13 +49,11 @@ const VERY_THIN_TECH = [
   'remove-app-from-app-store',
   'remove-sensitive-env-files-from-git-history',
   'hfs-http-file-server-lan-share-upload-download-guide',
-  'ios-app-store-distribution-certificate-sha1-public-key',
-  // 下面两篇 slug 与正文不符（slug 漂移），但均为 Invisible 草稿，且各自已有一篇
-  // 更完整的同主题「已发布」文章（StoreKit → ios-storekit-testing-guide-...;
-  // Cloudflare → secure-ios-api-keys-cloudflare-worker-runtime-config）。
-  // 恢复收录会制造重复内容，故保持隔离：
-  'ui-ux-pro-max-ai-design-skill-for-cursor', // 正文实为 StoreKit 测试（Invisible 草稿）
-  'cloudflare-pages-and-privacy-policy-for-ios-apps' // 正文实为 Cloudflare Worker 存密钥（Invisible 草稿）
+  'ios-app-store-distribution-certificate-sha1-public-key'
+  // 注：原 'ui-ux-pro-max-ai-design-skill-for-cursor'（正文为 StoreKit 测试）与
+  // 'cloudflare-pages-and-privacy-policy-for-ios-apps'（正文为 Cloudflare Worker 存密钥）
+  // 两篇 Invisible 草稿，因各自已有更完整的已发布同主题文章，已于 2026-07-13 在
+  // Notion 手动删除，故从此清单移除（保留会排除不存在的 slug，无意义）。
 ]
 
 // ── D. 单薄技术（400–700 中文字）：建议 noindex，可按需保留 ────────────────
