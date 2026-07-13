@@ -25,7 +25,9 @@ export async function getStaticPaths({ locale }) {
     paths: Array.from({ length: totalPages - 1 }, (_, i) => ({
       params: { page: '' + (i + 2) }
     })),
-    fallback: true
+    // blocking：未预渲染路径首访即阻塞生成并返回真实状态码（含 getStaticProps 的
+    // notFound → 404），避免 fallback:true 先发 200 骨架页导致模板 URL 软 404。
+    fallback: 'blocking'
   }
 }
 
