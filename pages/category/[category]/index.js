@@ -64,8 +64,10 @@ export async function getStaticPaths() {
     paths: Object.keys(categoryOptions).map(category => ({
       params: { category: categoryOptions[category]?.name }
     })),
-    // blocking：未预渲染路径首访即阻塞生成并返回真实状态码（含 getStaticProps 的
-    // notFound → 404），避免 fallback:true 先发 200 骨架页导致模板 URL 软 404。
-    fallback: 'blocking'
+    // 保持 true：对完整 [...] 括号对（如 /category/[category]），Next.js 会在路由
+    // 解析阶段（getStaticProps 之前）抛错；用 blocking 会把它暴露成 500。true 下
+    // 首访返回 200 骨架页，避免 500。真正的 [...] URL 已无链接指向，风险很低。
+    // 单括号等非法参数仍由 getStaticProps 的守卫拦为 404。
+    fallback: true
   }
 }

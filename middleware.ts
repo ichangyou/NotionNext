@@ -72,6 +72,23 @@ function applyLocalePrefix(targetPath: string, localePrefix: string) {
   return `/${localePrefix}${targetPath}`
 }
 
+/**
+ * 未替换的动态路由模板：URL 段含字面量 [ 或 ]（如 /category/[category]、/tag/[tag]）。
+ * 这类路径不合法，且完整的 [...] 括号对会让 Next.js 在路由解析阶段（getStaticProps
+ * 之前）抛 500——守卫写在 getStaticProps 里拦不住。在中间件（早于路由解析）直接返回
+ * 404：既消除 500，也给爬虫正确的「不存在」信号，避免软 404。合法 URL 永不含方括号，
+ * 故零误伤。
+ */
+function getTemplatePathRejectResponse(req: NextRequest) {
+  // 只检查 pathname（不含查询串），避免误伤 ?ids[]=1 之类带方括号的合法查询参数。
+  // pathname 保留百分号编码，故同时匹配字面量 [ ] 与编码后的 %5B / %5D。
+  const pathname = req.nextUrl.pathname
+  if (/[[\]]/.test(pathname) || /%5[bd]/i.test(pathname)) {
+    return new NextResponse(null, { status: 404 })
+  }
+  return null
+}
+
 function getContentRedirectResponse(req: NextRequest) {
   if (req.nextUrl.pathname.startsWith('/api')) {
     return null
@@ -113,6 +130,11 @@ function getContentRedirectResponse(req: NextRequest) {
  */
 // eslint-disable-next-line @typescript-eslint/require-await, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 const noAuthMiddleware = async (req: NextRequest, ev: any) => {
+  const templateReject = getTemplatePathRejectResponse(req)
+  if (templateReject) {
+    return templateReject
+  }
+
   const contentRedirect = getContentRedirectResponse(req)
   if (contentRedirect) {
     return contentRedirect
@@ -149,6 +171,11 @@ const noAuthMiddleware = async (req: NextRequest, ev: any) => {
  */
 const authMiddleware = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
   ? clerkMiddleware((auth, req) => {
+      const templateReject = getTemplatePathRejectResponse(req)
+      if (templateReject) {
+        return templateReject
+      }
+
       const contentRedirect = getContentRedirectResponse(req)
       if (contentRedirect) {
         return contentRedirect
