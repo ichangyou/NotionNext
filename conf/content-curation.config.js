@@ -27,7 +27,8 @@ const BROKEN_PAGES = []
 // 这些 slug 的 301 目标在 next.config.js 里配置；此处加入是为了让它们退出 sitemap。
 const REDIRECTED_DUPLICATES = [
   'ios-aso-seo', // → app-store-aso-practical-guide（ASO 完整版）
-  'prevent-macos-from-sleeping-with-caffeinate' // → mac-caffeinate-shutdown-poweroff-ai-agent
+  'prevent-macos-from-sleeping-with-caffeinate', // → mac-caffeinate-shutdown-poweroff-ai-agent
+  'ios-storekit-membership-testing-guide' // → ios-storekit-testing-guide-for-subscriptions-and-sandbox（正文 99% 重复）
 ]
 
 // ── C. 极薄技术碎片（<400 中文字）：删除/合并前先 noindex ──────────────────
@@ -48,12 +49,13 @@ const VERY_THIN_TECH = [
   'remove-app-from-app-store',
   'remove-sensitive-env-files-from-git-history',
   'hfs-http-file-server-lan-share-upload-download-guide',
-  'ios-app-store-distribution-certificate-sha1-public-key'
-  // 已从此清单移除并恢复收录（2026-07-13）：两篇原 slug 与正文不符，正文均为
-  // 实在的原创技术内容，已在 Notion 改为描述正文的新 slug，旧 slug 的 301 见
-  // next.config.js：
-  //   ui-ux-pro-max-ai-design-skill-for-cursor        → xcode-storekit-configuration-local-iap-testing（StoreKit 本地测试内购）
-  //   cloudflare-pages-and-privacy-policy-for-ios-apps → cloudflare-worker-store-api-keys-secrets-ios（Cloudflare Worker 存密钥）
+  'ios-app-store-distribution-certificate-sha1-public-key',
+  // 下面两篇 slug 与正文不符（slug 漂移），但均为 Invisible 草稿，且各自已有一篇
+  // 更完整的同主题「已发布」文章（StoreKit → ios-storekit-testing-guide-...;
+  // Cloudflare → secure-ios-api-keys-cloudflare-worker-runtime-config）。
+  // 恢复收录会制造重复内容，故保持隔离：
+  'ui-ux-pro-max-ai-design-skill-for-cursor', // 正文实为 StoreKit 测试（Invisible 草稿）
+  'cloudflare-pages-and-privacy-policy-for-ios-apps' // 正文实为 Cloudflare Worker 存密钥（Invisible 草稿）
 ]
 
 // ── D. 单薄技术（400–700 中文字）：建议 noindex，可按需保留 ────────────────
