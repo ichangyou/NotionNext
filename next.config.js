@@ -136,6 +136,12 @@ const nextConfig = {
             destination: '/rss/feed.xml',
             permanent: true
           },
+          // 残留的旧隐私政策 URL（GSC 已发现但现为 404）→ 301 到规范隐私页
+          {
+            source: '/mufeng-blog-privacy-policy-google-adsense-vercel',
+            destination: '/privacy-policy',
+            permanent: true
+          },
           // ── 低价值/重复内容 301 重定向（2026-06-23 内容治理）────────────
           // 重复主题合并到更完整的文章。这些 slug 同时在
           // conf/content-curation.config.js 的 CONTENT_EXCLUDE_SLUGS 中，确保退出 sitemap。
