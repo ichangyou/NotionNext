@@ -48,10 +48,12 @@ const VERY_THIN_TECH = [
   'remove-app-from-app-store',
   'remove-sensitive-env-files-from-git-history',
   'hfs-http-file-server-lan-share-upload-download-guide',
-  'ios-app-store-distribution-certificate-sha1-public-key',
-  // 下面两篇 slug 与正文不符（slug 漂移），建议改 slug + 扩写，暂先 noindex：
-  'ui-ux-pro-max-ai-design-skill-for-cursor', // 正文实为 StoreKit 测试
-  'cloudflare-pages-and-privacy-policy-for-ios-apps' // 正文实为 Cloudflare Worker 存密钥
+  'ios-app-store-distribution-certificate-sha1-public-key'
+  // 已从此清单移除并恢复收录（2026-07-13）：两篇原 slug 与正文不符，正文均为
+  // 实在的原创技术内容，已在 Notion 改为描述正文的新 slug，旧 slug 的 301 见
+  // next.config.js：
+  //   ui-ux-pro-max-ai-design-skill-for-cursor        → xcode-storekit-configuration-local-iap-testing（StoreKit 本地测试内购）
+  //   cloudflare-pages-and-privacy-policy-for-ios-apps → cloudflare-worker-store-api-keys-secrets-ios（Cloudflare Worker 存密钥）
 ]
 
 // ── D. 单薄技术（400–700 中文字）：建议 noindex，可按需保留 ────────────────

@@ -148,6 +148,21 @@ const nextConfig = {
             source: '/article/prevent-macos-from-sleeping-with-caffeinate',
             destination: '/article/mac-caffeinate-shutdown-poweroff-ai-agent',
             statusCode: 301
+          },
+          // ── slug 漂移修正（2026-07-13）：旧 slug 与正文不符，正文为实在的原创
+          //    技术内容，已改为描述正文的新 slug 并恢复收录；旧 slug 301 到新 slug
+          //    以保留链接权重、避免旧 URL 404。
+          //    ⚠️ 部署前务必先在 Notion 把两篇的 slug 改成下面 destination 的值，
+          //    否则旧 URL 会 301 到尚不存在的新 URL 而 404。
+          {
+            source: '/article/ui-ux-pro-max-ai-design-skill-for-cursor',
+            destination: '/article/xcode-storekit-configuration-local-iap-testing',
+            statusCode: 301
+          },
+          {
+            source: '/article/cloudflare-pages-and-privacy-policy-for-ios-apps',
+            destination: '/article/cloudflare-worker-store-api-keys-secrets-ios',
+            statusCode: 301
           }
           // ── 合并集群（待新长文上线后再启用，目标文章尚未创建）──────────
           // 集群A 代理配置 → 新建《Mac 开发者代理配置完全指南》后启用：
