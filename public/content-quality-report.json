@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-01T18:33:21.909Z",
+  "generatedAt": "2026-07-13T10:10:03.159Z",
   "site": "https://mufeng.blog",
   "qualityGuard": {
     "enabled": true,
@@ -16,18 +16,18 @@
     ]
   },
   "totals": {
-    "publishedPosts": 186,
-    "lowQualityPosts": 29,
+    "publishedPosts": 195,
+    "lowQualityPosts": 28,
     "indexBlockedPosts": 0,
-    "warningOnlyPosts": 29
+    "warningOnlyPosts": 28
   },
   "reasonStats": {
     "all": {
-      "short-summary": 29
+      "short-summary": 28
     },
     "blocking": {},
     "warning": {
-      "short-summary": 29
+      "short-summary": 28
     }
   },
   "lowQualityPosts": [
@@ -144,25 +144,6 @@
       "lastEditedDay": "2026-4-11",
       "href": "/article/stock-analysis-baba",
       "url": "https://mufeng.blog/article/stock-analysis-baba"
-    },
-    {
-      "id": "2f2b2da8-94ba-80f2-b7f0-e32e0aef7921",
-      "slug": "article/after-a-small-drink-in-shanghai",
-      "title": "沪上小酌后",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 77,
-      "wordCount": 0,
-      "publishDay": "2026-1-24",
-      "lastEditedDay": "2026-5-26",
-      "href": "/article/after-a-small-drink-in-shanghai",
-      "url": "https://mufeng.blog/article/after-a-small-drink-in-shanghai"
     },
     {
       "id": "1bfb2da8-94ba-801d-b29b-f86ce0d9309a",
