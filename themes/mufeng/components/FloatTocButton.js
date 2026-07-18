@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useGlobal } from '@/lib/global'
 import Catalog from './Catalog'
 
 /**
@@ -7,6 +8,7 @@ import Catalog from './Catalog'
  */
 const FloatTocButton = ({ post }) => {
   const [open, setOpen] = useState(false)
+  const { locale } = useGlobal()
 
   // 禁止背景滚动
   useEffect(() => {
@@ -26,9 +28,9 @@ const FloatTocButton = ({ post }) => {
     <div className='xl:hidden'>
       {/* 浮动按钮 */}
       <button
-        aria-label='目录'
+        aria-label={locale.COMMON.TABLE_OF_CONTENTS}
         onClick={() => setOpen(true)}
-        className='fixed right-4 bottom-32 z-20
+        className='floating-toc-btn fixed right-4 bottom-32 z-20
           w-10 h-10 flex items-center justify-center
           bg-white dark:bg-gray-800
           border border-gray-200 dark:border-gray-700
@@ -58,7 +60,7 @@ const FloatTocButton = ({ post }) => {
             <div className='flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-800'>
               <div className='flex items-center gap-2'>
                 <i className='fas fa-list-ul text-red-500 dark:text-red-400' />
-                <span className='font-medium text-gray-700 dark:text-gray-300'>目录</span>
+                <span className='font-medium text-gray-700 dark:text-gray-300'>{locale.COMMON.TABLE_OF_CONTENTS}</span>
               </div>
               <button
                 onClick={() => setOpen(false)}

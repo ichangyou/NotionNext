@@ -138,7 +138,7 @@ const Catalog = ({ post }) => {
                 href={`#${id}`}
                 title={tocItem.text}
                 onClick={e => handleTocItemClick(e, id)}
-                className={`block py-[5px] pr-2 -ml-px border-l-2 transition-all duration-150 cursor-pointer
+                className={`catalog-item block py-[5px] pr-2 -ml-px border-l-2 transition-all duration-150 cursor-pointer
                   ${isActive
                     ? 'border-red-500 dark:border-red-400'
                     : 'border-transparent hover:border-gray-200 dark:hover:border-gray-700'

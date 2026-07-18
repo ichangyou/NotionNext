@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { useState } from 'react'
+import { useGlobal } from '@/lib/global'
 
 /**
  * 打赏按钮 - mufeng 主题
@@ -7,6 +8,7 @@ import { useState } from 'react'
  */
 const RewardButton = () => {
   const [showQR, setShowQR] = useState(false)
+  const { locale } = useGlobal()
 
   return (
     <div className='my-6 flex flex-col items-center'>
@@ -16,12 +18,12 @@ const RewardButton = () => {
         className='flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm text-gray-600 shadow-sm transition-all duration-200 hover:border-red-300 hover:text-red-500 hover:shadow-md active:scale-95 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-red-500 dark:hover:text-red-400'
       >
         <i className='fas fa-heart text-red-500' />
-        <span>打赏</span>
+        <span>{locale.POST.REWARD}</span>
       </button>
 
       {/* 二维码区域 */}
       {showQR && (
-        <div className='mt-5 flex animate-fade-in-up gap-8 rounded-2xl border border-gray-100 bg-gray-50 px-8 py-6 dark:border-gray-700 dark:bg-gray-800 sm:gap-10 sm:px-10 sm:py-8'>
+        <div className='mt-5 flex flex-col items-center animate-fade-in-up gap-6 rounded-2xl border border-gray-100 bg-gray-50 px-6 py-6 dark:border-gray-700 dark:bg-gray-800 sm:flex-row sm:gap-10 sm:px-10 sm:py-8'>
           <div className='relative h-44 w-44 overflow-hidden rounded-xl sm:h-52 sm:w-52'>
             <Image
               src='/reward_code_wechat_changyou.png'
