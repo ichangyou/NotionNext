@@ -103,15 +103,6 @@ const Style = () => {
   }
 
   /* ======== 目录样式 ======== */
-  
-  .catalog-item {
-    transition: all 0.2s ease-in-out;
-  }
-  
-  .catalog-item:hover {
-    transform: translateX(4px);
-    color: #ef4444;
-  }
 
   .floating-toc {
     transition: all 0.3s ease;
@@ -424,9 +415,9 @@ const Style = () => {
       line-height: 1.85;
     }
 
-    /* ---- 目录浮动按钮位置避开底部安全区 ---- */
+    /* ---- 目录浮动按钮位置避开底部安全区（8rem = Tailwind bottom-32） ---- */
     .floating-toc-btn {
-      bottom: calc(1rem + env(safe-area-inset-bottom));
+      bottom: calc(8rem + env(safe-area-inset-bottom));
     }
 
     /* ---- 无封面文章去掉 react-notion-x 的顶部占位间距 ---- */
@@ -577,10 +568,10 @@ const Style = () => {
 
   /* ======== 文章内容排版优化 ======== */
 
-  /* 段落间距与行高 */
+  /* 段落间距与行高：段间距需明显大于段内行距，段落才有边界感 */
   #article-wrapper .notion-text {
     line-height: 1.8;
-    margin-bottom: 0.25em;
+    margin-bottom: 0.9em;
   }
 
   /* 标题层级感 */

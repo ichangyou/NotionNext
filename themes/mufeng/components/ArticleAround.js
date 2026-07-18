@@ -6,7 +6,7 @@ import Link from 'next/link'
  * @returns
  */
 export default function ArticleAround({ prev, next }) {
-  if (!prev || !next) {
+  if (!prev && !next) {
     return <></>
   }
   return (
@@ -15,9 +15,9 @@ export default function ArticleAround({ prev, next }) {
         <Link
           href={prev.href}
           passHref
-          className='flex-1 flex items-center gap-2 px-4 py-3 text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200 min-w-0'>
+          className='group flex-1 flex items-center gap-2 px-4 py-3 text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200 min-w-0'>
           <i className='fas fa-angle-double-left text-gray-400 flex-shrink-0' />
-          <span className='line-clamp-2 text-gray-600 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors'>{prev.title}</span>
+          <span className='line-clamp-2 text-gray-600 dark:text-gray-400 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors'>{prev.title}</span>
         </Link>
       ) : <div className='flex-1' />}
 
@@ -27,8 +27,8 @@ export default function ArticleAround({ prev, next }) {
         <Link
           href={next.href}
           passHref
-          className='flex-1 flex items-center justify-end gap-2 px-4 py-3 text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200 min-w-0'>
-          <span className='line-clamp-2 text-right text-gray-600 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors'>{next.title}</span>
+          className='group flex-1 flex items-center justify-end gap-2 px-4 py-3 text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200 min-w-0'>
+          <span className='line-clamp-2 text-right text-gray-600 dark:text-gray-400 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors'>{next.title}</span>
           <i className='fas fa-angle-double-right text-gray-400 flex-shrink-0' />
         </Link>
       ) : <div className='flex-1' />}

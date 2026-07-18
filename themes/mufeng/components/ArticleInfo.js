@@ -60,24 +60,24 @@ export default function ArticleInfo (props) {
           className='group flex items-center text-[13px] text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300'
         >
           <i className='fas fa-arrow-left text-xs mr-2 transition-transform duration-300 group-hover:-translate-x-1' />
-          返回
+          {locale.POST.BACK}
         </button>
 
         {post?.type !== 'Page' && (
           <button
             onClick={toggleFocusMode}
             className='flex items-center gap-1.5 text-[13px] text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300'
-            title={focusMode ? '退出专注模式' : '专注模式'}
+            title={focusMode ? locale.POST.EXIT_FOCUS_MODE : locale.POST.FOCUS_MODE}
           >
             <i className={`fas ${focusMode ? 'fa-compress' : 'fa-expand'} text-xs`} />
-            <span className='hidden sm:inline'>{focusMode ? '退出专注' : '专注模式'}</span>
+            <span className='hidden sm:inline'>{focusMode ? locale.POST.EXIT_FOCUS_MODE : locale.POST.FOCUS_MODE}</span>
           </button>
         )}
       </div>
 
-      <h2 className="blog-item-title mb-5 font-bold text-black text-xl md:text-2xl no-underline">
+      <h1 className="mb-5 font-bold text-gray-900 dark:text-gray-100 text-2xl md:text-3xl leading-snug">
         {siteConfig('POST_TITLE_ICON') && <NotionIcon icon={post?.pageIcon} />}{post?.title}
-      </h2>
+      </h1>
 
       {post?.type !== 'Page' && (
         <>
@@ -87,14 +87,14 @@ export default function ArticleInfo (props) {
             <div className='flex flex-wrap items-center gap-x-3 gap-y-1'>
               <Link
                 href={siteConfig('SIMPLE_AUTHOR_LINK', null, CONFIG)}
-                className='flex items-center hover:text-red-400 transition-all duration-200'>
+                className='flex items-center hover:text-red-500 dark:hover:text-red-400 transition-all duration-200'>
                 <i className='fas fa-user-edit mr-1'></i> {siteConfig('AUTHOR')}
               </Link>
 
               <span className='w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full flex-shrink-0'></span>
 
               <Link
-                className='flex items-center hover:text-red-400 transition-all duration-200'
+                className='flex items-center hover:text-red-500 dark:hover:text-red-400 transition-all duration-200'
                 href={`/archive#${formatDateFmt(post?.publishDate, 'yyyy-MM')}`}>
                 <i className='fas fa-calendar-alt mr-1' />{' '}
                 {post?.publishDay}
@@ -109,6 +109,14 @@ export default function ArticleInfo (props) {
               <span className='w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full flex-shrink-0'></span>
 
               <RealTimeViewCount post={post} simple={true} />
+
+              {post?.lastEditedDay && post?.lastEditedDay !== post?.publishDay && (
+                <span className='flex items-center focus-hide'>
+                  <span className='w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full flex-shrink-0 mr-3'></span>
+                  <i className='far fa-edit mr-1'></i>
+                  {locale.COMMON.LAST_EDITED_TIME}: {post?.lastEditedDay}
+                </span>
+              )}
             </div>
 
             {/* 第二行：分类和标签 */}
@@ -116,7 +124,7 @@ export default function ArticleInfo (props) {
               {post?.category && (
                 <Link
                   href={`/category/${post?.category}`}
-                  className='flex items-center text-xs bg-gray-100 dark:bg-gray-800 hover:bg-red-50 dark:hover:bg-gray-700 px-2 py-1 rounded-md hover:text-red-400 transition-all duration-200'>
+                  className='flex items-center text-xs bg-gray-100 dark:bg-gray-800 hover:bg-red-50 dark:hover:bg-gray-700 px-2 py-1 rounded-md hover:text-red-500 dark:hover:text-red-400 transition-all duration-200'>
                   <i className='fas fa-folder-open mr-1'></i>
                   {post?.category}
                 </Link>
@@ -127,19 +135,12 @@ export default function ArticleInfo (props) {
                   <Link
                     key={t}
                     href={`/tag/${t}`}
-                    className='flex items-center text-xs bg-gray-100 dark:bg-gray-800 hover:bg-red-50 dark:hover:bg-gray-700 px-2 py-1 rounded-md hover:text-red-400 transition-all duration-200'>
+                    className='flex items-center text-xs bg-gray-100 dark:bg-gray-800 hover:bg-red-50 dark:hover:bg-gray-700 px-2 py-1 rounded-md hover:text-red-500 dark:hover:text-red-400 transition-all duration-200'>
                     <i className='fas fa-tag mr-1'></i> {t}
                   </Link>
                 ))}
             </div>
           </header>
-          
-          {/* 额外的编辑信息 */}
-          <div className='text-xs text-gray-500 dark:text-gray-400 mb-4 focus-hide'>
-            <span className="flex items-center">
-              <i className="far fa-edit mr-1"></i> {locale.COMMON.LAST_EDITED_TIME}: {post?.lastEditedDay}
-            </span>
-          </div>
         </>
       )}
     </section>
