@@ -121,6 +121,14 @@ const SEO = props => {
   const absoluteImage = toAbsoluteUrl(image)
   const absoluteLogo = toAbsoluteUrl(favicon)
 
+  // Notion 图库默认封面（渐变图）对分享预览无辨识度，替换为站点品牌默认图
+  const isNotionDefaultCover = u =>
+    u?.includes('notion.so/images/page-cover')
+  const ogImage =
+    !absoluteImage || isNotionDefaultCover(absoluteImage)
+      ? `${LINK}/images/og-default.png`
+      : absoluteImage
+
   // 结构化数据的日期必须是 ISO 8601；publishDay/lastEditedDay 是给 UI 的显示字符串，不能用
   const toISO = d => (d ? new Date(d).toISOString() : undefined)
   const CONTACT_TWITTER = siteConfig('CONTACT_TWITTER', null, NOTION_CONFIG)
@@ -160,7 +168,7 @@ const SEO = props => {
       <meta property='og:title' content={title} />
       <meta property='og:description' content={description} />
       <meta property='og:url' content={url} />
-      <meta property='og:image' content={image} />
+      <meta property='og:image' content={ogImage} />
       <meta property='og:site_name' content={title} />
       <meta property='og:type' content={type} />
       <meta name='twitter:card' content='summary_large_image' />
@@ -205,7 +213,7 @@ const SEO = props => {
                 '@type': 'BlogPosting',
                 headline: post?.title || title,
                 description: description,
-                image: absoluteImage,
+                image: ogImage,
                 url: url,
                 mainEntityOfPage: url,
                 datePublished: toISO(post?.publishDate),
