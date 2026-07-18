@@ -82,7 +82,7 @@ ${keywords ? `\n关键词：${keywords}\n` : ''}
 ## 内容说明
 
 - 所有博客文章均为原创内容，转载请注明来源
-- 普通搜索索引允许访问；AI 训练用途不授权，具体策略以 robots.txt 和 Cloudflare Content Signals 为准
+- 欢迎搜索索引、AI 检索引用与模型训练使用本站内容，引用时请注明出处，具体策略以 robots.txt 为准
 - 完整文章列表见 [llms-full.txt](${link}/llms-full.txt)
 `
 
