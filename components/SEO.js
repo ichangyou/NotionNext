@@ -121,6 +121,12 @@ const SEO = props => {
   const absoluteImage = toAbsoluteUrl(image)
   const absoluteLogo = toAbsoluteUrl(favicon)
 
+  // 结构化数据的日期必须是 ISO 8601；publishDay/lastEditedDay 是给 UI 的显示字符串，不能用
+  const toISO = d => (d ? new Date(d).toISOString() : undefined)
+  const CONTACT_TWITTER = siteConfig('CONTACT_TWITTER', null, NOTION_CONFIG)
+  const CONTACT_GITHUB = siteConfig('CONTACT_GITHUB', null, NOTION_CONFIG)
+  const authorSameAs = [CONTACT_TWITTER, CONTACT_GITHUB].filter(Boolean)
+
   return (
     <Head>
       <link rel='icon' href={favicon} />
@@ -184,7 +190,10 @@ const SEO = props => {
       )}
       {meta?.type === 'Post' && (
         <>
-          <meta property='article:published_time' content={meta.publishDay} />
+          <meta
+            property='article:published_time'
+            content={toISO(post?.publishDate)}
+          />
           <meta property='article:author' content={AUTHOR} />
           <meta property='article:section' content={category} />
           <meta property='article:publisher' content={FACEBOOK_PAGE} />
@@ -194,15 +203,19 @@ const SEO = props => {
               __html: JSON.stringify({
                 '@context': 'https://schema.org',
                 '@type': 'BlogPosting',
-                headline: title,
+                headline: post?.title || title,
                 description: description,
                 image: absoluteImage,
                 url: url,
-                datePublished: meta.publishDay,
-                dateModified: post?.lastEditedDay || meta.publishDay,
+                mainEntityOfPage: url,
+                datePublished: toISO(post?.publishDate),
+                dateModified:
+                  toISO(post?.lastEditedDate) || toISO(post?.publishDate),
                 author: {
                   '@type': 'Person',
-                  name: AUTHOR
+                  name: AUTHOR,
+                  url: LINK,
+                  ...(authorSameAs.length ? { sameAs: authorSameAs } : {})
                 },
                 publisher: {
                   '@type': 'Organization',
@@ -248,7 +261,8 @@ const SEO = props => {
                   '@id': `${LINK}/#author`,
                   name: AUTHOR,
                   url: LINK,
-                  image: absoluteLogo
+                  image: absoluteLogo,
+                  ...(authorSameAs.length ? { sameAs: authorSameAs } : {})
                 }
               ]
             })
