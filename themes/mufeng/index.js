@@ -135,7 +135,7 @@ const LayoutBase = props => {
               {/* 主内容区域 */}
               <div
                 id='container-wrapper'
-                className='w-full min-w-0 max-w-4xl mr-auto ml-0 px-4 md:px-8 lg:pr-12 lg:pl-[90px] pt-6 pb-3 md:py-10 overflow-x-hidden'>
+                className='w-full min-w-0 max-w-4xl mr-auto ml-0 px-4 md:px-8 lg:pr-12 lg:pl-[90px] pt-6 pb-3 md:py-10 overflow-x-clip'>
 
                 {/* 加载状态占位 */}
                 {onLoading && (
@@ -265,14 +265,129 @@ const LayoutSearch = props => {
  */
 const LayoutArchive = props => {
   const { archivePosts } = props
+
+  // 按年份聚合月份分组（archivePosts 的 key 是 yyyy-MM，已按时间倒序）
+  const monthKeys = Object.keys(archivePosts)
+  const years = []
+  const yearMonths = {}
+  monthKeys.forEach(mk => {
+    const y = mk.slice(0, 4)
+    if (!yearMonths[y]) {
+      yearMonths[y] = []
+      years.push(y)
+    }
+    yearMonths[y].push(mk)
+  })
+
+  // 当前年份高亮（scroll-spy）
+  const [activeYear, setActiveYear] = useState(years[0])
+  // 点击年份跳转期间的锁：滚动途中只在到达目标分区时才更新高亮
+  const pendingYear = useRef(null)
+
+  useEffect(() => {
+    const sections = years
+      .map(y => document.getElementById(`year-${y}`))
+      .filter(Boolean)
+    if (sections.length === 0) return
+    // 记录当前落在顶部触发带内的分区，取最靠上的那个作为当前年份
+    const visible = new Map()
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            visible.set(e.target.id, e.boundingClientRect.top)
+          } else {
+            visible.delete(e.target.id)
+          }
+        })
+        if (visible.size === 0) return
+        let bestId = null
+        let bestTop = Infinity
+        visible.forEach((top, id) => {
+          if (top < bestTop) {
+            bestTop = top
+            bestId = id
+          }
+        })
+        if (!bestId) return
+        const year = bestId.replace('year-', '')
+        // 跳转锁生效时，途经的分区不更新高亮，只有到达目标才解锁并更新
+        if (pendingYear.current !== null) {
+          if (year === pendingYear.current) pendingYear.current = null
+          else return
+        }
+        setActiveYear(year)
+      },
+      { rootMargin: '-80px 0px -40% 0px', threshold: 0 }
+    )
+    sections.forEach(s => observer.observe(s))
+
+    // 用户主动滚动（滚轮/触摸/键盘）时取消跳转锁，避免手动滚动的高亮被冻结
+    const cancelPending = () => {
+      pendingYear.current = null
+    }
+    window.addEventListener('wheel', cancelPending, { passive: true })
+    window.addEventListener('touchmove', cancelPending, { passive: true })
+    window.addEventListener('keydown', cancelPending)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('wheel', cancelPending)
+      window.removeEventListener('touchmove', cancelPending)
+      window.removeEventListener('keydown', cancelPending)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const scrollToYear = (e, year) => {
+    e.preventDefault()
+    const el = document.getElementById(`year-${year}`)
+    if (el) {
+      pendingYear.current = year
+      setActiveYear(year)
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      history.replaceState(null, '', `#year-${year}`)
+    }
+  }
+
   return (
     <div className='w-full'>
-      {Object.keys(archivePosts).map(archiveTitle => (
-        <BlogArchiveItem
-          key={archiveTitle}
-          archiveTitle={archiveTitle}
-          archivePosts={archivePosts}
-        />
+      {/* 年份跳转导航（sticky 横向条，移动端顶部导航高 h-14） */}
+      {years.length > 1 && (
+        <nav className='sticky top-14 z-20 -mx-4 mb-6 border-b border-gray-100 bg-white/90 px-4 py-2.5 backdrop-blur md:-mx-8 md:px-8 lg:top-0 dark:border-gray-800/50 dark:bg-[#0d0d0d]/90'>
+          <div className='flex gap-1 overflow-x-auto'>
+            {years.map(y => (
+              <a
+                key={y}
+                href={`#year-${y}`}
+                onClick={e => scrollToYear(e, y)}
+                className={`shrink-0 rounded-full px-3 py-1 text-sm transition-colors ${
+                  activeYear === y
+                    ? 'bg-red-500 text-white'
+                    : 'text-gray-500 hover:bg-gray-100 hover:text-red-500 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-red-400'
+                }`}
+              >
+                {y}
+              </a>
+            ))}
+          </div>
+        </nav>
+      )}
+
+      {/* 年份分区 */}
+      {years.map(y => (
+        <section key={y} id={`year-${y}`} className='mb-12 scroll-mt-28'>
+          <h2 className='mb-6 text-3xl font-bold text-gray-900 dark:text-white'>
+            {y}
+          </h2>
+          {yearMonths[y].map(mk => (
+            <BlogArchiveItem
+              key={mk}
+              archiveTitle={mk}
+              archivePosts={archivePosts}
+            />
+          ))}
+        </section>
       ))}
     </div>
   )
