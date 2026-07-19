@@ -13,8 +13,8 @@ const BLOG = {
   // 更新缓存间隔 单位(秒)；即每个页面有N秒的纯静态期、此期间无论多少次访问都不会抓取notion数据；调大该值有助于节省Vercel资源、同时提升访问速率，但也会使文章更新有延迟。原默认值5秒会导致爬虫每次抓取都触发ISR Write，消耗大量Vercel配额。
   // 86400 = 24小时。博客内容不需要30分钟刷新，每天刷新一次完全够用。这样爬虫扫同一批 URL，只有真正过了24小时的才会触发写入，写入量降 90%+。
   // 现在设置为12小时，测试下效果
-  APPEARANCE: process.env.NEXT_PUBLIC_APPEARANCE || 'light', // ['light', 'dark', 'auto'], // light 日间模式 ， dark夜间模式， auto根据时间和主题自动夜间模式
-  APPEARANCE_DARK_TIME: process.env.NEXT_PUBLIC_APPEARANCE_DARK_TIME || [18, 6], // 夜间模式起至时间，false时关闭根据时间自动切换夜间模式
+  APPEARANCE: process.env.NEXT_PUBLIC_APPEARANCE || 'auto', // ['light', 'dark', 'auto'], // light 日间模式 ， dark夜间模式， auto根据时间和主题自动夜间模式
+  APPEARANCE_DARK_TIME: process.env.NEXT_PUBLIC_APPEARANCE_DARK_TIME || false, // 夜间模式起至时间，false时关闭根据时间自动切换夜间模式
 
   AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || '沐风', // 您的昵称 例如 tangly1024
   BIO: process.env.NEXT_PUBLIC_BIO || '诗人、学者', // 作者简介
