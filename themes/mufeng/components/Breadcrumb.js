@@ -66,7 +66,7 @@ export default function Breadcrumb() {
                 {crumb.name}
               </Link>
             ) : (
-              <span className='text-gray-800 dark:text-gray-200 font-medium'>
+              <span className='text-gray-400 dark:text-gray-500'>
                 {crumb.name}
               </span>
             )}
