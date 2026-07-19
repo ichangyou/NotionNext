@@ -61,9 +61,7 @@ const BlogListPage = dynamic(() => import('./components/BlogListPage'), {
 const RecommendPosts = dynamic(() => import('./components/RecommendPosts'), {
   ssr: false
 })
-const PageTitle = dynamic(() => import('./components/PageTitle'), {
-  ssr: false
-})
+const PageTitle = dynamic(() => import('./components/PageTitle'))
 const DarkModeButton = dynamic(() => import('@/components/DarkModeButton'), {
   ssr: false
 })
