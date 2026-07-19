@@ -651,25 +651,51 @@ const LayoutCategoryIndex = props => {
  * @param {*} props
  * @returns
  */
+/**
+ * 标签列表：编辑式文字云
+ * 无胶囊外壳，字号 + 透明度按文章数「对数」连续映射，形成加权排版。
+ * 用 opacity 而非颜色做深浅，明暗两套主题都自动成立。
+ * @param {*} props
+ * @returns
+ */
 const LayoutTagIndex = props => {
-  const { tagOptions } = props
+  const { tagOptions = [] } = props
+  const counts = tagOptions.map(t => t.count || 0)
+  const maxCount = Math.max(...counts, 1)
+  const minCount = Math.min(...counts.filter(c => c > 0), 1)
+  const logMin = Math.log(minCount)
+  const logRange = Math.log(maxCount) - logMin || 1
   return (
-    <div id='tags-list' className='flex flex-wrap gap-2'>
-      {tagOptions.map(tag => (
-        <Link
-          key={tag.name}
-          href={`/tag/${encodeURIComponent(tag.name)}`}
-          className='inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 transition-all duration-200'
-        >
-          <span>#</span>
-          <span>{tag.name}</span>
-          {tag.count > 0 && (
-            <span className='text-xs text-gray-400 dark:text-gray-500'>
-              ({tag.count})
+    <div id='tags-list' className='flex flex-wrap items-baseline gap-x-5 gap-y-4'>
+      {tagOptions.map(tag => {
+        const c = tag.count > 0 ? tag.count : minCount
+        const t = (Math.log(c) - logMin) / logRange // 0..1，越热越接近 1
+        const fontSize = 15 + t * 11 // 15px（冷）→ 26px（热）
+        const fontWeight = t > 0.35 ? 500 : 400
+        const opacity = 0.5 + t * 0.5 // 0.5（淡）→ 1.0（实）
+        return (
+          <Link
+            key={tag.name}
+            href={`/tag/${encodeURIComponent(tag.name)}`}
+            style={{ fontSize: `${fontSize}px`, fontWeight, opacity }}
+            className='group inline-flex items-baseline gap-1 leading-none text-gray-900 dark:text-gray-100 transition-colors duration-150 hover:!opacity-100 hover:text-red-500 dark:hover:text-red-400'
+          >
+            <span className='font-normal opacity-40' style={{ fontSize: '0.6em' }}>
+              #
             </span>
-          )}
-        </Link>
-      ))}
+            <span className='decoration-1 underline-offset-4 group-hover:underline'>
+              {tag.name}
+            </span>
+            {tag.count > 0 && (
+              <span
+                className='font-normal tabular-nums opacity-40'
+                style={{ fontSize: '0.55em' }}>
+                {tag.count}
+              </span>
+            )}
+          </Link>
+        )
+      })}
     </div>
   )
 }
