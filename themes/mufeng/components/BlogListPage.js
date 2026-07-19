@@ -86,10 +86,10 @@ export default function BlogListPage(props) {
             )}
             
             {/* 单个文章项 */}
-            <article className='group py-4 first:pt-0'>
-              <Link 
+            <article className='group'>
+              <Link
                 href={post.href}
-                className='flex items-start md:items-center justify-between gap-4 hover:bg-gray-50 dark:hover:bg-gray-800/30 -mx-3 px-3 py-2 rounded-lg transition-all duration-200'
+                className='flex items-start md:items-center justify-between gap-4 hover:bg-gray-50 dark:hover:bg-gray-800/30 -mx-3 px-3 py-4 rounded-lg transition-all duration-200'
               >
                 {/* 左侧：序号 + 标题 */}
                 <div className='flex items-start md:items-center gap-4 flex-1 min-w-0'>
@@ -99,7 +99,7 @@ export default function BlogListPage(props) {
                   </span>
                   
                   {/* 标题 */}
-                  <h2 className='text-base md:text-lg font-medium text-gray-800 dark:text-gray-200 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-200 line-clamp-2 md:line-clamp-1'>
+                  <h2 title={post.title} className='text-base md:text-lg font-medium text-gray-800 dark:text-gray-200 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors duration-200 line-clamp-2'>
                     {siteConfig('POST_TITLE_ICON') && (
                       <NotionIcon icon={post.pageIcon} className='mr-1' />
                     )}
