@@ -40,10 +40,6 @@ export default function Footer(props) {
           <div className='flex flex-wrap items-center justify-center gap-x-4 gap-y-1'>
             <span>© {copyrightDate} {siteConfig('AUTHOR')}</span>
             <span className='hidden sm:inline'>·</span>
-            <Link href='/' className='hover:text-gray-600 dark:hover:text-gray-300 transition-colors'>
-              {siteConfig('TITLE')}
-            </Link>
-            <span className='hidden sm:inline'>·</span>
             <Link href='/privacy-policy' className='hover:text-gray-600 dark:hover:text-gray-300 transition-colors'>
               {locale?.COMMON?.PRIVACY_POLICY || '隐私政策'}
             </Link>
