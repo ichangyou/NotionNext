@@ -120,9 +120,11 @@ function renderStarrySky() {
       u()
     })(),
     (function t() {
-      document.getElementsByTagName('html')[0].className.indexOf('dark') >= 0 &&
-        u(),
-        window.requestAnimationFrame(t)
+      var isDark =
+        document.getElementsByTagName('html')[0].className.indexOf('dark') >= 0
+      if (isDark) u()
+      else h.clearRect(0, 0, n, e)
+      window.requestAnimationFrame(t)
     })()
 }
 
