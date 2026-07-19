@@ -17,7 +17,7 @@ export default function PageTitle({ title, description }) {
   const getDefaultContent = () => {
     if (path === '/' || path === '' || path.startsWith('/page/')) {
       return {
-        title: '我的文章',
+        title: '最新文章',
         description: siteConfig('SIMPLE_PAGE_TITLE_DESCRIPTION', null, CONFIG) || '分享我的技术经验、产品思考和行业洞察'
       }
     }

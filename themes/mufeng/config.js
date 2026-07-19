@@ -8,7 +8,7 @@ const CONFIG = {
   SIMPLE_AUTHOR_LINK: process.env.NEXT_PUBLIC_AUTHOR_LINK || '#',
 
   // 页面标题描述
-  SIMPLE_PAGE_TITLE_DESCRIPTION: process.env.NEXT_PUBLIC_THEME_SIMPLE_PAGE_DESCRIPTION || 'iOS 开发、AI 工程，和一点投资与成长札记',
+  SIMPLE_PAGE_TITLE_DESCRIPTION: process.env.NEXT_PUBLIC_THEME_SIMPLE_PAGE_DESCRIPTION || 'AI 工程、iOS 开发，和一些投资与成长札记',
 
   SIMPLE_POST_AD_ENABLE: process.env.NEXT_PUBLIC_SIMPLE_POST_AD_ENABLE || false, // 文章列表是否插入广告
 
