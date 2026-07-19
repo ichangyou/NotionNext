@@ -171,7 +171,7 @@ export default function BlogListPage(props) {
                   }}
                   className={`w-8 h-8 flex items-center justify-center rounded-md text-sm transition-all duration-200
                     ${item === currentPage
-                      ? 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 font-medium'
+                      ? 'bg-red-500 text-white font-medium'
                       : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300'
                     }`}
                 >
