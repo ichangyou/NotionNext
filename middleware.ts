@@ -90,7 +90,7 @@ function getTemplatePathRejectResponse(req: NextRequest) {
   return null
 }
 
-function getLegacyUuidRedirectResponse(req: NextRequest) {
+function getLegacyUuidResponse(req: NextRequest) {
   if (req.nextUrl.pathname.startsWith('/api')) {
     return null
   }
@@ -107,7 +107,7 @@ function getLegacyUuidRedirectResponse(req: NextRequest) {
 
   const destination = LEGACY_UUID_REDIRECTS[match[1].toLowerCase()]
   if (!destination) {
-    return null
+    return new NextResponse(null, { status: 410 })
   }
 
   const nextPath = applyLocalePrefix(destination, localePrefix)
@@ -165,9 +165,9 @@ const noAuthMiddleware = async (req: NextRequest, ev: any) => {
     return templateReject
   }
 
-  const legacyUuidRedirect = getLegacyUuidRedirectResponse(req)
-  if (legacyUuidRedirect) {
-    return legacyUuidRedirect
+  const legacyUuidResponse = getLegacyUuidResponse(req)
+  if (legacyUuidResponse) {
+    return legacyUuidResponse
   }
 
   const contentRedirect = getContentRedirectResponse(req)
@@ -211,9 +211,9 @@ const authMiddleware = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
         return templateReject
       }
 
-      const legacyUuidRedirect = getLegacyUuidRedirectResponse(req)
-      if (legacyUuidRedirect) {
-        return legacyUuidRedirect
+      const legacyUuidResponse = getLegacyUuidResponse(req)
+      if (legacyUuidResponse) {
+        return legacyUuidResponse
       }
 
       const contentRedirect = getContentRedirectResponse(req)
