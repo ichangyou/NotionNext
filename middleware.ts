@@ -90,6 +90,16 @@ function getTemplatePathRejectResponse(req: NextRequest) {
   return null
 }
 
+function getLegacyLocaleEntryRedirectResponse(req: NextRequest) {
+  if (req.nextUrl.pathname !== '/zh') {
+    return null
+  }
+
+  const redirectToUrl = req.nextUrl.clone()
+  redirectToUrl.pathname = '/'
+  return NextResponse.redirect(redirectToUrl, 301)
+}
+
 function getLegacyUuidResponse(req: NextRequest) {
   if (req.nextUrl.pathname.startsWith('/api')) {
     return null
@@ -160,6 +170,11 @@ function getContentRedirectResponse(req: NextRequest) {
  */
 // eslint-disable-next-line @typescript-eslint/require-await, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 const noAuthMiddleware = async (req: NextRequest, ev: any) => {
+  const legacyLocaleEntryRedirect = getLegacyLocaleEntryRedirectResponse(req)
+  if (legacyLocaleEntryRedirect) {
+    return legacyLocaleEntryRedirect
+  }
+
   const templateReject = getTemplatePathRejectResponse(req)
   if (templateReject) {
     return templateReject
@@ -206,6 +221,12 @@ const noAuthMiddleware = async (req: NextRequest, ev: any) => {
  */
 const authMiddleware = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
   ? clerkMiddleware((auth, req) => {
+      const legacyLocaleEntryRedirect =
+        getLegacyLocaleEntryRedirectResponse(req)
+      if (legacyLocaleEntryRedirect) {
+        return legacyLocaleEntryRedirect
+      }
+
       const templateReject = getTemplatePathRejectResponse(req)
       if (templateReject) {
         return templateReject

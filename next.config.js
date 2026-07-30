@@ -136,6 +136,14 @@ const nextConfig = {
             destination: '/rss/feed.xml',
             permanent: true
           },
+          // 当前没有正式英文子站；/en 指向上游模板站，统一到中文主站。
+          // locale: false 确保规则按原始 URL 匹配，不被 Next.js i18n 自动添加语言前缀。
+          {
+            source: '/en',
+            destination: '/',
+            statusCode: 301,
+            locale: false
+          },
           // GSC 发现的历史文章地址：保留旧链接权重并单跳到当前 canonical slug。
           {
             source: '/article/ui-ux-pro-max',
