@@ -23,6 +23,12 @@
 // 修复，恢复正常访问并保留收录，故从此处移除。
 const BROKEN_PAGES = []
 
+// ── A2. 未完成的站点功能页（完成内容后再恢复）──────────────────────────────
+// 这些页面不仅退出 sitemap/导航，还会在动态路由层返回 404，避免默认模板以 200 被审核。
+const RETIRED_SITE_PAGES = [
+  'links' // 当前仍是 NotionNext 默认友链模板，重写为真实资源页后从此数组移除。
+]
+
 // ── B. 已做 301 重定向的重复页（同时从 sitemap 移除）──────────────────────
 // 这些 slug 的 301 目标在 next.config.js 里配置；此处加入是为了让它们退出 sitemap。
 const REDIRECTED_DUPLICATES = [
@@ -100,10 +106,12 @@ const THIN_PERSONAL = [
 module.exports = {
   CONTENT_EXCLUDE_SLUGS: [
     ...BROKEN_PAGES,
+    ...RETIRED_SITE_PAGES,
     ...REDIRECTED_DUPLICATES,
     ...VERY_THIN_TECH,
     ...THIN_TECH,
     ...VERY_THIN_PERSONAL,
     ...THIN_PERSONAL
-  ]
+  ],
+  CONTENT_RETIRED_PAGE_SLUGS: RETIRED_SITE_PAGES
 }

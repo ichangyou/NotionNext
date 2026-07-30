@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-19T09:47:43.181Z",
+  "generatedAt": "2026-07-30T07:30:38.005Z",
   "site": "https://mufeng.blog",
   "qualityGuard": {
     "enabled": true,
@@ -16,64 +16,36 @@
     ]
   },
   "totals": {
-    "publishedPosts": 198,
-    "lowQualityPosts": 28,
+    "publishedPosts": 204,
+    "lowQualityPosts": 4,
     "indexBlockedPosts": 0,
-    "warningOnlyPosts": 28
+    "warningOnlyPosts": 4,
+    "curationExcludedPosts": 32,
+    "indexablePosts": 172,
+    "nonIndexablePosts": 32,
+    "postsWithBodyMetrics": 0,
+    "postsMissingBodyMetrics": 204
   },
   "reasonStats": {
     "all": {
-      "short-summary": 28
+      "short-summary": 4
     },
     "blocking": {},
     "warning": {
-      "short-summary": 28
+      "short-summary": 4
+    },
+    "audit": {
+      "missing-body-metrics": 204
     }
   },
   "lowQualityPosts": [
-    {
-      "id": "35eb2da8-94ba-80f2-a983-d9259e2f2287",
-      "slug": "article/agent-skills-ai-memory-handbook",
-      "title": "AI 每天早上都失忆了，直到我给它装了这",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 74,
-      "wordCount": 0,
-      "publishDay": "2026-5-12",
-      "lastEditedDay": "2026-5-12",
-      "href": "/article/agent-skills-ai-memory-handbook",
-      "url": "https://mufeng.blog/article/agent-skills-ai-memory-handbook"
-    },
-    {
-      "id": "350b2da8-94ba-8043-a147-e1e7ac78710f",
-      "slug": "article/app-store-launch-lessons-indie-ios-developer",
-      "title": "一个 iOS 独立开发者的 App Store 上线复盘",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 77,
-      "wordCount": 0,
-      "publishDay": "2026-4-28",
-      "lastEditedDay": "2026-4-28",
-      "href": "/article/app-store-launch-lessons-indie-ios-developer",
-      "url": "https://mufeng.blog/article/app-store-launch-lessons-indie-ios-developer"
-    },
     {
       "id": "34ab2da8-94ba-809f-aa17-d94f9b83cf2c",
       "slug": "article/codex-npm-optional-dependencies-question",
       "title": "Codex CLI 安装踩坑实录：npm optionalDependencies 问题 & pnpm 终极解决方案",
       "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
       "reasons": [
         "short-summary"
       ],
@@ -83,130 +55,22 @@
       ],
       "summaryChars": 73,
       "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
       "publishDay": "2026-4-22",
       "lastEditedDay": "2026-6-7",
       "href": "/article/codex-npm-optional-dependencies-question",
       "url": "https://mufeng.blog/article/codex-npm-optional-dependencies-question"
     },
     {
-      "id": "349b2da8-94ba-802b-a42b-ded22ceb7518",
-      "slug": "article/notebooklm-learning-case-study",
-      "title": "我用 NotebookLM，完整复盘一个真实学习案例",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 78,
-      "wordCount": 0,
-      "publishDay": "2026-4-21",
-      "lastEditedDay": "2026-4-21",
-      "href": "/article/notebooklm-learning-case-study",
-      "url": "https://mufeng.blog/article/notebooklm-learning-case-study"
-    },
-    {
-      "id": "349b2da8-94ba-80ee-b063-e13e79cbffbf",
-      "slug": "article/ai-for-solo-ios-developers",
-      "title": "AI 让我不再需要团队开发 App",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 47,
-      "wordCount": 0,
-      "publishDay": "2026-4-21",
-      "lastEditedDay": "2026-4-21",
-      "href": "/article/ai-for-solo-ios-developers",
-      "url": "https://mufeng.blog/article/ai-for-solo-ios-developers"
-    },
-    {
-      "id": "33fb2da8-94ba-8068-bfeb-de6d9cc33b29",
-      "slug": "article/stock-analysis-baba",
-      "title": "阿里巴巴（BABA）深度投资分析：AI 转型期的深度价值困境反转",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 79,
-      "wordCount": 0,
-      "publishDay": "2026-4-11",
-      "lastEditedDay": "2026-4-11",
-      "href": "/article/stock-analysis-baba",
-      "url": "https://mufeng.blog/article/stock-analysis-baba"
-    },
-    {
-      "id": "1bfb2da8-94ba-801d-b29b-f86ce0d9309a",
-      "slug": "article/build-your-own-digital-home",
-      "title": "为什么我要打造自己的独立博客，而不是依赖第三方平台？",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 13,
-      "wordCount": 0,
-      "publishDay": "2025-3-23",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/build-your-own-digital-home",
-      "url": "https://mufeng.blog/article/build-your-own-digital-home"
-    },
-    {
-      "id": "1c1b2da8-94ba-8054-83fb-cd9148b8764c",
-      "slug": "article/why-index-funds-make-sense",
-      "title": "普通人如何通过价值投资实现财富增长？",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 23,
-      "wordCount": 0,
-      "publishDay": "2025-3-16",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/why-index-funds-make-sense",
-      "url": "https://mufeng.blog/article/why-index-funds-make-sense"
-    },
-    {
-      "id": "1c1b2da8-94ba-80b2-b61f-dbd58fb84458",
-      "slug": "article/some-artists-grow-with-age",
-      "title": "刀郎：用音乐普度众生，用岁月成就经典",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 18,
-      "wordCount": 0,
-      "publishDay": "2025-3-8",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/some-artists-grow-with-age",
-      "url": "https://mufeng.blog/article/some-artists-grow-with-age"
-    },
-    {
       "id": "1c1b2da8-94ba-80de-a28f-f6654e8b19b2",
       "slug": "article/build-yourself-into-someone-strong",
       "title": "工作、学习、财务与成长的一些思考",
       "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
       "reasons": [
         "short-summary"
       ],
@@ -216,111 +80,22 @@
       ],
       "summaryChars": 12,
       "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
       "publishDay": "2025-3-2",
       "lastEditedDay": "2026-5-23",
       "href": "/article/build-yourself-into-someone-strong",
       "url": "https://mufeng.blog/article/build-yourself-into-someone-strong"
     },
     {
-      "id": "1c4b2da8-94ba-8004-b4e1-de4ac7463946",
-      "slug": "article/you-are-creating-yourself",
-      "title": "情绪就是你的风水",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 69,
-      "wordCount": 0,
-      "publishDay": "2025-2-26",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/you-are-creating-yourself",
-      "url": "https://mufeng.blog/article/you-are-creating-yourself"
-    },
-    {
-      "id": "1c4b2da8-94ba-80bc-8490-d3491f4fc2bb",
-      "slug": "article/greatness-takes-time",
-      "title": "《茅台传》读后感：品质是信仰，成功是坚持",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 11,
-      "wordCount": 0,
-      "publishDay": "2025-2-22",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/greatness-takes-time",
-      "url": "https://mufeng.blog/article/greatness-takes-time"
-    },
-    {
-      "id": "1bdb2da8-94ba-8017-8a89-dae5dd7702bd",
-      "slug": "article/nobody-wants-to-get-rich-slowly",
-      "title": "耐心是投资的关键：我的股市定投经验与心得",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 21,
-      "wordCount": 0,
-      "publishDay": "2025-2-15",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/nobody-wants-to-get-rich-slowly",
-      "url": "https://mufeng.blog/article/nobody-wants-to-get-rich-slowly"
-    },
-    {
-      "id": "1c4b2da8-94ba-80be-9d52-e6bfb9f21df4",
-      "slug": "article/investing-is-like-fishing",
-      "title": "放长线钓大鱼",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 23,
-      "wordCount": 0,
-      "publishDay": "2025-2-6",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/investing-is-like-fishing",
-      "url": "https://mufeng.blog/article/investing-is-like-fishing"
-    },
-    {
-      "id": "1c4b2da8-94ba-80b8-b709-c8903d268236",
-      "slug": "article/people-like-me-keep-moving",
-      "title": "过年见闻录",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 12,
-      "wordCount": 0,
-      "publishDay": "2025-2-4",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/people-like-me-keep-moving",
-      "url": "https://mufeng.blog/article/people-like-me-keep-moving"
-    },
-    {
       "id": "1c5b2da8-94ba-806c-a64c-f0925bbdfff5",
       "slug": "article/build-your-own-thinking-system",
       "title": "两个做事实用方法",
       "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
       "reasons": [
         "short-summary"
       ],
@@ -330,206 +105,22 @@
       ],
       "summaryChars": 21,
       "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
       "publishDay": "2025-1-20",
       "lastEditedDay": "2026-5-23",
       "href": "/article/build-your-own-thinking-system",
       "url": "https://mufeng.blog/article/build-your-own-thinking-system"
     },
     {
-      "id": "1c5b2da8-94ba-80a7-baa6-e225b2060d39",
-      "slug": "article/my-first-step-toward-globalization",
-      "title": "建议你有张美金储蓄卡",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 17,
-      "wordCount": 0,
-      "publishDay": "2025-1-17",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/my-first-step-toward-globalization",
-      "url": "https://mufeng.blog/article/my-first-step-toward-globalization"
-    },
-    {
-      "id": "1c5b2da8-94ba-80cd-b2d8-d78bb6fde8d9",
-      "slug": "article/focus-on-your-main-quest",
-      "title": "每天变得更聪明一点点",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 47,
-      "wordCount": 0,
-      "publishDay": "2025-3-29",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/focus-on-your-main-quest",
-      "url": "https://mufeng.blog/article/focus-on-your-main-quest"
-    },
-    {
-      "id": "1c5b2da8-94ba-809b-99b0-c7bedcb2a093",
-      "slug": "article/the-most-important-3-hours",
-      "title": "时间的艺术与财富的哲学",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 75,
-      "wordCount": 0,
-      "publishDay": "2025-1-8",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/the-most-important-3-hours",
-      "url": "https://mufeng.blog/article/the-most-important-3-hours"
-    },
-    {
-      "id": "1c5b2da8-94ba-80e3-9ef2-df248134ae6a",
-      "slug": "article/lessons-from-xiaomi-and-lei-jun",
-      "title": "向雷军学习 - 读《小米创业思考》有感",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 13,
-      "wordCount": 0,
-      "publishDay": "2025-3-29",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/lessons-from-xiaomi-and-lei-jun",
-      "url": "https://mufeng.blog/article/lessons-from-xiaomi-and-lei-jun"
-    },
-    {
-      "id": "1c5b2da8-94ba-8047-b216-da3e4fd8c76b",
-      "slug": "article/run-yourself-like-a-company",
-      "title": "2024年终总结",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 14,
-      "wordCount": 0,
-      "publishDay": "2025-1-1",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/run-yourself-like-a-company",
-      "url": "https://mufeng.blog/article/run-yourself-like-a-company"
-    },
-    {
-      "id": "1cab2da8-94ba-801a-a10c-fa589b2835c9",
-      "slug": "article/busy-but-going-nowhere",
-      "title": "忙碌的误区在于无效的努力",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 58,
-      "wordCount": 0,
-      "publishDay": "2024-12-25",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/busy-but-going-nowhere",
-      "url": "https://mufeng.blog/article/busy-but-going-nowhere"
-    },
-    {
-      "id": "1cab2da8-94ba-80ec-a8e4-d3d87da057f7",
-      "slug": "article/hong-kong-trip-hsbc-card-travel-notes",
-      "title": "深圳、香港二日",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 36,
-      "wordCount": 0,
-      "publishDay": "2025-1-21",
-      "lastEditedDay": "2026-5-23",
-      "href": "/article/hong-kong-trip-hsbc-card-travel-notes",
-      "url": "https://mufeng.blog/article/hong-kong-trip-hsbc-card-travel-notes"
-    },
-    {
-      "id": "1cab2da8-94ba-8070-b518-e021cc52ab9b",
-      "slug": "article/thinking-in-decades",
-      "title": "选择比努力更重要",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 34,
-      "wordCount": 0,
-      "publishDay": "2024-11-16",
-      "lastEditedDay": "2026-5-21",
-      "href": "/article/thinking-in-decades",
-      "url": "https://mufeng.blog/article/thinking-in-decades"
-    },
-    {
-      "id": "1cab2da8-94ba-80f2-a631-ca5fa87ad75c",
-      "slug": "article/upgrading-the-workflow",
-      "title": "利用工具提高效率，珍惜时间",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 33,
-      "wordCount": 0,
-      "publishDay": "2024-11-10",
-      "lastEditedDay": "2026-5-21",
-      "href": "/article/upgrading-the-workflow",
-      "url": "https://mufeng.blog/article/upgrading-the-workflow"
-    },
-    {
-      "id": "1cdb2da8-94ba-80d2-8272-f0f02b78ea50",
-      "slug": "article/mountains-clouds-and-time",
-      "title": "巴山蜀水峨眉山",
-      "isIndexBlocked": false,
-      "reasons": [
-        "short-summary"
-      ],
-      "blockingReasons": [],
-      "warningReasons": [
-        "short-summary"
-      ],
-      "summaryChars": 41,
-      "wordCount": 0,
-      "publishDay": "2024-10-2",
-      "lastEditedDay": "2026-5-21",
-      "href": "/article/mountains-clouds-and-time",
-      "url": "https://mufeng.blog/article/mountains-clouds-and-time"
-    },
-    {
       "id": "1cdb2da8-94ba-800b-a501-ee9f41bedf3a",
       "slug": "article/principles-and-risk",
       "title": "瑞·达利欧的五大交易原则",
       "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
       "reasons": [
         "short-summary"
       ],
@@ -539,16 +130,67 @@
       ],
       "summaryChars": 24,
       "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
       "publishDay": "2024-7-5",
       "lastEditedDay": "2026-5-21",
       "href": "/article/principles-and-risk",
       "url": "https://mufeng.blog/article/principles-and-risk"
+    }
+  ],
+  "indexBlockedPosts": [],
+  "curationExcludedPosts": [
+    {
+      "id": "377b2da8-94ba-8022-bae5-d6e1f953fed7",
+      "slug": "article/nvm-node-version-management-guide",
+      "title": "Node.js 版本管理：nvm 实用指南",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 95,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-6-6",
+      "lastEditedDay": "2026-6-6",
+      "href": "/article/nvm-node-version-management-guide",
+      "url": "https://mufeng.blog/article/nvm-node-version-management-guide"
     },
     {
-      "id": "1d4b2da8-94ba-805c-b6a7-c9da2e089d3c",
-      "slug": "article/learning-methods-and-quiet-growth",
-      "title": "万般劫难，“静”可保命",
+      "id": "359b2da8-94ba-80c0-b694-d4efb296c3c4",
+      "slug": "article/why-xcode-real-device-debugging-drains-macbook-battery",
+      "title": "Xcode + 真机联调，是 Mac 上最耗电的开发场景之一",
       "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 264,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-5-7",
+      "lastEditedDay": "2026-5-7",
+      "href": "/article/why-xcode-real-device-debugging-drains-macbook-battery",
+      "url": "https://mufeng.blog/article/why-xcode-real-device-debugging-drains-macbook-battery"
+    },
+    {
+      "id": "34ab2da8-94ba-809f-aa17-d94f9b83cf2c",
+      "slug": "article/codex-npm-optional-dependencies-question",
+      "title": "Codex CLI 安装踩坑实录：npm optionalDependencies 问题 & pnpm 终极解决方案",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
       "reasons": [
         "short-summary"
       ],
@@ -556,13 +198,1327 @@
       "warningReasons": [
         "short-summary"
       ],
-      "summaryChars": 32,
+      "summaryChars": 73,
       "wordCount": 0,
-      "publishDay": "2024-3-23",
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-4-22",
+      "lastEditedDay": "2026-6-7",
+      "href": "/article/codex-npm-optional-dependencies-question",
+      "url": "https://mufeng.blog/article/codex-npm-optional-dependencies-question"
+    },
+    {
+      "id": "346b2da8-94ba-8020-ba34-feac4fb2bfe8",
+      "slug": "article/app-store-bg-music",
+      "title": "App Store 推广（视频 / 截图 / 落地页）背景音乐哪里找？",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 91,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-4-18",
+      "lastEditedDay": "2026-5-20",
+      "href": "/article/app-store-bg-music",
+      "url": "https://mufeng.blog/article/app-store-bg-music"
+    },
+    {
+      "id": "32fb2da8-94ba-8007-966e-f9c523998ef7",
+      "slug": "article/github-release-tagging-semantic-versioning-guide",
+      "title": "GitHub iOS 项目发布流程 —— Tag 与 Release 规范",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 180,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-26",
+      "lastEditedDay": "2026-7-13",
+      "href": "/article/github-release-tagging-semantic-versioning-guide",
+      "url": "https://mufeng.blog/article/github-release-tagging-semantic-versioning-guide"
+    },
+    {
+      "id": "32cb2da8-94ba-8013-8ee6-f0727cd74cd2",
+      "slug": "article/add-web-pages-to-things3-with-bookmarklet",
+      "title": "Mac Edge 浏览器一键导入链接到 Things 3",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 263,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-23",
+      "lastEditedDay": "2026-5-28",
+      "href": "/article/add-web-pages-to-things3-with-bookmarklet",
+      "url": "https://mufeng.blog/article/add-web-pages-to-things3-with-bookmarklet"
+    },
+    {
+      "id": "320b2da8-94ba-8059-8688-da0b1074b308",
+      "slug": "article/migrate-domain-dns-from-spaceship-to-cloudflare",
+      "title": "将 mufeng.blog 从 Spaceship 迁移到 Cloudflare",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 273,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-11",
+      "lastEditedDay": "2026-5-28",
+      "href": "/article/migrate-domain-dns-from-spaceship-to-cloudflare",
+      "url": "https://mufeng.blog/article/migrate-domain-dns-from-spaceship-to-cloudflare"
+    },
+    {
+      "id": "319b2da8-94ba-8025-8290-f19d1f6b04b8",
+      "slug": "article/fix-github-ssh-port-22-connection-closed",
+      "title": "git push 报错，22 端口被封了？三步修好",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 276,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-4",
+      "lastEditedDay": "2026-5-28",
+      "href": "/article/fix-github-ssh-port-22-connection-closed",
+      "url": "https://mufeng.blog/article/fix-github-ssh-port-22-connection-closed"
+    },
+    {
+      "id": "318b2da8-94ba-8003-988b-ddff61740cc8",
+      "slug": "article/claude-code-shortcuts-and-terminal-workflow-guide",
+      "title": "Claude Code 常用快捷键",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 206,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-3",
+      "lastEditedDay": "2026-6-7",
+      "href": "/article/claude-code-shortcuts-and-terminal-workflow-guide",
+      "url": "https://mufeng.blog/article/claude-code-shortcuts-and-terminal-workflow-guide"
+    },
+    {
+      "id": "318b2da8-94ba-8084-a5ec-d5133389e8f2",
+      "slug": "article/optimized-zshrc-config-for-macos-developers",
+      "title": "Claude 优化 .zshrc 配置",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 188,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-3",
+      "lastEditedDay": "2026-6-7",
+      "href": "/article/optimized-zshrc-config-for-macos-developers",
+      "url": "https://mufeng.blog/article/optimized-zshrc-config-for-macos-developers"
+    },
+    {
+      "id": "316b2da8-94ba-80f4-9d10-ed16fd438e4a",
+      "slug": "article/bash-shell-scripting-guide-for-developers",
+      "title": "Bash 详解",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 178,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-1",
+      "lastEditedDay": "2026-5-28",
+      "href": "/article/bash-shell-scripting-guide-for-developers",
+      "url": "https://mufeng.blog/article/bash-shell-scripting-guide-for-developers"
+    },
+    {
+      "id": "304b2da8-94ba-8011-8aed-c9fe8f32704e",
+      "slug": "article/cache-avalanche-breakdown-and-penetration-explained",
+      "title": "缓存雪崩、缓存击穿、缓存穿透",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 163,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-2-11",
+      "lastEditedDay": "2026-5-27",
+      "href": "/article/cache-avalanche-breakdown-and-penetration-explained",
+      "url": "https://mufeng.blog/article/cache-avalanche-breakdown-and-penetration-explained"
+    },
+    {
+      "id": "302b2da8-94ba-8002-86df-c270fae25128",
+      "slug": "article/remove-sensitive-env-files-from-git-history",
+      "title": "清理 Git 敏感信息提交记录",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 174,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-2-9",
+      "lastEditedDay": "2026-7-13",
+      "href": "/article/remove-sensitive-env-files-from-git-history",
+      "url": "https://mufeng.blog/article/remove-sensitive-env-files-from-git-history"
+    },
+    {
+      "id": "2f6b2da8-94ba-80d1-b378-f8ddb3887b27",
+      "slug": "article/cursor-agent-skills-and-ai-workflow-guide",
+      "title": "Cursor Agent Skill：让 AI 成为你的专业搭档",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 195,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-1-28",
+      "lastEditedDay": "2026-5-26",
+      "href": "/article/cursor-agent-skills-and-ai-workflow-guide",
+      "url": "https://mufeng.blog/article/cursor-agent-skills-and-ai-workflow-guide"
+    },
+    {
+      "id": "2f4b2da8-94ba-803a-9346-fd78745ddfc2",
+      "slug": "article/cursor-rules-agents-and-copilot-instructions-guide",
+      "title": "如何把 Cursor 里的 AI，驯化成一个听话的高级工程师",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 198,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-1-26",
+      "lastEditedDay": "2026-5-26",
+      "href": "/article/cursor-rules-agents-and-copilot-instructions-guide",
+      "url": "https://mufeng.blog/article/cursor-rules-agents-and-copilot-instructions-guide"
+    },
+    {
+      "id": "2efb2da8-94ba-8069-b27a-c037c9908d0a",
+      "slug": "article/ios-storekit-membership-testing-guide",
+      "title": "还没上线 app store 的开发阶段，怎样模拟购买会员功能?",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 189,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-1-21",
+      "lastEditedDay": "2026-5-26",
+      "href": "/article/ios-storekit-membership-testing-guide",
+      "url": "https://mufeng.blog/article/ios-storekit-membership-testing-guide"
+    },
+    {
+      "id": "2e8b2da8-94ba-80e7-b16c-e2b377a20444",
+      "slug": "article/cursor-ai-programming-workflow-and-practical-guide",
+      "title": "在 Cursor 中高效使用 AI Skills 指南",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 181,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-1-14",
+      "lastEditedDay": "2026-5-26",
+      "href": "/article/cursor-ai-programming-workflow-and-practical-guide",
+      "url": "https://mufeng.blog/article/cursor-ai-programming-workflow-and-practical-guide"
+    },
+    {
+      "id": "2ceb2da8-94ba-8019-a258-f4b37d58d895",
+      "slug": "article/ai-blog-redesign-indie-app-passion-work-freedom",
+      "title": "找到做自己喜欢的事",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 147,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-12-19",
+      "lastEditedDay": "2026-5-25",
+      "href": "/article/ai-blog-redesign-indie-app-passion-work-freedom",
+      "url": "https://mufeng.blog/article/ai-blog-redesign-indie-app-passion-work-freedom"
+    },
+    {
+      "id": "2adb2da8-94ba-80cc-b646-d3695faef909",
+      "slug": "article/spring-bean-registration-component-scan-vs-manual-configuration",
+      "title": "手动注册第三方 JAR 包中的类到 Spring 容器",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 189,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-11-16",
+      "lastEditedDay": "2026-5-25",
+      "href": "/article/spring-bean-registration-component-scan-vs-manual-configuration",
+      "url": "https://mufeng.blog/article/spring-bean-registration-component-scan-vs-manual-configuration"
+    },
+    {
+      "id": "2adb2da8-94ba-807f-9212-edf37f94aa9c",
+      "slug": "article/shanghai-hustle-life-reflection-mortality-xuxiake-mindset",
+      "title": "活成自己的徐霞客",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 123,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-11-9",
+      "lastEditedDay": "2026-5-25",
+      "href": "/article/shanghai-hustle-life-reflection-mortality-xuxiake-mindset",
+      "url": "https://mufeng.blog/article/shanghai-hustle-life-reflection-mortality-xuxiake-mindset"
+    },
+    {
+      "id": "25eb2da8-94ba-8032-93ce-c708e0ff2ba3",
+      "slug": "article/reading-habits-thin-to-thick-feynman-method-book-review",
+      "title": "读书习惯，是最划算的长期投资",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 143,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-8-29",
+      "lastEditedDay": "2026-5-24",
+      "href": "/article/reading-habits-thin-to-thick-feynman-method-book-review",
+      "url": "https://mufeng.blog/article/reading-habits-thin-to-thick-feynman-method-book-review"
+    },
+    {
+      "id": "25bb2da8-94ba-80f0-a66a-c002a25bb93d",
+      "slug": "article/financial-freedom-early-retirement-big-goals-life-purpose",
+      "title": "提前退休十年计划：让钱替你工作",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 133,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-8-26",
+      "lastEditedDay": "2026-5-24",
+      "href": "/article/financial-freedom-early-retirement-big-goals-life-purpose",
+      "url": "https://mufeng.blog/article/financial-freedom-early-retirement-big-goals-life-purpose"
+    },
+    {
+      "id": "253b2da8-94ba-8038-8e04-dd80afd00d18",
+      "slug": "article/java-completablefuture-async-programming-guide",
+      "title": "CompletableFuture 全面详解",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 202,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-8-18",
+      "lastEditedDay": "2026-5-24",
+      "href": "/article/java-completablefuture-async-programming-guide",
+      "url": "https://mufeng.blog/article/java-completablefuture-async-programming-guide"
+    },
+    {
+      "id": "228b2da8-94ba-801d-bf27-ea7fb74fac37",
+      "slug": "article/personal-finance-hk-bank-index-fund-retirement-planning",
+      "title": "通过投资养老",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 118,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-7-6",
+      "lastEditedDay": "2026-5-24",
+      "href": "/article/personal-finance-hk-bank-index-fund-retirement-planning",
+      "url": "https://mufeng.blog/article/personal-finance-hk-bank-index-fund-retirement-planning"
+    },
+    {
+      "id": "218b2da8-94ba-8038-8def-f92734af8e3a",
+      "slug": "article/english-learning-method-voice-diary-deliberate-practice",
+      "title": "学习英语无捷径：我的实践经验",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 134,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-6-20",
+      "lastEditedDay": "2026-5-23",
+      "href": "/article/english-learning-method-voice-diary-deliberate-practice",
+      "url": "https://mufeng.blog/article/english-learning-method-voice-diary-deliberate-practice"
+    },
+    {
+      "id": "1f6b2da8-94ba-8001-9905-e0f78ed2a2a5",
+      "slug": "article/book-review-truth-about-wealth-money-time-management",
+      "title": "读《财富的真相》：学会理财，更要学会管理自己的人生节奏",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 128,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-5-17",
+      "lastEditedDay": "2026-5-23",
+      "href": "/article/book-review-truth-about-wealth-money-time-management",
+      "url": "https://mufeng.blog/article/book-review-truth-about-wealth-money-time-management"
+    },
+    {
+      "id": "1e9b2da8-94ba-801b-9020-cc46048f53e8",
+      "slug": "article/proxifier-guide-force-proxy-for-developers",
+      "title": "Proxifier 的工作原理",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 171,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-5-4",
+      "lastEditedDay": "2026-5-23",
+      "href": "/article/proxifier-guide-force-proxy-for-developers",
+      "url": "https://mufeng.blog/article/proxifier-guide-force-proxy-for-developers"
+    },
+    {
+      "id": "1c9b2da8-94ba-809b-9c53-d4c98dd4687b",
+      "slug": "article/ai-empowers-everyone-build-habits-blog-journey",
+      "title": "借助AI打造个人品牌，走向技术平权时代",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 106,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-4-2",
+      "lastEditedDay": "2026-5-23",
+      "href": "/article/ai-empowers-everyone-build-habits-blog-journey",
+      "url": "https://mufeng.blog/article/ai-empowers-everyone-build-habits-blog-journey"
+    },
+    {
+      "id": "1c1b2da8-94ba-80de-a28f-f6654e8b19b2",
+      "slug": "article/build-yourself-into-someone-strong",
+      "title": "工作、学习、财务与成长的一些思考",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 12,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-3-2",
+      "lastEditedDay": "2026-5-23",
+      "href": "/article/build-yourself-into-someone-strong",
+      "url": "https://mufeng.blog/article/build-yourself-into-someone-strong"
+    },
+    {
+      "id": "1c5b2da8-94ba-806c-a64c-f0925bbdfff5",
+      "slug": "article/build-your-own-thinking-system",
+      "title": "两个做事实用方法",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 21,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-1-20",
+      "lastEditedDay": "2026-5-23",
+      "href": "/article/build-your-own-thinking-system",
+      "url": "https://mufeng.blog/article/build-your-own-thinking-system"
+    },
+    {
+      "id": "1cdb2da8-94ba-800b-a501-ee9f41bedf3a",
+      "slug": "article/principles-and-risk",
+      "title": "瑞·达利欧的五大交易原则",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 24,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2024-7-5",
       "lastEditedDay": "2026-5-21",
-      "href": "/article/learning-methods-and-quiet-growth",
-      "url": "https://mufeng.blog/article/learning-methods-and-quiet-growth"
+      "href": "/article/principles-and-risk",
+      "url": "https://mufeng.blog/article/principles-and-risk"
+    },
+    {
+      "id": "1d4b2da8-94ba-8007-8c19-fd46c8acc770",
+      "slug": "article/learn-location",
+      "title": "给自己一个学习地点",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 167,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2024-1-14",
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/learn-location",
+      "url": "https://mufeng.blog/article/learn-location"
     }
   ],
-  "indexBlockedPosts": []
+  "nonIndexablePosts": [
+    {
+      "id": "377b2da8-94ba-8022-bae5-d6e1f953fed7",
+      "slug": "article/nvm-node-version-management-guide",
+      "title": "Node.js 版本管理：nvm 实用指南",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 95,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-6-6",
+      "lastEditedDay": "2026-6-6",
+      "href": "/article/nvm-node-version-management-guide",
+      "url": "https://mufeng.blog/article/nvm-node-version-management-guide"
+    },
+    {
+      "id": "359b2da8-94ba-80c0-b694-d4efb296c3c4",
+      "slug": "article/why-xcode-real-device-debugging-drains-macbook-battery",
+      "title": "Xcode + 真机联调，是 Mac 上最耗电的开发场景之一",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 264,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-5-7",
+      "lastEditedDay": "2026-5-7",
+      "href": "/article/why-xcode-real-device-debugging-drains-macbook-battery",
+      "url": "https://mufeng.blog/article/why-xcode-real-device-debugging-drains-macbook-battery"
+    },
+    {
+      "id": "34ab2da8-94ba-809f-aa17-d94f9b83cf2c",
+      "slug": "article/codex-npm-optional-dependencies-question",
+      "title": "Codex CLI 安装踩坑实录：npm optionalDependencies 问题 & pnpm 终极解决方案",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 73,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-4-22",
+      "lastEditedDay": "2026-6-7",
+      "href": "/article/codex-npm-optional-dependencies-question",
+      "url": "https://mufeng.blog/article/codex-npm-optional-dependencies-question"
+    },
+    {
+      "id": "346b2da8-94ba-8020-ba34-feac4fb2bfe8",
+      "slug": "article/app-store-bg-music",
+      "title": "App Store 推广（视频 / 截图 / 落地页）背景音乐哪里找？",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 91,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-4-18",
+      "lastEditedDay": "2026-5-20",
+      "href": "/article/app-store-bg-music",
+      "url": "https://mufeng.blog/article/app-store-bg-music"
+    },
+    {
+      "id": "32fb2da8-94ba-8007-966e-f9c523998ef7",
+      "slug": "article/github-release-tagging-semantic-versioning-guide",
+      "title": "GitHub iOS 项目发布流程 —— Tag 与 Release 规范",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 180,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-26",
+      "lastEditedDay": "2026-7-13",
+      "href": "/article/github-release-tagging-semantic-versioning-guide",
+      "url": "https://mufeng.blog/article/github-release-tagging-semantic-versioning-guide"
+    },
+    {
+      "id": "32cb2da8-94ba-8013-8ee6-f0727cd74cd2",
+      "slug": "article/add-web-pages-to-things3-with-bookmarklet",
+      "title": "Mac Edge 浏览器一键导入链接到 Things 3",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 263,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-23",
+      "lastEditedDay": "2026-5-28",
+      "href": "/article/add-web-pages-to-things3-with-bookmarklet",
+      "url": "https://mufeng.blog/article/add-web-pages-to-things3-with-bookmarklet"
+    },
+    {
+      "id": "320b2da8-94ba-8059-8688-da0b1074b308",
+      "slug": "article/migrate-domain-dns-from-spaceship-to-cloudflare",
+      "title": "将 mufeng.blog 从 Spaceship 迁移到 Cloudflare",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 273,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-11",
+      "lastEditedDay": "2026-5-28",
+      "href": "/article/migrate-domain-dns-from-spaceship-to-cloudflare",
+      "url": "https://mufeng.blog/article/migrate-domain-dns-from-spaceship-to-cloudflare"
+    },
+    {
+      "id": "319b2da8-94ba-8025-8290-f19d1f6b04b8",
+      "slug": "article/fix-github-ssh-port-22-connection-closed",
+      "title": "git push 报错，22 端口被封了？三步修好",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 276,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-4",
+      "lastEditedDay": "2026-5-28",
+      "href": "/article/fix-github-ssh-port-22-connection-closed",
+      "url": "https://mufeng.blog/article/fix-github-ssh-port-22-connection-closed"
+    },
+    {
+      "id": "318b2da8-94ba-8003-988b-ddff61740cc8",
+      "slug": "article/claude-code-shortcuts-and-terminal-workflow-guide",
+      "title": "Claude Code 常用快捷键",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 206,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-3",
+      "lastEditedDay": "2026-6-7",
+      "href": "/article/claude-code-shortcuts-and-terminal-workflow-guide",
+      "url": "https://mufeng.blog/article/claude-code-shortcuts-and-terminal-workflow-guide"
+    },
+    {
+      "id": "318b2da8-94ba-8084-a5ec-d5133389e8f2",
+      "slug": "article/optimized-zshrc-config-for-macos-developers",
+      "title": "Claude 优化 .zshrc 配置",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 188,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-3",
+      "lastEditedDay": "2026-6-7",
+      "href": "/article/optimized-zshrc-config-for-macos-developers",
+      "url": "https://mufeng.blog/article/optimized-zshrc-config-for-macos-developers"
+    },
+    {
+      "id": "316b2da8-94ba-80f4-9d10-ed16fd438e4a",
+      "slug": "article/bash-shell-scripting-guide-for-developers",
+      "title": "Bash 详解",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 178,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-3-1",
+      "lastEditedDay": "2026-5-28",
+      "href": "/article/bash-shell-scripting-guide-for-developers",
+      "url": "https://mufeng.blog/article/bash-shell-scripting-guide-for-developers"
+    },
+    {
+      "id": "304b2da8-94ba-8011-8aed-c9fe8f32704e",
+      "slug": "article/cache-avalanche-breakdown-and-penetration-explained",
+      "title": "缓存雪崩、缓存击穿、缓存穿透",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 163,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-2-11",
+      "lastEditedDay": "2026-5-27",
+      "href": "/article/cache-avalanche-breakdown-and-penetration-explained",
+      "url": "https://mufeng.blog/article/cache-avalanche-breakdown-and-penetration-explained"
+    },
+    {
+      "id": "302b2da8-94ba-8002-86df-c270fae25128",
+      "slug": "article/remove-sensitive-env-files-from-git-history",
+      "title": "清理 Git 敏感信息提交记录",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 174,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-2-9",
+      "lastEditedDay": "2026-7-13",
+      "href": "/article/remove-sensitive-env-files-from-git-history",
+      "url": "https://mufeng.blog/article/remove-sensitive-env-files-from-git-history"
+    },
+    {
+      "id": "2f6b2da8-94ba-80d1-b378-f8ddb3887b27",
+      "slug": "article/cursor-agent-skills-and-ai-workflow-guide",
+      "title": "Cursor Agent Skill：让 AI 成为你的专业搭档",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 195,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-1-28",
+      "lastEditedDay": "2026-5-26",
+      "href": "/article/cursor-agent-skills-and-ai-workflow-guide",
+      "url": "https://mufeng.blog/article/cursor-agent-skills-and-ai-workflow-guide"
+    },
+    {
+      "id": "2f4b2da8-94ba-803a-9346-fd78745ddfc2",
+      "slug": "article/cursor-rules-agents-and-copilot-instructions-guide",
+      "title": "如何把 Cursor 里的 AI，驯化成一个听话的高级工程师",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 198,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-1-26",
+      "lastEditedDay": "2026-5-26",
+      "href": "/article/cursor-rules-agents-and-copilot-instructions-guide",
+      "url": "https://mufeng.blog/article/cursor-rules-agents-and-copilot-instructions-guide"
+    },
+    {
+      "id": "2efb2da8-94ba-8069-b27a-c037c9908d0a",
+      "slug": "article/ios-storekit-membership-testing-guide",
+      "title": "还没上线 app store 的开发阶段，怎样模拟购买会员功能?",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 189,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-1-21",
+      "lastEditedDay": "2026-5-26",
+      "href": "/article/ios-storekit-membership-testing-guide",
+      "url": "https://mufeng.blog/article/ios-storekit-membership-testing-guide"
+    },
+    {
+      "id": "2e8b2da8-94ba-80e7-b16c-e2b377a20444",
+      "slug": "article/cursor-ai-programming-workflow-and-practical-guide",
+      "title": "在 Cursor 中高效使用 AI Skills 指南",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 181,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-1-14",
+      "lastEditedDay": "2026-5-26",
+      "href": "/article/cursor-ai-programming-workflow-and-practical-guide",
+      "url": "https://mufeng.blog/article/cursor-ai-programming-workflow-and-practical-guide"
+    },
+    {
+      "id": "2ceb2da8-94ba-8019-a258-f4b37d58d895",
+      "slug": "article/ai-blog-redesign-indie-app-passion-work-freedom",
+      "title": "找到做自己喜欢的事",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 147,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-12-19",
+      "lastEditedDay": "2026-5-25",
+      "href": "/article/ai-blog-redesign-indie-app-passion-work-freedom",
+      "url": "https://mufeng.blog/article/ai-blog-redesign-indie-app-passion-work-freedom"
+    },
+    {
+      "id": "2adb2da8-94ba-80cc-b646-d3695faef909",
+      "slug": "article/spring-bean-registration-component-scan-vs-manual-configuration",
+      "title": "手动注册第三方 JAR 包中的类到 Spring 容器",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 189,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-11-16",
+      "lastEditedDay": "2026-5-25",
+      "href": "/article/spring-bean-registration-component-scan-vs-manual-configuration",
+      "url": "https://mufeng.blog/article/spring-bean-registration-component-scan-vs-manual-configuration"
+    },
+    {
+      "id": "2adb2da8-94ba-807f-9212-edf37f94aa9c",
+      "slug": "article/shanghai-hustle-life-reflection-mortality-xuxiake-mindset",
+      "title": "活成自己的徐霞客",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 123,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-11-9",
+      "lastEditedDay": "2026-5-25",
+      "href": "/article/shanghai-hustle-life-reflection-mortality-xuxiake-mindset",
+      "url": "https://mufeng.blog/article/shanghai-hustle-life-reflection-mortality-xuxiake-mindset"
+    },
+    {
+      "id": "25eb2da8-94ba-8032-93ce-c708e0ff2ba3",
+      "slug": "article/reading-habits-thin-to-thick-feynman-method-book-review",
+      "title": "读书习惯，是最划算的长期投资",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 143,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-8-29",
+      "lastEditedDay": "2026-5-24",
+      "href": "/article/reading-habits-thin-to-thick-feynman-method-book-review",
+      "url": "https://mufeng.blog/article/reading-habits-thin-to-thick-feynman-method-book-review"
+    },
+    {
+      "id": "25bb2da8-94ba-80f0-a66a-c002a25bb93d",
+      "slug": "article/financial-freedom-early-retirement-big-goals-life-purpose",
+      "title": "提前退休十年计划：让钱替你工作",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 133,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-8-26",
+      "lastEditedDay": "2026-5-24",
+      "href": "/article/financial-freedom-early-retirement-big-goals-life-purpose",
+      "url": "https://mufeng.blog/article/financial-freedom-early-retirement-big-goals-life-purpose"
+    },
+    {
+      "id": "253b2da8-94ba-8038-8e04-dd80afd00d18",
+      "slug": "article/java-completablefuture-async-programming-guide",
+      "title": "CompletableFuture 全面详解",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 202,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-8-18",
+      "lastEditedDay": "2026-5-24",
+      "href": "/article/java-completablefuture-async-programming-guide",
+      "url": "https://mufeng.blog/article/java-completablefuture-async-programming-guide"
+    },
+    {
+      "id": "228b2da8-94ba-801d-bf27-ea7fb74fac37",
+      "slug": "article/personal-finance-hk-bank-index-fund-retirement-planning",
+      "title": "通过投资养老",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 118,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-7-6",
+      "lastEditedDay": "2026-5-24",
+      "href": "/article/personal-finance-hk-bank-index-fund-retirement-planning",
+      "url": "https://mufeng.blog/article/personal-finance-hk-bank-index-fund-retirement-planning"
+    },
+    {
+      "id": "218b2da8-94ba-8038-8def-f92734af8e3a",
+      "slug": "article/english-learning-method-voice-diary-deliberate-practice",
+      "title": "学习英语无捷径：我的实践经验",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 134,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-6-20",
+      "lastEditedDay": "2026-5-23",
+      "href": "/article/english-learning-method-voice-diary-deliberate-practice",
+      "url": "https://mufeng.blog/article/english-learning-method-voice-diary-deliberate-practice"
+    },
+    {
+      "id": "1f6b2da8-94ba-8001-9905-e0f78ed2a2a5",
+      "slug": "article/book-review-truth-about-wealth-money-time-management",
+      "title": "读《财富的真相》：学会理财，更要学会管理自己的人生节奏",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 128,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-5-17",
+      "lastEditedDay": "2026-5-23",
+      "href": "/article/book-review-truth-about-wealth-money-time-management",
+      "url": "https://mufeng.blog/article/book-review-truth-about-wealth-money-time-management"
+    },
+    {
+      "id": "1e9b2da8-94ba-801b-9020-cc46048f53e8",
+      "slug": "article/proxifier-guide-force-proxy-for-developers",
+      "title": "Proxifier 的工作原理",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 171,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-5-4",
+      "lastEditedDay": "2026-5-23",
+      "href": "/article/proxifier-guide-force-proxy-for-developers",
+      "url": "https://mufeng.blog/article/proxifier-guide-force-proxy-for-developers"
+    },
+    {
+      "id": "1c9b2da8-94ba-809b-9c53-d4c98dd4687b",
+      "slug": "article/ai-empowers-everyone-build-habits-blog-journey",
+      "title": "借助AI打造个人品牌，走向技术平权时代",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 106,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-4-2",
+      "lastEditedDay": "2026-5-23",
+      "href": "/article/ai-empowers-everyone-build-habits-blog-journey",
+      "url": "https://mufeng.blog/article/ai-empowers-everyone-build-habits-blog-journey"
+    },
+    {
+      "id": "1c1b2da8-94ba-80de-a28f-f6654e8b19b2",
+      "slug": "article/build-yourself-into-someone-strong",
+      "title": "工作、学习、财务与成长的一些思考",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 12,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-3-2",
+      "lastEditedDay": "2026-5-23",
+      "href": "/article/build-yourself-into-someone-strong",
+      "url": "https://mufeng.blog/article/build-yourself-into-someone-strong"
+    },
+    {
+      "id": "1c5b2da8-94ba-806c-a64c-f0925bbdfff5",
+      "slug": "article/build-your-own-thinking-system",
+      "title": "两个做事实用方法",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 21,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2025-1-20",
+      "lastEditedDay": "2026-5-23",
+      "href": "/article/build-your-own-thinking-system",
+      "url": "https://mufeng.blog/article/build-your-own-thinking-system"
+    },
+    {
+      "id": "1cdb2da8-94ba-800b-a501-ee9f41bedf3a",
+      "slug": "article/principles-and-risk",
+      "title": "瑞·达利欧的五大交易原则",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 24,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2024-7-5",
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/principles-and-risk",
+      "url": "https://mufeng.blog/article/principles-and-risk"
+    },
+    {
+      "id": "1d4b2da8-94ba-8007-8c19-fd46c8acc770",
+      "slug": "article/learn-location",
+      "title": "给自己一个学习地点",
+      "isIndexBlocked": false,
+      "isCurationExcluded": true,
+      "isIndexable": false,
+      "reasons": [],
+      "blockingReasons": [],
+      "warningReasons": [],
+      "summaryChars": 167,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2024-1-14",
+      "lastEditedDay": "2026-5-21",
+      "href": "/article/learn-location",
+      "url": "https://mufeng.blog/article/learn-location"
+    }
+  ]
 }

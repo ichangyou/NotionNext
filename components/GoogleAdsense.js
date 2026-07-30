@@ -2,6 +2,9 @@ import { siteConfig } from '@/lib/config'
 import { loadExternalResource } from '@/lib/utils'
 import { useEffect } from 'react'
 
+let adsenseInitPromise = null
+let adsenseMutationObserver = null
+
 /**
  * 请求广告元素
  * 调用后，实际只有当广告单元在页面中可见时才会真正获取
@@ -63,8 +66,16 @@ function getNodesWithAdsByGoogleClass(node) {
  * @returns
  */
 export const initGoogleAdsense = ADSENSE_GOOGLE_ID => {
+  if (!ADSENSE_GOOGLE_ID || typeof window === 'undefined') {
+    return Promise.resolve()
+  }
+
+  if (adsenseInitPromise) {
+    return adsenseInitPromise
+  }
+
   console.log('Load Adsense')
-  loadExternalResource(
+  adsenseInitPromise = loadExternalResource(
     `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_GOOGLE_ID}`,
     'js'
   ).then(url => {
@@ -76,37 +87,38 @@ export const initGoogleAdsense = ADSENSE_GOOGLE_ID => {
       }
 
       // 创建一个 MutationObserver 实例，监听页面上新出现的广告单元
-      const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-          // 检查每个添加到DOM中的节点
-          mutation.addedNodes.forEach(node => {
-            // 如果节点是adsbygoogle元素，则请求广告
-            if (node.nodeType === Node.ELEMENT_NODE) {
-              const adsNodes = getNodesWithAdsByGoogleClass(node)
-              if (adsNodes.length > 0) {
-                requestAd(adsNodes)
+      if (!adsenseMutationObserver) {
+        adsenseMutationObserver = new MutationObserver(mutations => {
+          mutations.forEach(mutation => {
+            // 检查每个添加到DOM中的节点
+            mutation.addedNodes.forEach(node => {
+              // 如果节点是adsbygoogle元素，则请求广告
+              if (node.nodeType === Node.ELEMENT_NODE) {
+                const adsNodes = getNodesWithAdsByGoogleClass(node)
+                if (adsNodes.length > 0) {
+                  requestAd(adsNodes)
+                }
               }
-            }
+            })
           })
         })
-      })
 
-      // 配置 MutationObserver 监听特定类型的 DOM 变化
-      const observerConfig = {
-        childList: true, // 观察目标子节点的变化
-        subtree: true // 包括目标节点的所有后代节点
+        // 配置 MutationObserver 监听特定类型的 DOM 变化
+        const observerConfig = {
+          childList: true, // 观察目标子节点的变化
+          subtree: true // 包括目标节点的所有后代节点
+        }
+
+        // 启动 MutationObserver
+        adsenseMutationObserver.observe(document.body, observerConfig)
       }
-
-      // 启动 MutationObserver
-      observer.observe(
-        document.querySelector('#article-wrapper #notion-article') ||
-          document.body,
-        observerConfig
-      )
     }, 100)
   }).catch(error => {
+    adsenseInitPromise = null
     console.warn('AdSense脚本加载失败，可能被广告拦截器阻止:', error)
   })
+
+  return adsenseInitPromise
 }
 
 /**
@@ -118,7 +130,22 @@ export const initGoogleAdsense = ADSENSE_GOOGLE_ID => {
 const AdSlot = ({ type = 'show' }) => {
   const ADSENSE_GOOGLE_ID = siteConfig('ADSENSE_GOOGLE_ID')
   const ADSENSE_GOOGLE_TEST = siteConfig('ADSENSE_GOOGLE_TEST')
-  if (!ADSENSE_GOOGLE_ID) {
+  const slotConfig = {
+    'in-article': siteConfig('ADSENSE_GOOGLE_SLOT_IN_ARTICLE'),
+    flow: siteConfig('ADSENSE_GOOGLE_SLOT_FLOW'),
+    native: siteConfig('ADSENSE_GOOGLE_SLOT_NATIVE'),
+    show: siteConfig('ADSENSE_GOOGLE_SLOT_AUTO')
+  }
+  const adSlot = (slotConfig[type] || slotConfig.show || '').toString().trim()
+  const adClient = (ADSENSE_GOOGLE_ID || '').toString().trim()
+
+  useEffect(() => {
+    if (adClient && adSlot) {
+      initGoogleAdsense(adClient)
+    }
+  }, [adClient, adSlot])
+
+  if (!adClient || !adSlot) {
     return null
   }
   // 文章内嵌广告
@@ -130,8 +157,8 @@ const AdSlot = ({ type = 'show' }) => {
         data-ad-layout='in-article'
         data-ad-format='fluid'
         data-adtest={ADSENSE_GOOGLE_TEST ? 'on' : 'off'}
-        data-ad-client={ADSENSE_GOOGLE_ID}
-        data-ad-slot={siteConfig('ADSENSE_GOOGLE_SLOT_IN_ARTICLE')}></ins>
+        data-ad-client={adClient}
+        data-ad-slot={adSlot}></ins>
     )
   }
 
@@ -144,8 +171,8 @@ const AdSlot = ({ type = 'show' }) => {
         data-ad-layout-key='-5j+cz+30-f7+bf'
         style={{ display: 'block' }}
         data-adtest={ADSENSE_GOOGLE_TEST ? 'on' : 'off'}
-        data-ad-client={ADSENSE_GOOGLE_ID}
-        data-ad-slot={siteConfig('ADSENSE_GOOGLE_SLOT_FLOW')}></ins>
+        data-ad-client={adClient}
+        data-ad-slot={adSlot}></ins>
     )
   }
 
@@ -157,8 +184,8 @@ const AdSlot = ({ type = 'show' }) => {
         style={{ display: 'block', textAlign: 'center' }}
         data-ad-format='autorelaxed'
         data-adtest={ADSENSE_GOOGLE_TEST ? 'on' : 'off'}
-        data-ad-client={ADSENSE_GOOGLE_ID}
-        data-ad-slot={siteConfig('ADSENSE_GOOGLE_SLOT_NATIVE')}></ins>
+        data-ad-client={adClient}
+        data-ad-slot={adSlot}></ins>
     )
   }
 
@@ -167,9 +194,9 @@ const AdSlot = ({ type = 'show' }) => {
     <ins
       className='adsbygoogle'
       style={{ display: 'block' }}
-      data-ad-client={ADSENSE_GOOGLE_ID}
+      data-ad-client={adClient}
       data-adtest={ADSENSE_GOOGLE_TEST ? 'on' : 'off'}
-      data-ad-slot={siteConfig('ADSENSE_GOOGLE_SLOT_AUTO')}
+      data-ad-slot={adSlot}
       data-ad-format='auto'
       data-full-width-responsive='true'></ins>
   )
@@ -180,12 +207,19 @@ const AdSlot = ({ type = 'show' }) => {
  * 检测文本内容 出现<ins/> 关键词时自动替换为广告
  * @param {*} props
  */
-const AdEmbed = () => {
+const AdEmbed = ({ enabled = false }) => {
   const ADSENSE_GOOGLE_ID = siteConfig('ADSENSE_GOOGLE_ID')
   const ADSENSE_GOOGLE_TEST = siteConfig('ADSENSE_GOOGLE_TEST')
   const ADSENSE_GOOGLE_SLOT_AUTO = siteConfig('ADSENSE_GOOGLE_SLOT_AUTO')
   useEffect(() => {
-    setTimeout(() => {
+    const adClient = (ADSENSE_GOOGLE_ID || '').toString().trim()
+    const adSlot = (ADSENSE_GOOGLE_SLOT_AUTO || '').toString().trim()
+    if (!enabled || !adClient || !adSlot) {
+      return
+    }
+
+    initGoogleAdsense(adClient)
+    const timer = setTimeout(() => {
       // 找到所有 class 为 notion-text 且内容为 '<ins/>' 的 div 元素
       const notionTextElements = document.querySelectorAll(
         '#article-wrapper #notion-article div.notion-text'
@@ -198,12 +232,12 @@ const AdEmbed = () => {
           const newInsElement = document.createElement('ins')
           newInsElement.className = 'adsbygoogle w-full py-1'
           newInsElement.style.display = 'block'
-          newInsElement.setAttribute('data-ad-client', ADSENSE_GOOGLE_ID)
+          newInsElement.setAttribute('data-ad-client', adClient)
           newInsElement.setAttribute(
             'data-adtest',
             ADSENSE_GOOGLE_TEST ? 'on' : 'off'
           )
-          newInsElement.setAttribute('data-ad-slot', ADSENSE_GOOGLE_SLOT_AUTO)
+          newInsElement.setAttribute('data-ad-slot', adSlot)
           newInsElement.setAttribute('data-ad-format', 'auto')
           newInsElement.setAttribute('data-full-width-responsive', 'true')
 
@@ -212,8 +246,15 @@ const AdEmbed = () => {
         }
       })
     }, 1000)
-  }, [])
-  return <></>
+
+    return () => clearTimeout(timer)
+  }, [
+    enabled,
+    ADSENSE_GOOGLE_ID,
+    ADSENSE_GOOGLE_SLOT_AUTO,
+    ADSENSE_GOOGLE_TEST
+  ])
+  return null
 }
 
 export { AdEmbed, AdSlot }

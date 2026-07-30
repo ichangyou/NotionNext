@@ -5,6 +5,7 @@ import WechatFollowGate, { checkUnlocked, shouldEnableGate } from '@/components/
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import { isBrowser } from '@/lib/utils'
+import { isAdEligiblePost } from '@/lib/utils/content-indexing'
 import { Transition } from '@headlessui/react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
@@ -13,6 +14,8 @@ import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import BlogPostBar from './components/BlogPostBar'
 import CONFIG from './config'
 import { Style } from './style'
+import AboutPage from './components/AboutPage'
+import BlogListPage from './components/BlogListPage'
 import Catalog from './components/Catalog'
 // 静态导入（SSR）：首页「往期精选」链接必须进入初始 HTML 才能提升长尾抓取优先级
 import PastPosts from './components/PastPosts'
@@ -55,9 +58,6 @@ const SearchInput = dynamic(() => import('./components/SearchInput'), {
   ssr: false
 })
 const WWAds = dynamic(() => import('@/components/WWAds'), { ssr: false })
-const BlogListPage = dynamic(() => import('./components/BlogListPage'), {
-  ssr: false
-})
 const RecommendPosts = dynamic(() => import('./components/RecommendPosts'), {
   ssr: false
 })
@@ -77,10 +77,6 @@ const PaidColumnsPage = dynamic(() => import('./components/PaidColumnsPage'), {
 const WorksPage = dynamic(() => import('./components/WorksPage'), {
   ssr: false
 })
-const AboutPage = dynamic(() => import('./components/AboutPage'), {
-  ssr: false
-})
-
 // 主题全局状态
 const ThemeGlobalSimple = createContext()
 export const useSimpleGlobal = () => useContext(ThemeGlobalSimple)
@@ -398,6 +394,7 @@ const LayoutArchive = props => {
  */
 const LayoutSlug = props => {
   const { post, lock, validPassword, prev, next, recommendPosts } = props
+  const showAds = isAdEligiblePost(post)
   const { fullWidth, isSignedIn } = useGlobal()
   const { setSlotRight } = useContext(TocSlotContext)
   const articleRef = useRef(null)
@@ -487,7 +484,7 @@ const LayoutSlug = props => {
             <ArticleInfo post={post} />
 
             {/* 广告嵌入 */}
-            <AdSlot type={'in-article'} />
+            {showAds && <AdSlot type='in-article' />}
             <WWAds orientation='horizontal' className='w-full' />
 
             {/* 文章正文区域（可能被门控） */}
@@ -527,9 +524,11 @@ const LayoutSlug = props => {
                 </div>
 
                 {/* 广告嵌入 */}
-                <div className='focus-hide'>
-                  <AdSlot type={'in-article'} />
-                </div>
+                {showAds && (
+                  <div className='focus-hide'>
+                    <AdSlot type='in-article' />
+                  </div>
+                )}
 
                 {post?.type === 'Post' && (
                   <div className='focus-hide'>
@@ -544,9 +543,11 @@ const LayoutSlug = props => {
                 </div>
 
                 {/* 原生广告：仅文章页展示，移动端隐藏（autorelaxed 在小屏幕上产生大量空白） */}
-                <div className='hidden md:block focus-hide'>
-                  <AdSlot type='native' />
-                </div>
+                {showAds && (
+                  <div className='hidden md:block focus-hide'>
+                    <AdSlot type='native' />
+                  </div>
+                )}
               </>
             )}
           </div>

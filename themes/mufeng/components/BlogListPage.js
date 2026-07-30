@@ -1,4 +1,3 @@
-import { AdSlot } from '@/components/GoogleAdsense'
 import NotionIcon from '@/components/NotionIcon'
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
@@ -6,7 +5,6 @@ import { formatDateFmt } from '@/lib/utils/formatDate'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import CONFIG from '../config'
 
 /**
  * 博客列表 - 简洁序号列表样式
@@ -22,13 +20,6 @@ export default function BlogListPage(props) {
   const POSTS_PER_PAGE = siteConfig('POSTS_PER_PAGE', null, NOTION_CONFIG)
   const totalPage = Math.ceil(postCount / POSTS_PER_PAGE)
   const currentPage = +page
-
-  // 博客列表嵌入广告
-  const SIMPLE_POST_AD_ENABLE = siteConfig(
-    'SIMPLE_POST_AD_ENABLE',
-    false,
-    CONFIG
-  )
 
   const showPrev = currentPage > 1
   const showNext = currentPage < totalPage
@@ -81,10 +72,6 @@ export default function BlogListPage(props) {
       <div id='posts-wrapper' className='divide-y divide-gray-100 dark:divide-gray-800/50'>
         {posts?.map((post, index) => (
           <div key={post.id}>
-            {SIMPLE_POST_AD_ENABLE && (index + 1) % 5 === 0 && (
-              <AdSlot type='in-article' />
-            )}
-            
             {/* 单个文章项 */}
             <article className='group'>
               <Link

@@ -1,4 +1,3 @@
-import { AdSlot } from '@/components/GoogleAdsense'
 import Live2D from '@/components/Live2D'
 import Announcement from './Announcement'
 import Catalog from './Catalog'
@@ -19,7 +18,6 @@ export default function SideBar (props) {
 
             <Announcement post={notice} />
 
-            <AdSlot/>
             <WWAds orientation="vertical" className="w-full" />
 
     </>)

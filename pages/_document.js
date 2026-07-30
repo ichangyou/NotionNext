@@ -14,12 +14,11 @@ class MyDocument extends Document {
         <Head>
           {/* GEO: 告知 AI 爬虫存在 Markdown 格式的站点概览 */}
           <link rel='alternate' type='text/markdown' href='/llms.txt' />
-          {/* Google AdSense 验证 - 静态加载确保被Google爬虫检测到 */}
+          {/* AdSense 账户验证。广告脚本仅在存在有效广告位的页面按需加载。 */}
           {BLOG.ADSENSE_GOOGLE_ID && (
-            <script
-              async
-              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${BLOG.ADSENSE_GOOGLE_ID}`}
-              crossOrigin='anonymous'
+            <meta
+              name='google-adsense-account'
+              content={BLOG.ADSENSE_GOOGLE_ID}
             />
           )}
           {/* 预加载字体 */}
