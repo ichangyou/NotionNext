@@ -1,6 +1,7 @@
 import { siteConfig } from '@/lib/config'
 import { compressImage, mapImgUrl } from '@/lib/notion/mapImage'
 import { isBrowser, loadExternalResource } from '@/lib/utils'
+import { isAdEligiblePost } from '@/lib/utils/content-indexing'
 import 'katex/dist/katex.min.css'
 import dynamic from 'next/dynamic'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -135,7 +136,7 @@ const NotionPage = ({ post, className }) => {
           }}
         />
 
-        <AdEmbed />
+        <AdEmbed enabled={isAdEligiblePost(post)} />
         <PrismMac />
       </div>
 

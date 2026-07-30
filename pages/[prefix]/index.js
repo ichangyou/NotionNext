@@ -87,6 +87,11 @@ const RESERVED_SLUGS = new Set([
   'about', 'works', 'archive', 'category', 'search',
   'tag', 'membership', 'auth', 'dashboard'
 ])
+const RETIRED_PAGE_SLUGS = new Set(
+  (BLOG.CONTENT_RETIRED_PAGE_SLUGS || []).map(slug =>
+    slug.toString().trim().toLowerCase()
+  )
+)
 
 export async function getStaticPaths() {
   if (!BLOG.isProd) {
@@ -99,7 +104,12 @@ export async function getStaticPaths() {
   const from = 'slug-paths'
   const { allPages } = await getGlobalData({ from })
   const paths = allPages
-    ?.filter(row => checkSlugHasNoSlash(row) && !RESERVED_SLUGS.has(row.slug))
+    ?.filter(
+      row =>
+        checkSlugHasNoSlash(row) &&
+        !RESERVED_SLUGS.has(row.slug) &&
+        !RETIRED_PAGE_SLUGS.has(row.slug)
+    )
     .map(row => ({ params: { prefix: row.slug } }))
   return {
     paths: paths,
@@ -109,6 +119,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { prefix }, locale }) {
   if (!prefix || prefix === 'undefined') {
+    return { notFound: true }
+  }
+  if (RETIRED_PAGE_SLUGS.has(prefix.toString().trim().toLowerCase())) {
     return { notFound: true }
   }
   // 明显的扫描器 / 漏洞探测路径：不查询 Notion、不写入 ISR，直接 404
