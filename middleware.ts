@@ -8,6 +8,7 @@ import {
 } from '@/lib/utils/content-indexing'
 import { idToUuid } from 'notion-utils'
 import BLOG from './blog.config'
+import { LEGACY_UUID_REDIRECTS } from './conf/legacy-uuid-redirects.config'
 
 /**
  * Clerk 身份验证中间件
@@ -89,6 +90,35 @@ function getTemplatePathRejectResponse(req: NextRequest) {
   return null
 }
 
+function getLegacyUuidRedirectResponse(req: NextRequest) {
+  if (req.nextUrl.pathname.startsWith('/api')) {
+    return null
+  }
+
+  const { localePrefix, pathWithoutLocale } = splitLocaleFromPath(
+    req.nextUrl.pathname
+  )
+  const match = pathWithoutLocale.match(
+    /^\/article\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\/?$/i
+  )
+  if (!match) {
+    return null
+  }
+
+  const destination = LEGACY_UUID_REDIRECTS[match[1].toLowerCase()]
+  if (!destination) {
+    return null
+  }
+
+  const nextPath = applyLocalePrefix(destination, localePrefix)
+  const redirectToUrl = req.nextUrl.clone()
+  redirectToUrl.pathname = nextPath
+  console.log(
+    `legacy UUID redirect from ${req.nextUrl.pathname} to ${nextPath}`
+  )
+  return NextResponse.redirect(redirectToUrl, 301)
+}
+
 function getContentRedirectResponse(req: NextRequest) {
   if (req.nextUrl.pathname.startsWith('/api')) {
     return null
@@ -135,6 +165,11 @@ const noAuthMiddleware = async (req: NextRequest, ev: any) => {
     return templateReject
   }
 
+  const legacyUuidRedirect = getLegacyUuidRedirectResponse(req)
+  if (legacyUuidRedirect) {
+    return legacyUuidRedirect
+  }
+
   const contentRedirect = getContentRedirectResponse(req)
   if (contentRedirect) {
     return contentRedirect
@@ -174,6 +209,11 @@ const authMiddleware = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
       const templateReject = getTemplatePathRejectResponse(req)
       if (templateReject) {
         return templateReject
+      }
+
+      const legacyUuidRedirect = getLegacyUuidRedirectResponse(req)
+      if (legacyUuidRedirect) {
+        return legacyUuidRedirect
       }
 
       const contentRedirect = getContentRedirectResponse(req)
