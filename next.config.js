@@ -136,6 +136,45 @@ const nextConfig = {
             destination: '/rss/feed.xml',
             permanent: true
           },
+          // GSC 发现的历史文章地址：保留旧链接权重并单跳到当前 canonical slug。
+          {
+            source: '/article/ui-ux-pro-max',
+            destination:
+              '/article/ui-ux-pro-max-skill-for-cursor-and-ai-coding',
+            statusCode: 301
+          },
+          {
+            source: '/article/xcode-storekit-configuration-local-iap-testing',
+            destination:
+              '/article/ios-storekit-testing-guide-for-subscriptions-and-sandbox',
+            statusCode: 301
+          },
+          {
+            source: '/article/claude-code-permissions-setting',
+            destination: '/article/claude-code-permissions-settings-guide',
+            statusCode: 301
+          },
+          {
+            source: '/article/cursor_agent_skill',
+            destination: '/article/cursor-agent-skills-and-ai-workflow-guide',
+            statusCode: 301
+          },
+          {
+            source: '/article/google-stitch',
+            destination: '/article/google-stitch-design-md-ai-ui-workflow',
+            statusCode: 301
+          },
+          // Notion 旧 slug 曾含前导空格；HTTP 请求中的空格会编码为 %20。
+          {
+            source: '/article/%20claude-code-token-rtk-89-percent',
+            destination: '/article/claude-code-token-rtk-89-percent',
+            statusCode: 301
+          },
+          {
+            source: '/atom.xml',
+            destination: '/rss/feed.xml',
+            statusCode: 301
+          },
           // 残留的旧隐私政策 URL（GSC 已发现但现为 404）→ 301 到规范隐私页
           {
             source: '/mufeng-blog-privacy-policy-google-adsense-vercel',
