@@ -274,6 +274,20 @@ const nextConfig = {
     ? undefined
     : () => {
         return [
+          // RSS 与 favicon 不是搜索结果落地页。使用响应头阻止索引；
+          // 不在 robots.txt 中屏蔽，确保爬虫能读取到 noindex。
+          {
+            source: '/rss/:path*',
+            headers: [{ key: 'X-Robots-Tag', value: 'noindex' }]
+          },
+          {
+            source: '/favicon.ico',
+            headers: [{ key: 'X-Robots-Tag', value: 'noindex' }]
+          },
+          {
+            source: '/favicon.svg',
+            headers: [{ key: 'X-Robots-Tag', value: 'noindex' }]
+          },
           {
             source: '/:path*{/}?',
             headers: [
