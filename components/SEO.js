@@ -113,7 +113,12 @@ const SEO = props => {
     router.route === '/search/[keyword]' ||
     router.route === '/search/[keyword]/page/[page]'
   const isNoIndexPage = isNoIndexRoute || isNoIndexPost(post)
-  const robotsContent = isNoIndexPage ? 'noindex, nofollow' : 'follow, index'
+  const robotsContent =
+    router.route === '/404'
+      ? 'noindex, nofollow'
+      : isNoIndexPage
+        ? 'noindex, follow'
+        : 'index, follow'
 
   // 将相对路径转为绝对 URL，便于搜索引擎与 AI 爬虫正确解析结构化数据中的图片
   const toAbsoluteUrl = u =>

@@ -9,6 +9,8 @@ export const FAST_404_PATHS: ReadonlySet<string> = new Set([
   '/article/ai',
   '/claude-automation-recommender',
   '/article/ai-spacex',
+  '/article/guide',
+  '/guide',
   '/oops',
   '/undefined',
   '/init'

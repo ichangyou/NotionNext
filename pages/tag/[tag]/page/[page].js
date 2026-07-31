@@ -10,6 +10,26 @@ const Tag = props => {
 }
 
 export async function getStaticProps({ params: { tag, page }, locale }) {
+  if (
+    typeof tag !== 'string' ||
+    /[[\]]/.test(tag) ||
+    !/^\d+$/.test(String(page))
+  ) {
+    return { notFound: true }
+  }
+  const pageNumber = Number(page)
+  if (pageNumber === 1) {
+    return {
+      redirect: {
+        destination: `/tag/${encodeURIComponent(tag)}`,
+        statusCode: 301
+      }
+    }
+  }
+  if (pageNumber < 2) {
+    return { notFound: true }
+  }
+
   const from = 'tag-page-props'
   const props = await getGlobalData({ from, locale })
   // 过滤状态、标签
@@ -18,15 +38,26 @@ export async function getStaticProps({ params: { tag, page }, locale }) {
     .filter(post => post && post?.tags && post?.tags.includes(tag))
   // 处理文章数
   props.postCount = props.posts.length
-  const POSTS_PER_PAGE = siteConfig('POSTS_PER_PAGE', null, props?.NOTION_CONFIG)
+  const POSTS_PER_PAGE = siteConfig(
+    'POSTS_PER_PAGE',
+    null,
+    props?.NOTION_CONFIG
+  )
+  const totalPages = Math.ceil(props.postCount / POSTS_PER_PAGE)
+  if (pageNumber > totalPages) {
+    return { notFound: true }
+  }
   // 处理分页
   props.posts = props.posts.slice(
-    POSTS_PER_PAGE * (page - 1),
-    POSTS_PER_PAGE * page
+    POSTS_PER_PAGE * (pageNumber - 1),
+    POSTS_PER_PAGE * pageNumber
   )
+  if (props.posts.length === 0) {
+    return { notFound: true }
+  }
 
   props.tag = tag
-  props.page = page
+  props.page = pageNumber
   delete props.allPages
   return {
     props,
@@ -55,14 +86,14 @@ export async function getStaticPaths() {
       postCount / siteConfig('POSTS_PER_PAGE', null, NOTION_CONFIG)
     )
     if (totalPages > 1) {
-      for (let i = 1; i <= totalPages; i++) {
+      for (let i = 2; i <= totalPages; i++) {
         paths.push({ params: { tag: tag.name, page: '' + i } })
       }
     }
   })
   return {
     paths: paths,
-    fallback: true
+    fallback: 'blocking'
   }
 }
 

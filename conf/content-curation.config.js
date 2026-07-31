@@ -29,6 +29,11 @@ const RETIRED_SITE_PAGES = [
   'links' // 当前仍是 NotionNext 默认友链模板，重写为真实资源页后从此数组移除。
 ]
 
+// ── A3. 默认内容模板页（不面向读者）───────────────────────────────────────
+const RETIRED_CONTENT_PAGES = [
+  'guide' // NotionNext「模板说明」，直接访问返回 404。
+]
+
 // ── B. 已做 301 重定向的重复页（同时从 sitemap 移除）──────────────────────
 // 这些 slug 的 301 目标在 next.config.js 里配置；此处加入是为了让它们退出 sitemap。
 const REDIRECTED_DUPLICATES = [
@@ -40,22 +45,11 @@ const REDIRECTED_DUPLICATES = [
 // ── C. 极薄技术碎片（<400 中文字）：删除/合并前先 noindex ──────────────────
 // 这批是「百科词条」式无原创、或工具碎片，AdSense「低价值」高危。
 const VERY_THIN_TECH = [
-  'zsh-proxy-setup-and-terminal-proxy-switching',
-  'claude-code-proxy-setup-mac-zshrc-wrapper-script',
-  'git-proxy-config-socks5-http-cursor-github',
-  'what-is-zsh-and-how-it-works',
-  'what-is-npm',
-  'vim-keybindings-and-essential-editing-workflow',
   'cache-avalanche-breakdown-and-penetration-explained',
   'optimized-zshrc-config-for-macos-developers',
   'claude-code-shortcuts-and-terminal-workflow-guide',
   'github-release-tagging-semantic-versioning-guide',
-  'install-arm-homebrew-on-apple-silicon-mac',
-  'migrate-from-intel-homebrew-to-arm-homebrew-on-mac',
-  'remove-app-from-app-store',
-  'remove-sensitive-env-files-from-git-history',
-  'hfs-http-file-server-lan-share-upload-download-guide',
-  'ios-app-store-distribution-certificate-sha1-public-key'
+  'remove-sensitive-env-files-from-git-history'
   // 注：原 'ui-ux-pro-max-ai-design-skill-for-cursor'（正文为 StoreKit 测试）与
   // 'cloudflare-pages-and-privacy-policy-for-ios-apps'（正文为 Cloudflare Worker 存密钥）
   // 两篇 Invisible 草稿，因各自已有更完整的已发布同主题文章，已于 2026-07-13 在
@@ -82,9 +76,7 @@ const THIN_TECH = [
 ]
 
 // ── E. 极薄随笔 ────────────────────────────────────────────────────────────
-const VERY_THIN_PERSONAL = [
-  'after-a-small-drink-in-shanghai' // 69 字
-]
+const VERY_THIN_PERSONAL = []
 
 // ── F. 单薄随笔：建议 noindex，可按需扩写后恢复收录 ─────────────────────────
 // 个人随笔类薄文，AdSense「低价值」风险中等；若日后扩写成完整长文，删掉对应 slug 即恢复收录。
@@ -107,11 +99,12 @@ module.exports = {
   CONTENT_EXCLUDE_SLUGS: [
     ...BROKEN_PAGES,
     ...RETIRED_SITE_PAGES,
+    ...RETIRED_CONTENT_PAGES,
     ...REDIRECTED_DUPLICATES,
     ...VERY_THIN_TECH,
     ...THIN_TECH,
     ...VERY_THIN_PERSONAL,
     ...THIN_PERSONAL
   ],
-  CONTENT_RETIRED_PAGE_SLUGS: RETIRED_SITE_PAGES
+  CONTENT_RETIRED_PAGE_SLUGS: [...RETIRED_SITE_PAGES, ...RETIRED_CONTENT_PAGES]
 }
