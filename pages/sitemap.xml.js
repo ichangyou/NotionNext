@@ -59,6 +59,14 @@ function generateLocalesSitemap(link, allPages, locale) {
       priority: '1.0'
     }
   ]
+  if (!locale) {
+    defaultFields.push({
+      loc: `${link}${locale}/about`,
+      lastmod: dateNow,
+      changefreq: 'monthly',
+      priority: '0.8'
+    })
+  }
   const postFields =
     allPages
       ?.filter(isIndexableContentPage)

@@ -16,6 +16,26 @@ export default function Category(props) {
 }
 
 export async function getStaticProps({ params: { category, page } }) {
+  if (
+    typeof category !== 'string' ||
+    /[[\]]/.test(category) ||
+    !/^\d+$/.test(String(page))
+  ) {
+    return { notFound: true }
+  }
+  const pageNumber = Number(page)
+  if (pageNumber === 1) {
+    return {
+      redirect: {
+        destination: `/category/${encodeURIComponent(category)}`,
+        statusCode: 301
+      }
+    }
+  }
+  if (pageNumber < 2) {
+    return { notFound: true }
+  }
+
   const from = 'category-page-props'
   let props = await getGlobalData({ from })
 
@@ -25,11 +45,19 @@ export async function getStaticProps({ params: { category, page } }) {
     .filter(post => post && post.category && post.category.includes(category))
   // 处理文章页数
   props.postCount = props.posts.length
-  const POSTS_PER_PAGE = siteConfig('POSTS_PER_PAGE', null, props?.NOTION_CONFIG)
+  const POSTS_PER_PAGE = siteConfig(
+    'POSTS_PER_PAGE',
+    null,
+    props?.NOTION_CONFIG
+  )
+  const totalPages = Math.ceil(props.postCount / POSTS_PER_PAGE)
+  if (pageNumber > totalPages) {
+    return { notFound: true }
+  }
   // 处理分页
   props.posts = props.posts.slice(
-    POSTS_PER_PAGE * (page - 1),
-    POSTS_PER_PAGE * page
+    POSTS_PER_PAGE * (pageNumber - 1),
+    POSTS_PER_PAGE * pageNumber
   )
 
   // 该页没有文章，返回 404（避免 Google 将重定向 URL 视为索引问题）
@@ -38,9 +66,9 @@ export async function getStaticProps({ params: { category, page } }) {
   }
 
   delete props.allPages
-  props.page = page
+  props.page = pageNumber
 
-  props = { ...props, category, page }
+  props = { ...props, category, page: pageNumber }
 
   return {
     props,
@@ -74,7 +102,7 @@ export async function getStaticPaths() {
       postCount / siteConfig('POSTS_PER_PAGE', null, NOTION_CONFIG)
     )
     if (totalPages > 1) {
-      for (let i = 1; i <= totalPages; i++) {
+      for (let i = 2; i <= totalPages; i++) {
         paths.push({ params: { category: category.name, page: '' + i } })
       }
     }
@@ -82,6 +110,6 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: true
+    fallback: 'blocking'
   }
 }

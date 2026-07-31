@@ -8,13 +8,20 @@ import {
 } from '@/lib/utils/content-indexing'
 import { idToUuid } from 'notion-utils'
 import BLOG from './blog.config'
+import { FAST_404_PATHS } from './conf/fast-404-paths.config'
+import { LEGACY_UUID_REDIRECTS } from './conf/legacy-uuid-redirects.config'
 
 /**
  * Clerk 身份验证中间件
  */
 export const config = {
   // 这里设置白名单，防止静态资源被拦截
-  matcher: ['/((?!.*\\..*|_next|/sign-in|/auth).*)', '/', '/(api|trpc)(.*)']
+  matcher: [
+    '/((?!.*\\..*|_next|/sign-in|/auth).*)',
+    '/',
+    '/(api|trpc)(.*)',
+    '/Applications/:path*'
+  ]
 }
 
 // 限制登录访问的路由
@@ -89,6 +96,53 @@ function getTemplatePathRejectResponse(req: NextRequest) {
   return null
 }
 
+function getLegacyLocaleEntryRedirectResponse(req: NextRequest) {
+  if (req.nextUrl.pathname !== '/zh') {
+    return null
+  }
+
+  const redirectToUrl = req.nextUrl.clone()
+  redirectToUrl.pathname = '/'
+  return NextResponse.redirect(redirectToUrl, 301)
+}
+
+function getFast404Response(req: NextRequest) {
+  if (!FAST_404_PATHS.has(req.nextUrl.pathname)) {
+    return null
+  }
+
+  return new NextResponse(null, { status: 404 })
+}
+
+function getLegacyUuidResponse(req: NextRequest) {
+  if (req.nextUrl.pathname.startsWith('/api')) {
+    return null
+  }
+
+  const { localePrefix, pathWithoutLocale } = splitLocaleFromPath(
+    req.nextUrl.pathname
+  )
+  const match = pathWithoutLocale.match(
+    /^\/article\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\/?$/i
+  )
+  if (!match) {
+    return null
+  }
+
+  const destination = LEGACY_UUID_REDIRECTS[match[1].toLowerCase()]
+  if (!destination) {
+    return new NextResponse(null, { status: 410 })
+  }
+
+  const nextPath = applyLocalePrefix(destination, localePrefix)
+  const redirectToUrl = req.nextUrl.clone()
+  redirectToUrl.pathname = nextPath
+  console.log(
+    `legacy UUID redirect from ${req.nextUrl.pathname} to ${nextPath}`
+  )
+  return NextResponse.redirect(redirectToUrl, 301)
+}
+
 function getContentRedirectResponse(req: NextRequest) {
   if (req.nextUrl.pathname.startsWith('/api')) {
     return null
@@ -130,9 +184,24 @@ function getContentRedirectResponse(req: NextRequest) {
  */
 // eslint-disable-next-line @typescript-eslint/require-await, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 const noAuthMiddleware = async (req: NextRequest, ev: any) => {
+  const legacyLocaleEntryRedirect = getLegacyLocaleEntryRedirectResponse(req)
+  if (legacyLocaleEntryRedirect) {
+    return legacyLocaleEntryRedirect
+  }
+
+  const fast404Response = getFast404Response(req)
+  if (fast404Response) {
+    return fast404Response
+  }
+
   const templateReject = getTemplatePathRejectResponse(req)
   if (templateReject) {
     return templateReject
+  }
+
+  const legacyUuidResponse = getLegacyUuidResponse(req)
+  if (legacyUuidResponse) {
+    return legacyUuidResponse
   }
 
   const contentRedirect = getContentRedirectResponse(req)
@@ -171,9 +240,25 @@ const noAuthMiddleware = async (req: NextRequest, ev: any) => {
  */
 const authMiddleware = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
   ? clerkMiddleware((auth, req) => {
+      const legacyLocaleEntryRedirect =
+        getLegacyLocaleEntryRedirectResponse(req)
+      if (legacyLocaleEntryRedirect) {
+        return legacyLocaleEntryRedirect
+      }
+
+      const fast404Response = getFast404Response(req)
+      if (fast404Response) {
+        return fast404Response
+      }
+
       const templateReject = getTemplatePathRejectResponse(req)
       if (templateReject) {
         return templateReject
+      }
+
+      const legacyUuidResponse = getLegacyUuidResponse(req)
+      if (legacyUuidResponse) {
+        return legacyUuidResponse
       }
 
       const contentRedirect = getContentRedirectResponse(req)

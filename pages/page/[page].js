@@ -37,6 +37,18 @@ export async function getStaticProps({ params: { page }, locale }) {
   if (!/^\d+$/.test(String(page))) {
     return { notFound: true }
   }
+  const pageNumber = Number(page)
+  if (pageNumber === 1) {
+    return {
+      redirect: {
+        destination: '/',
+        statusCode: 301
+      }
+    }
+  }
+  if (pageNumber < 2) {
+    return { notFound: true }
+  }
   const from = `page-${page}`
   const props = await getGlobalData({ from, locale })
   const { allPages } = props
@@ -47,13 +59,24 @@ export async function getStaticProps({ params: { page }, locale }) {
   )
 
   const allPosts = allPages?.filter(isPublishedPostForList)
-  const POSTS_PER_PAGE = siteConfig('POSTS_PER_PAGE', null, props?.NOTION_CONFIG)
+  const POSTS_PER_PAGE = siteConfig(
+    'POSTS_PER_PAGE',
+    null,
+    props?.NOTION_CONFIG
+  )
+  const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE)
+  if (pageNumber > totalPages) {
+    return { notFound: true }
+  }
   // 处理分页
   props.posts = allPosts.slice(
-    POSTS_PER_PAGE * (page - 1),
-    POSTS_PER_PAGE * page
+    POSTS_PER_PAGE * (pageNumber - 1),
+    POSTS_PER_PAGE * pageNumber
   )
-  props.page = page
+  if (props.posts.length === 0) {
+    return { notFound: true }
+  }
+  props.page = pageNumber
 
   // 处理预览
   if (siteConfig('POST_LIST_PREVIEW', false, props?.NOTION_CONFIG)) {

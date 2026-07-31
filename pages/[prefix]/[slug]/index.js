@@ -6,6 +6,12 @@ import { checkSlugHasOneSlash, processPostData } from '@/lib/utils/post'
 import { idToUuid } from 'notion-utils'
 import Slug from '..'
 
+const RETIRED_PAGE_SLUGS = new Set(
+  (BLOG.CONTENT_RETIRED_PAGE_SLUGS || []).map(slug =>
+    slug.toString().trim().toLowerCase()
+  )
+)
+
 /**
  * 根据notion的slug访问页面
  * 解析二级目录 /article/about
@@ -30,7 +36,11 @@ export async function getStaticPaths() {
   // 根据slug中的 / 分割成prefix和slug两个字段 ; 例如 article/test
   // 最终用户可以通过  [domain]/[prefix]/[slug] 路径访问，即这里的 [domain]/article/test
   const paths = allPages
-    ?.filter(row => checkSlugHasOneSlash(row))
+    ?.filter(row => {
+      if (!checkSlugHasOneSlash(row)) return false
+      const slug = row.slug.split('/')[1]?.trim().toLowerCase()
+      return !RETIRED_PAGE_SLUGS.has(slug)
+    })
     .map(row => ({
       params: { prefix: row.slug.split('/')[0], slug: row.slug.split('/')[1] }
     }))
@@ -47,6 +57,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { prefix, slug }, locale }) {
   if (!prefix || prefix === 'undefined' || !slug || slug === 'undefined') {
+    return { notFound: true }
+  }
+  if (RETIRED_PAGE_SLUGS.has(slug.toString().trim().toLowerCase())) {
     return { notFound: true }
   }
   // 明显的扫描器 / 漏洞探测路径：不查询 Notion、不写入 ISR，直接 404

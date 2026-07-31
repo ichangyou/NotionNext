@@ -28,6 +28,10 @@ export async function getStaticProps({ params: { tag }, locale }) {
     ?.filter(isPublishedPostForList)
     .filter(post => post && post?.tags && post?.tags.includes(tag))
 
+  if (props.posts.length === 0) {
+    return { notFound: true }
+  }
+
   // 处理文章页数
   props.postCount = props.posts.length
 
@@ -77,11 +81,9 @@ export async function getStaticPaths() {
     paths: Object.keys(tagNames).map(index => ({
       params: { tag: tagNames[index] }
     })),
-    // 保持 true：对完整 [...] 括号对（如 /tag/[tag]），Next.js 会在路由解析阶段
-    // （getStaticProps 之前）抛错；用 blocking 会把它暴露成 500。true 下首访返回
-    // 200 骨架页，避免 500。真正的 [...] URL 已无链接指向，风险很低。
-    // 单括号等非法参数仍由 getStaticProps 的守卫拦为 404。
-    fallback: true
+    // 未替换的 [...] 模板路径已由 middleware 提前返回 404；其余未预渲染标签
+    // 阻塞生成，确保空标签首访直接返回真实 404，而不是 200 骨架页。
+    fallback: 'blocking'
   }
 }
 

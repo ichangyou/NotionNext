@@ -136,6 +136,53 @@ const nextConfig = {
             destination: '/rss/feed.xml',
             permanent: true
           },
+          // 当前没有正式英文子站；/en 指向上游模板站，统一到中文主站。
+          // locale: false 确保规则按原始 URL 匹配，不被 Next.js i18n 自动添加语言前缀。
+          {
+            source: '/en',
+            destination: '/',
+            statusCode: 301,
+            locale: false
+          },
+          // GSC 发现的历史文章地址：保留旧链接权重并单跳到当前 canonical slug。
+          {
+            source: '/article/ui-ux-pro-max',
+            destination:
+              '/article/ui-ux-pro-max-skill-for-cursor-and-ai-coding',
+            statusCode: 301
+          },
+          {
+            source: '/article/xcode-storekit-configuration-local-iap-testing',
+            destination:
+              '/article/ios-storekit-testing-guide-for-subscriptions-and-sandbox',
+            statusCode: 301
+          },
+          {
+            source: '/article/claude-code-permissions-setting',
+            destination: '/article/claude-code-permissions-settings-guide',
+            statusCode: 301
+          },
+          {
+            source: '/article/cursor_agent_skill',
+            destination: '/article/cursor-agent-skills-and-ai-workflow-guide',
+            statusCode: 301
+          },
+          {
+            source: '/article/google-stitch',
+            destination: '/article/google-stitch-design-md-ai-ui-workflow',
+            statusCode: 301
+          },
+          // Notion 旧 slug 曾含前导空格；HTTP 请求中的空格会编码为 %20。
+          {
+            source: '/article/%20claude-code-token-rtk-89-percent',
+            destination: '/article/claude-code-token-rtk-89-percent',
+            statusCode: 301
+          },
+          {
+            source: '/atom.xml',
+            destination: '/rss/feed.xml',
+            statusCode: 301
+          },
           // 残留的旧隐私政策 URL（GSC 已发现但现为 404）→ 301 到规范隐私页
           {
             source: '/mufeng-blog-privacy-policy-google-adsense-vercel',
@@ -227,6 +274,20 @@ const nextConfig = {
     ? undefined
     : () => {
         return [
+          // RSS 与 favicon 不是搜索结果落地页。使用响应头阻止索引；
+          // 不在 robots.txt 中屏蔽，确保爬虫能读取到 noindex。
+          {
+            source: '/rss/:path*',
+            headers: [{ key: 'X-Robots-Tag', value: 'noindex' }]
+          },
+          {
+            source: '/favicon.ico',
+            headers: [{ key: 'X-Robots-Tag', value: 'noindex' }]
+          },
+          {
+            source: '/favicon.svg',
+            headers: [{ key: 'X-Robots-Tag', value: 'noindex' }]
+          },
           {
             source: '/:path*{/}?',
             headers: [
