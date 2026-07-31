@@ -46,6 +46,9 @@ export async function getStaticProps({ locale }) {
   })
   const { allPages } = props
   props.posts = allPages?.filter(isPublishedPostForList)
+  // allPages 未经 isPublishedPostForList 过滤，留在 props 里会把被排除的薄文
+  // 序列化进 __NEXT_DATA__。与 pages/index.js 保持一致。
+  delete props.allPages
   return {
     props,
     revalidate: process.env.EXPORT

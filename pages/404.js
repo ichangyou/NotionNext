@@ -17,6 +17,9 @@ export async function getStaticProps(req) {
   const { locale } = req
 
   const props = (await getGlobalData({ from: '404', locale })) || {}
+  // 退役页（如 /links）以 notFound 落到本页，allPages 未经 isPublishedPostForList
+  // 过滤，留在 props 里会把已排除的页面序列化进 __NEXT_DATA__。
+  delete props.allPages
   return { props }
 }
 

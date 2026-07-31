@@ -38,6 +38,9 @@ export async function getServerSideProps({ params: { keyword }, locale }) {
     props.posts = props.posts?.slice(0, POSTS_PER_PAGE)
   }
   props.keyword = keyword
+  // allPages 未经 isPublishedPostForList 过滤，留在 props 里会把被排除的薄文
+  // 序列化进 __NEXT_DATA__。与 pages/index.js、[keyword]/page/[page].js 保持一致。
+  delete props.allPages
   return { props }
 }
 
