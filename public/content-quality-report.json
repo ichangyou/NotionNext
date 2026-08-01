@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-31T10:48:15.650Z",
+  "generatedAt": "2026-08-01T09:41:40.212Z",
   "site": "https://mufeng.blog",
   "qualityGuard": {
     "enabled": true,
@@ -16,29 +16,54 @@
     ]
   },
   "totals": {
-    "publishedPosts": 204,
-    "lowQualityPosts": 4,
+    "publishedPosts": 205,
+    "lowQualityPosts": 5,
     "indexBlockedPosts": 0,
-    "warningOnlyPosts": 4,
+    "warningOnlyPosts": 5,
     "curationExcludedPosts": 32,
-    "indexablePosts": 172,
+    "indexablePosts": 173,
     "nonIndexablePosts": 32,
     "postsWithBodyMetrics": 0,
-    "postsMissingBodyMetrics": 204
+    "postsMissingBodyMetrics": 205
   },
   "reasonStats": {
     "all": {
-      "short-summary": 4
+      "short-summary": 5
     },
     "blocking": {},
     "warning": {
-      "short-summary": 4
+      "short-summary": 5
     },
     "audit": {
-      "missing-body-metrics": 204
+      "missing-body-metrics": 205
     }
   },
   "lowQualityPosts": [
+    {
+      "id": "3afb2da8-94ba-80ec-ab23-de3eb2723355",
+      "slug": "article/apple-search-ads-roi",
+      "title": "Apple Search Ads 入门：先把账算明白，再决定投不投",
+      "isIndexBlocked": false,
+      "isCurationExcluded": false,
+      "isIndexable": true,
+      "reasons": [
+        "short-summary"
+      ],
+      "blockingReasons": [],
+      "warningReasons": [
+        "short-summary"
+      ],
+      "summaryChars": 75,
+      "wordCount": 0,
+      "hasBodyMetrics": false,
+      "auditWarnings": [
+        "missing-body-metrics"
+      ],
+      "publishDay": "2026-8-1",
+      "lastEditedDay": "2026-8-1",
+      "href": "/article/apple-search-ads-roi",
+      "url": "https://mufeng.blog/article/apple-search-ads-roi"
+    },
     {
       "id": "34ab2da8-94ba-809f-aa17-d94f9b83cf2c",
       "slug": "article/codex-npm-optional-dependencies-question",

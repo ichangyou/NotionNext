@@ -186,10 +186,11 @@ export default function LeftSidebar(props) {
           </div>
         </Link>
 
-        {/* 名字 */}
-        <h1 className='text-xl font-bold text-gray-900 dark:text-white mb-1.5'>
+        {/* 名字：侧边栏站点名不是页面主标题，用 div 而非 h1，
+            避免与文章标题争抢唯一 h1（本组件转为 SSR 后该标签会进入初始 HTML）。 */}
+        <div className='text-xl font-bold text-gray-900 dark:text-white mb-1.5'>
           {siteConfig('AUTHOR')}
-        </h1>
+        </div>
 
         {/* 简介 */}
         <p className='text-[13px] text-gray-500 dark:text-gray-400 mb-4 leading-relaxed'>
