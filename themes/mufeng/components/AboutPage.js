@@ -34,6 +34,11 @@ function TopicCard({ icon, title, desc }) {
  * 关于我页面
  */
 export default function AboutPage() {
+  // 页面主标题：此前关于页只有三个 h2（关于这个博客／我在写什么／技术栈），没有 h1，
+  // 文档大纲缺少顶层标题。复用已有的 SIMPLE_ABOUT_TITLE —— 它同时是 SEO.js:407
+  // 生成 <title> 的来源，这样可见标题、<title> 与导航标签三者保持一致。
+  const aboutTitle = siteConfig('SIMPLE_ABOUT_TITLE', null, CONFIG)
+  const aboutSubtitle = siteConfig('SIMPLE_ABOUT_SUBTITLE', null, CONFIG)
   const aboutBio1 = siteConfig('SIMPLE_ABOUT_BIO_1', null, CONFIG)
   const aboutBio2 = siteConfig('SIMPLE_ABOUT_BIO_2', null, CONFIG)
   const aboutBio3 = siteConfig('SIMPLE_ABOUT_BIO_3', null, CONFIG)
@@ -57,6 +62,18 @@ export default function AboutPage() {
 
   return (
     <div className='max-w-3xl space-y-14'>
+
+      {/* 页面主标题 */}
+      <header className='space-y-2'>
+        <h1 className='text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 leading-snug'>
+          {aboutTitle}
+        </h1>
+        {aboutSubtitle && (
+          <p className='text-sm text-gray-500 dark:text-gray-400'>
+            {aboutSubtitle}
+          </p>
+        )}
+      </header>
 
       {/* 关于这个博客 */}
       <section className='space-y-6'>
