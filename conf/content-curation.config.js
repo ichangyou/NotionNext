@@ -31,7 +31,13 @@ const RETIRED_SITE_PAGES = [
 
 // ── A3. 默认内容模板页（不面向读者）───────────────────────────────────────
 const RETIRED_CONTENT_PAGES = [
-  'guide' // NotionNext「模板说明」，直接访问返回 404。
+  'guide', // NotionNext「模板说明」，直接访问返回 404。
+  // NotionNext 上游演示模板残留的示例文章。Notion 中 status 非 Published，
+  // 因此已不进 sitemap/列表且为 noindex，但直接访问仍返回 200 并展示默认模板
+  // （其中 example-2 是「加锁文章 - 密码123456」的密码墙 demo）。
+  // AdSense 明确将「默认模板页」列为低价值内容，故一并退役为 404。
+  'example-1',
+  'example-2'
 ]
 
 // ── B. 已做 301 重定向的重复页（同时从 sitemap 移除）──────────────────────
