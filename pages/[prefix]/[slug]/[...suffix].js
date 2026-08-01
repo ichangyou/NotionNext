@@ -68,20 +68,19 @@ export async function getStaticProps({
 
   const suffixPath = suffixSegments.join('/')
   const tailSlug = slug + '/' + suffixPath
-  const lastSlugSegment = suffixSegments[suffixSegments.length - 1]
   const fullSlug = prefix + '/' + tailSlug
   const from = `slug-props-${fullSlug}`
   const props = await getGlobalData({ from, locale })
 
-  // 在列表内查找文章
+  // 在列表内查找文章。
+  // 只按完整路径匹配：此前还允许 tailSlug / suffixPath / lastSlugSegment 三种
+  // 忽略 prefix 的尾段匹配，导致 /<任意前缀>/article/<slug> 都能以 200 + index,follow
+  // 返回同一篇文章（实测 /en、/zzz、/fr 均命中），构成无上界的重复内容 URL 空间。
+  // 站内真实数据中不存在三段及以上的 slug，因此去掉这三个分支不影响正常 URL。
   props.post = props?.allPages?.find(p => {
     return (
       (p.type || '').indexOf('Menu') < 0 &&
-      (p.slug === tailSlug ||
-        p.slug === suffixPath ||
-        p.slug === lastSlugSegment ||
-        p.slug === fullSlug ||
-        p.id === idToUuid(fullSlug))
+      (p.slug === fullSlug || p.id === idToUuid(fullSlug))
     )
   })
 
