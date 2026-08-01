@@ -111,7 +111,11 @@ const SEO = props => {
     router.route === '/category/[category]/page/[page]' ||
     router.route === '/search' ||
     router.route === '/search/[keyword]' ||
-    router.route === '/search/[keyword]/page/[page]'
+    router.route === '/search/[keyword]/page/[page]' ||
+    // 作品页与付费专栏页正文各约 320 字，属 AdSense「内容单薄」区间。
+    // 先退出索引，待内容补齐后从此处删除对应行即可恢复收录。
+    router.route === '/works' ||
+    router.route === '/membership'
   const isNoIndexPage = isNoIndexRoute || isNoIndexPost(post)
   const robotsContent =
     router.route === '/404'
