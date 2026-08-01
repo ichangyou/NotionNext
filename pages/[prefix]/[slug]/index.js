@@ -70,11 +70,16 @@ export async function getStaticProps({ params: { prefix, slug }, locale }) {
   const from = `slug-props-${fullSlug}`
   const props = await getGlobalData({ from, locale })
 
-  // 在列表内查找文章
+  // 在列表内查找文章。
+  // 只按完整路径匹配：此前还允许 `p.slug === slug`（忽略 prefix 的裸 slug 匹配），
+  // 导致任意前缀都能命中同一篇内容——例如 /xx/privacy-policy 会以 200 + index,follow
+  // 返回隐私政策正文，构成无上界的重复内容 URL 空间。
+  // 站内真实数据中所有 Post 的 slug 均为两段（article/xxx），裸 slug 的 Page
+  // 由 pages/[prefix]/index.js 在单段路径上提供服务，因此去掉该分支不影响正常 URL。
   props.post = props?.allPages?.find(p => {
     return (
       (p.type || '').indexOf('Menu') < 0 &&
-      (p.slug === slug || p.slug === fullSlug || p.id === idToUuid(fullSlug))
+      (p.slug === fullSlug || p.id === idToUuid(fullSlug))
     )
   })
 
