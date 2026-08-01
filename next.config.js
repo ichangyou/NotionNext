@@ -96,7 +96,12 @@ const nextConfig = {
     : {
         defaultLocale: BLOG.LANG,
         // 支持的所有多语言,按需填写即可
-        locales: locales
+        locales: locales,
+        // 关闭自动语言检测：en 子站当前仍是 NotionNext 上游演示模板（Example article /
+        // EMPTY-ARTICLE 等占位内容），自动检测会把 Accept-Language: en 的访客与爬虫
+        // 307 送进 /en，制造重复内容与低价值页面。彻底移除需在 Vercel 环境变量里
+        // 删掉 NOTION_PAGE_ID 的 `en:` 段。
+        localeDetection: false
       },
   images: {
     // 图片压缩

@@ -116,7 +116,13 @@ const SEO = props => {
     // 先退出索引，待内容补齐后从此处删除对应行即可恢复收录。
     router.route === '/works' ||
     router.route === '/membership'
-  const isNoIndexPage = isNoIndexRoute || isNoIndexPost(post)
+  // 非默认语言（当前只有 en）指向上游演示模板站，且 /en/<中文文章 slug> 会以
+  // index,follow 输出与中文版逐字相同的正文，构成整个重复内容命名空间。
+  // 在 meta 层直接判定，避免依赖 i18n 之后才生效的路由层 redirect。
+  const isNonDefaultLocale =
+    !!router.locale && !!router.defaultLocale && router.locale !== router.defaultLocale
+  const isNoIndexPage =
+    isNoIndexRoute || isNonDefaultLocale || isNoIndexPost(post)
   const robotsContent =
     router.route === '/404'
       ? 'noindex, nofollow'
