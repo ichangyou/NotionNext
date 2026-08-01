@@ -19,6 +19,19 @@ import BlogListPage from './components/BlogListPage'
 import Catalog from './components/Catalog'
 // 静态导入（SSR）：首页「往期精选」链接必须进入初始 HTML 才能提升长尾抓取优先级
 import PastPosts from './components/PastPosts'
+// 静态导入（SSR）：以下组件承载站点骨架与内链，必须进入初始 HTML。
+// 此前均为 dynamic(ssr:false)，导致文章页首屏 HTML 无 <h1>、无导航、无页脚、
+// 无任何指向其他文章与关于页/隐私政策的链接（AdSense「低价值内容」判定的直接对应项）。
+// 已确认这些组件在渲染期不访问 window/document，浏览器 API 仅出现在事件处理器与 useEffect 内。
+import ArticleInfo from './components/ArticleInfo'
+import ArticleAround from './components/ArticleAround'
+import Header from './components/Header'
+import NavBar from './components/NavBar'
+import LeftSidebar from './components/LeftSidebar'
+import Footer from './components/Footer'
+import RecommendPosts from './components/RecommendPosts'
+import PaidColumnsPage from './components/PaidColumnsPage'
+import WorksPage from './components/WorksPage'
 
 
 const AlgoliaSearchModal = dynamic(
@@ -36,31 +49,16 @@ const BlogArchiveItem = dynamic(() => import('./components/BlogArchiveItem'), {
 const ArticleLock = dynamic(() => import('./components/ArticleLock'), {
   ssr: false
 })
-const ArticleInfo = dynamic(() => import('./components/ArticleInfo'), {
-  ssr: false
-})
 const Comment = dynamic(() => import('@/components/Comment'), { ssr: false })
-const ArticleAround = dynamic(() => import('./components/ArticleAround'), {
-  ssr: false
-})
 const ShareBar = dynamic(() => import('@/components/ShareBar'), { ssr: false })
 const TopBar = dynamic(() => import('./components/TopBar'), { ssr: false })
-const Header = dynamic(() => import('./components/Header'), { ssr: false })
-const NavBar = dynamic(() => import('./components/NavBar'), { ssr: false })
-const LeftSidebar = dynamic(() => import('./components/LeftSidebar'), {
-  ssr: false
-})
 const JumpToTopButton = dynamic(() => import('./components/JumpToTopButton'), {
   ssr: false
 })
-const Footer = dynamic(() => import('./components/Footer'), { ssr: false })
 const SearchInput = dynamic(() => import('./components/SearchInput'), {
   ssr: false
 })
 const WWAds = dynamic(() => import('@/components/WWAds'), { ssr: false })
-const RecommendPosts = dynamic(() => import('./components/RecommendPosts'), {
-  ssr: false
-})
 const PageTitle = dynamic(() => import('./components/PageTitle'))
 const DarkModeButton = dynamic(() => import('@/components/DarkModeButton'), {
   ssr: false
@@ -69,12 +67,6 @@ const FloatTocButton = dynamic(() => import('./components/FloatTocButton'), {
   ssr: false
 })
 const RewardButton = dynamic(() => import('./components/RewardButton'), {
-  ssr: false
-})
-const PaidColumnsPage = dynamic(() => import('./components/PaidColumnsPage'), {
-  ssr: false
-})
-const WorksPage = dynamic(() => import('./components/WorksPage'), {
   ssr: false
 })
 // 主题全局状态
