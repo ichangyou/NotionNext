@@ -54,3 +54,6 @@ package-lock.json
 .claude/*
 .cursor/*
 .shared/*
+
+# typescript 增量编译缓存（机器本地状态，每次 tsc 都会变）
+tsconfig.tsbuildinfo
