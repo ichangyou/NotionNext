@@ -96,6 +96,10 @@ function getTemplatePathRejectResponse(req: NextRequest) {
   return null
 }
 
+// /zh 是中文主站的重复入口（默认语言不需要前缀），永久 301 到根路径。
+// 注意这里只处理 /zh：/en 保持 404。英文站尚未上线但计划启用，而 301 是永久性的
+// ——Google 与浏览器（Chrome 对 301 的缓存是无限期的）都会长期缓存，届时会把已访问过
+// /en 的用户持续跳回首页，且服务端看不到。404 无缓存语义，能让 /en 保持可用。
 function getLegacyLocaleEntryRedirectResponse(req: NextRequest) {
   if (req.nextUrl.pathname !== '/zh') {
     return null
