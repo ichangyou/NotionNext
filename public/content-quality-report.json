@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-05T10:33:36.394Z",
+  "generatedAt": "2026-08-07T08:00:38.766Z",
   "site": "https://mufeng.blog",
   "qualityGuard": {
     "enabled": true,
@@ -16,15 +16,15 @@
     ]
   },
   "totals": {
-    "publishedPosts": 205,
+    "publishedPosts": 208,
     "lowQualityPosts": 5,
     "indexBlockedPosts": 0,
     "warningOnlyPosts": 5,
     "curationExcludedPosts": 32,
-    "indexablePosts": 173,
+    "indexablePosts": 176,
     "nonIndexablePosts": 32,
     "postsWithBodyMetrics": 0,
-    "postsMissingBodyMetrics": 205
+    "postsMissingBodyMetrics": 208
   },
   "reasonStats": {
     "all": {
@@ -35,7 +35,7 @@
       "short-summary": 5
     },
     "audit": {
-      "missing-body-metrics": 205
+      "missing-body-metrics": 208
     }
   },
   "lowQualityPosts": [
