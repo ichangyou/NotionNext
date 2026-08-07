@@ -91,6 +91,10 @@ const ExternalPlugin = props => {
     null,
     NOTION_CONFIG
   )
+  // 谷歌统计只在生产环境上报：本地 dev 用的是同一个 measurement ID，
+  // 不加门禁会把开发时的反复刷新混进 GA4 数据里。
+  const GTAG_ENABLED =
+    !!ANALYTICS_GOOGLE_ID && process.env.NODE_ENV === 'production'
   const MATOMO_HOST_URL = siteConfig('MATOMO_HOST_URL', null, NOTION_CONFIG)
   const MATOMO_SITE_ID = siteConfig('MATOMO_SITE_ID', null, NOTION_CONFIG)
   const ANALYTICS_51LA_ID = siteConfig('ANALYTICS_51LA_ID', null, NOTION_CONFIG)
@@ -185,7 +189,7 @@ const ExternalPlugin = props => {
       {THEME_SWITCH && <ThemeSwitch />}
       {DEBUG && <DebugPanel />}
       {ANALYTICS_ACKEE_TRACKER && <Ackee />}
-      {ANALYTICS_GOOGLE_ID && <Gtag />}
+      {GTAG_ENABLED && <Gtag />}
       {ANALYTICS_VERCEL && <Analytics />}
       {ANALYTICS_BUSUANZI_ENABLE && <Busuanzi />}
       {FACEBOOK_APP_ID && FACEBOOK_PAGE_ID && <Messenger />}
@@ -387,7 +391,7 @@ const ExternalPlugin = props => {
       )}
 
       {/* 谷歌统计 */}
-      {ANALYTICS_GOOGLE_ID && (
+      {GTAG_ENABLED && (
         <>
           <script
             async
